@@ -17,6 +17,14 @@
 #include <Window.h>
 #include <stdio.h>
 #include <Message.h>
+#include <String.h>
+#include <Message.h>
+#include <List.h>
+#include <stdio.h>
+#include <String.h>
+#include <Window.h>
+#include <stdio.h>
+#include <Message.h>
 #include <Window.h>
 #include <List.h>
 #include <TextControl.h>

@@ -3,6 +3,9 @@
 #include <stdio.h>
 #end
 #include "../BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.lzz"
+#include "BlogPositivePost.lzz"
+#include "BlogPositiveBlog.lzz"
+#include "BlogPositivePluginWindow.lzz"
 #include "../Example/ExamplePlugin.lzz"
 
 class BlogPositivePluginLoader {
