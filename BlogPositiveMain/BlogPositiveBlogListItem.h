@@ -1,12 +1,23 @@
-#pragma once
+// BlogPositiveBlogListItem.h
+//
+
+#ifndef LZZ_BlogPositiveBlogListItem_h
+#define LZZ_BlogPositiveBlogListItem_h
 #include <ListItem.h>
 #include <Message.h>
-#include "../API/BlogPositiveBlog.h"
-
-class BlogPositiveBlogListItem : public BStringItem {
+#include <View.h>
+#include <Message.h>
+#include <List.h>
+#include <stdio.h>
+#include <String.h>
+#define LZZ_INLINE inline
+class BlogPositiveBlogListItem : public BStringItem
+{
 public:
-	BlogPositiveBlogListItem(BlogPositiveBlog *blog);
-	inline BlogPositiveBlog *Blog() {return fBlog;}
+  BlogPositiveBlogListItem (BlogPositiveBlog * blog);
+  BlogPositiveBlog * Blog ();
 private:
-	BlogPositiveBlog *fBlog;
+  BlogPositiveBlog * fBlog;
 };
+#undef LZZ_INLINE
+#endif

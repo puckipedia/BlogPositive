@@ -1,23 +1,16 @@
-#include "ExamplePlugin.h"
-#include <Window.h>
-#include <Directory.h>
-#include <TextView.h>
-#include <GroupLayout.h>
-#include <GroupLayoutBuilder.h>
-#include <ListView.h>
-#include <Entry.h>
-#include <Path.h>
-#include <ScrollView.h>
-#include <malloc.h>
-#include <File.h>
-#include "../API/BlogPositivePost.h"
+// ExamplePlugin.cpp
+//
 
-bool
-ExamplePlugin::Supports(int32 Code) {
+#include "ExamplePlugin.h"
+#define LZZ_INLINE inline
+uint32 ExamplePlugin::Version ()
+                         {return 0;}
+bool ExamplePlugin::Supports (int32 Code)
+                                    {
 	return Code == 'BACN';
 }
-BList *
-ExamplePlugin::GetBlogPosts(BlogPositiveBlog *blog) {
+BList * ExamplePlugin::GetBlogPosts (BlogPositiveBlog * blog)
+                                                    {
   BList *list = new BList();
   BDirectory Dir(blog->GetAuthentication());
   BEntry entry;
@@ -38,11 +31,11 @@ ExamplePlugin::GetBlogPosts(BlogPositiveBlog *blog) {
   }
   return list;
 }
-
-void
-ExamplePlugin::SavePost(BlogPositivePost *post) {
+void ExamplePlugin::SavePost (BlogPositivePost * post)
+                                                {
   BPath path(post->Blog()->GetAuthentication());
   path.Append(post->Name());
   BFile file(path.Path(), B_WRITE_ONLY | B_ERASE_FILE);
   file.Write((void *)post->Page(), post->Pagesize()+2);
 }
+#undef LZZ_INLINE

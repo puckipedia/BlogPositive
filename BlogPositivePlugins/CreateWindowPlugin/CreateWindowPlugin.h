@@ -1,48 +1,69 @@
-#pragma once
+// CreateWindowPlugin.h
+//
+
+#ifndef LZZ_CreateWindowPlugin_h
+#define LZZ_CreateWindowPlugin_h
 #include <GroupLayout.h>
 #include <GroupLayoutBuilder.h>
 #include <OS.h>
-#include "../../API/BlogPositivePluginWindow.h"
 #include <ScrollView.h>
 #include <Menu.h>
 #include <MenuBar.h>
 #include <MenuItem.h>
 #include <ListView.h>
 #include <TextView.h>
+#include <Window.h>
+#include <stdio.h>
+#include <Message.h>
+#define LZZ_INLINE inline
 class CreateWindowPlugin;
-
-class PostItem : public BStringItem {
+class PostItem : public BStringItem
+{
 public:
-  inline PostItem(BlogPositivePost *post) : BStringItem(post->Name()) {
+  PostItem (BlogPositivePost * post);
+  BlogPositivePost * Post ();
+private:
+  BlogPositivePost * fPost;
+};
+class PluginAndWindowThing
+{
+public:
+  BWindow * fWindow;
+  BlogPositivePlugin * fPlugin;
+  BlogPositiveBlog * fBlog;
+  BListView * fView;
+};
+class CreateWindowPlugin : public BlogPositivePlugin
+{
+public:
+  uint32 Version ();
+  int32 Type ();
+  bool Supports (int32 Code);
+  void HookBlogList (BlogPositivePluginPostListWindow * * window, BlogPositiveBlog * blog);
+  BlogPositivePost * TryGetPost (BWindow * window);
+  static int32 loadList (void * t);
+  void HookEditor (BlogPositivePluginBlogPostWindow * * window, BlogPositivePost * post);
+  char const * GetPostContent (BlogPositivePluginBlogPostWindow * window);
+};
+LZZ_INLINE PostItem::PostItem (BlogPositivePost * post)
+  : BStringItem (post->Name())
+                                                                      {
     fPost = post;
   }
-  inline BlogPositivePost *Post() {
+LZZ_INLINE BlogPositivePost * PostItem::Post ()
+                                  {
     return fPost;
   }
- private:
-  BlogPositivePost *fPost;
-};
-
-class PluginAndWindowThing {
- public:
-  BWindow *fWindow;
-  BlogPositivePlugin *fPlugin;
-  BlogPositiveBlog *fBlog;
-  BListView *fView;
-};
-
-class CreateWindowPlugin : public BlogPositivePlugin {
- public:
-  uint32 Version() {
-    return 0;
-  }
-  inline int32 Type() {
+LZZ_INLINE int32 CreateWindowPlugin::Type ()
+                      {
     return kBlogPositiveBlogEditor;
   }
-  inline bool Supports(int32 Code) {
+LZZ_INLINE bool CreateWindowPlugin::Supports (int32 Code)
+                                   {
     return false;
   }
-  inline void HookBlogList(BlogPositivePluginPostListWindow **window, BlogPositiveBlog *blog) {
+LZZ_INLINE void CreateWindowPlugin::HookBlogList (BlogPositivePluginPostListWindow * * window, BlogPositiveBlog * blog)
+                                                                                              {
     BWindow *win = *window;
     BListView *aView = new BListView("ListView");
     BMessage *msg = new BMessage(kPostWindowGetSelection);
@@ -57,7 +78,8 @@ class CreateWindowPlugin : public BlogPositivePlugin {
     thread_id readThread = spawn_thread(loadList, "load_posts", B_NORMAL_PRIORITY, thing);
     resume_thread(readThread);
   }
-  inline BlogPositivePost *TryGetPost(BWindow *window) {
+LZZ_INLINE BlogPositivePost * CreateWindowPlugin::TryGetPost (BWindow * window)
+                                                       {
     BListView *aView = (BListView *)window->FindView("ListView");
     if(aView != NULL) {
       int32 ChosenOne = aView->CurrentSelection();
@@ -69,7 +91,8 @@ class CreateWindowPlugin : public BlogPositivePlugin {
     }
 
   }
-  inline static int32 loadList(void *t) {
+LZZ_INLINE int32 CreateWindowPlugin::loadList (void * t)
+                                        {
     PluginAndWindowThing *thing = (PluginAndWindowThing *)t;
     BList *list = thing->fPlugin->GetBlogPosts(thing->fBlog);
     if(thing->fView->LockLooper()) {
@@ -80,7 +103,8 @@ class CreateWindowPlugin : public BlogPositivePlugin {
       thing->fView->UnlockLooper();
     }
   }
-  inline void HookEditor(BlogPositivePluginBlogPostWindow **window, BlogPositivePost *post) {
+LZZ_INLINE void CreateWindowPlugin::HookEditor (BlogPositivePluginBlogPostWindow * * window, BlogPositivePost * post)
+                                                                                            {
     BlogPositivePluginBlogPostWindow *win = *window;
     BTextView *aView = new BTextView("TextView");
     aView->SetText(post->Page());
@@ -94,9 +118,11 @@ class CreateWindowPlugin : public BlogPositivePlugin {
     menu->AddItem(new BMenuItem("Save", new BMessage(kPostWindowSavePost), 'S'));
     menuBar->AddItem(menu);
   }
-  inline const char *GetPostContent(BlogPositivePluginBlogPostWindow *window) {
+LZZ_INLINE char const * CreateWindowPlugin::GetPostContent (BlogPositivePluginBlogPostWindow * window)
+                                                                              {
     BView *view = window->FindView("TextView");
     BTextView *textView = (BTextView *)view;
     return textView->Text();
   }
-};
+#undef LZZ_INLINE
+#endif
