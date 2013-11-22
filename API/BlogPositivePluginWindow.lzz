@@ -1,0 +1,74 @@
+#hdr
+#include <Window.h>
+#include <stdio.h>
+#include <Message.h>
+#end
+const uint32 kPostWindowGetSelection = 'PWgs';
+const uint32 kPostWindowSavePost = 'PWsp';
+const uint32 kPostWindowNewPost = 'PWnp';
+class BlogPositivePluginPostListWindow : public BWindow {
+ public:
+  BlogPositivePluginPostListWindow(BRect rect, const char *Name) : BWindow(rect, Name, B_DOCUMENT_WINDOW, 0) {}
+  void SetBlog(BlogPositiveBlog *blog);
+  BlogPositiveBlog *Blog();
+  void MessageReceived(BMessage *msg);
+ private:
+  BlogPositiveBlog *fBlog;
+};
+class BlogPositivePluginBlogPostWindow : public BWindow {
+ public:
+  BlogPositivePluginBlogPostWindow(BRect rect, const char *Name) : BWindow(rect, Name, B_DOCUMENT_WINDOW, 0) {}
+  void SetPost(BlogPositivePost *post);
+  BlogPositivePost *Post();
+  void MessageReceived(BMessage *msg);
+ private:
+  BlogPositivePost *fPost;
+};
+
+
+
+void
+BlogPositivePluginPostListWindow::SetBlog(BlogPositiveBlog *blog) {
+  fBlog = blog;
+  printf("%d\n", blog);
+}
+
+BlogPositiveBlog *
+BlogPositivePluginPostListWindow::Blog() {
+  return fBlog;
+}
+
+void
+BlogPositivePluginPostListWindow::MessageReceived(BMessage *message) {
+  switch(message->what) {
+  case kPostWindowGetSelection:
+    BlogPositivePluginLoader::OpenPostWindowQueryingPlugins(this);
+    break;
+  default:
+    BWindow::MessageReceived(message);
+  }
+}
+
+void
+BlogPositivePluginBlogPostWindow::SetPost(BlogPositivePost *post) {
+  fPost = post;
+}
+
+
+BlogPositivePost *
+BlogPositivePluginBlogPostWindow::Post() {
+  return fPost;
+}
+
+
+void
+BlogPositivePluginBlogPostWindow::MessageReceived(BMessage *message) {
+  switch(message->what) {
+  case kPostWindowSavePost:
+    Post()->SetPage(BlogPositivePluginLoader::GetPageContent(this));
+    Post()->Blog()->GetPlugin()->SavePost(fPost);
+    break;
+  default:
+    BWindow::MessageReceived(message);
+  }
+}

@@ -1,0 +1,20 @@
+#hdr
+#include <ListItem.h>
+#include <Message.h>
+#include <View.h>
+#end
+
+#include "../API/BlogPositiveBlog.lzz"
+
+class BlogPositiveBlogListItem : public BStringItem {
+public:
+	BlogPositiveBlogListItem(BlogPositiveBlog *blog);
+	BlogPositiveBlog *Blog() {return fBlog;}
+private:
+	BlogPositiveBlog *fBlog;
+};
+
+
+BlogPositiveBlogListItem::BlogPositiveBlogListItem(BlogPositiveBlog *blog)
+	: BStringItem(blog->GetName())
+{fBlog = blog;}
