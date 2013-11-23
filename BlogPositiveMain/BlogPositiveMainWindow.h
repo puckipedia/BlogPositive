@@ -1,15 +1,12 @@
-#pragma once
+#ifndef BP_MAIN_WINDOW_H
+#define BP_MAIN_WINDOW_H
+
 #include <Window.h>
-#include <Message.h>
-#include <ListView.h>
 
 class BlogPositiveMainWindow : public BWindow
 {
 public:
-  static BlogPositiveMainWindow *First;
-					BlogPositiveMainWindow(BRect frame);
-	virtual bool	QuitRequested();
-			void	MessageReceived(BMessage *message);
-private:
-			BListView *fListView;
+    BlogPositiveMainWindow(BRect frame);
 };
+
+#endif

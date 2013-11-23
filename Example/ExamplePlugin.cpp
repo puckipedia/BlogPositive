@@ -1,15 +1,13 @@
 #include "ExamplePlugin.h"
-#include <Window.h>
-#include <Directory.h>
-#include <TextView.h>
-#include <GroupLayout.h>
-#include <GroupLayoutBuilder.h>
-#include <ListView.h>
-#include <Entry.h>
+
 #include <Path.h>
-#include <ScrollView.h>
+#include <Entry.h>
+#include <Directory.h>
+#include <List.h>
 #include <malloc.h>
 #include <File.h>
+
+#include "../API/BlogPositiveBlog.h"
 #include "../API/BlogPositivePost.h"
 
 bool
@@ -34,7 +32,6 @@ ExamplePlugin::GetBlogPosts(BlogPositiveBlog *blog) {
     post->SetName((const char *)name);
     post->SetPage(pointer);
     list->AddItem(post);
-    printf("%s\n",name);
   }
   return list;
 }
