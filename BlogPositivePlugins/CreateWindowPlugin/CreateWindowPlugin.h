@@ -15,6 +15,7 @@
 #include "../../API/BlogPositivePluginWindow.h"
 #include "../../API/BlogPositivePlugin.h"
 #include "../../API/BlogPositivePost.h"
+#include "../../API/BlogPositivePluginWindow.h"
 #define LZZ_INLINE inline
 class PostItem : public BStringItem
 {

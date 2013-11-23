@@ -11,6 +11,7 @@
 #include "../../API/BlogPositivePluginWindow.h"
 #include "../../API/BlogPositivePlugin.h"
 #include "../../API/BlogPositivePost.h"
+#include "../../API/BlogPositivePluginWindow.h"
 #end
 
 class PostItem : public BStringItem {
