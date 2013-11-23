@@ -10,6 +10,7 @@
 #include <GroupLayoutBuilder.h>
 #include <Message.h>
 #include "../BlogPositiveSettings.h" 
+#include "BlogPositivePluginWindow.h"
 #define LZZ_INLINE inline
 class BlogPositiveCreateBlog : public BWindow
 {

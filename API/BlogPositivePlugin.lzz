@@ -6,6 +6,7 @@
 #include <GroupLayoutBuilder.h>
 #include <Message.h>
 #include "../BlogPositiveSettings.h" 
+#include "BlogPositivePluginWindow.h"
 #end 
 #define kBlogPositiveBlogApi 1 
 #define kBlogPositiveBlogEditor 2
