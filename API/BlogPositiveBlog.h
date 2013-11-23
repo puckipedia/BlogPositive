@@ -7,6 +7,7 @@
 #include <List.h>
 #include <stdio.h>
 #include <String.h>
+#include "BlogPositivePlugin.h"
 #define LZZ_INLINE inline
 class BlogPositiveBlog
 {

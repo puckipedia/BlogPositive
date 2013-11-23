@@ -3,6 +3,7 @@
 #include <List.h>
 #include <stdio.h>
 #include <String.h>
+#include "BlogPositivePlugin.h"
 #end
 
 const uint32 kBlogMessage = 'BPBL';
