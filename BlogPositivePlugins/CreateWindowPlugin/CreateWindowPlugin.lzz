@@ -16,10 +16,10 @@
 
 class PostItem : public BStringItem {
 public:
-  inline PostItem(BlogPositivePost *post) : BStringItem(post->Name()) {
+  PostItem(BlogPositivePost *post) : BStringItem(post->Name()) {
     fPost = post;
   }
-  inline BlogPositivePost *Post() {
+  BlogPositivePost *Post() {
     return fPost;
   }
  private:
@@ -39,13 +39,13 @@ class CreateWindowPlugin : public BlogPositivePlugin {
   uint32 Version() {
     return 0;
   }
-  inline int32 Type() {
+  int32 Type() {
     return kBlogPositiveBlogEditor;
   }
-  inline bool Supports(int32 Code) {
+  bool Supports(int32 Code) {
     return false;
   }
-  inline void HookBlogList(BlogPositivePluginPostListWindow **window, BlogPositiveBlog *blog) {
+  void HookBlogList(BlogPositivePluginPostListWindow **window, BlogPositiveBlog *blog) {
     BWindow *win = *window;
     BListView *aView = new BListView("ListView");
     BMessage *msg = new BMessage(kPostWindowGetSelection);
@@ -60,7 +60,7 @@ class CreateWindowPlugin : public BlogPositivePlugin {
     thread_id readThread = spawn_thread(loadList, "load_posts", B_NORMAL_PRIORITY, thing);
     resume_thread(readThread);
   }
-  inline BlogPositivePost *TryGetPost(BWindow *window) {
+  BlogPositivePost *TryGetPost(BWindow *window) {
     BListView *aView = (BListView *)window->FindView("ListView");
     if(aView != NULL) {
       int32 ChosenOne = aView->CurrentSelection();
@@ -72,7 +72,7 @@ class CreateWindowPlugin : public BlogPositivePlugin {
     }
 
   }
-  inline static int32 loadList(void *t) {
+  static int32 loadList(void *t) {
     PluginAndWindowThing *thing = (PluginAndWindowThing *)t;
     BList *list = thing->fPlugin->GetBlogPosts(thing->fBlog);
     if(thing->fView->LockLooper()) {
@@ -83,7 +83,7 @@ class CreateWindowPlugin : public BlogPositivePlugin {
       thing->fView->UnlockLooper();
     }
   }
-  inline void HookEditor(BlogPositivePluginBlogPostWindow **window, BlogPositivePost *post) {
+  void HookEditor(BlogPositivePluginBlogPostWindow **window, BlogPositivePost *post) {
     BlogPositivePluginBlogPostWindow *win = *window;
     BTextView *aView = new BTextView("TextView");
     aView->SetText(post->Page());
@@ -97,7 +97,7 @@ class CreateWindowPlugin : public BlogPositivePlugin {
     menu->AddItem(new BMenuItem("Save", new BMessage(kPostWindowSavePost), 'S'));
     menuBar->AddItem(menu);
   }
-  inline const char *GetPostContent(BlogPositivePluginBlogPostWindow *window) {
+  const char *GetPostContent(BlogPositivePluginBlogPostWindow *window) {
     BView *view = window->FindView("TextView");
     BTextView *textView = (BTextView *)view;
     return textView->Text();
