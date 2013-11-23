@@ -4,7 +4,6 @@
 #include <Message.h>
 #include <List.h>
 
-class BString;
 class BlogPositivePlugin;
 class BlogPositiveBlog {
  public:

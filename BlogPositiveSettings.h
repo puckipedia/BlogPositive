@@ -1,4 +1,5 @@
-#pragma once
+#ifndef BP_SETTINGS_H
+#define BP_SETTINGS_H
 #include <Message.h>
 class BPath;
 class BlogPositiveSettings : public BMessage {
@@ -9,3 +10,4 @@ class BlogPositiveSettings : public BMessage {
  private:
   BPath *settingsPath;	
 };
+#endif BP_SETTINGS_H
