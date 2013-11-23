@@ -16,7 +16,7 @@
 #include <ScrollView.h>
 #include <malloc.h>
 #include <File.h>
-#include <String.h>
+#include "../API/BlogPositivePost.h"
 #define LZZ_INLINE inline
 class ExamplePlugin : public BlogPositivePlugin
 {

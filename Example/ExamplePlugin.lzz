@@ -12,6 +12,7 @@
 #include <ScrollView.h>
 #include <malloc.h>
 #include <File.h>
+#include "../API/BlogPositivePost.h"
 #end
 class ExamplePlugin : public BlogPositivePlugin {
 public:
@@ -21,7 +22,6 @@ public:
 	void SavePost(BlogPositivePost *post);
 };
 
-#include "../API/BlogPositivePost.lzz"
 
 bool
 ExamplePlugin::Supports(int32 Code) {
