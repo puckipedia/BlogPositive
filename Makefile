@@ -3,4 +3,5 @@ run: clean blogpositive
 clean:
 	rm blogpositive || true
 blogpositive:
-	gcc -g -lroot -lbe -Wno-deprecated -o blogpositive **.cpp */*.cpp
+	gcc -g -std=c90 -lroot -lbe -Wno-deprecated -o blogpositive 
+**.cpp */*.cpp
