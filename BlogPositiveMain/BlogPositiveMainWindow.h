@@ -13,29 +13,11 @@
 #include <MenuBar.h>
 #include <MenuItem.h>
 #include <stdio.h>
-#include <Message.h>
-#include <List.h>
-#include <stdio.h>
-#include <String.h>
-#include <Message.h>
-#include <Path.h>
-#include <File.h>
-#include <FindDirectory.h>
-#include <stdio.h>
-#include <Window.h>
-#include <List.h>
-#include <TextControl.h> 
-#include <GroupLayout.h> 
-#include <GroupLayoutBuilder.h>
-#include <Message.h>
-#include "../BlogPositiveSettings.h" 
-#include <List.h>
-#include <stdio.h>
-#include "../BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h"
-#include "BlogPositivePost.h"
-#include "BlogPositiveBlog.h"
-#include "BlogPositivePluginWindow.h"
-#include "../Example/ExamplePlugin.h"
+#include "../API/BlogPositiveBlog.h"
+#include "../BlogPositiveSettings.h"
+
+#include "../API/BlogPositivePlugin.h"
+#include "../API/BlogPositivePluginLoader.h"
 #define LZZ_INLINE inline
 class BlogPositiveMainWindow : public BWindow
 {
