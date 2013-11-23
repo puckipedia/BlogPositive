@@ -1,35 +1,21 @@
-#pragma once
-#include "BlogPositiveBlog.h"
-#include <String.h>
+#ifndef BP_POST_H
+#define BP_POST_H
 
+class BString;
+class BlogPositiveBlog;
 class BlogPositivePost {
 public:
-  BlogPositivePost(BlogPositiveBlog *blog) {
-    fName = new BString();
-    fPage = new BString();
-    fBlog = blog;
-  }
-  BlogPositiveBlog *Blog() {
-    return fBlog;
-  }
-  const char *Name() {
-    return fName->String();
-  }
-  void SetName(const char *name) {
-    fName->SetTo(name);
-  }
-  
-  const char *Page() {
-    return fPage->String();
-  }
-  void SetPage(const char *page) {
-    fPage->SetTo(page);
-  }
-  uint32 Pagesize() {
-    return fPage->Length();
-  }
+    BlogPositivePost(BlogPositiveBlog *blog);
+    BlogPositiveBlog *Blog();
+    const char *Name();
+    void SetName(const char *name);
+    const char *Page();
+    void SetPage(const char *page);
+    uint32 Pagesize();
  private:
-  BString *fName;
-  BString *fPage;
-  BlogPositiveBlog *fBlog;
+    BString *fName;
+    BString *fPage;
+    BlogPositiveBlog *fBlog;
 };
+
+#endif
