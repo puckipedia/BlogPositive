@@ -13,8 +13,9 @@
 #include <ListView.h>
 #include <TextView.h>
 #include "../../API/BlogPositivePluginWindow.h"
+#include "../../API/BlogPositivePlugin.h"
+#include "../../API/BlogPositivePost.h"
 #define LZZ_INLINE inline
-class CreateWindowPlugin;
 class PostItem : public BStringItem
 {
 public:

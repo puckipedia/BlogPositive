@@ -2,6 +2,9 @@
 #include <Window.h>
 #include <stdio.h>
 #include <Message.h>
+#include "BlogPositiveBlog.h"
+#include "BlogPositivePost.h"
+#include "BlogPositivePluginLoader.h"
 #end
 const uint32 kPostWindowGetSelection = 'PWgs';
 const uint32 kPostWindowSavePost = 'PWsp';

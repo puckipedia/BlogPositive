@@ -6,6 +6,9 @@
 #include <Window.h>
 #include <stdio.h>
 #include <Message.h>
+#include "BlogPositiveBlog.h"
+#include "BlogPositivePost.h"
+#include "BlogPositivePluginLoader.h"
 #define LZZ_INLINE inline
 class BlogPositivePluginPostListWindow : public BWindow
 {
