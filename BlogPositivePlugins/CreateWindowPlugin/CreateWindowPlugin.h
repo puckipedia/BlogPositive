@@ -3,6 +3,7 @@
 #include <GroupLayoutBuilder.h>
 #include <OS.h>
 #include "../../API/BlogPositivePluginWindow.h"
+#include "../../API/BlogPositivePlugin.h"
 #include <ScrollView.h>
 #include <Menu.h>
 #include <MenuBar.h>
@@ -51,7 +52,7 @@ class CreateWindowPlugin : public BlogPositivePlugin {
     win->AddChild(BGroupLayoutBuilder(B_VERTICAL, 10).Add(aView));
     PluginAndWindowThing *thing = new PluginAndWindowThing();
     thing->fWindow = *window;
-    thing->fBlog = blog;
+    thing->fBlog = blog;	
     thing->fView = aView;
     thing->fPlugin = blog->GetPlugin();
     thread_id readThread = spawn_thread(loadList, "load_posts", B_NORMAL_PRIORITY, thing);
