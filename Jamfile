@@ -25,9 +25,11 @@ TYPE = APP ;
 #	if two source files with the same name (source.c or source.cpp)
 #	are included from different directories.
 # Ex: SRCS = file1.cpp file2.cpp file3.cpp ;
-SRCS =  API/BlogPositivePluginLoader.cpp API/BlogPositivePluginWindow.cpp 
-	BlogPositiveMain/BlogPositiveBlogListItem.cpp 
-	BlogPositiveMain/BlogPositiveMainWindow.cpp 
+SRCS =  API/BlogPositivePluginLoader.cpp API/BlogPositivePluginWindow.cpp
+	API/BlogPositivePlugin.cpp API/BlogPositiveBlog.cpp
+	API/BlogPositivePost.cpp BlogPositiveMain/BlogPositiveBlogListItem.cpp 
+	BlogPositiveMain/BlogPositiveMainWindow.cpp
+	BlogPositiveMain/BlogPositiveMainView.cpp
 	BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.cpp 
 	BlogPositiveSettings.cpp Example/ExamplePlugin.cpp main.cpp ;
 

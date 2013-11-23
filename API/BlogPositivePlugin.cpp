@@ -34,10 +34,11 @@ BlogPositiveCreateBlog::BlogPositiveCreateBlog()
 void
 BlogPositiveCreateBlog::SetBlogHandler(int32 blogHandler)
 {
-    fBlogHandler = bg;
+    fBlogHandler = blogHandler;
 }
 
-void MessageReceived(BMessage *message)
+void
+BlogPositiveCreateBlog::MessageReceived(BMessage *message)
 {
     switch(message->what)
     {
@@ -126,7 +127,7 @@ BlogPositivePlugin::SavePost(BlogPositivePost *post)
 }
 
 void 
-OpenNewBlogWindow()
+BlogPositivePlugin::OpenNewBlogWindow()
 {
     (new BlogPositiveCreateBlog())->Show();
 }

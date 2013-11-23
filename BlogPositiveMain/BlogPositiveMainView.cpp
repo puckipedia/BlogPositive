@@ -44,7 +44,7 @@ BlogPositiveMainView::MessageReceived(BMessage *message)
     }
     if(message->what == 'ABCD') {
 	int32 m = message->GetInt32("ding", 0);
-	BList *pluginList = BlogPositivePluginLoader::List;
+	BList *pluginList = BlogPositivePluginLoader::fList;
 	BlogPositivePlugin *pl = (BlogPositivePlugin *)pluginList->ItemAt(m);
 	pl->OpenNewBlogWindow();
 	return;
@@ -66,7 +66,7 @@ BlogPositiveMainView::BlogPositiveMainView(const char *name)
     
     aRect.bottom = 20;
     BMenuBar *menuBar = new BMenuBar("MenuBar");
-    BList *pluginList = BlogPositivePluginLoader::List;
+    BList *pluginList = BlogPositivePluginLoader::fList;
     BlogPositiveSettings *settings = new BlogPositiveSettings("bloglist");
     BList *lis = BlogPositiveBlog::DeserializeList(settings, "blogs");
     aView->Reload(lis);

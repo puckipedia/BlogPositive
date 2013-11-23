@@ -14,8 +14,8 @@ public:
     static void OpenPostWindow(BlogPositivePost *post);
     static void OpenPostWindowQueryingPlugins(BWindow *window);
     static const char *GetPageContent(BlogPositivePluginBlogPostWindow *window);
-private:
     static BList *fList;
+private:
     static CreateWindowPlugin *fPlugin;
 };
 

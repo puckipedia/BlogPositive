@@ -8,6 +8,7 @@ class BMessage;
 class BlogPositiveMainView : public BView
 {
 public:
+    BlogPositiveMainView(const char *name);
     void MessageReceived(BMessage *message);
 private:
     BListView *fListView;

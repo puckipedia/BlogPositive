@@ -6,9 +6,9 @@
 #include "BlogPositiveBlog.h"
 #include "BlogPositivePluginLoader.h"
 #include "BlogPositivePost.h"
+#include "BlogPositivePlugin.h"
 
-
-BlogPositivePluginPostListWindow(BRect rect, const char *Name)
+BlogPositivePluginPostListWindow::BlogPositivePluginPostListWindow(BRect rect, const char *Name)
     : BWindow(rect, Name, B_DOCUMENT_WINDOW, 0)
 {
     
@@ -39,7 +39,7 @@ BlogPositivePluginPostListWindow::MessageReceived(BMessage *message)
     }
 }
 
-BlogPositivePluginBlogPostWindow(BRect rect, const char *Name)
+BlogPositivePluginBlogPostWindow::BlogPositivePluginBlogPostWindow(BRect rect, const char *Name)
  : BWindow(rect, Name, B_DOCUMENT_WINDOW, 0)
 {
     
@@ -64,7 +64,7 @@ BlogPositivePluginBlogPostWindow::MessageReceived(BMessage *message)
     {
     case kPostWindowSavePost:
 	Post()->SetPage(BlogPositivePluginLoader::GetPageContent(this));
-	Post()->Blog()->GetPlugin()->SavePost(fPost);
+	Post()->Blog()->Plugin()->SavePost(fPost);
 	break;
     default:
 	BWindow::MessageReceived(message);

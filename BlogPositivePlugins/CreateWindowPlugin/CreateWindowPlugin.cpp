@@ -1,5 +1,38 @@
 #include "CreateWindowPlugin.h"
 
+#include <GroupLayout.h>
+#include <GroupLayoutBuilder.h>
+#include <OS.h>
+#include <ScrollView.h>
+#include <Menu.h>
+#include <MenuBar.h>
+#include <MenuItem.h>
+#include <ListView.h>
+#include <TextView.h>
+
+#include "../../API/BlogPositivePluginWindow.h"
+
+class PostItem : public BStringItem {
+public:
+  inline PostItem(BlogPositivePost *post) : BStringItem(post->Name()) {
+    fPost = post;
+  }
+  inline BlogPositivePost *Post() {
+    return fPost;
+  }
+ private:
+  BlogPositivePost *fPost;
+};
+
+class PluginAndWindowThing {
+ public:
+  BWindow *fWindow;
+  BlogPositivePlugin *fPlugin;
+  BlogPositiveBlog *fBlog;
+  BListView *fView;
+};
+
+
 uint32
 CreateWindowPlugin::Version()
 {
@@ -22,10 +55,10 @@ CreateWindowPlugin::HookBlogList(BlogPositivePluginPostListWindow **aWindow, Blo
     win->SetLayout(new BGroupLayout(B_VERTICAL));
     win->AddChild(BGroupLayoutBuilder(B_VERTICAL, 10).Add(aView));
     PluginAndWindowThing *thing = new PluginAndWindowThing();
-    thing->fWindow = *window;
-    thing->fBlog = blog;	
+    thing->fWindow = *aWindow;
+    thing->fBlog = aBlog;	
     thing->fView = aView;
-    thing->fPlugin = aBlog->GetPlugin();
+    thing->fPlugin = aBlog->Plugin();
     thread_id readThread = spawn_thread(loadList, "load_posts", B_NORMAL_PRIORITY, thing);
     resume_thread(readThread);
 }
@@ -33,7 +66,7 @@ CreateWindowPlugin::HookBlogList(BlogPositivePluginPostListWindow **aWindow, Blo
 BlogPositivePost *
 CreateWindowPlugin::TryGetPost(BWindow *aWindow)
 {
-    BListView *aView = (BListView *)window->FindView("ListView");
+    BListView *aView = (BListView *)aWindow->FindView("ListView");
     if(aView != NULL) {
 	int32 ChosenOne = aView->CurrentSelection();
 	if(ChosenOne == -1) {

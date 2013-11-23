@@ -14,10 +14,10 @@ CreateWindowPlugin *BlogPositivePluginLoader::fPlugin;
 void
 BlogPositivePluginLoader::Initialize()
 {
-    List = new BList();
-    Plugin = new CreateWindowPlugin();
-    List->AddItem(Plugin);
-    List->AddItem(new ExamplePlugin());
+    fList = new BList();
+    fPlugin = new CreateWindowPlugin();
+    fList->AddItem(fPlugin);
+    fList->AddItem(new ExamplePlugin());
 }
 
 void
@@ -27,7 +27,7 @@ BlogPositivePluginLoader::LoadWindow(BlogPositiveBlog *aBlog)
     for(int i = 0; i < fList->CountItems(); i++) {
 	BlogPositivePlugin *aPlugin = (BlogPositivePlugin *)fList->ItemAt(i);
 	if(aPlugin->Type() == kBlogPositiveBlogApi &&
-	   aPlugin->Supports(aBlog->GetBlogHandler())) {
+	   aPlugin->Supports(aBlog->BlogHandler())) {
 	    aWorkingPlugin = aPlugin;
 	    break;
 	}
@@ -36,9 +36,9 @@ BlogPositivePluginLoader::LoadWindow(BlogPositiveBlog *aBlog)
 	return;
 
     BlogPositivePluginPostListWindow *aBlogWindow = 
-	new BlogPositivePluginPostListWindow(BRect(100, 100, 600, 700), aBlog->GetName());
+	new BlogPositivePluginPostListWindow(BRect(100, 100, 600, 700), aBlog->Name());
 
-    blog->SetPlugin(aWorkingPlugin);
+    aBlog->SetPlugin(aWorkingPlugin);
     aBlogWindow->SetBlog(aBlog);
 
     for(int i = 0; i < fList->CountItems(); i++) {
@@ -55,12 +55,12 @@ void
 BlogPositivePluginLoader::OpenPostWindow(BlogPositivePost *aPost)
 {
     BlogPositivePluginBlogPostWindow *aBlogWindow = 
-	new BlogPositivePluginBlogPostWindow(BRect(100, 100, 600, 700), post->Name());
+	new BlogPositivePluginBlogPostWindow(BRect(100, 100, 600, 700), aPost->Name());
     
-    aBlogWindow->SetPost(post);
+    aBlogWindow->SetPost(aPost);
     
     for(int i = 0; i < fList->CountItems(); i++) {
-	BlogPositivePlugin *plugin = (BlogPositivePlugin *)List->ItemAt(i);
+	BlogPositivePlugin *plugin = (BlogPositivePlugin *)fList->ItemAt(i);
 	if(plugin->Type() == kBlogPositiveBlogEditor) {
 	    plugin->HookEditor(&aBlogWindow, aPost);
 	}
@@ -84,6 +84,7 @@ BlogPositivePluginLoader::OpenPostWindowQueryingPlugins(BWindow *aWindow)
     }
 }
 const char *
-BlogPositivePluginLoader::GetPageContent(BlogPositivePluginBlogPostWindow *aWindow) {
+BlogPositivePluginLoader::GetPageContent(BlogPositivePluginBlogPostWindow *aWindow)
+{
     return fPlugin->GetPostContent(aWindow);
 }

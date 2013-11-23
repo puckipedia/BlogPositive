@@ -17,7 +17,7 @@ ExamplePlugin::Supports(int32 Code) {
 BList *
 ExamplePlugin::GetBlogPosts(BlogPositiveBlog *blog) {
   BList *list = new BList();
-  BDirectory Dir(blog->GetAuthentication());
+  BDirectory Dir(blog->Authentication());
   BEntry entry;
   
   while(Dir.GetNextEntry(&entry) == B_OK) {
@@ -38,8 +38,8 @@ ExamplePlugin::GetBlogPosts(BlogPositiveBlog *blog) {
 
 void
 ExamplePlugin::SavePost(BlogPositivePost *post) {
-  BPath path(post->Blog()->GetAuthentication());
+  BPath path(post->Blog()->Authentication());
   path.Append(post->Name());
   BFile file(path.Path(), B_WRITE_ONLY | B_ERASE_FILE);
-  file.Write((void *)post->Page(), post->Pagesize()+2);
+  file.Write((void *)post->Page(), post->PageSize()+2);
 }

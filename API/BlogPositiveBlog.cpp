@@ -1,7 +1,9 @@
 #include "BlogPositiveBlog.h"
 
-#include "BlogPositivePlugin.h"
 #include <String.h>
+#include <List.h>
+
+#include "BlogPositivePlugin.h"
 
 const uint32 kBlogMessage = 'BPBL';
 
@@ -27,13 +29,13 @@ BlogPositiveBlog::DeserializeList(BMessage *message, const char *blogName)
 }
 
 BMessage *
-BlogPostitiveBlog::SerializeList(BList *blist, const char *blogName)
+BlogPositiveBlog::SerializeList(BList *blist, const char *blogName)
 {
   BMessage *bm = new BMessage();
   for(int i = 0; i < blist->CountItems(); i++)
   {
-    bmessage->AddMessage(blogName,
-			 ((BlogPositiveBlog *)blist->ItemAt(i))->Serialize());
+    bm->AddMessage(blogName,
+		   ((BlogPositiveBlog *)blist->ItemAt(i))->Serialize());
     
   }
   return bm;
@@ -49,6 +51,18 @@ const char *
 BlogPositiveBlog::Name()
 {
   return fName->String();
+}
+
+void
+BlogPositiveBlog::SetAuthentication(const char *auth)
+{
+    fAuthentication->SetTo(auth);
+}
+
+const char *
+BlogPositiveBlog::Authentication()
+{
+    return fAuthentication->String();
 }
 
 void
