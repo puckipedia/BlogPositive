@@ -1,0 +1,698 @@
+rm: cannot remove `blogpositive': No such file or directory
+In file included from /boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:15,
+                 from /boot/home/BlogPositive/API/BlogPositivePluginLoader.h:8,
+                 from /boot/home/BlogPositive/main.cpp:6:
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.h:14: `BlogPositiveBlog' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.h:14: `blog' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.h:14: variable or field `SetBlog' declared void
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.h:15: syntax error before `*'
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.h:18: syntax error before `*'
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.h:24: `BlogPositivePost' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.h:24: `post' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.h:24: variable or field `SetPost' declared void
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.h:25: syntax error before `*'
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.h:28: syntax error before `*'
+In file included from /boot/home/BlogPositive/API/BlogPositivePluginLoader.h:8,
+                 from /boot/home/BlogPositive/main.cpp:6:
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:21: parse error before `*'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:22: syntax error before `*'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:24: syntax error before `*'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:25: base `BStringItem' with only non-default constructor
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:25: in class without a constructor
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:30: syntax error before `*'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:31: syntax error before `*'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:35: parse error before `{'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:40: type specifier omitted for parameter
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:40: parse error before `*'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:41: syntax error before `*'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:43: type specifier omitted for parameter
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:43: parse error before `*'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:45: parse error before `}'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:46: parse error before `*'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:51: syntax error before `*'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:56: cannot declare member function `CreateWindowPlugin::Type' within `PostItem'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:56: syntax error before `{'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:60: cannot declare member function `CreateWindowPlugin::Supports' within `PostItem'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:60: syntax error before `{'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:63: type specifier omitted for parameter
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:63: parse error before `*'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:64: cannot declare member function `CreateWindowPlugin::HookBlogList' within `PostItem'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:64: syntax error before `{'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:67: `kPostWindowGetSelection' was not declared in this scope
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:68: syntax error before `->'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:69: syntax error before `->'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:70: syntax error before `->'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:72: syntax error before `->'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:73: syntax error before `->'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:74: syntax error before `->'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:75: syntax error before `->'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:77: ANSI C++ forbids declaration `resume_thread' with no type
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:77: `int resume_thread' redeclared as different kind of symbol
+/boot/system/develop/headers/os/kernel/OS.h:334: previous declaration of `status_t resume_thread(long int)'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:78: parse error before `}'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:79: syntax error before `*'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:87: `ChosenOne' was not declared in this scope
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:88: parse error before `return'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:93: cannot declare member function `CreateWindowPlugin::loadList' within `PostItem'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:93: syntax error before `{'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:95: `class PluginAndWindowThing' has no member named `fPlugin'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:95: `class PluginAndWindowThing' has no member named `fBlog'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:96: parse error before `if'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:97: parse error before `;'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:97: syntax error before `++'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:99: syntax error before `->'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:101: syntax error before `->'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:104: type specifier omitted for parameter
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:104: parse error before `*'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:105: cannot declare member function `CreateWindowPlugin::HookEditor' within `PostItem'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:105: syntax error before `{'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:107: conflicting types for `class BTextView * aView'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:66: previous declaration as `class BListView * aView'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:108: syntax error before `->'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:109: syntax error before `->'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:110: syntax error before `->'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:111: `win' was not declared in this scope
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:112: syntax error before `.'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:114: syntax error before `->'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:116: syntax error before `->'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:117: syntax error before `->'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:120: cannot declare member function `CreateWindowPlugin::GetPostContent' within `PostItem'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:120: syntax error before `{'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:122: `view' was not declared in this scope
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:123: parse error before `return'
+In file included from /boot/home/BlogPositive/API/BlogPositivePost.h:6,
+                 from /boot/home/BlogPositive/API/BlogPositivePluginLoader.h:9,
+                 from /boot/home/BlogPositive/main.cpp:6:
+/boot/system/develop/headers/os/support/String.h:426: cannot declare member function `PostItem::BString::Length' within `PostItem'
+/boot/system/develop/headers/os/support/String.h:426: syntax error before `{'
+/boot/system/develop/headers/os/support/String.h:435: cannot declare member function `PostItem::BString::IsEmpty' within `PostItem'
+/boot/system/develop/headers/os/support/String.h:435: syntax error before `{'
+/boot/system/develop/headers/os/support/String.h:442: cannot declare member function `PostItem::BString::String' within `PostItem'
+/boot/system/develop/headers/os/support/String.h:442: syntax error before `{'
+/boot/system/develop/headers/os/support/String.h:451: cannot declare member function `PostItem::BString::HashValue' within `PostItem'
+/boot/system/develop/headers/os/support/String.h:451: syntax error before `{'
+/boot/system/develop/headers/os/support/String.h:458: cannot declare member function `PostItem::BString::SetTo' within `PostItem'
+/boot/system/develop/headers/os/support/String.h:458: syntax error before `{'
+/boot/system/develop/headers/os/support/String.h:465: cannot declare member function `PostItem::BString::[]' within `PostItem'
+/boot/system/develop/headers/os/support/String.h:465: syntax error before `{'
+/boot/system/develop/headers/os/support/String.h:472: cannot declare member function `PostItem::BString::ByteAt' within `PostItem'
+/boot/system/develop/headers/os/support/String.h:472: syntax error before `{'
+/boot/system/develop/headers/os/support/String.h:481: cannot declare member function `PostItem::BString::+=' within `PostItem'
+/boot/system/develop/headers/os/support/String.h:481: syntax error before `{'
+/boot/system/develop/headers/os/support/String.h:489: cannot declare member function `PostItem::BString::Append' within `PostItem'
+/boot/system/develop/headers/os/support/String.h:489: syntax error before `{'
+/boot/system/develop/headers/os/support/String.h:497: cannot declare member function `PostItem::BString::Append' within `PostItem'
+/boot/system/develop/headers/os/support/String.h:497: syntax error before `{'
+/boot/system/develop/headers/os/support/String.h:504: cannot declare member function `PostItem::BString::==' within `PostItem'
+/boot/system/develop/headers/os/support/String.h:504: syntax error before `{'
+/boot/system/develop/headers/os/support/String.h:511: cannot declare member function `PostItem::BString::<' within `PostItem'
+/boot/system/develop/headers/os/support/String.h:511: syntax error before `{'
+/boot/system/develop/headers/os/support/String.h:518: cannot declare member function `PostItem::BString::<=' within `PostItem'
+/boot/system/develop/headers/os/support/String.h:518: syntax error before `{'
+/boot/system/develop/headers/os/support/String.h:525: cannot declare member function `PostItem::BString::>=' within `PostItem'
+/boot/system/develop/headers/os/support/String.h:525: syntax error before `{'
+/boot/system/develop/headers/os/support/String.h:532: cannot declare member function `PostItem::BString::>' within `PostItem'
+/boot/system/develop/headers/os/support/String.h:532: syntax error before `{'
+/boot/system/develop/headers/os/support/String.h:539: cannot declare member function `PostItem::BString::!=' within `PostItem'
+/boot/system/develop/headers/os/support/String.h:539: syntax error before `{'
+/boot/system/develop/headers/os/support/String.h:546: cannot declare member function `PostItem::BString::!=' within `PostItem'
+/boot/system/develop/headers/os/support/String.h:546: syntax error before `{'
+/boot/system/develop/headers/os/support/String.h:553: cannot declare member function `PostItem::BString::type name' within `PostItem'
+/boot/system/develop/headers/os/support/String.h:553: syntax error before `{'
+/boot/system/develop/headers/os/support/String.h: In function `bool operator <=(const char *, const BString &)':
+/boot/system/develop/headers/os/support/String.h:568: no match for `const BString & >= const char *&'
+/boot/system/develop/headers/os/support/String.h:413: candidates are: bool operator >=(const char *, const PostItem::BString &)
+/boot/system/develop/headers/os/support/String.h: In function `bool operator ==(const char *, const BString &)':
+/boot/system/develop/headers/os/support/String.h:575: no match for `const BString & == const char *&'
+/boot/system/develop/headers/os/interface/GraphicsDefs.h:21: candidates are: bool operator ==(const pattern &, const pattern &)
+/boot/system/develop/headers/os/support/String.h:411:                 bool operator ==(const char *, const PostItem::BString &)
+/boot/system/develop/headers/os/support/String.h:574:                 bool operator ==(const char *, const BString &)
+/boot/system/develop/headers/os/support/String.h: In function `bool operator >(const char *, const BString &)':
+/boot/system/develop/headers/os/support/String.h:582: no match for `const BString & < const char *&'
+/boot/system/develop/headers/os/app/Messenger.h:82: candidates are: bool operator <(const BMessenger &, const BMessenger &)
+/boot/system/develop/headers/os/support/String.h:560:                 bool operator <(const char *, const PostItem::BString &)
+/boot/system/develop/headers/os/support/String.h: In function `bool operator >=(const char *, const BString &)':
+/boot/system/develop/headers/os/support/String.h:589: no match for `const BString & <= const char *&'
+/boot/system/develop/headers/os/support/String.h:410: candidates are: bool operator <=(const char *, const PostItem::BString &)
+/boot/system/develop/headers/os/support/String.h:567:                 bool operator <=(const char *, const BString &)
+/boot/system/develop/headers/os/support/String.h: In function `bool operator !=(const char *, const BString &)':
+/boot/system/develop/headers/os/support/String.h:596: no match for `const BString & != const char *&'
+/boot/system/develop/headers/os/interface/GraphicsDefs.h:28: candidates are: bool operator !=(const pattern &, const pattern &)
+/boot/system/develop/headers/os/app/Messenger.h:83:                 bool operator !=(const BMessenger &, const BMessenger &)
+/boot/system/develop/headers/os/support/String.h:414:                 bool operator !=(const char *, const PostItem::BString &)
+/boot/system/develop/headers/os/support/String.h:595:                 bool operator !=(const char *, const BString &)
+/boot/home/BlogPositive/API/BlogPositivePost.h: At top level:
+In file included from /boot/home/BlogPositive/API/BlogPositivePluginLoader.h:9,
+                 from /boot/home/BlogPositive/main.cpp:6:
+/boot/home/BlogPositive/API/BlogPositivePost.h:11: parse error before `*'
+/boot/home/BlogPositive/API/BlogPositivePost.h:12: syntax error before `*'
+/boot/home/BlogPositive/API/BlogPositivePost.h:21: syntax error before `*'
+In file included from /boot/home/BlogPositive/API/BlogPositivePluginLoader.h:10,
+                 from /boot/home/BlogPositive/main.cpp:6:
+/boot/home/BlogPositive/API/BlogPositiveBlog.h:26: `BlogPositivePlugin' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositiveBlog.h:26: `plugin' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositiveBlog.h:26: variable or field `SetPlugin' declared void
+/boot/home/BlogPositive/API/BlogPositiveBlog.h:27: syntax error before `*'
+/boot/home/BlogPositive/API/BlogPositiveBlog.h:32: syntax error before `*'
+/boot/home/BlogPositive/main.cpp:31: Internal compiler error in `make_decl_rtl', at varasm.c:741
+Please submit info to Oliver Tappe <gcc@hirschkaefer.de>.
+
+In file included from /boot/home/BlogPositive/API/BlogPositiveBlog.cpp:4:
+/boot/home/BlogPositive/API/BlogPositiveBlog.h:26: `BlogPositivePlugin' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositiveBlog.h:26: `plugin' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositiveBlog.h:26: variable or field `SetPlugin' declared void
+/boot/home/BlogPositive/API/BlogPositiveBlog.h:27: syntax error before `*'
+/boot/home/BlogPositive/API/BlogPositiveBlog.h:32: syntax error before `*'
+/boot/home/BlogPositive/API/BlogPositiveBlog.cpp:86: `BlogPositivePlugin' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositiveBlog.cpp:86: `plugin' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositiveBlog.cpp:87: `void BlogPositiveBlog::SetPlugin' is not a static member of `class BlogPositiveBlog'
+/boot/home/BlogPositive/API/BlogPositiveBlog.cpp:87: syntax error before `{'
+/boot/home/BlogPositive/API/BlogPositiveBlog.cpp:90: syntax error before `*'
+In file included from /boot/home/BlogPositive/API/BlogPositivePlugin.cpp:4:
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:32: ANSI C++ forbids declaration `BlogPositivePost' with no type
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:32: `BlogPositivePost' declared as a `virtual' field
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:32: parse error before `*'
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:33: `BlogPositiveBlog' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:33: `blog' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:33: virtual outside class declaration
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:34: `BlogPositiveBlog' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:34: `blog' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:34: virtual outside class declaration
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:35: ANSI C++ forbids declaration `BlogPositivePost' with no type
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:35: `BlogPositivePost' declared as a `virtual' field
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:35: declaration of `int BlogPositivePlugin::BlogPositivePost'
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:32: conflicts with previous declaration `int BlogPositivePlugin::BlogPositivePost'
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:35: parse error before `*'
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:36: `BlogPositivePluginPostListWindow' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:36: `window' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:36: `BlogPositiveBlog' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:36: `blog' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:36: variable or field `HookBlogList' declared void
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:36: ANSI C++ forbids initialization of member `HookBlogList'
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:36: making `HookBlogList' static
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:36: ANSI C++ forbids in-class initialization of non-const static member `HookBlogList'
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:36: `HookBlogList' declared as a `virtual' field
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:37: `BlogPositivePluginBlogPostWindow' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:37: `window' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:37: invalid use of member `BlogPositivePlugin::BlogPositivePost'
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:37: `post' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:37: variable or field `HookEditor' declared void
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:37: ANSI C++ forbids initialization of member `HookEditor'
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:37: making `HookEditor' static
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:37: ANSI C++ forbids in-class initialization of non-const static member `HookEditor'
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:37: `HookEditor' declared as a `virtual' field
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:38: invalid use of member `BlogPositivePlugin::BlogPositivePost'
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:38: `post' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:38: variable or field `SavePost' declared void
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:38: `SavePost' declared as a `virtual' field
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:35: duplicate member `BlogPositivePlugin::BlogPositivePost'
+/boot/home/BlogPositive/API/BlogPositivePlugin.cpp: In method `void BlogPositiveCreateBlog::MessageReceived(BMessage *)':
+/boot/home/BlogPositive/API/BlogPositivePlugin.cpp:29: `BlogPositiveBlog' undeclared (first use this function)
+/boot/home/BlogPositive/API/BlogPositivePlugin.cpp:29: (Each undeclared identifier is reported only once
+/boot/home/BlogPositive/API/BlogPositivePlugin.cpp:29: for each function it appears in.)
+/boot/home/BlogPositive/API/BlogPositivePlugin.cpp:29: parse error before `::'
+/boot/home/BlogPositive/API/BlogPositivePlugin.cpp:30: `blog' undeclared (first use this function)
+/boot/home/BlogPositive/API/BlogPositivePlugin.cpp:30: parse error before `('
+/boot/home/BlogPositive/API/BlogPositivePlugin.cpp:36: parse error before `::'
+/boot/home/BlogPositive/API/BlogPositivePlugin.cpp: In method `int32 BlogPositivePlugin::Type()':
+/boot/home/BlogPositive/API/BlogPositivePlugin.cpp:49: `kBlogPositiveBlogApi' undeclared (first use this function)
+/boot/home/BlogPositive/API/BlogPositivePlugin.cpp: At top level:
+/boot/home/BlogPositive/API/BlogPositivePlugin.cpp:52: syntax error before `*'
+/boot/home/BlogPositive/API/BlogPositivePlugin.cpp:55: `class BWindow * BlogPositivePlugin::InitializeBlogWindow' is not a static member of `class BlogPositivePlugin'
+/boot/home/BlogPositive/API/BlogPositivePlugin.cpp:55: syntax error before `{'
+/boot/home/BlogPositive/API/BlogPositivePlugin.cpp:57: `class BList * BlogPositivePlugin::GetBlogPosts' is not a static member of `class BlogPositivePlugin'
+/boot/home/BlogPositive/API/BlogPositivePlugin.cpp:57: syntax error before `{'
+/boot/home/BlogPositive/API/BlogPositivePlugin.cpp:58: syntax error before `*'
+/boot/home/BlogPositive/API/BlogPositivePlugin.cpp:60: `BlogPositivePluginPostListWindow' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePlugin.cpp:60: `window' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePlugin.cpp:61: duplicate initialization of BlogPositivePlugin::HookBlogList
+/boot/home/BlogPositive/API/BlogPositivePlugin.cpp:61: conflicting types for `void BlogPositivePlugin::HookBlogList'
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:36: previous declaration as `int BlogPositivePlugin::HookBlogList'
+/boot/home/BlogPositive/API/BlogPositivePlugin.cpp:61: initializer list being treated as compound expression
+/boot/home/BlogPositive/API/BlogPositivePlugin.cpp:61: syntax error before `{'
+/boot/home/BlogPositive/API/BlogPositivePlugin.cpp:62: `BlogPositivePluginBlogPostWindow' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePlugin.cpp:62: `window' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePlugin.cpp:62: invalid use of member `BlogPositivePlugin::BlogPositivePost'
+/boot/home/BlogPositive/API/BlogPositivePlugin.cpp:62: `post' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePlugin.cpp:63: duplicate initialization of BlogPositivePlugin::HookEditor
+/boot/home/BlogPositive/API/BlogPositivePlugin.cpp:63: conflicting types for `void BlogPositivePlugin::HookEditor'
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:37: previous declaration as `int BlogPositivePlugin::HookEditor'
+/boot/home/BlogPositive/API/BlogPositivePlugin.cpp:63: initializer list being treated as compound expression
+/boot/home/BlogPositive/API/BlogPositivePlugin.cpp:63: syntax error before `{'
+/boot/home/BlogPositive/API/BlogPositivePlugin.cpp:64: invalid use of member `BlogPositivePlugin::BlogPositivePost'
+/boot/home/BlogPositive/API/BlogPositivePlugin.cpp:64: `post' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePlugin.cpp:65: `void BlogPositivePlugin::SavePost' is not a static member of `class BlogPositivePlugin'
+/boot/home/BlogPositive/API/BlogPositivePlugin.cpp:65: syntax error before `{'
+In file included from /boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:15,
+                 from /boot/home/BlogPositive/API/BlogPositivePluginLoader.h:8,
+                 from /boot/home/BlogPositive/API/BlogPositivePluginLoader.cpp:4:
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.h:14: `BlogPositiveBlog' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.h:14: `blog' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.h:14: variable or field `SetBlog' declared void
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.h:15: syntax error before `*'
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.h:18: syntax error before `*'
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.h:24: `BlogPositivePost' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.h:24: `post' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.h:24: variable or field `SetPost' declared void
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.h:25: syntax error before `*'
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.h:28: syntax error before `*'
+In file included from /boot/home/BlogPositive/API/BlogPositivePluginLoader.h:8,
+                 from /boot/home/BlogPositive/API/BlogPositivePluginLoader.cpp:4:
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:21: parse error before `*'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:22: syntax error before `*'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:24: syntax error before `*'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:25: base `BStringItem' with only non-default constructor
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:25: in class without a constructor
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:30: syntax error before `*'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:31: syntax error before `*'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:35: parse error before `{'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:40: type specifier omitted for parameter
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:40: parse error before `*'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:41: syntax error before `*'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:43: type specifier omitted for parameter
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:43: parse error before `*'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:45: parse error before `}'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:46: parse error before `*'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:51: syntax error before `*'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:56: cannot declare member function `CreateWindowPlugin::Type' within `PostItem'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:56: syntax error before `{'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:60: cannot declare member function `CreateWindowPlugin::Supports' within `PostItem'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:60: syntax error before `{'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:63: type specifier omitted for parameter
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:63: parse error before `*'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:64: cannot declare member function `CreateWindowPlugin::HookBlogList' within `PostItem'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:64: syntax error before `{'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:67: `kPostWindowGetSelection' was not declared in this scope
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:68: syntax error before `->'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:69: syntax error before `->'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:70: syntax error before `->'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:72: syntax error before `->'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:73: syntax error before `->'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:74: syntax error before `->'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:75: syntax error before `->'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:77: ANSI C++ forbids declaration `resume_thread' with no type
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:77: `int resume_thread' redeclared as different kind of symbol
+/boot/system/develop/headers/os/kernel/OS.h:334: previous declaration of `status_t resume_thread(long int)'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:78: parse error before `}'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:79: syntax error before `*'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:87: `ChosenOne' was not declared in this scope
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:88: parse error before `return'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:93: cannot declare member function `CreateWindowPlugin::loadList' within `PostItem'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:93: syntax error before `{'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:95: `class PluginAndWindowThing' has no member named `fPlugin'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:95: `class PluginAndWindowThing' has no member named `fBlog'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:96: parse error before `if'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:97: parse error before `;'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:97: syntax error before `++'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:99: syntax error before `->'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:101: syntax error before `->'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:104: type specifier omitted for parameter
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:104: parse error before `*'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:105: cannot declare member function `CreateWindowPlugin::HookEditor' within `PostItem'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:105: syntax error before `{'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:107: conflicting types for `class BTextView * aView'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:66: previous declaration as `class BListView * aView'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:108: syntax error before `->'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:109: syntax error before `->'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:110: syntax error before `->'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:111: `win' was not declared in this scope
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:112: syntax error before `.'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:114: syntax error before `->'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:116: syntax error before `->'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:117: syntax error before `->'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:120: cannot declare member function `CreateWindowPlugin::GetPostContent' within `PostItem'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:120: syntax error before `{'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:122: `view' was not declared in this scope
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:123: parse error before `return'
+In file included from /boot/home/BlogPositive/API/BlogPositivePost.h:6,
+                 from /boot/home/BlogPositive/API/BlogPositivePluginLoader.h:9,
+                 from /boot/home/BlogPositive/API/BlogPositivePluginLoader.cpp:4:
+/boot/system/develop/headers/os/support/String.h:426: cannot declare member function `PostItem::BString::Length' within `PostItem'
+/boot/system/develop/headers/os/support/String.h:426: syntax error before `{'
+/boot/system/develop/headers/os/support/String.h:435: cannot declare member function `PostItem::BString::IsEmpty' within `PostItem'
+/boot/system/develop/headers/os/support/String.h:435: syntax error before `{'
+/boot/system/develop/headers/os/support/String.h:442: cannot declare member function `PostItem::BString::String' within `PostItem'
+/boot/system/develop/headers/os/support/String.h:442: syntax error before `{'
+/boot/system/develop/headers/os/support/String.h:451: cannot declare member function `PostItem::BString::HashValue' within `PostItem'
+/boot/system/develop/headers/os/support/String.h:451: syntax error before `{'
+/boot/system/develop/headers/os/support/String.h:458: cannot declare member function `PostItem::BString::SetTo' within `PostItem'
+/boot/system/develop/headers/os/support/String.h:458: syntax error before `{'
+/boot/system/develop/headers/os/support/String.h:465: cannot declare member function `PostItem::BString::[]' within `PostItem'
+/boot/system/develop/headers/os/support/String.h:465: syntax error before `{'
+/boot/system/develop/headers/os/support/String.h:472: cannot declare member function `PostItem::BString::ByteAt' within `PostItem'
+/boot/system/develop/headers/os/support/String.h:472: syntax error before `{'
+/boot/system/develop/headers/os/support/String.h:481: cannot declare member function `PostItem::BString::+=' within `PostItem'
+/boot/system/develop/headers/os/support/String.h:481: syntax error before `{'
+/boot/system/develop/headers/os/support/String.h:489: cannot declare member function `PostItem::BString::Append' within `PostItem'
+/boot/system/develop/headers/os/support/String.h:489: syntax error before `{'
+/boot/system/develop/headers/os/support/String.h:497: cannot declare member function `PostItem::BString::Append' within `PostItem'
+/boot/system/develop/headers/os/support/String.h:497: syntax error before `{'
+/boot/system/develop/headers/os/support/String.h:504: cannot declare member function `PostItem::BString::==' within `PostItem'
+/boot/system/develop/headers/os/support/String.h:504: syntax error before `{'
+/boot/system/develop/headers/os/support/String.h:511: cannot declare member function `PostItem::BString::<' within `PostItem'
+/boot/system/develop/headers/os/support/String.h:511: syntax error before `{'
+/boot/system/develop/headers/os/support/String.h:518: cannot declare member function `PostItem::BString::<=' within `PostItem'
+/boot/system/develop/headers/os/support/String.h:518: syntax error before `{'
+/boot/system/develop/headers/os/support/String.h:525: cannot declare member function `PostItem::BString::>=' within `PostItem'
+/boot/system/develop/headers/os/support/String.h:525: syntax error before `{'
+/boot/system/develop/headers/os/support/String.h:532: cannot declare member function `PostItem::BString::>' within `PostItem'
+/boot/system/develop/headers/os/support/String.h:532: syntax error before `{'
+/boot/system/develop/headers/os/support/String.h:539: cannot declare member function `PostItem::BString::!=' within `PostItem'
+/boot/system/develop/headers/os/support/String.h:539: syntax error before `{'
+/boot/system/develop/headers/os/support/String.h:546: cannot declare member function `PostItem::BString::!=' within `PostItem'
+/boot/system/develop/headers/os/support/String.h:546: syntax error before `{'
+/boot/system/develop/headers/os/support/String.h:553: cannot declare member function `PostItem::BString::type name' within `PostItem'
+/boot/system/develop/headers/os/support/String.h:553: syntax error before `{'
+/boot/system/develop/headers/os/support/String.h: In function `bool operator <=(const char *, const BString &)':
+/boot/system/develop/headers/os/support/String.h:568: no match for `const BString & >= const char *&'
+/boot/system/develop/headers/os/support/String.h:413: candidates are: bool operator >=(const char *, const PostItem::BString &)
+/boot/system/develop/headers/os/support/String.h: In function `bool operator ==(const char *, const BString &)':
+/boot/system/develop/headers/os/support/String.h:575: no match for `const BString & == const char *&'
+/boot/system/develop/headers/os/interface/GraphicsDefs.h:21: candidates are: bool operator ==(const pattern &, const pattern &)
+/boot/system/develop/headers/os/support/String.h:411:                 bool operator ==(const char *, const PostItem::BString &)
+/boot/system/develop/headers/os/support/String.h:574:                 bool operator ==(const char *, const BString &)
+/boot/system/develop/headers/os/support/String.h: In function `bool operator >(const char *, const BString &)':
+/boot/system/develop/headers/os/support/String.h:582: no match for `const BString & < const char *&'
+/boot/system/develop/headers/os/app/Messenger.h:82: candidates are: bool operator <(const BMessenger &, const BMessenger &)
+/boot/system/develop/headers/os/support/String.h:560:                 bool operator <(const char *, const PostItem::BString &)
+/boot/system/develop/headers/os/support/String.h: In function `bool operator >=(const char *, const BString &)':
+/boot/system/develop/headers/os/support/String.h:589: no match for `const BString & <= const char *&'
+/boot/system/develop/headers/os/support/String.h:410: candidates are: bool operator <=(const char *, const PostItem::BString &)
+/boot/system/develop/headers/os/support/String.h:567:                 bool operator <=(const char *, const BString &)
+/boot/system/develop/headers/os/support/String.h: In function `bool operator !=(const char *, const BString &)':
+/boot/system/develop/headers/os/support/String.h:596: no match for `const BString & != const char *&'
+/boot/system/develop/headers/os/interface/GraphicsDefs.h:28: candidates are: bool operator !=(const pattern &, const pattern &)
+/boot/system/develop/headers/os/app/Messenger.h:83:                 bool operator !=(const BMessenger &, const BMessenger &)
+/boot/system/develop/headers/os/support/String.h:414:                 bool operator !=(const char *, const PostItem::BString &)
+/boot/system/develop/headers/os/support/String.h:595:                 bool operator !=(const char *, const BString &)
+/boot/home/BlogPositive/API/BlogPositivePost.h: At top level:
+In file included from /boot/home/BlogPositive/API/BlogPositivePluginLoader.h:9,
+                 from /boot/home/BlogPositive/API/BlogPositivePluginLoader.cpp:4:
+/boot/home/BlogPositive/API/BlogPositivePost.h:11: parse error before `*'
+/boot/home/BlogPositive/API/BlogPositivePost.h:12: syntax error before `*'
+/boot/home/BlogPositive/API/BlogPositivePost.h:21: syntax error before `*'
+In file included from /boot/home/BlogPositive/API/BlogPositivePluginLoader.h:10,
+                 from /boot/home/BlogPositive/API/BlogPositivePluginLoader.cpp:4:
+/boot/home/BlogPositive/API/BlogPositiveBlog.h:26: `BlogPositivePlugin' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositiveBlog.h:26: `plugin' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositiveBlog.h:26: variable or field `SetPlugin' declared void
+/boot/home/BlogPositive/API/BlogPositiveBlog.h:27: syntax error before `*'
+/boot/home/BlogPositive/API/BlogPositiveBlog.h:32: syntax error before `*'
+/boot/home/BlogPositive/API/BlogPositivePluginLoader.cpp:8: redefinition of `class BList * BlogPositivePluginLoader::List'
+/boot/home/BlogPositive/API/BlogPositivePluginLoader.cpp:6: `class BList * BlogPositivePluginLoader::List' previously declared here
+/boot/home/BlogPositive/API/BlogPositivePluginLoader.cpp:9: redefinition of `class CreateWindowPlugin * BlogPositivePluginLoader::Plugin'
+/boot/home/BlogPositive/API/BlogPositivePluginLoader.cpp:7: `class CreateWindowPlugin * BlogPositivePluginLoader::Plugin' previously declared here
+/boot/home/BlogPositive/API/BlogPositivePluginLoader.cpp: In function `static void BlogPositivePluginLoader::Initialize()':
+/boot/home/BlogPositive/API/BlogPositivePluginLoader.cpp:13: invalid use of undefined type `class CreateWindowPlugin'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:17: forward declaration of `class CreateWindowPlugin'
+/boot/home/BlogPositive/API/BlogPositivePluginLoader.cpp: In function `static void BlogPositivePluginLoader::LoadWindow(BlogPositiveBlog *)':
+/boot/home/BlogPositive/API/BlogPositivePluginLoader.cpp:24: `kBlogPositiveBlogApi' undeclared (first use this function)
+/boot/home/BlogPositive/API/BlogPositivePluginLoader.cpp:24: (Each undeclared identifier is reported only once
+/boot/home/BlogPositive/API/BlogPositivePluginLoader.cpp:24: for each function it appears in.)
+/boot/home/BlogPositive/API/BlogPositivePluginLoader.cpp:35: no matching function for call to `BlogPositiveBlog::SetPlugin (BlogPositivePlugin *&)'
+/boot/home/BlogPositive/API/BlogPositivePluginLoader.cpp:36: no matching function for call to `BlogPositivePluginPostListWindow::SetBlog (BlogPositiveBlog *&)'
+/boot/home/BlogPositive/API/BlogPositivePluginLoader.cpp:39: `kBlogPositiveBlogEditor' undeclared (first use this function)
+/boot/home/BlogPositive/API/BlogPositivePluginLoader.cpp: In function `static void BlogPositivePluginLoader::OpenPostWindow(BlogPositivePost *)':
+/boot/home/BlogPositive/API/BlogPositivePluginLoader.cpp:53: no matching function for call to `BlogPositivePluginBlogPostWindow::SetPost (BlogPositivePost *&)'
+/boot/home/BlogPositive/API/BlogPositivePluginLoader.cpp: In function `static const char * BlogPositivePluginLoader::GetPageContent(BlogPositivePluginBlogPostWindow *)':
+/boot/home/BlogPositive/API/BlogPositivePluginLoader.cpp:78: invalid use of undefined type `class CreateWindowPlugin'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:17: forward declaration of `class CreateWindowPlugin'
+/boot/home/BlogPositive/API/BlogPositivePluginLoader.cpp: At top level:
+/boot/home/BlogPositive/API/BlogPositivePluginLoader.cpp:80: Internal compiler error in `make_decl_rtl', at varasm.c:741
+Please submit info to Oliver Tappe <gcc@hirschkaefer.de>.
+
+In file included from /boot/home/BlogPositive/API/BlogPositivePluginWindow.cpp:4:
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.h:14: `BlogPositiveBlog' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.h:14: `blog' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.h:14: variable or field `SetBlog' declared void
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.h:15: syntax error before `*'
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.h:18: syntax error before `*'
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.h:24: `BlogPositivePost' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.h:24: `post' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.h:24: variable or field `SetPost' declared void
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.h:25: syntax error before `*'
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.h:28: syntax error before `*'
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.cpp:15: `BlogPositiveBlog' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.cpp:15: `blog' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.cpp:16: `void BlogPositivePluginPostListWindow::SetBlog' is not a static member of `class BlogPositivePluginPostListWindow'
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.cpp:16: syntax error before `{'
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.cpp:18: `blog' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.cpp:18: ANSI C++ forbids declaration `printf' with no type
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.cpp:18: `int printf' redeclared as different kind of symbol
+/boot/system/develop/headers/posix/stdio.h:149: previous declaration of `int printf(const char *, ...)'
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.cpp:18: initializer list being treated as compound expression
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.cpp:19: parse error before `}'
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.cpp:20: syntax error before `*'
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.cpp: In method `void BlogPositivePluginPostListWindow::MessageReceived(BMessage *)':
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.cpp:28: `BlogPositivePluginLoader' undeclared (first use this function)
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.cpp:28: (Each undeclared identifier is reported only once
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.cpp:28: for each function it appears in.)
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.cpp:28: parse error before `::'
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.cpp: At top level:
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.cpp:34: `BlogPositivePost' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.cpp:34: `post' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.cpp:35: `void BlogPositivePluginBlogPostWindow::SetPost' is not a static member of `class BlogPositivePluginBlogPostWindow'
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.cpp:35: syntax error before `{'
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.cpp:38: syntax error before `*'
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.cpp: In method `void BlogPositivePluginBlogPostWindow::MessageReceived(BMessage *)':
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.cpp:46: implicit declaration of function `int Post(...)'
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.cpp:46: base operand of `->' is not a pointer
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.cpp:46: parse error before `::'
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.cpp:47: base operand of `->' is not a pointer
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.cpp:47: `fPost' undeclared (first use this function)
+In file included from /boot/home/BlogPositive/API/BlogPositivePost.cpp:4:
+/boot/home/BlogPositive/API/BlogPositivePost.h:11: parse error before `*'
+/boot/home/BlogPositive/API/BlogPositivePost.h:12: syntax error before `*'
+/boot/home/BlogPositive/API/BlogPositivePost.h:21: syntax error before `*'
+/boot/home/BlogPositive/API/BlogPositivePost.cpp:6: parse error before `*'
+/boot/home/BlogPositive/API/BlogPositivePost.cpp:9: ANSI C++ forbids declaration `fPage' with no type
+/boot/home/BlogPositive/API/BlogPositivePost.cpp:9: initialization to `int' from `BString *' lacks a cast
+/boot/home/BlogPositive/API/BlogPositivePost.cpp:10: ANSI C++ forbids declaration `fBlog' with no type
+/boot/home/BlogPositive/API/BlogPositivePost.cpp:10: `blog' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePost.cpp:11: parse error before `}'
+/boot/home/BlogPositive/API/BlogPositivePost.cpp:12: syntax error before `*'
+In file included from /boot/home/BlogPositive/BlogPositiveMain/BlogPositiveBlogListItem.h:9,
+                 from /boot/home/BlogPositive/BlogPositiveMain/BlogPositiveBlogListItem.cpp:4:
+/boot/home/BlogPositive/API/BlogPositiveBlog.h:26: `BlogPositivePlugin' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositiveBlog.h:26: `plugin' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositiveBlog.h:26: variable or field `SetPlugin' declared void
+/boot/home/BlogPositive/API/BlogPositiveBlog.h:27: syntax error before `*'
+/boot/home/BlogPositive/API/BlogPositiveBlog.h:32: syntax error before `*'
+In file included from /boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.h:16,
+                 from /boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:4:
+/boot/home/BlogPositive/API/BlogPositiveBlog.h:26: `BlogPositivePlugin' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositiveBlog.h:26: `plugin' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositiveBlog.h:26: variable or field `SetPlugin' declared void
+/boot/home/BlogPositive/API/BlogPositiveBlog.h:27: syntax error before `*'
+/boot/home/BlogPositive/API/BlogPositiveBlog.h:32: syntax error before `*'
+In file included from /boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.h:19,
+                 from /boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:4:
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:32: ANSI C++ forbids declaration `BlogPositivePost' with no type
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:32: `BlogPositivePost' declared as a `virtual' field
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:32: parse error before `*'
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:35: ANSI C++ forbids declaration `BlogPositivePost' with no type
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:35: `BlogPositivePost' declared as a `virtual' field
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:35: declaration of `int BlogPositivePlugin::BlogPositivePost'
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:32: conflicts with previous declaration `int BlogPositivePlugin::BlogPositivePost'
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:35: parse error before `*'
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:36: `BlogPositivePluginPostListWindow' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:36: `window' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:36: parse error before `*'
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:37: `BlogPositivePluginBlogPostWindow' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:37: `window' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:37: invalid use of member `BlogPositivePlugin::BlogPositivePost'
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:37: `post' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:37: variable or field `HookEditor' declared void
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:37: ANSI C++ forbids initialization of member `HookEditor'
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:37: making `HookEditor' static
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:37: ANSI C++ forbids in-class initialization of non-const static member `HookEditor'
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:37: `HookEditor' declared as a `virtual' field
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:38: invalid use of member `BlogPositivePlugin::BlogPositivePost'
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:38: `post' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:38: variable or field `SavePost' declared void
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:38: `SavePost' declared as a `virtual' field
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:35: duplicate member `BlogPositivePlugin::BlogPositivePost'
+In file included from /boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:15,
+                 from /boot/home/BlogPositive/API/BlogPositivePluginLoader.h:8,
+                 from /boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.h:20,
+                 from /boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:4:
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.h:24: `BlogPositivePost' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.h:24: `post' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.h:24: variable or field `SetPost' declared void
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.h:25: syntax error before `*'
+/boot/home/BlogPositive/API/BlogPositivePluginWindow.h:28: syntax error before `*'
+In file included from /boot/home/BlogPositive/API/BlogPositivePluginLoader.h:8,
+                 from /boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.h:20,
+                 from /boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:4:
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:21: parse error before `*'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:22: syntax error before `*'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:24: syntax error before `*'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:25: base `BStringItem' with only non-default constructor
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:25: in class without a constructor
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:41: syntax error before `*'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:43: type specifier omitted for parameter
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:43: parse error before `*'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:46: parse error before `*'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:51: syntax error before `*'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:56: cannot declare member function `CreateWindowPlugin::Type' within `PostItem'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:56: syntax error before `{'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:60: cannot declare member function `CreateWindowPlugin::Supports' within `PostItem'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:60: syntax error before `{'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:64: cannot declare member function `CreateWindowPlugin::HookBlogList' within `PostItem'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:64: syntax error before `{'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:67: `kPostWindowGetSelection' was not declared in this scope
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:68: syntax error before `->'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:69: syntax error before `->'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:70: syntax error before `->'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:72: syntax error before `->'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:73: syntax error before `->'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:74: syntax error before `->'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:75: syntax error before `->'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:76: `loadList' was not declared in this scope
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:77: ANSI C++ forbids declaration `resume_thread' with no type
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:77: `int resume_thread' redeclared as different kind of symbol
+/boot/system/develop/headers/os/kernel/OS.h:334: previous declaration of `status_t resume_thread(long int)'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:78: parse error before `}'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:79: syntax error before `*'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:87: `ChosenOne' was not declared in this scope
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:88: parse error before `return'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:93: cannot declare member function `CreateWindowPlugin::loadList' within `PostItem'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:93: syntax error before `{'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:96: parse error before `if'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:97: parse error before `;'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:97: syntax error before `++'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:99: syntax error before `->'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:101: syntax error before `->'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:104: type specifier omitted for parameter
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:104: parse error before `*'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:105: cannot declare member function `CreateWindowPlugin::HookEditor' within `PostItem'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:105: syntax error before `{'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:107: conflicting types for `class BTextView * aView'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:66: previous declaration as `class BListView * aView'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:108: syntax error before `->'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:109: syntax error before `->'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:110: syntax error before `->'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:111: `win' was not declared in this scope
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:112: syntax error before `.'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:114: syntax error before `->'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:116: syntax error before `->'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:117: syntax error before `->'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:120: cannot declare member function `CreateWindowPlugin::GetPostContent' within `PostItem'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:120: syntax error before `{'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:122: `view' was not declared in this scope
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:123: parse error before `return'
+In file included from /boot/home/BlogPositive/API/BlogPositivePluginLoader.h:12,
+                 from /boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.h:20,
+                 from /boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:4:
+/boot/home/BlogPositive/Example/ExamplePlugin.h:27: invalid use of member `BlogPositivePlugin::BlogPositivePost'
+/boot/home/BlogPositive/Example/ExamplePlugin.h:27: `post' was not declared in this scope
+/boot/home/BlogPositive/Example/ExamplePlugin.h:27: variable or field `SavePost' declared void
+/boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:7: cannot declare member `PostItem::BlogPositiveMainWindow::First' within `PostItem'
+/boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:9: cannot declare member function `PostItem::BlogPositiveBlogListView::BlogPositiveBlogListView' within `PostItem'
+/boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:9: syntax error before `:'
+/boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:13: cannot declare member function `PostItem::BlogPositiveBlogListView::Reload' within `PostItem'
+/boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:13: syntax error before `{'
+/boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:18: cannot declare member function `PostItem::BlogPositiveBlogListView::createItem' within `PostItem'
+/boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:18: syntax error before `{'
+/boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:20: parse error before `*'
+/boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:24: cannot declare member function `PostItem::BlogPositiveMainWindow::MessageReceived' within `PostItem'
+/boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:24: syntax error before `{'
+/boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:29: `BlogPositiveBlogListItem' was not declared in this scope
+/boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:29: parse error before `)'
+/boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:29: ANSI C++ forbids declaration `LoadWindow' with no type
+/boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:29: cannot declare member `PostItem::BlogPositivePluginLoader::LoadWindow' within `PostItem'
+/boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:29: invalid declarator
+/boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:29: syntax error before `->'
+/boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:35: `m' was not declared in this scope
+/boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:36: syntax error before `->'
+/boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:39: `message' was not declared in this scope
+/boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:39: ANSI C++ forbids declaration `MessageReceived' with no type
+/boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:39: cannot declare member `BWindow::MessageReceived' within `PostItem'
+/boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:39: invalid declarator
+/boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:40: parse error before `}'
+/boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:42: cannot declare member function `PostItem::BlogPositiveMainWindow::BlogPositiveMainWindow' within `PostItem'
+/boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:42: syntax error before `:'
+/boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:46: conflicting types for `class PostItem::BlogPositiveBlogListView * aView'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:107: previous declaration as `class BTextView * aView'
+/boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:48: implicit declaration of function `int Bounds(...)'
+/boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:49: ANSI C++ forbids declaration `aView' with no type
+/boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:49: conflicting types for `int aView'
+/boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:46: previous declaration as `class PostItem::BlogPositiveBlogListView * aView'
+/boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:49: initialization to `int' from `PostItem::BlogPositiveBlogListView *' lacks a cast
+/boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:50: syntax error before `->'
+/boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:51: ANSI C++ forbids declaration `fListView' with no type
+/boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:53: syntax error before `.'
+/boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:54: redefinition of `class BMenuBar * menuBar'
+/boot/home/BlogPositive/BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h:113: `class BMenuBar * menuBar' previously defined here
+/boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:54: multiple initializations given for `menuBar'
+/boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:55: redefinition of `class BList * pluginList'
+/boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:34: `class BList * pluginList' previously defined here
+/boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:55: multiple initializations given for `pluginList'
+/boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:58: syntax error before `->'
+/boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:59: parse error before `;'
+/boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:59: syntax error before `++'
+/boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:63: syntax error before `->'
+/boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:65: syntax error before `->'
+/boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:68: ANSI C++ forbids declaration `SetLayout' with no type
+/boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:68: initialization to `int' from `BGroupLayout *' lacks a cast
+/boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:69: ANSI C++ forbids declaration `AddChild' with no type
+/boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:69: `class BGroupLayoutBuilder' used where a `int' was expected
+/boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:71: parse error before `}'
+/boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:73: cannot declare member function `PostItem::BlogPositiveMainWindow::QuitRequested' within `PostItem'
+/boot/home/BlogPositive/BlogPositiveMain/BlogPositiveMainWindow.cpp:73: syntax error before `{'
+In file included from /boot/home/BlogPositive/Example/ExamplePlugin.h:6,
+                 from /boot/home/BlogPositive/Example/ExamplePlugin.cpp:4:
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:32: ANSI C++ forbids declaration `BlogPositivePost' with no type
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:32: `BlogPositivePost' declared as a `virtual' field
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:32: parse error before `*'
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:33: `BlogPositiveBlog' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:33: `blog' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:33: virtual outside class declaration
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:34: `BlogPositiveBlog' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:34: `blog' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:34: virtual outside class declaration
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:35: ANSI C++ forbids declaration `BlogPositivePost' with no type
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:35: `BlogPositivePost' declared as a `virtual' field
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:35: declaration of `int BlogPositivePlugin::BlogPositivePost'
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:32: conflicts with previous declaration `int BlogPositivePlugin::BlogPositivePost'
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:35: parse error before `*'
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:36: `BlogPositivePluginPostListWindow' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:36: `window' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:36: `BlogPositiveBlog' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:36: `blog' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:36: variable or field `HookBlogList' declared void
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:36: ANSI C++ forbids initialization of member `HookBlogList'
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:36: making `HookBlogList' static
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:36: ANSI C++ forbids in-class initialization of non-const static member `HookBlogList'
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:36: `HookBlogList' declared as a `virtual' field
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:37: `BlogPositivePluginBlogPostWindow' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:37: `window' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:37: invalid use of member `BlogPositivePlugin::BlogPositivePost'
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:37: `post' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:37: variable or field `HookEditor' declared void
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:37: ANSI C++ forbids initialization of member `HookEditor'
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:37: making `HookEditor' static
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:37: ANSI C++ forbids in-class initialization of non-const static member `HookEditor'
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:37: `HookEditor' declared as a `virtual' field
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:38: invalid use of member `BlogPositivePlugin::BlogPositivePost'
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:38: `post' was not declared in this scope
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:38: variable or field `SavePost' declared void
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:38: `SavePost' declared as a `virtual' field
+/boot/home/BlogPositive/API/BlogPositivePlugin.h:35: duplicate member `BlogPositivePlugin::BlogPositivePost'
+In file included from /boot/home/BlogPositive/Example/ExamplePlugin.cpp:4:
+/boot/home/BlogPositive/Example/ExamplePlugin.h:27: invalid use of member `BlogPositivePlugin::BlogPositivePost'
+/boot/home/BlogPositive/Example/ExamplePlugin.h:27: `post' was not declared in this scope
+/boot/home/BlogPositive/Example/ExamplePlugin.h:27: variable or field `SavePost' declared void
+/boot/home/BlogPositive/Example/ExamplePlugin.cpp: In method `class BList * ExamplePlugin::GetBlogPosts(BlogPositiveBlog *)':
+/boot/home/BlogPositive/Example/ExamplePlugin.cpp:26: `post' undeclared (first use this function)
+/boot/home/BlogPositive/Example/ExamplePlugin.cpp:26: (Each undeclared identifier is reported only once
+/boot/home/BlogPositive/Example/ExamplePlugin.cpp:26: for each function it appears in.)
+/boot/home/BlogPositive/Example/ExamplePlugin.cpp:26: parse error before `('
+/boot/home/BlogPositive/Example/ExamplePlugin.cpp: At top level:
+/boot/home/BlogPositive/Example/ExamplePlugin.cpp:34: invalid use of member `BlogPositivePlugin::BlogPositivePost'
+/boot/home/BlogPositive/Example/ExamplePlugin.cpp:35: `void ExamplePlugin::SavePost' is not a static member of `class ExamplePlugin'
+/boot/home/BlogPositive/Example/ExamplePlugin.cpp:35: syntax error before `{'
+/boot/home/BlogPositive/Example/ExamplePlugin.cpp:37: syntax error before `.'
+/boot/home/BlogPositive/Example/ExamplePlugin.cpp:38: `path' was not declared in this scope
+/boot/home/BlogPositive/Example/ExamplePlugin.cpp:39: syntax error before `.'
+make: *** [blogpositive] Error 1
