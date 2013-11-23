@@ -6,10 +6,7 @@
 #include <ListItem.h>
 #include <Message.h>
 #include <View.h>
-#include <Message.h>
-#include <List.h>
-#include <stdio.h>
-#include <String.h>
+#include "../API/BlogPositiveBlog.h"
 #define LZZ_INLINE inline
 class BlogPositiveBlogListItem : public BStringItem
 {

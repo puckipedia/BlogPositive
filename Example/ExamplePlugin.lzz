@@ -1,7 +1,6 @@
-
-#include "../API/BlogPositivePlugin.lzz"
-#include "../API/BlogPositiveBlog.lzz"
 #hdr
+#include "../API/BlogPositivePlugin.h"
+#include "../API/BlogPositiveBlog.h"
 #include <Window.h>
 #include <Directory.h>
 #include <TextView.h>

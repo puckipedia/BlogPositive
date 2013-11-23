@@ -12,9 +12,7 @@
 #include <MenuItem.h>
 #include <ListView.h>
 #include <TextView.h>
-#include <Window.h>
-#include <stdio.h>
-#include <Message.h>
+#include "../../API/BlogPositivePluginWindow.h"
 #define LZZ_INLINE inline
 class CreateWindowPlugin;
 class PostItem : public BStringItem

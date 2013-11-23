@@ -8,8 +8,8 @@
 #include <MenuItem.h>
 #include <ListView.h>
 #include <TextView.h>
+#include "../../API/BlogPositivePluginWindow.h"
 #end
-#include "../../API/BlogPositivePluginWindow.lzz"
 class CreateWindowPlugin;
 
 class PostItem : public BStringItem {

@@ -3,21 +3,8 @@
 
 #ifndef LZZ_ExamplePlugin_h
 #define LZZ_ExamplePlugin_h
-#include <Window.h>
-#include <List.h>
-#include <TextControl.h>
-#include <GroupLayout.h>
-#include <GroupLayoutBuilder.h>
-#include <Message.h>
-#include <Message.h>
-#include <Path.h>
-#include <File.h>
-#include <FindDirectory.h>
-#include <stdio.h>
-#include <Message.h>
-#include <List.h>
-#include <stdio.h>
-#include <String.h>
+#include "../API/BlogPositivePlugin.h"
+#include "../API/BlogPositiveBlog.h"
 #include <Window.h>
 #include <Directory.h>
 #include <TextView.h>

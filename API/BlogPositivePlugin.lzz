@@ -1,13 +1,13 @@
 #hdr
 #include <Window.h>
 #include <List.h>
-#include <TextControl.h>
-#include <GroupLayout.h>
+#include <TextControl.h> 
+#include <GroupLayout.h> 
 #include <GroupLayoutBuilder.h>
 #include <Message.h>
-#end
-#include "../BlogPositiveSettings.lzz"
-#define kBlogPositiveBlogApi 1
+#include "../BlogPositiveSettings.h" 
+#end 
+#define kBlogPositiveBlogApi 1 
 #define kBlogPositiveBlogEditor 2
 
 class BlogPositiveCreateBlog : public BWindow {

@@ -5,15 +5,11 @@
 #define LZZ_BlogPositivePlugin_h
 #include <Window.h>
 #include <List.h>
-#include <TextControl.h>
-#include <GroupLayout.h>
+#include <TextControl.h> 
+#include <GroupLayout.h> 
 #include <GroupLayoutBuilder.h>
 #include <Message.h>
-#include <Message.h>
-#include <Path.h>
-#include <File.h>
-#include <FindDirectory.h>
-#include <stdio.h>
+#include "../BlogPositiveSettings.h" 
 #define LZZ_INLINE inline
 class BlogPositiveCreateBlog : public BWindow
 {
