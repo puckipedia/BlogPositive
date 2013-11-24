@@ -107,3 +107,9 @@ BlogPositiveBlog::Plugin()
 {
   return fPlugin;
 }
+
+BString *
+BlogPositiveBlog::NameString()
+{
+    return fName;
+}

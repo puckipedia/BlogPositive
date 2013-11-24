@@ -5,13 +5,24 @@
 
 class BListView;
 class BMessage;
+class BMenuBar;
+class BMenu;
 class BlogPositiveBlogListView;
+class BlogPositiveBlog;
+class BPoint;
+class BMenuItem;
 class BlogPositiveMainView : public BView
 {
 public:
     BlogPositiveMainView(const char *name);
     void MessageReceived(BMessage *message);
+    void AttachedToWindow();
+    void Reload(BList *list);
+    void RemoveBlog();
 private:
+    BMenuBar *fMenuBar;
+    BMenu *fNewMenu;
+    BMenuItem *fRemoveMenuItem;
     BlogPositiveBlogListView *fListView;
 };
 

@@ -4,29 +4,36 @@
 #include <Message.h>
 #include <List.h>
 
+class BString;
 class BlogPositivePlugin;
 class BlogPositiveBlog {
- public:
-  static BList *DeserializeList(BMessage *message, const char *blogName);
-  static BMessage *SerializeList(BList *blist, const char *blogName);
-  
-  BlogPositiveBlog();
-  void SetName(const char *name);
-  const char *Name();
-  void SetAuthentication(const char *authentication);
-  const char *Authentication();
-  void SetBlogHandler(int32 blogHandler);
-  int32 BlogHandler();
-  BMessage *Serialize();
-  void Unserialize(BMessage *message);
-  void SetPlugin(BlogPositivePlugin *plugin);
-  BlogPositivePlugin *Plugin();
+public:
+    static BList *DeserializeList(BMessage *message, const char *blogName);
+    static BMessage *SerializeList(BList *blist, const char *blogName);
+    
+    BlogPositiveBlog();
 
- private:
-  BString *fName;
-  BString *fAuthentication;
-  int32 fBlogHandler;
-  BlogPositivePlugin *fPlugin;
+    void SetName(const char *name);
+    const char *Name();
+
+    void SetAuthentication(const char *authentication);
+    const char *Authentication();
+
+    void SetBlogHandler(int32 blogHandler);
+    int32 BlogHandler();
+
+    BMessage *Serialize();
+    void Unserialize(BMessage *message);
+
+    void SetPlugin(BlogPositivePlugin *plugin);
+    BlogPositivePlugin *Plugin();
+
+    BString *NameString();
+private:
+    BString *fName;
+    BString *fAuthentication;
+    int32 fBlogHandler;
+    BlogPositivePlugin *fPlugin;
 };
 
 #endif

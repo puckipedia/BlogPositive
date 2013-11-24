@@ -8,6 +8,9 @@
 #include <MenuBar.h>
 #include <MenuItem.h>
 #include <stdio.h>
+#include <Point.h>
+#include <PopUpMenu.h>
+#include <String.h>
 
 #include "../API/BlogPositiveBlog.h"
 #include "../BlogPositiveSettings.h"
@@ -16,7 +19,8 @@
 #include "../API/BlogPositivePluginLoader.h"
 
 const int32 kBlogSelected = 'BPBS';
-
+const int32 kCreateNewBlog = 'BPCB';
+const int32 kRemoveCurrentBlog = 'BPRC';
 class BlogPositiveBlogListView : public BListView {
 public:
     BlogPositiveBlogListView()
@@ -37,38 +41,80 @@ public:
 void
 BlogPositiveMainView::MessageReceived(BMessage *message)
 {
-//    if(message->what == '____') {
-//	BlogPositivePluginLoader::LoadWindow(
-//	    ((BlogPositiveBlogListItem *)fListView->ItemAt(fListView->CurrentSelection()))->Blog());
-//	return;
-//    }
-//    if(message->what == 'ABCD') {
-//	int32 m = message->GetInt32("ding", 0);
-//	BList *pluginList = BlogPositivePluginLoader::fList;
-//	BlogPositivePlugin *pl = (BlogPositivePlugin *)pluginList->ItemAt(m);
-//	pl->OpenNewBlogWindow();
-//	return;
-//    }
-    if(message->what == 'ABCD') {
-	printf("APCD?\n");
-	return;
+    switch(message->what)
+    {
+    case kRemoveCurrentBlog:
+	RemoveBlog();
+	break;
+    case kBlogSelected:
+    {
+	if(fListView->CurrentSelection() == -1)
+	    break;
+	BlogPositivePluginLoader::LoadWindow(		
+	    ((BlogPositiveBlogListItem *)fListView->ItemAt(fListView->CurrentSelection()))->Blog());
+	break;
     }
-    printf("%d %d %d\n", message->what, 'ABAB', 'ABCD');
-    BView::MessageReceived(message);
+    case kCreateNewBlog:
+    {
+	int32 m = message->GetInt32("ding", 0);
+	BList *pluginList = BlogPositivePluginLoader::fList;
+	BlogPositivePlugin *pl = (BlogPositivePlugin *)pluginList->ItemAt(m);
+	pl->OpenNewBlogWindow();
+	break;
+    }
+    default:
+	BView::MessageReceived(message);
+    }
+}
+
+void
+BlogPositiveMainView::RemoveBlog()
+{
+    if(fListView->CurrentSelection() == -1)
+	return;
+    BlogPositiveSettings *settings = new BlogPositiveSettings("bloglist"); 
+    BList *lis = BlogPositiveBlog::DeserializeList(settings, "blogs");
+    BlogPositiveBlog *blog = ((BlogPositiveBlogListItem *)fListView->ItemAt(fListView->CurrentSelection()))->Blog();
+for(int i = 0; i < lis->CountItems(); i++)
+{
+    if(blog->NameString()->Compare(((BlogPositiveBlog *)lis->ItemAt(i))->Name()) == 0)
+    {
+	lis->RemoveItem(i);
+	break;
+    }
+}
+BlogPositiveSettings::SaveOther(BlogPositiveBlog::SerializeList(lis, "blogs"), "bloglist");
+
+Reload(lis);
+
+}
+void
+BlogPositiveMainView::Reload(BList *lis)
+{
+    fListView->MakeEmpty();
+    fListView->Reload(lis);
+}
+void
+BlogPositiveMainView::AttachedToWindow()
+{
+    fListView->SetTarget(this);
+    for(int i = 0; i < fNewMenu->CountItems(); i++)
+    {
+	fNewMenu->ItemAt(i)->SetTarget(this);
+    }
+    fRemoveMenuItem->SetTarget(this);
 }
 
 BlogPositiveMainView::BlogPositiveMainView(const char *name)
     : BView(name, 0)
 {
-    BMessage *aListMessage = new BMessage('ABAB');
-    
     fListView = new BlogPositiveBlogListView();
-    fListView->SetInvocationMessage(new BMessage('ABAB'));
+    fListView->SetInvocationMessage(new BMessage(kBlogSelected));
     
-    BMenuBar *menuBar = new BMenuBar("MenuBar");
+    fMenuBar = new BMenuBar("MenuBar");
     
-    BMenu *aNewMenuItem = new BMenu("New");
-    menuBar->AddItem(aNewMenuItem);
+    fNewMenu = new BMenu("New");
+    fMenuBar->AddItem(fNewMenu);
 
     BList *pluginList = BlogPositivePluginLoader::fList;
     BlogPositiveSettings *settings = new BlogPositiveSettings("bloglist"); 
@@ -81,17 +127,21 @@ BlogPositiveMainView::BlogPositiveMainView(const char *name)
 	BlogPositivePlugin *pl = (BlogPositivePlugin *)pluginList->ItemAt(i);
 	if(pl->Type() == kBlogPositiveBlogApi)
 	{
-	    BMessage *msg = new BMessage('ABCD');
+	    BMessage *msg = new BMessage(kCreateNewBlog);
 	    msg->SetInt32("ding", i);	
 	    msg->SetString("sendToView", Name());
 	    BMenuItem *mi = new BMenuItem(pl->Name(), msg);
-	    aNewMenuItem->AddItem(mi);
+	    fNewMenu->AddItem(mi);
 	}
     }
     
+    BMessage *aMenuItemMessage = new BMessage(kRemoveCurrentBlog);
+    fRemoveMenuItem = new BMenuItem("Remove blog", aMenuItemMessage);
+    fMenuBar->AddItem(fRemoveMenuItem);
+
     SetLayout(new BGroupLayout(B_VERTICAL));
     AddChild(
 	BGroupLayoutBuilder(B_VERTICAL, 0)
-	.Add(menuBar)
+	.Add(fMenuBar)
 	.Add(new BScrollView("scroll_view", fListView, 0, false, true)));
 }
