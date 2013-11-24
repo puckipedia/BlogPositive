@@ -53,17 +53,17 @@ BlogPositiveMainView::MessageReceived(BMessage *message)
 	printf("APCD?\n");
 	return;
     }
-    printf("%d %d %d\n", message->what, '____', 'ABCD');
+    printf("%d %d %d\n", message->what, 'ABAB', 'ABCD');
     BView::MessageReceived(message);
 }
 
 BlogPositiveMainView::BlogPositiveMainView(const char *name)
     : BView(name, 0)
 {
-    BMessage *aListMessage = new BMessage('____');
+    BMessage *aListMessage = new BMessage('ABAB');
     
     fListView = new BlogPositiveBlogListView();
-    fListView->SetInvocationMessage(new BMessage('____'));
+    fListView->SetInvocationMessage(new BMessage('ABAB'));
     
     BMenuBar *menuBar = new BMenuBar("MenuBar");
     
