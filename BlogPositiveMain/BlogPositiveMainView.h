@@ -5,13 +5,14 @@
 
 class BListView;
 class BMessage;
+class BlogPositiveBlogListView;
 class BlogPositiveMainView : public BView
 {
 public:
     BlogPositiveMainView(const char *name);
     void MessageReceived(BMessage *message);
 private:
-    BListView *fListView;
+    BlogPositiveBlogListView *fListView;
 };
 
 #endif

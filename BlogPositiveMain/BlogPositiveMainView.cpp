@@ -37,51 +37,61 @@ public:
 void
 BlogPositiveMainView::MessageReceived(BMessage *message)
 {
-    if(message->what == kBlogSelected) {
-	BlogPositivePluginLoader::LoadWindow(
-	    ((BlogPositiveBlogListItem *)fListView->ItemAt(fListView->CurrentSelection()))->Blog());
-	return;
-    }
+//    if(message->what == '____') {
+//	BlogPositivePluginLoader::LoadWindow(
+//	    ((BlogPositiveBlogListItem *)fListView->ItemAt(fListView->CurrentSelection()))->Blog());
+//	return;
+//    }
+//    if(message->what == 'ABCD') {
+//	int32 m = message->GetInt32("ding", 0);
+//	BList *pluginList = BlogPositivePluginLoader::fList;
+//	BlogPositivePlugin *pl = (BlogPositivePlugin *)pluginList->ItemAt(m);
+//	pl->OpenNewBlogWindow();
+//	return;
+//    }
     if(message->what == 'ABCD') {
-	int32 m = message->GetInt32("ding", 0);
-	BList *pluginList = BlogPositivePluginLoader::fList;
-	BlogPositivePlugin *pl = (BlogPositivePlugin *)pluginList->ItemAt(m);
-	pl->OpenNewBlogWindow();
+	printf("APCD?\n");
 	return;
     }
+    printf("%d %d %d\n", message->what, '____', 'ABCD');
     BView::MessageReceived(message);
 }
 
 BlogPositiveMainView::BlogPositiveMainView(const char *name)
     : BView(name, 0)
 {
+    BMessage *aListMessage = new BMessage('____');
     
-    BMessage *invocationMessage = new BMessage(kBlogSelected);
-    BlogPositiveBlogListView *aView;
-    BScrollView *sView;
-    BRect aRect( Bounds() );
-    aView = new BlogPositiveBlogListView();
-    aView->SetInvocationMessage(invocationMessage);
-    fListView = aView;
+    fListView = new BlogPositiveBlogListView();
+    fListView->SetInvocationMessage(new BMessage('____'));
     
-    aRect.bottom = 20;
     BMenuBar *menuBar = new BMenuBar("MenuBar");
+    
+    BMenu *aNewMenuItem = new BMenu("New");
+    menuBar->AddItem(aNewMenuItem);
+
     BList *pluginList = BlogPositivePluginLoader::fList;
-    BlogPositiveSettings *settings = new BlogPositiveSettings("bloglist");
+    BlogPositiveSettings *settings = new BlogPositiveSettings("bloglist"); 
+    
     BList *lis = BlogPositiveBlog::DeserializeList(settings, "blogs");
-    aView->Reload(lis);
-    for(int i = 0; i < pluginList->CountItems(); i++) {
+    fListView->Reload(lis);
+
+    for(int i = 0; i < pluginList->CountItems(); i++)
+    {
 	BlogPositivePlugin *pl = (BlogPositivePlugin *)pluginList->ItemAt(i);
-	if(pl->Type() == kBlogPositiveBlogApi) {
+	if(pl->Type() == kBlogPositiveBlogApi)
+	{
 	    BMessage *msg = new BMessage('ABCD');
-	    msg->SetInt32("ding", i);
+	    msg->SetInt32("ding", i);	
+	    msg->SetString("sendToView", Name());
 	    BMenuItem *mi = new BMenuItem(pl->Name(), msg);
-	    menuBar->AddItem(mi);
+	    aNewMenuItem->AddItem(mi);
 	}
-    }	
+    }
+    
     SetLayout(new BGroupLayout(B_VERTICAL));
     AddChild(
 	BGroupLayoutBuilder(B_VERTICAL, 0)
 	.Add(menuBar)
-	.Add(new BScrollView("scroll_view", aView, 0, false, true)));
+	.Add(new BScrollView("scroll_view", fListView, 0, false, true)));
 }

@@ -1,11 +1,13 @@
 #include "BlogPositivePluginLoader.h"
 
+#include <List.h>
+#include <stdio.h>
+
 #include "BlogPositiveBlog.h"
 #include "BlogPositivePlugin.h"
 #include "../BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.h"
 #include "../Example/ExamplePlugin.h"
 #include "BlogPositivePluginWindow.h"
-#include <List.h>
 
 
 BList *BlogPositivePluginLoader::fList;
@@ -26,6 +28,7 @@ BlogPositivePluginLoader::LoadWindow(BlogPositiveBlog *aBlog)
     BlogPositivePlugin *aWorkingPlugin = 0;
     for(int i = 0; i < fList->CountItems(); i++) {
 	BlogPositivePlugin *aPlugin = (BlogPositivePlugin *)fList->ItemAt(i);
+	printf("Name: %s, Type: %d, supports: %d\n", aPlugin->Name(), aPlugin->Type(), aPlugin->Supports(aBlog->BlogHandler()));
 	if(aPlugin->Type() == kBlogPositiveBlogApi &&
 	   aPlugin->Supports(aBlog->BlogHandler())) {
 	    aWorkingPlugin = aPlugin;

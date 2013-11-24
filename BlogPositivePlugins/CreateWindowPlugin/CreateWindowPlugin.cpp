@@ -95,16 +95,19 @@ void
 CreateWindowPlugin::HookEditor(BlogPositivePluginBlogPostWindow **aWindow, BlogPositivePost *aPost)
 {
     BlogPositivePluginBlogPostWindow *win = *aWindow;
+
     BTextView *aView = new BTextView("TextView");
     aView->SetText(aPost->Page());
+
+    BMenuBar *menuBar = new BMenuBar("MenuBar");
+
     win->SetLayout(new BGroupLayout(B_VERTICAL));
-    win->AddChild(BGroupLayoutBuilder(B_VERTICAL, 10).Add(aView));
-    BRect r(win->Bounds());
-    r.bottom = 20;
-    BMenuBar *menuBar = new BMenuBar(r, "MenuBar");
-    win->AddChild(menuBar);
+    win->AddChild(BGroupLayoutBuilder(B_VERTICAL, 0).Add(menuBar).Add(aView));
+
     BMenu *menu = new BMenu("File");
+
     menu->AddItem(new BMenuItem("Save", new BMessage(kPostWindowSavePost), 'S'));
+
     menuBar->AddItem(menu);
 }
 
