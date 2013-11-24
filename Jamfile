@@ -30,12 +30,14 @@ SRCS =  API/BlogPositivePluginLoader.cpp API/BlogPositivePluginWindow.cpp
 	API/BlogPositivePost.cpp BlogPositiveMain/BlogPositiveBlogListItem.cpp 
 	BlogPositiveMain/BlogPositiveMainWindow.cpp
 	BlogPositiveMain/BlogPositiveMainView.cpp
+	BlogPositivePostList/BlogPositivePostListView.cpp
+	BlogPositivePostList/BlogPositivePostListWindow.cpp
 	BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.cpp 
 	BlogPositiveSettings.cpp Example/ExamplePlugin.cpp main.cpp ;
 
 # Specify the resource files to use
 #	Full path or a relative path to the resource file can be used.
-RSRCS =  ;
+RSRCS = haiku.rsrc ;
 
 # Specify additional libraries to link against
 #	There are two acceptable forms of library specifications

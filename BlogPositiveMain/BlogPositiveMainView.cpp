@@ -11,9 +11,11 @@
 #include <Point.h>
 #include <PopUpMenu.h>
 #include <String.h>
+#include <Rect.h>
 
 #include "../API/BlogPositiveBlog.h"
 #include "../BlogPositiveSettings.h"
+#include "../BlogPositivePostList/BlogPositivePostListWindow.h"
 #include "BlogPositiveBlogListItem.h"
 #include "../API/BlogPositivePlugin.h"
 #include "../API/BlogPositivePluginLoader.h"
@@ -50,8 +52,12 @@ BlogPositiveMainView::MessageReceived(BMessage *message)
     {
 	if(fListView->CurrentSelection() == -1)
 	    break;
-	BlogPositivePluginLoader::LoadWindow(		
-	    ((BlogPositiveBlogListItem *)fListView->ItemAt(fListView->CurrentSelection()))->Blog());
+	BlogPositiveBlog *aBlog =
+	    ((BlogPositiveBlogListItem *)fListView->ItemAt(fListView->CurrentSelection()))->Blog();
+	BlogPositivePluginLoader::FindPlugin(aBlog);
+	BlogPositivePostListWindow *aWindow =
+	    new BlogPositivePostListWindow(aBlog, BRect(100, 100, 400, 600));
+	aWindow->Show();
 	break;
     }
     case kCreateNewBlog:

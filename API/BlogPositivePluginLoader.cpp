@@ -23,35 +23,24 @@ BlogPositivePluginLoader::Initialize()
 }
 
 void
-BlogPositivePluginLoader::LoadWindow(BlogPositiveBlog *aBlog)
+BlogPositivePluginLoader::FindPlugin(BlogPositiveBlog *aBlog)
 {
     BlogPositivePlugin *aWorkingPlugin = 0;
-    for(int i = 0; i < fList->CountItems(); i++) {
+    for(int i = 0; i < fList->CountItems(); i++)
+    {
 	BlogPositivePlugin *aPlugin = (BlogPositivePlugin *)fList->ItemAt(i);
-	printf("Name: %s, Type: %d, supports: %d\n", aPlugin->Name(), aPlugin->Type(), aPlugin->Supports(aBlog->BlogHandler()));
 	if(aPlugin->Type() == kBlogPositiveBlogApi &&
-	   aPlugin->Supports(aBlog->BlogHandler())) {
+	   aPlugin->Supports(aBlog->BlogHandler()))
+	{
 	    aWorkingPlugin = aPlugin;
 	    break;
 	}
     }
+
     if(aWorkingPlugin == 0)
 	return;
 
-    BlogPositivePluginPostListWindow *aBlogWindow = 
-	new BlogPositivePluginPostListWindow(BRect(100, 100, 600, 700), aBlog->Name());
-
     aBlog->SetPlugin(aWorkingPlugin);
-    aBlogWindow->SetBlog(aBlog);
-
-    for(int i = 0; i < fList->CountItems(); i++) {
-	BlogPositivePlugin *plugin = (BlogPositivePlugin *)fList->ItemAt(i);
-	if(plugin->Type() == kBlogPositiveBlogEditor) {
-	    plugin->HookBlogList(&aBlogWindow, aBlog);
-	}
-    }
-
-    aBlogWindow->Show();
 }
 
 void
