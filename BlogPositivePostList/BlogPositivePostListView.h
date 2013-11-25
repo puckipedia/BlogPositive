@@ -5,6 +5,7 @@
 
 class BMessage;
 class BlogPositiveBlog;
+class BMenuItem;
 class BListView;
 class BlogPositivePostListView : public BView
 {
@@ -13,8 +14,13 @@ public:
     void AttachedToWindow();
     void MessageReceived(BMessage *aMessage);
     static int32 loadList(void *t);
+    void Reload();
 private:
     BlogPositiveBlog *fBlog;
+
+    BMenuItem *fAddPost;
+    BMenuItem *fRemovePost;
+
     BListView *fListView;
 };
 

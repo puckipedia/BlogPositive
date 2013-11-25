@@ -11,10 +11,11 @@ class BlogPositiveBlogListView;
 class BlogPositiveBlog;
 class BPoint;
 class BMenuItem;
+class BlogPositiveDelegate;
 class BlogPositiveMainView : public BView
 {
 public:
-    BlogPositiveMainView(const char *name);
+    BlogPositiveMainView(const char *name, BlogPositiveDelegate *del);
     void MessageReceived(BMessage *message);
     void AttachedToWindow();
     void Reload(BList *list);
@@ -24,6 +25,7 @@ private:
     BMenu *fNewMenu;
     BMenuItem *fRemoveMenuItem;
     BlogPositiveBlogListView *fListView;
+    BlogPositiveDelegate *fDelegate;
 };
 
 #endif

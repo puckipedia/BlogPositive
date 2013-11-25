@@ -6,17 +6,12 @@ class BList;
 class BlogPositiveBlog;
 class BlogPositivePost;
 class BlogPositivePluginBlogPostWindow;
-class CreateWindowPlugin;
 class BlogPositivePluginLoader {
 public:
     static void Initialize();
     static void FindPlugin(BlogPositiveBlog *blog);
-    static void OpenPostWindow(BlogPositivePost *post);
-    static void OpenPostWindowQueryingPlugins(BWindow *window);
-    static const char *GetPageContent(BlogPositivePluginBlogPostWindow *window);
     static BList *fList;
 private:
-    static CreateWindowPlugin *fPlugin;
 };
 
 #endif

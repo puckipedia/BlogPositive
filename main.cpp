@@ -4,7 +4,18 @@
 #include <Window.h>
 #include <Message.h>
 #include "API/BlogPositivePluginLoader.h"
+#include "BlogPositiveSharedWindow.h"
 #include "BlogPositiveMain/BlogPositiveMainWindow.h"
+
+#define USE_SHARED_WINDOW 0
+
+#if USE_SHARED_WINDOW
+#define CLASS BlogPositiveSharedWindow
+#else
+#define CLASS BlogPositiveMainWindow
+#endif
+
+#include <curl/curl.h>
 
 class HelloHaiku : public BApplication
 {
@@ -16,16 +27,20 @@ class HelloHaiku : public BApplication
 
     void ReadyToRun()
     {
-		BWindow *win = new BlogPositiveMainWindow(BRect(100, 100, 300, 200));
+		BWindow *win = new CLASS (BRect(100, 100, 600, 200));
 		win->Show();
     }
 };
 
 int main(void)
 {
+    curl_global_init(CURL_GLOBAL_NOTHING);
+
     HelloHaiku app;
 
     app.Run();
+
+    curl_global_cleanup();
 
     return 0;
 }

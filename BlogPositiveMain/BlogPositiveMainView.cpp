@@ -19,6 +19,7 @@
 #include "BlogPositiveBlogListItem.h"
 #include "../API/BlogPositivePlugin.h"
 #include "../API/BlogPositivePluginLoader.h"
+#include "../BlogPositiveDelegate.h"
 
 const int32 kBlogSelected = 'BPBS';
 const int32 kCreateNewBlog = 'BPCB';
@@ -55,9 +56,7 @@ BlogPositiveMainView::MessageReceived(BMessage *message)
 	BlogPositiveBlog *aBlog =
 	    ((BlogPositiveBlogListItem *)fListView->ItemAt(fListView->CurrentSelection()))->Blog();
 	BlogPositivePluginLoader::FindPlugin(aBlog);
-	BlogPositivePostListWindow *aWindow =
-	    new BlogPositivePostListWindow(aBlog, BRect(100, 100, 400, 600));
-	aWindow->Show();
+	fDelegate->OpenPostList(aBlog);
 	break;
     }
     case kCreateNewBlog:
@@ -65,7 +64,7 @@ BlogPositiveMainView::MessageReceived(BMessage *message)
 	int32 m = message->GetInt32("ding", 0);
 	BList *pluginList = BlogPositivePluginLoader::fList;
 	BlogPositivePlugin *pl = (BlogPositivePlugin *)pluginList->ItemAt(m);
-	pl->OpenNewBlogWindow();
+	pl->OpenNewBlogWindow(this);
 	break;
     }
     default:
@@ -111,9 +110,11 @@ BlogPositiveMainView::AttachedToWindow()
     fRemoveMenuItem->SetTarget(this);
 }
 
-BlogPositiveMainView::BlogPositiveMainView(const char *name)
+BlogPositiveMainView::BlogPositiveMainView(const char *name, BlogPositiveDelegate *del)
     : BView(name, 0)
 {
+    fDelegate = del;
+
     fListView = new BlogPositiveBlogListView();
     fListView->SetInvocationMessage(new BMessage(kBlogSelected));
     

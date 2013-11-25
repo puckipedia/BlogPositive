@@ -6,6 +6,7 @@
 #include <List.h>
 #include <malloc.h>
 #include <File.h>
+#include <stdio.h>
 
 #include "../API/BlogPositiveBlog.h"
 #include "../API/BlogPositivePost.h"
@@ -13,6 +14,12 @@
 bool
 ExamplePlugin::Supports(int32 Code) {
 	return Code == 'BACN';
+}
+
+uint32
+ExamplePlugin::MainHandler()
+{
+    return 'BACN';
 }
 BList *
 ExamplePlugin::GetBlogPosts(BlogPositiveBlog *blog) {
@@ -34,6 +41,30 @@ ExamplePlugin::GetBlogPosts(BlogPositiveBlog *blog) {
     list->AddItem(post);
   }
   return list;
+}
+BlogPositivePost *
+ExamplePlugin::CreateNewPost(BlogPositiveBlog *blog, const char *name)
+{
+  BPath path(blog->Authentication());
+  path.Append(name);
+  BFile file(path.Path(), B_WRITE_ONLY | B_ERASE_FILE | B_CREATE_FILE);
+  int32 a = '\0\0\0\0';
+  printf("Creating new post at path %s, writing 0 in\n", path.Path());
+  file.Write((void *)&a, sizeof(a));
+  BlogPositivePost *p = new BlogPositivePost(blog);
+  p->SetName(name);
+  p->SetPage("");
+  return p;
+}
+
+void
+ExamplePlugin::RemovePost(BlogPositivePost *post)
+{
+    BPath path(post->Blog()->Authentication());
+    path.Append(post->Name());
+    BEntry entr(path.Path());
+    printf("Remove post %s\n", path.Path());
+    entr.Remove();
 }
 
 void

@@ -25,15 +25,20 @@ TYPE = APP ;
 #	if two source files with the same name (source.c or source.cpp)
 #	are included from different directories.
 # Ex: SRCS = file1.cpp file2.cpp file3.cpp ;
-SRCS =  API/BlogPositivePluginLoader.cpp API/BlogPositivePluginWindow.cpp
+SRCS =  API/BlogPositivePluginLoader.cpp #API/BlogPositivePluginWindow.cpp
 	API/BlogPositivePlugin.cpp API/BlogPositiveBlog.cpp
 	API/BlogPositivePost.cpp BlogPositiveMain/BlogPositiveBlogListItem.cpp 
 	BlogPositiveMain/BlogPositiveMainWindow.cpp
 	BlogPositiveMain/BlogPositiveMainView.cpp
 	BlogPositivePostList/BlogPositivePostListView.cpp
 	BlogPositivePostList/BlogPositivePostListWindow.cpp
-	BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.cpp 
-	BlogPositiveSettings.cpp Example/ExamplePlugin.cpp main.cpp ;
+	BlogPositivePostEditor/BlogPositivePostEditorView.cpp
+	BlogPositiveSharedWindow.cpp
+	BlogPositivePostEditor/BlogPositivePostEditorWindow.cpp
+#	BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.cpp 
+	BlogPositiveSettings.cpp Example/ExamplePlugin.cpp main.cpp
+	BlogPositivePlugins/WordpressPlugin/WordpressPlugin.cpp
+	BlogPositivePlugins/WordpressPlugin/xmlnode.cpp ;
 
 # Specify the resource files to use
 #	Full path or a relative path to the resource file can be used.
@@ -49,7 +54,7 @@ RSRCS = haiku.rsrc ;
 #		naming scheme you need to specify the path to the library
 #		and it's name
 #		library: my_lib.a entry: my_lib.a or path/my_lib.a
-LIBS =  be root ;
+LIBS =  be root curl network z textencoding ;
 
 # Specify additional paths to directories following the standard
 #	libXXX.so or libXXX.a naming scheme.  You can specify full paths
@@ -97,10 +102,10 @@ SYMBOLS =  TRUE ;
 DEBUGGER =  TRUE ;
 
 # Specify additional compiler flags for all files
-COMPILER_FLAGS =  ;
+COMPILER_FLAGS = -std=c++0x ;
 
 # Specify additional linker flags
-LINKER_FLAGS =  ;
+LINKER_FLAGS = ;
 
 # (for TYPE == DRIVER only) Specify desired location of driver in the /dev
 #	hierarchy. Used by the driverinstall rule. E.g., DRIVER_PATH = video/usb will
