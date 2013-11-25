@@ -120,7 +120,7 @@ BlogPositiveMainView::BlogPositiveMainView(const char *name, BlogPositiveDelegat
     
     fMenuBar = new BMenuBar("MenuBar");
     
-    fNewMenu = new BMenu("New");
+    fNewMenu = new BMenu("Add Blog");
     fMenuBar->AddItem(fNewMenu);
 
     BList *pluginList = BlogPositivePluginLoader::fList;

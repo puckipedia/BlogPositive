@@ -13,21 +13,23 @@
 class BlogPositiveSharedDelegate : public BlogPositiveDelegate
 {
 public:
-void OpenPostList(BlogPositiveBlog *blog)
-{
-if(fWindow->LockLooper()) {
-BView *v = fWindow->FindView("SecondView");
-for(int i = 0; i < v->CountChildren(); i++)
-{
-BView *subView = v->ChildAt(i);
-subView->RemoveSelf();
-delete subView;
-}
-v->SetLayout(new BGroupLayout(B_VERTICAL));
-v->AddChild(BGroupLayoutBuilder(B_VERTICAL, 0).Add(new BlogPositivePostListView("PostList", blog)));
-fWindow->UnlockLooper();
-}
-    }
+    void OpenPostList(BlogPositiveBlog *blog)
+	{
+	    if(fWindow->LockLooper()) {	
+		BView *v = fWindow->FindView("SecondView");
+		printf("Opening postlist: %d\n", v->CountChildren());
+		for(int i = 0; i < v->CountChildren(); i++)
+		{
+		    BView *subView = v->ChildAt(i);
+		    subView->RemoveSelf();
+		    printf("Removing %d", subView);
+		    delete subView;
+		}
+		v->SetLayout(new BGroupLayout(B_VERTICAL));
+		v->AddChild(BGroupLayoutBuilder(B_VERTICAL, 0).Add(new BlogPositivePostListView("PostList", blog)));
+		fWindow->UnlockLooper();
+	    }
+	}
     BlogPositiveSharedWindow *fWindow;
 };
 

@@ -7,6 +7,7 @@ class BString;
 class BlogPositiveBlog;
 class BlogPositivePost {
 public:
+    BlogPositivePost() {}
     BlogPositivePost(BlogPositiveBlog *blog);
     BlogPositiveBlog *Blog();
     void SetBlog(BlogPositiveBlog *blog);
@@ -15,7 +16,7 @@ public:
     const char *Page();
     void SetPage(const char *page);
     uint32 PageSize();
- private:
+protected:
     BString *fName;
     BString *fPage;
     BlogPositiveBlog *fBlog;

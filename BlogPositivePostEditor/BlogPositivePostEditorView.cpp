@@ -32,12 +32,10 @@ BlogPositivePostEditorView::BlogPositivePostEditorView(const char *aName, BlogPo
     fTextView->SetText(aPost->Page());
     
     BMenuBar *menuBar = new BMenuBar("MenuBar");
-    BMenu *menu = new BMenu("File");
 
     fMenuItem = new BMenuItem("Save", new BMessage(kPostEditorSavePost));
 
-    menu->AddItem(fMenuItem);
-    menuBar->AddItem(menu);
+    menuBar->AddItem(fMenuItem);
 
     SetLayout(new BGroupLayout(B_VERTICAL));
     AddChild(BGroupLayoutBuilder(B_VERTICAL, 0).Add(menuBar).Add(fTextView));

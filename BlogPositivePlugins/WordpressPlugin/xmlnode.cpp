@@ -22,7 +22,8 @@ uint32	XmlNode::encoding = XML_ENCODING_NONE;
 
 XmlNode::XmlNode(XmlNode* parent, const char* name) :
 	mName(name),
-	mData("")
+	mData(""),
+	fCdata(false)
 {
 	mParent	= parent;
 	mType	= XML_TYPE_SINGLE;
@@ -33,6 +34,7 @@ XmlNode::XmlNode(XmlNode* parent, const char* name) :
 XmlNode::XmlNode(const char* buf, XmlNode* parent) :
 	mName(""),
 	mData(""),
+	fCdata(false),
 	mChild(20, false)
 {
 	mParent	= parent;
@@ -58,6 +60,7 @@ XmlNode::XmlNode(const char* buf, XmlNode* parent) :
 
 XmlNode::XmlNode(BMessage *archive) :
 	mName(""),
+    fCdata(false),
 	mData("")
 {
 	// Init
@@ -102,7 +105,8 @@ XmlNode::XmlNode(BMessage *archive) :
 
 
 XmlNode::XmlNode(const XmlNode& source)
-	: mName(source.Name())
+	    : fCdata(false),
+	mName(source.Name())
 {
 	mParent = source.mParent;
 
@@ -1029,6 +1033,11 @@ XmlNode::Display(int level) const
 	}
 }
 
+void
+XmlNode::SetCdata(bool cData)
+{
+    fCdata = cData;
+}
 
 bool
 XmlNode::SaveToFile(const char* filename) const
@@ -1057,7 +1066,7 @@ XmlNode::SaveToFile(const char* filename) const
 BString *
 XmlNode::SavetoString() const
 {
-    BString *dummy = new BString("<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n\n");
+    BString *dummy = new BString("<?xml version=\"1.0\"?>\n");
 	int c = Children();	
 	printf("I have %d children", c);
 	for (int i=0; i<c; i++) {
@@ -1074,7 +1083,7 @@ XmlNode::SaveString(BString *str, int depth) const
 	BString *s = str; 			// s is reused later!
 //
 	if (mType == XML_TYPE_COMMENT) {
-	    *s << "<!-- " << mData.String() << " -->\n";
+	    *s << "<!-- " << mData.String() << " -->";
 
 		return true;
 	}
@@ -1097,10 +1106,10 @@ XmlNode::SaveString(BString *str, int depth) const
 	
 		int c = Children();
 		if (c==0) {
-		    *s << " />\n";
+		    *s << " />";
 		}
 		else {
-		    *s << ">\n";
+		    *s << ">";
 			
 			for (int i=0; i<c; i++) {
 			    ItemAt(i)->SaveString(str, depth+1);
@@ -1108,7 +1117,7 @@ XmlNode::SaveString(BString *str, int depth) const
 	
 			// closing tag:
 			//TabS(depth);
-			*s << "</" << Name() << ">\n";
+			*s << "</" << Name() << ">";
 		}
 	}
 	else if (mType == XML_TYPE_SINGLE) {
@@ -1117,7 +1126,12 @@ XmlNode::SaveString(BString *str, int depth) const
 		}
 		else {
 		    *s << ">";
-			*s << mData.String() << "</" << mName.String() << ">\n";
+		    if(fCdata)
+			*s << "<![CDATA[";
+		    *s << mData.String();
+		    if(fCdata)
+			*s << "]]>";
+		    *s << "</" << mName.String() << ">";
 		}
 	}
 	

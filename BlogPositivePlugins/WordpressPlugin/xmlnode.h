@@ -55,7 +55,7 @@ public:
 	uint32 Type() const;
 	
 	XmlNode*	Parent() const;
-	
+    void SetCdata(bool cdata);
 	const BString& Value() const;
 	int			ValueAsInt() const;
 	void SetValue(const BString& value);
@@ -120,6 +120,7 @@ public:
 public:	
 	void Display() const;
 private:
+    bool fCdata;
 	void Display(int level) const;
 public:	
 

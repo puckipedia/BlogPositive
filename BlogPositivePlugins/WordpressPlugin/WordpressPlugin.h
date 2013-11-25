@@ -16,18 +16,7 @@ public:
     BList *GetBlogPosts(BlogPositiveBlog *aBlog);
     void SavePost(BlogPositivePost *aPost);
     BlogPositivePost *CreateNewPost(BlogPositiveBlog *aBlog, const char *aName);
-};
-
-class WordpressPost : public BlogPositivePost
-{
-public:
-    WordpressPost(BlogPositiveBlog *blog);
-    const char *Name();
-    void SetName(const char *name);
-    const char *Page();
-    void SetPage(const char *page);
-    uint32 PageSize();
-private:
+    void RemovePost(BlogPositivePost *aPost);
 };
 
 #endif
