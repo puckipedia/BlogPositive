@@ -1,3 +1,8 @@
+/*
+ * Taken from friss, which is licenced under the MIT licence
+ * http://pulkomandy.tk/projects/friss/browser
+ */
+
 #include "xmlnode.h"
 
 #include <assert.h>
