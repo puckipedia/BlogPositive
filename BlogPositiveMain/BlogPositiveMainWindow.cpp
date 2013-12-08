@@ -17,28 +17,31 @@
 
 class BlogPositiveMainDelegate : public BlogPositiveDelegate
 {
-public:
-    void OpenPostList(BlogPositiveBlog *aBlog)
-    {
-	BlogPositivePostListWindow *aWindow =
-	    new BlogPositivePostListWindow(aBlog, BRect(100, 100, 400, 600));
-	aWindow->Show();
-    }
+	public:
+		void	OpenPostList(BlogPositiveBlog* aBlog)
+	{
+		BlogPositivePostListWindow* aWindow
+		= new BlogPositivePostListWindow(aBlog, BRect(100, 100, 400, 600));
+		aWindow->Show();
+	}
 };
 
 BlogPositiveMainWindow::BlogPositiveMainWindow(BRect frame)
-    : BWindow(frame, "BlogPositive", B_TITLED_WINDOW, B_AUTO_UPDATE_SIZE_LIMITS)
+	:
+	BWindow(frame, "BlogPositive", B_TITLED_WINDOW, B_AUTO_UPDATE_SIZE_LIMITS)
 {
-    BlogPositiveMainView *view = new BlogPositiveMainView("MainView", new BlogPositiveMainDelegate());
-    AddHandler(view);
-    SetLayout(new BGroupLayout(B_VERTICAL));
-    AddChild(
-	BGroupLayoutBuilder(B_VERTICAL, 0)
-	.Add(view));
+	BlogPositiveMainView* view
+		= new BlogPositiveMainView("MainView", new BlogPositiveMainDelegate());
+	AddHandler(view);
+	SetLayout(new BGroupLayout(B_VERTICAL));
+	AddChild(
+		BGroupLayoutBuilder(B_VERTICAL, 0)
+		.Add(view));
 }
 
+
 void
-BlogPositiveMainWindow::MessageReceived(BMessage *message)
+BlogPositiveMainWindow::MessageReceived(BMessage* message)
 {
-    BWindow::MessageReceived(message);
+	BWindow::MessageReceived(message);
 }

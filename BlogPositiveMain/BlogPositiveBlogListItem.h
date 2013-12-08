@@ -2,16 +2,22 @@
  * Copyright 2013 Puck Meerburg, puck@puckipedia.nl
  * All rights reserved. Distributed under the terms of the MIT License.
  */
+#ifndef BP_BLOGLISTITEM_H
+#define BP_BLOGLISTITEM_H
 
-#pragma once
+
 #include <ListItem.h>
-#include <Message.h>
-#include "../API/BlogPositiveBlog.h"
 
+class BlogPositiveBlog;
 class BlogPositiveBlogListItem : public BStringItem {
 public:
-	BlogPositiveBlogListItem(BlogPositiveBlog *blog);
-	inline BlogPositiveBlog *Blog() {return fBlog;}
+						BlogPositiveBlogListItem(BlogPositiveBlog* blog);
+	BlogPositiveBlog*	Blog()
+	{
+		return fBlog;
+	}
 private:
-	BlogPositiveBlog *fBlog;
+	BlogPositiveBlog*	fBlog;
 };
+
+#endif
