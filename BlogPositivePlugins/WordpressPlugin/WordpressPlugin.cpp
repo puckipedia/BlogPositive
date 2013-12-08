@@ -3,329 +3,283 @@
  * All rights reserved. Distributed under the terms of the MIT License.
  */
 
+
 #include "WordpressPlugin.h"
 
-#include <String.h>
+#include "../../API/BlogPositiveBlog.h"
+#include "../../API/BlogPositivePost.h"
 #include <curl/curl.h>
 #include <stdio.h>
-#include "../../API/BlogPositiveBlog.h"
+#include <String.h>
 #include "xmlnode.h"
 #include "XmlRpcWrapper.h"
+
+void
+WordpressPlugin::GetAuthentication(BString Auth, BString* Username,
+	BString* Password, BString* XmlRPCUrl)
+{
+	int32 SeperatorLocation = Auth.FindFirst("|||");
+	int32 LastLocation = Auth.FindLast("|||");
+
+	Auth.CopyInto(*Username, 0, SeperatorLocation);
+
+	Auth.CopyInto(*Password, SeperatorLocation + 3,
+		LastLocation - SeperatorLocation - 3);
+
+	Auth.CopyInto(*XmlRPCUrl, LastLocation + 3, Auth.Length()-LastLocation - 3);
+}
+
 
 uint32
 WordpressPlugin::Version()
 {
-    return 0;
+	return 0;
 }
 
-char *
+
+char*
 WordpressPlugin::Name()
 {
-    return "Wordpress.com or self-hosted";
+	return "Wordpress.com or self-hosted";
 }
+
 
 int32
 WordpressPlugin::Type()
 {
-    return kBlogPositiveBlogApi;
+	return kBlogPositiveBlogApi;
 }
+
 
 uint32
 WordpressPlugin::MainHandler()
 {
-    return 'WoPr';
+	return 'WoPr';
 }
+
 
 bool
 WordpressPlugin::Supports(int32 Code)
 {
-    return Code == 'WoPr';
+	return Code == 'WoPr';
 }
-size_t WriteTobString(void *bloc, size_t size, size_t nmemb, void *userp)
+
+
+size_t WriteTobString(void* bloc, size_t size, size_t nmemb, void* userp)
 {
-    printf("Got part! %d %d\n", size, nmemb);
-    *((BString *)userp) << (const char *)bloc;
-    return nmemb;
+	*((BString* )userp) << (const char* )bloc;
+	return nmemb;
 }
 
 
 class WordpressPost : public BlogPositivePost
 {
 public:
-    WordpressPost(BString aPostName, BString aPostContent, BString aPostId, BlogPositiveBlog *aBlog)
-    {
-	fName = new BString(aPostName);
-	fPage = new BString(aPostContent);
-	fId = new BString(aPostId);
-	fBlog = aBlog;
-	printf("Post! %s %s %s\n", aPostName.String(), aPostContent.String(), aPostId.String());
-    }
-    const char *
-    PostId()
-    {
-	return fId->String();
-    }
+				WordpressPost(BString aPostName, BString aPostContent,
+					BString aPostId, BlogPositiveBlog* aBlog);
+	const char*	PostId();
 private:
-    BString *fId;
+	BString fId;
 };
 
-#define CreateStringValue(name, value)			\
-    XmlNode * name = new XmlNode(params, "param"); {	\
-	XmlNode *val = new XmlNode(name, "value");	\
-	XmlNode *string = new XmlNode(val, "string");	\
-	string->SetValue(value);			\
-	val->AddChild(string);				\
-	name->AddChild(val);				\
-    }
-#define CreateIntValue(name, value, cf)			\
-    XmlNode * name = new XmlNode(params, "param"); {	\
-	XmlNode *val = new XmlNode(name, "value");	\
-	XmlNode *string = new XmlNode(val, "int");	\
-	string->SetValue(value);			\
-	string->SetCdata(cf);				\
-	val->AddChild(string);				\
-	name->AddChild(val);				\
-    }
-#define CreateValue(name, value) \
-    XmlNode * name = new XmlNode(params, "param"); {	\
-	XmlNode *val = new XmlNode(name, "value"); \
-        val->SetValue(value);				\
-	name->AddChild(val); \
-    }
 
-#define Struct(__ding, __name, __val, __a, __cda) do {			\
-	XmlNode *member = new XmlNode(__ding, "member");	\
-	XmlNode *name = new XmlNode(member, "name");		\
-	name->SetValue(BString(__name));			\
-	XmlNode *value = new XmlNode(member, "value");		\
-	XmlNode *in = new XmlNode(value, __a); \
-	in->SetValue(BString(__val));		 \
-	value->AddChild(in);\
-	member->AddChild(name); member->AddChild(value);	\
-	__ding->AddChild(member);				\
-	in->SetCdata(__cda);					\
-    }	while(0)							
-
-BList *
-WordpressPlugin::GetBlogPosts(BlogPositiveBlog *aBlog)
+WordpressPost::WordpressPost(BString postName, BString postContent,
+	BString postId, BlogPositiveBlog* blog)
+	:
+	fName(postName),
+	fPage(postContent),
+	fId(postId),
+	fBlog(blog)
 {
-    BString Auth = BString(aBlog->Authentication());
+}
 
-    int32 SeperatorLocation = Auth.FindFirst("|||");
-    int32 LastLocation = Auth.FindLast("|||");
-    
-    BString username;
-    Auth.CopyInto(username, 0, SeperatorLocation);
 
-    BString password;
-    Auth.CopyInto(password, SeperatorLocation+3, LastLocation-SeperatorLocation-3);
-    
-    BString xmlrpcurl;
-    Auth.CopyInto(xmlrpcurl, LastLocation+3, Auth.Length()-LastLocation-3);
+const char*
+WordpressPost::PostId()
+{
+	return fId.String();
+}
 
-    XmlRpcRequest *r = new XmlRpcRequest();
-    r->fMethodName = new BString("metaWeblog.getRecentPosts");
-    r->AddItem(new XmlValue(1));
-    r->AddItem(new XmlValue(&username));
-    r->AddItem(new XmlValue(&password));
-    r->AddItem(new XmlValue(30));
-    CURL *curl = curl_easy_init();
-    
-    BString str;
 
-    curl_easy_setopt(curl, CURLOPT_URL, xmlrpcurl.String());
-    BString *stttr = r->GetData();
-    printf("LOADING POSTS? %s %s %s %s\n", username.String(), password.String(), xmlrpcurl.String(), stttr->String());
+BList*
+WordpressPlugin::GetBlogPosts(BlogPositiveBlog* aBlog)
+{
+	BString username;
+	BString password;
+	BString xmlrpcurl;
+	BString Auth(aBlog->Authentication());
 
-    curl_easy_setopt(curl, CURLOPT_POSTFIELDS, stttr->String());
-    delete stttr;
-    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteTobString);
-    curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)&str);
-    curl_easy_setopt(curl, CURLOPT_USERAGENT, "libcurl-agent/1.0");
-    curl_easy_perform(curl);
+	GetAuthentication(Auth, &username, &password, &xmlrpcurl);
 
-    printf("-%s-\n", str.String());
-    XmlNode *responseNode = new XmlNode(str.String(), NULL);
-    XmlNode *postNode = NULL;
-    if(responseNode->FindChild("param", NULL, true) == NULL)
-	return new BList();
-    XmlNode *postListNode = responseNode->FindChild("param", NULL, true)->FindChild("array", NULL, true)->FindChild("data", NULL, true);
-    BList *postList = new BList();
-    while((postNode = postListNode->FindChild("value", postNode)) != NULL)
-    {
-	const BString *aPostName;
-	const BString *aPostContent;
-	const BString *aPostId;
-	XmlNode *firstStructNode = postNode->FindChild("struct", NULL, true);
-	for(int i = 0; i < firstStructNode->Children(); i++)
+	XmlRpcRequest* r = new XmlRpcRequest();
+
+	r->SetMethodName("metaWeblog.getRecentPosts");
+	r->AddItem(new XmlValue(1));
+	r->AddItem(new XmlValue(&username));
+	r->AddItem(new XmlValue(&password));
+	r->AddItem(new XmlValue(30));
+
+	CURL* curl = curl_easy_init();
+
+	BString responseString;
+	BString dataString(r->GetData());
+
+	curl_easy_setopt(curl, CURLOPT_URL, xmlrpcurl.String());
+
+	curl_easy_setopt(curl, CURLOPT_POSTFIELDS, dataString.String());
+	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteTobString);
+	curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void*)&responseString);
+	curl_easy_setopt(curl, CURLOPT_USERAGENT, "libcurl-agent/1.0");
+	curl_easy_perform(curl);
+
+	XmlNode* responseNode = new XmlNode(str.String(), NULL);
+	XmlNode* postNode = NULL;
+	if (responseNode->FindChild("param", NULL, true) == NULL)
+		return new BList();
+	XmlNode* postListNode = responseNode->FindChild("param", NULL, true)
+		->FindChild("array", NULL, true)->FindChild("data", NULL, true);
+	BList* postList = new BList();
+
+	while ((postNode = postListNode->FindChild("value", postNode)) != NULL)
 	{
-	    XmlNode *a = firstStructNode->ItemAt(i);
-	    BString *name = (BString *)&a->FindChild("name")->Value();
-	    if(name->Compare(BString("title")) == 0)
-	    {
-		aPostName = &a->FindChild("string", NULL, true)->Value();
-	    }
-	    if(name->Compare(BString("description")) == 0)
-	    {
-		aPostContent = &a->FindChild("string", NULL, true)->Value();
-	    }
-	    if(name->Compare(BString("postid")) == 0)
-	    {
-		aPostId = &a->FindChild("string", NULL, true)->Value();
-	    }
+		BString aPostName;
+		BString aPostContent;
+		BString aPostId;
+		XmlNode* firstStructNode = postNode->FindChild("struct", NULL, true);
+		for (int i = 0; i < firstStructNode->Children(); i++)
+		{
+			XmlNode node = firstStructNode->ItemAt(i);
+			BString name = node->FindChild("name")->Value();
+			if (name == "title")
+			{
+				aPostName = a->FindChild("string", NULL, true)->Value();
+			}
+			if (name == "description")
+			{
+				aPostContent = a->FindChild("string", NULL, true)->Value();
+			}
+			if (name == "postid")
+			{
+				aPostId = a->FindChild("string", NULL, true)->Value();
+			}
 	}
-	WordpressPost *aPost = new WordpressPost((BString)*aPostName, (BString)*aPostContent, (BString)*aPostId, aBlog);
+	WordpressPost* aPost = new WordpressPost(aPostName, aPostContent,
+		aPostId, aBlog);
 	postList->AddItem(aPost);
-    }
-    return postList;
+	}
+	return postList;
 }
+
 
 void
-WordpressPlugin::RemovePost(BlogPositivePost *aPost)
+WordpressPlugin::RemovePost(BlogPositivePost* aPost)
 {
-    BlogPositiveBlog *aBlog = aPost->Blog();
-    WordpressPost *wpPost = (WordpressPost *)aPost;
+	BlogPositiveBlog* aBlog = aPost->Blog();
+	WordpressPost* wpPost = (WordpressPost* )aPost;
 
-    BString Auth = BString(aBlog->Authentication());
+	BString username;
+	BString password;
+	BString xmlrpcurl;
+	BString Auth(aBlog->Authentication());
 
-    int32 SeperatorLocation = Auth.FindFirst("|||");
-    int32 LastLocation = Auth.FindLast("|||");
-    
-    BString username;
-    Auth.CopyInto(username, 0, SeperatorLocation);
+	GetAuthentication(Auth, &username, &password, &xmlrpcurl);
 
-    BString password;
-    Auth.CopyInto(password, SeperatorLocation+3, LastLocation-SeperatorLocation-3);
-    
-    BString xmlrpcurl;
-    Auth.CopyInto(xmlrpcurl, LastLocation+3, Auth.Length()-LastLocation-3);
+	XmlRpcRequest* request = new XmlRpcRequest();
+	request->fMethodName = new BString("wp.deletePost");
+	request->AddItem(new XmlValue(1));
+	request->AddItem(new XmlValue(username));
+	request->AddItem(new XmlValue(password));
+	request->AddItem(new XmlValue(wpPost->PostId(), "int"));
 
-    XmlRpcRequest *request = new XmlRpcRequest();
-    request->fMethodName = new BString("wp.deletePost");
-    request->AddItem(new XmlValue(1));
-    request->AddItem(new XmlValue(&username));
-    request->AddItem(new XmlValue(&password));
-    request->AddItem(new XmlValue(new BString(wpPost->PostId()), new BString("int")));
+	BString dataString = request->GetData();
 
-    CURL *curl = curl_easy_init();
+	CURL* curl = curl_easy_init();
+	curl_easy_setopt(curl, CURLOPT_URL, xmlrpcurl.String());
+	curl_easy_setopt(curl, CURLOPT_POSTFIELDS, dataString.String());
+	curl_easy_setopt(curl, CURLOPT_USERAGENT, "libcurl-agent/1.0");
+	curl_easy_perform(curl);
 
-    BString str;
-
-    curl_easy_setopt(curl, CURLOPT_URL, xmlrpcurl.String());
-    BString *stttr = request->GetData();
-    printf("REMOVING! %s %s %s %s\n", username.String(), password.String(), xmlrpcurl.String(), stttr->String());
-
-    curl_easy_setopt(curl, CURLOPT_POSTFIELDS, stttr->String());
-    delete stttr;
-    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteTobString);
-    curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)&str);
-    curl_easy_setopt(curl, CURLOPT_USERAGENT, "libcurl-agent/1.0");
-    curl_easy_perform(curl);
-
-    printf("-%s-\n", str.String());
 }
+
+
 void
-WordpressPlugin::SavePost(BlogPositivePost *aPost)
+WordpressPlugin::SavePost(BlogPositivePost* aPost)
 {
-    BlogPositiveBlog *aBlog = aPost->Blog();
-    WordpressPost *wpPost = (WordpressPost *)aPost;
+BlogPositiveBlog* aBlog = aPost->Blog();
+WordpressPost* wpPost = (WordpressPost* )aPost;
 
-    BString Auth = BString(aBlog->Authentication());
+	BString username;
+	BString password;
+	BString xmlrpcurl;
+	BString Auth(aBlog->Authentication());
 
-    int32 SeperatorLocation = Auth.FindFirst("|||");
-    int32 LastLocation = Auth.FindLast("|||");
-    
-    BString username;
-    Auth.CopyInto(username, 0, SeperatorLocation);
+	GetAuthentication(Auth, &username, &password, &xmlrpcurl);
 
-    BString password;
-    Auth.CopyInto(password, SeperatorLocation+3, LastLocation-SeperatorLocation-3);
-    
-    BString xmlrpcurl;
-    Auth.CopyInto(xmlrpcurl, LastLocation+3, Auth.Length()-LastLocation-3);
+	XmlRpcRequest* request = new XmlRpcRequest();
+	request->fMethodName = new BString("wp.editPost");
+	request->AddItem(new XmlValue(1));
+	request->AddItem(new XmlValue(&username));
+	request->AddItem(new XmlValue(&password));
+	request->AddItem(new XmlValue(wpPost->PostId(), "int"));
 
-    XmlRpcRequest *request = new XmlRpcRequest();
-    request->fMethodName = new BString("wp.editPost");
-    request->AddItem(new XmlValue(1));  
-    request->AddItem(new XmlValue(&username));
-    request->AddItem(new XmlValue(&password));
-    request->AddItem(new XmlValue(new BString(wpPost->PostId()), new BString("int")));
-    XmlStruct *struc = new XmlStruct();
-    XmlNameValuePair *p = new XmlNameValuePair();
-    p->fName = new BString("post_content");
-    p->fValue = new XmlValue(new BString(wpPost->Page()));
-    struc->AddItem(p);
-    request->AddItem(struc);
-    CURL *curl = curl_easy_init();
+	XmlStruct* struc = new XmlStruct();
+	XmlNameValuePair* p = new XmlNameValuePair();
+	p->fName = new BString("post_content");
+	p->fValue = new XmlValue(new BString(wpPost->Page()));
+	struc->AddItem(p);
+	request->AddItem(struc);
 
-    BString str;
+	CURL* curl = curl_easy_init();
 
-    curl_easy_setopt(curl, CURLOPT_URL, xmlrpcurl.String());
-    BString *stttr = request->GetData();
-    printf("POSTING! %s %s %s %s\n", username.String(), password.String(), xmlrpcurl.String(), stttr->String());
+	BString str;
 
-    curl_easy_setopt(curl, CURLOPT_POSTFIELDS, stttr->String());
-    delete stttr;
-    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteTobString);
-    curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)&str);
-    curl_easy_setopt(curl, CURLOPT_USERAGENT, "libcurl-agent/1.0");
-    curl_easy_perform(curl);
+	curl_easy_setopt(curl, CURLOPT_URL, xmlrpcurl.String());
+	BString requestString = request->GetData();
 
-    printf("-%s-\n", str.String());
-    XmlNode *responseNode = new XmlNode(str.String(), NULL);
-    
+	curl_easy_setopt(curl, CURLOPT_POSTFIELDS, requestString.String());
+	curl_easy_setopt(curl, CURLOPT_USERAGENT, "libcurl-agent/1.0");
+	curl_easy_perform(curl);
 }
 
-BlogPositivePost *
-WordpressPlugin::CreateNewPost(BlogPositiveBlog *aBlog, const char *aName)
+
+BlogPositivePost*
+WordpressPlugin::CreateNewPost(BlogPositiveBlog* aBlog, const char* aName)
 {
-    BString Auth = BString(aBlog->Authentication());
+	BString Auth = BString(aBlog->Authentication());
+	BString username;
+	BString password;
+	BString xmlrpcurl;
 
-    int32 SeperatorLocation = Auth.FindFirst("|||");
-    int32 LastLocation = Auth.FindLast("|||");
-    
-    BString username;
-    Auth.CopyInto(username, 0, SeperatorLocation);
+	GetAuthentication(Auth, &username, &password, &xmlrpcurl);
 
-    BString password;
-    Auth.CopyInto(password, SeperatorLocation+3, LastLocation-SeperatorLocation-3);
-    
-    BString xmlrpcurl;
-    Auth.CopyInto(xmlrpcurl, LastLocation+3, Auth.Length()-LastLocation-3);
+	XmlRpcRequest* request = new XmlRpcRequest();
+	request->fMethodName = new BString("wp.newPost");
+	request->AddItem(new XmlValue(1));
+	request->AddItem(new XmlValue(&username));
+	request->AddItem(new XmlValue(&password));
+	XmlStruct* strut = new XmlStruct();
+	strut->AddItem(new XmlNameValuePair("post_status",
+		new XmlValue("publish")));
+	strut->AddItem(new XmlNameValuePair("post_title", new XmlValue(aName)));
+	request->AddItem(strut);
 
+	CURL* curl = curl_easy_init();
+	curl_easy_setopt(curl, CURLOPT_URL, xmlrpcurl.String());
 
-//    BString *profile = GetProfile(aBlog);
-    XmlRpcRequest *request = new XmlRpcRequest();
-    request->fMethodName = new BString("wp.newPost");
-    request->AddItem(new XmlValue(1));
-    request->AddItem(new XmlValue(&username));
-    request->AddItem(new XmlValue(&password));
-    XmlStruct *strut = new XmlStruct();
-    strut->AddItem(new XmlNameValuePair(new BString("post_status"), new XmlValue(new BString("publish"))));
-    strut->AddItem(new XmlNameValuePair(new BString("post_title"), new XmlValue(new BString(aName))));
-    request->AddItem(strut);
+	BString responseString;
+	BString requestString = request->GetData();
+	curl_easy_setopt(curl, CURLOPT_POSTFIELDS, requestString.String());
+	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteTobString);
+	curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void* )&str);
+	curl_easy_setopt(curl, CURLOPT_USERAGENT, "libcurl-agent/1.0");
+	curl_easy_perform(curl);
 
-    CURL *curl = curl_easy_init();
-
-    BString str;
-
-    curl_easy_setopt(curl, CURLOPT_URL, xmlrpcurl.String());
-    BString *stttr = request->GetData();
-    printf("POSTING! %s %s %s %s\n", username.String(), password.String(), xmlrpcurl.String(), stttr->String());
-
-    curl_easy_setopt(curl, CURLOPT_POSTFIELDS, stttr->String());
-    delete stttr;
-    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteTobString);
-    curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)&str);
-    curl_easy_setopt(curl, CURLOPT_USERAGENT, "libcurl-agent/1.0");
-    curl_easy_perform(curl);
-
-    printf("-%s-\n", str.String());
-    XmlNode *responseNode = new XmlNode(str.String(), NULL);
-    XmlNode *rstring = responseNode->FindChild("string", NULL, true);
-    if(rstring != NULL) {
-	WordpressPost *post = new WordpressPost(BString(aName), BString(), (BString)rstring->Value(), aBlog);
-	return post;
-    }
-    return NULL;
+	XmlNode* responseNode = new XmlNode(responseString.String(), NULL);
+	XmlNode* rstring = responseNode->FindChild("string", NULL, true);
+	if (rstring != NULL) {
+		WordpressPost* post = new WordpressPost(aName, "",
+			rstring->Value(), aBlog);
+		return post;
+	}
+	return NULL;
 }
