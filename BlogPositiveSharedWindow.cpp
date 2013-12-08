@@ -8,7 +8,7 @@
 #include <Rect.h>
 #include <View.h>
 #include <GroupLayout.h>
-#include <GroupLayoutBuilder.h>
+#include <LayoutBuilder.h>
 #include <stdio.h>
 
 #include "BlogPositiveMain/BlogPositiveMainView.h"
@@ -18,36 +18,59 @@
 class BlogPositiveSharedDelegate : public BlogPositiveDelegate
 {
 public:
-    void OpenPostList(BlogPositiveBlog *blog)
-	{
-	    if(fWindow->LockLooper()) {	
-		BView *v = fWindow->FindView("SecondView");
-		printf("Opening postlist: %d\n", v->CountChildren());
-		for(int i = 0; i < v->CountChildren(); i++)
-		{
-		    BView *subView = v->ChildAt(i);
-		    subView->RemoveSelf();
-		    printf("Removing %d", subView);
-		    delete subView;
-		}
-		v->SetLayout(new BGroupLayout(B_VERTICAL));
-		v->AddChild(BGroupLayoutBuilder(B_VERTICAL, 0).Add(new BlogPositivePostListView("PostList", blog)));
-		fWindow->UnlockLooper();
-	    }
-	}
-    BlogPositiveSharedWindow *fWindow;
+	void						OpenPostList(BlogPositiveBlog* blog);
+	void						SetWindow(BlogPositiveSharedWindow* window);
+	BlogPositiveSharedWindow*	Window();
+
+private:
+	BlogPositiveSharedWindow*	fWindow;
 };
 
-BlogPositiveSharedWindow::BlogPositiveSharedWindow(BRect aRect)
-    : BWindow(aRect, "BlogPositive", B_TITLED_WINDOW, B_AUTO_UPDATE_SIZE_LIMITS)
+
+BlogPositiveSharedDelegate::OpenPostList(BlogPositiveBlog* blog)
 {
-    BView *secondView = new BView("SecondView", B_AUTO_UPDATE_SIZE_LIMITS);
-    BlogPositiveSharedDelegate *derp = new BlogPositiveSharedDelegate();
-    derp->fWindow = this;
-    BlogPositiveMainView *mainView = new BlogPositiveMainView("MainView", derp);
-    SetLayout(new BGroupLayout(B_HORIZONTAL));
-    AddChild(
-        BGroupLayoutBuilder(B_HORIZONTAL, 0)
-        .Add(mainView)
-        .Add(secondView));
+	if (fWindow->LockLooper()) {
+		BView* v = fWindow->FindView("SecondView");
+		for (int i = 0; i < v->CountChildren(); i++)
+		{
+			BView* subView = v->ChildAt(i);
+			subView->RemoveSelf();
+			delete subView;
+		}
+		BGroupLayout* layout = new BGroupLayout(B_VERTICAL);
+		v->SetLayout(layout);
+		v->AddChild(new BlogPositivePostListView("PostList", blog)));
+		fWindow->UnlockLooper();
+	}
+}
+
+
+void
+BlogPositiveSharedDelegate::SetWindow(BlogPositiveSharedWindow* window)
+{
+	fWindow = window;
+}
+
+
+BlogPositiveSharedWindow
+BlogPositiveSharedDelegate::Window()
+{
+	return fWindow;
+}
+
+
+BlogPositiveSharedWindow::BlogPositiveSharedWindow(BRect aRect)
+	:
+	BWindow(aRect, "BlogPositive", B_TITLED_WINDOW, B_AUTO_UPDATE_SIZE_LIMITS)
+{
+	BlogPositiveSharedDelegate* delegate = new BlogPositiveSharedDelegate();
+	delegate->fWindow = this;
+	BlogPositiveMainView* mainView
+		= new BlogPositiveMainView("MainView", delegate);
+
+	BView* secondView = new BView("SecondView", B_AUTO_UPDATE_SIZE_LIMITS);
+	SetLayout(new BGroupLayout(B_HORIZONTAL));
+
+	AddChild(mainView);
+	AddChild(secondView);
 }

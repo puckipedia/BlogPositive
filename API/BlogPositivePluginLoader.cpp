@@ -1,3 +1,9 @@
+/*
+ * Copyright 2013 Puck Meerburg, puck@puckipedia.nl
+ * All rights reserved. Distributed under the terms of the MIT License.
+ */
+
+
 #include "BlogPositivePluginLoader.h"
 
 #include <List.h>
@@ -5,37 +11,38 @@
 
 #include "BlogPositiveBlog.h"
 #include "BlogPositivePlugin.h"
-#include "../Example/ExamplePlugin.h"
 #include "BlogPositivePluginWindow.h"
+#include "../Example/ExamplePlugin.h"
 #include "../BlogPositivePlugins/WordpressPlugin/WordpressPlugin.h"
 
-BList *BlogPositivePluginLoader::fList;
+BList* BlogPositivePluginLoader::fList;
 
 void
 BlogPositivePluginLoader::Initialize()
 {
-    fList = new BList();
-    fList->AddItem(new ExamplePlugin());
-    fList->AddItem(new WordpressPlugin());
+	fList = new BList();
+	fList->AddItem(new ExamplePlugin());
+	fList->AddItem(new WordpressPlugin());
 }
 
+
 void
-BlogPositivePluginLoader::FindPlugin(BlogPositiveBlog *aBlog)
+BlogPositivePluginLoader::FindPlugin(BlogPositiveBlog* aBlog)
 {
-    BlogPositivePlugin *aWorkingPlugin = 0;
-    for(int i = 0; i < fList->CountItems(); i++)
-    {
-	BlogPositivePlugin *aPlugin = (BlogPositivePlugin *)fList->ItemAt(i);
-	if(aPlugin->Type() == kBlogPositiveBlogApi &&
-	   aPlugin->Supports(aBlog->BlogHandler()))
+	BlogPositivePlugin* aWorkingPlugin = NULL;
+	for (int i = 0; i < fList->CountItems(); i++)
 	{
-	    aWorkingPlugin = aPlugin;
-	    break;
+		BlogPositivePlugin* aPlugin = (BlogPositivePlugin*)fList->ItemAt(i);
+		if (aPlugin->Type() == kBlogPositiveBlogApi
+			&& aPlugin->Supports(aBlog->BlogHandler()))
+		{
+			aWorkingPlugin = aPlugin;
+			break;
+		}
 	}
-    }
 
-    if(aWorkingPlugin == 0)
-	return;
+	if (aWorkingPlugin == 0)
+		return;
 
-    aBlog->SetPlugin(aWorkingPlugin);
+	aBlog->SetPlugin(aWorkingPlugin);
 }

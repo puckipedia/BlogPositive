@@ -2,43 +2,44 @@
  * Copyright 2013 Puck Meerburg, puck@puckipedia.nl
  * All rights reserved. Distributed under the terms of the MIT License.
  */
-
 #ifndef BP_BLOG_H
 #define BP_BLOG_H
+
 
 #include <Message.h>
 #include <List.h>
 
-class BString;
 class BlogPositivePlugin;
+class BString;
 class BlogPositiveBlog {
 public:
-    static BList *DeserializeList(BMessage *message, const char *blogName);
-    static BMessage *SerializeList(BList *blist, const char *blogName);
-    
-    BlogPositiveBlog();
+	static BList*		DeserializeList(BMessage* message,
+							const char* blogName);
+	static BMessage*	SerializeList(BList* blist, const char* blogName);
 
-    void SetName(const char *name);
-    const char *Name();
+						BlogPositiveBlog();
 
-    void SetAuthentication(const char *authentication);
-    const char *Authentication();
+	void				SetName(const char* name);
+	const char*			Name();
 
-    void SetBlogHandler(int32 blogHandler);
-    int32 BlogHandler();
+	void				SetAuthentication(const char* authentication);
+	const char*			Authentication();
 
-    BMessage *Serialize();
-    void Unserialize(BMessage *message);
+	void				SetBlogHandler(int32 blogHandler);
+	int32				BlogHandler();
 
-    void SetPlugin(BlogPositivePlugin *plugin);
-    BlogPositivePlugin *Plugin();
+	BMessage*			Serialize();
+	void				Unserialize(BMessage* message);
 
-    BString *NameString();
+	void				SetPlugin(BlogPositivePlugin* plugin);
+	BlogPositivePlugin*	Plugin();
+
+	BString*			NameString();
 private:
-    BString *fName;
-    BString *fAuthentication;
-    int32 fBlogHandler;
-    BlogPositivePlugin *fPlugin;
+	BString* fName;
+	BString* fAuthentication;
+	int32 fBlogHandler;
+	BlogPositivePlugin* fPlugin;
 };
 
 #endif

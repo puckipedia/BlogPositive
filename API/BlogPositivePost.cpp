@@ -1,54 +1,65 @@
+/*
+ * Copyright 2013 Puck Meerburg, puck@puckipedia.nl
+ * All rights reserved. Distributed under the terms of the MIT License.
+ */
+
+
 #include "BlogPositivePost.h"
 
 #include <String.h>
 
 #include "BlogPositiveBlog.h"
 
-BlogPositivePost::BlogPositivePost(BlogPositiveBlog *aBlog)
+BlogPositivePost::BlogPositivePost(BlogPositiveBlog* aBlog)
 {
-    fName = new BString();
-    fPage = new BString();
-    fBlog = aBlog;
+	fBlog = aBlog;
 }
 
-BlogPositiveBlog *
+
+BlogPositiveBlog*
 BlogPositivePost::Blog()
 {
-    return fBlog;
+	return fBlog;
 }
+
 
 void
-BlogPositivePost::SetBlog(BlogPositiveBlog *aBlog)
+BlogPositivePost::SetBlog(BlogPositiveBlog* aBlog)
 {
-    fBlog = aBlog;
+	fBlog = aBlog;
 }
 
-const char *
+
+const char*
 BlogPositivePost::Name()
 {
-    return fName->String();
+	return fName.String();
 }
+
 
 void
-BlogPositivePost::SetName(const char *aName)
+BlogPositivePost::SetName(const char* aName)
 {
-    fName->SetTo(aName);
+	fName.SetTo(aName);
 }
 
-const char *
+
+const char*
 BlogPositivePost::Page()
 {
-    return fPage->String();
+	return fPage.String();
 }
 
+
 void
-BlogPositivePost::SetPage(const char *page)
+BlogPositivePost::SetPage(const char* page)
 {
-    fPage->SetTo(page);
+	fPage.SetTo(page);
 }
+
 
 uint32
 BlogPositivePost::PageSize()
 {
-    return fPage->Length();
+	return fPage.Length();
 }

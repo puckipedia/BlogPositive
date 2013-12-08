@@ -1,3 +1,9 @@
+/*
+ * Copyright 2013 Puck Meerburg, puck@puckipedia.nl
+ * All rights reserved. Distributed under the terms of the MIT License.
+ */
+
+
 #include "BlogPositivePluginWindow.h"
 
 #include <Window.h>
@@ -8,65 +14,75 @@
 #include "BlogPositivePost.h"
 #include "BlogPositivePlugin.h"
 
-BlogPositivePluginPostListWindow::BlogPositivePluginPostListWindow(BRect rect, const char *Name)
-    : BWindow(rect, Name, B_DOCUMENT_WINDOW, 0)
+BlogPositivePluginPostListWindow::BlogPositivePluginPostListWindow(BRect rect,
+	const char* Name)
+	:
+	BWindow(rect, Name, B_DOCUMENT_WINDOW, 0)
 {
-    
 }
+
 
 void
-BlogPositivePluginPostListWindow::SetBlog(BlogPositiveBlog *blog)
+BlogPositivePluginPostListWindow::SetBlog(BlogPositiveBlog* blog)
 {
-    fBlog = blog;
+	fBlog = blog;
 }
 
-BlogPositiveBlog *
+
+BlogPositiveBlog*
 BlogPositivePluginPostListWindow::Blog()
 {
-    return fBlog;
+	return fBlog;
 }
+
 
 void
-BlogPositivePluginPostListWindow::MessageReceived(BMessage *message)
+BlogPositivePluginPostListWindow::MessageReceived(BMessage* message)
 {
-    switch(message->what)
-    {
-    case kPostWindowGetSelection:
-	BlogPositivePluginLoader::OpenPostWindowQueryingPlugins(this);
-	break;
-    default:
-	BWindow::MessageReceived(message);
-    }
+	switch (message->what)
+	{
+		case kPostWindowGetSelection:
+			BlogPositivePluginLoader::OpenPostWindowQueryingPlugins(this);
+			break;
+		default:
+			BWindow::MessageReceived(message);
+	}
 }
 
-BlogPositivePluginBlogPostWindow::BlogPositivePluginBlogPostWindow(BRect rect, const char *Name)
- : BWindow(rect, Name, B_DOCUMENT_WINDOW, 0)
+
+BlogPositivePluginBlogPostWindow::BlogPositivePluginBlogPostWindow(BRect rect,
+	const char* Name)
+	:
+	BWindow(rect, Name, B_DOCUMENT_WINDOW, 0)
 {
-    
+
 }
+
 
 void
-BlogPositivePluginBlogPostWindow::SetPost(BlogPositivePost *post)
+BlogPositivePluginBlogPostWindow::SetPost(BlogPositivePost* post)
 {
-    fPost = post;
+	fPost = post;
 }
 
-BlogPositivePost *
+
+BlogPositivePost*
 BlogPositivePluginBlogPostWindow::Post()
 {
-    return fPost;
+	return fPost;
 }
 
+
 void
-BlogPositivePluginBlogPostWindow::MessageReceived(BMessage *message)
+BlogPositivePluginBlogPostWindow::MessageReceived(BMessage* message)
 {
-    switch(message->what)
-    {
-    case kPostWindowSavePost:
-	Post()->SetPage(BlogPositivePluginLoader::GetPageContent(this));
-	Post()->Blog()->Plugin()->SavePost(fPost);
-	break;
-    default:
-	BWindow::MessageReceived(message);
-    }
+	switch (message->what)
+	{
+		case kPostWindowSavePost:
+			Post()->SetPage(BlogPositivePluginLoader::GetPageContent(this));
+			Post()->Blog()->Plugin()->SavePost(fPost);
+			break;
+		default:
+			BWindow::MessageReceived(message);
+	}
 }
