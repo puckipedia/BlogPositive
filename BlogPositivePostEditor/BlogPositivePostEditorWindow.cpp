@@ -3,6 +3,7 @@
  * All rights reserved. Distributed under the terms of the MIT License.
  */
 
+
 #include "BlogPositivePostEditorWindow.h"
 
 #include <Rect.h>
@@ -14,13 +15,18 @@
 #include "BlogPositivePostEditorView.h"
 
 BlogPositivePostEditorWindow::BlogPositivePostEditorWindow(
-    BlogPositivePost *aPost, BRect aRect)
-    : BWindow(aRect, (BString("Post: ") << aPost->Name()).String(), B_TITLED_WINDOW, B_AUTO_UPDATE_SIZE_LIMITS)
+	BlogPositivePost* aPost, BRect aRect)
+	:
+	BWindow(aRect, "", B_TITLED_WINDOW, B_AUTO_UPDATE_SIZE_LIMITS)
 {
-    fView = new BlogPositivePostEditorView("EditorView", aPost);
+	fView = new BlogPositivePostEditorView("EditorView", aPost);
 
-    SetLayout(new BGroupLayout(B_VERTICAL));
-    AddChild(
-	BGroupLayoutBuilder(B_VERTICAL, 0)
-	.Add(fView));
+	BString titleString("Post: ");
+	titleString << aPost->Title();
+	SetTitle(titleString.String());
+
+	SetLayout(new BGroupLayout(B_VERTICAL));
+	AddChild(
+		BGroupLayoutBuilder(B_VERTICAL, 0)
+		.Add(fView));
 }

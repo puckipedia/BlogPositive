@@ -162,10 +162,10 @@ WordpressPlugin::GetBlogPosts(BlogPositiveBlog* aBlog)
 			{
 				aPostId = a->FindChild("string", NULL, true)->Value();
 			}
-	}
-	WordpressPost* aPost = new WordpressPost(aPostName, aPostContent,
-		aPostId, aBlog);
-	postList->AddItem(aPost);
+		}
+		WordpressPost* aPost = new WordpressPost(aPostName, aPostContent,
+			aPostId, aBlog);
+		postList->AddItem(aPost);
 	}
 	return postList;
 }

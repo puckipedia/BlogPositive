@@ -1,5 +1,6 @@
 /*
  * Taken from friss, which is licenced under the MIT licence
+ * Modified by :Puck Meerburg, to allow printing to a string.
  * http://pulkomandy.tk/projects/friss/browser
  */
 #ifndef XMLNODE
