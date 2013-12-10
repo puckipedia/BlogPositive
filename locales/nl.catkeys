@@ -1,16 +1,16 @@
-1	English	x.vnd-puckipedia-blogpositive	2684934432
+1	Dutch	x.vnd-puckipedia-blogpositive	2684934432
 Blog: %s	Post List Window		Blog: %s
-Save	Post Editor View		Save
+Save	Post Editor View		Opslaan
 BlogPositive	Main Window		BlogPositive
-Errors do occur\nBut this is very special\nPlease do try again!	Wordpress Plugin		Errors do occur\nBut this is very special\nPlease do try again!
-Remove blog	Main View		Remove blog
-Wordpress.com or self-hosted	Wordpress Plugin		Wordpress.com or self-hosted
-Sometimes things go wrong:\nMaybe the server is down,\nMaybe it needs help.	Wordpress Plugin		Sometimes things go wrong:\nMaybe the server is down,\nMaybe it needs help.
-Post: %s	Post Editor Window		Post: %s
-Time goes on and on:\nThe blog you seek is not here\nMaybe a typo?	Wordpress Plugin		Time goes on and on:\nThe blog you seek is not here\nMaybe a typo?
-Add Blog	Main View		Add Blog
-404 - Blog not found	Wordpress Plugin		404 - Blog not found
-500 - An error occured	Wordpress Plugin		500 - An error occured
-New Post	Post List View		New Post
-Remove Post	Post List View		Remove Post
-??? - Unknown error	Wordpress Plugin		??? - Unknown error
+Errors do occur\nBut this is very special\nPlease do try again!	Wordpress Plugin		Soms zjin er fouten\nMaar deze is erg speciaal\nProbeer het opnieuw!
+Remove blog	Main View		Verwijder blog
+Wordpress.com or self-hosted	Wordpress Plugin		Wordpress.com or zelf-gehoste
+Sometimes things go wrong:\nMaybe the server is down,\nMaybe it needs help.	Wordpress Plugin		Soms gaan dingen mis:\nMisschien is de server down,\nMisschien is het ziek.
+Post: %s	Post Editor Window		Bericht: %s
+Time goes on and on:\nThe blog you seek is not here\nMaybe a typo?	Wordpress Plugin		Tijd gaat door en door:\nDe blog die je zoekt: Niet hier!\nMisschien een typo?
+Add Blog	Main View		Voeg blog toe
+404 - Blog not found	Wordpress Plugin		404 - Blog niet gevonden
+500 - An error occured	Wordpress Plugin		500 - Een fout is voorgekomen
+New Post	Post List View		Nieuw Bericht
+Remove Post	Post List View		Verwijder Bericht
+??? - Unknown error	Wordpress Plugin		??? - Onbekende fout
