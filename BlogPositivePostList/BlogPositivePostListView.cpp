@@ -6,7 +6,7 @@
 
 #include "BlogPositivePostListView.h"
 
-#include <CatalogMacros.h>
+#include <Catalog.h>
 #include <OS.h>
 #include <StringItem.h>
 #include <ListView.h>
@@ -29,6 +29,7 @@
 #include <TextControl.h>
 #include <stdio.h>
 
+#undef B_TRANSLATION_CONTEXT
 #define B_TRANSLATION_CONTEXT "Post List View"
 
 const uint32 kPostListViewOpenPost = 'PLOP';
@@ -107,7 +108,8 @@ BlogPositivePostListView::BlogPositivePostListView(const char* name,
 	Reload();
 
 	SetLayout(new BGroupLayout(B_VERTICAL, 0));
-	AddChild(menu).Add(fListView));
+	AddChild(menu);
+	AddChild(fListView);
 }
 
 

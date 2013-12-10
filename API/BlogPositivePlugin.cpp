@@ -98,7 +98,7 @@ BlogPositivePlugin::MainHandler()
 }
 
 
-char*
+const char*
 BlogPositivePlugin::Name()
 {
 	return "Unknown";

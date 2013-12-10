@@ -10,12 +10,13 @@
 #include "../../API/BlogPositiveBlog.h"
 #include "../../API/BlogPositivePost.h"
 #include <curl/curl.h>
+#include <Catalog.h>
 #include <stdio.h>
-#include <CatalogMacros.h>
 #include <String.h>
 #include "xmlnode.h"
 #include "XmlRpcWrapper.h"
 
+#undef B_TRANSLATION_CONTEXT
 #define B_TRANSLATION_CONTEXT "Wordpress Plugin"
 
 void
@@ -41,10 +42,10 @@ WordpressPlugin::Version()
 }
 
 
-char*
+const char*
 WordpressPlugin::Name()
 {
-	return B_TRANSLATE("Wordpress.com or self-hosted", "Name of the plugin");
+	return B_TRANSLATE("Wordpress.com or self-hosted");
 }
 
 
@@ -145,22 +146,22 @@ WordpressPlugin::GetBlogPosts(BlogPositiveBlog* aBlog)
 		curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &responseCode);
 		switch (responseCode) {
 			case 404:
-				errorMessageTitle = B_TRANSLATE("404 - Blog not found", "404 error message title");
+				errorMessageTitle = B_TRANSLATE("404 - Blog not found");
 				errorMessageContent = B_TRANSLATE("Time goes on and on:\n"
 					"The blog you seek is not here\n"
-					"Maybe a typo?", "404 error message haiku");
+					"Maybe a typo?");
 				break;
 			case 500:
-				errorMessageTitle = B_TRANSLATE("500 - An error occured", "500 error message title");
+				errorMessageTitle = B_TRANSLATE("500 - An error occured");
 				errorMessageContent = B_TRANSLATE("Sometimes things go wrong:\n"
 					"Maybe the server is down,\n"
-					"Maybe it needs help.", "500 error message haiku");
+					"Maybe it needs help.");
 				break;
 			default:
-				errorMessageTitle = B_TRANSLATE("??? - Unknown error", "unknown error message title");
+				errorMessageTitle = B_TRANSLATE("??? - Unknown error");
 				errorMessageContent = B_TRANSLATE("Errors do occur\n"
 					"But this is very special\n"
-					"Please do try again!", "unknown error message haiku");
+					"Please do try again!");
 		}
 		BAlert* alertBox = new BAlert(errorMessageTitle, errorMessageContent,
 			":(");

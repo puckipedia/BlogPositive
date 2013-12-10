@@ -23,7 +23,7 @@ class BlogPositivePlugin {
 public:
 	virtual	uint32				Version();
 	virtual	uint32				MainHandler();
-	virtual	char*				Name();
+	virtual	const char*			Name();
 	virtual	int32				Type();
 
 	virtual	bool				Supports(int32 Code);

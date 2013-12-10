@@ -17,3 +17,4 @@
 *.h-tmp
 .#*
 obj.X86
+objects.*

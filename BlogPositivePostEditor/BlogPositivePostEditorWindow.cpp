@@ -6,7 +6,7 @@
 
 #include "BlogPositivePostEditorWindow.h"
 
-#include <CatalogMacros.h>
+#include <Catalog.h>
 #include <Rect.h>
 #include <GroupLayout.h>
 #include <GroupLayoutBuilder.h>
@@ -15,6 +15,7 @@
 #include "../API/BlogPositivePost.h"
 #include "BlogPositivePostEditorView.h"
 
+#undef B_TRANSLATION_CONTEXT
 #define B_TRANSLATION_CONTEXT "Post Editor Window"
 
 BlogPositivePostEditorWindow::BlogPositivePostEditorWindow(
@@ -25,8 +26,7 @@ BlogPositivePostEditorWindow::BlogPositivePostEditorWindow(
 	fView = new BlogPositivePostEditorView("EditorView", aPost);
 
 	BString titleString;
-	titleString.SetToFormat(B_TRANSLATE("Post: %s", "The %s par);
-	titleString << aPost->Name();
+	titleString.SetToFormat(B_TRANSLATE("Post: %s"), aPost->Name());
 	SetTitle(titleString.String());
 
 	SetLayout(new BGroupLayout(B_VERTICAL));

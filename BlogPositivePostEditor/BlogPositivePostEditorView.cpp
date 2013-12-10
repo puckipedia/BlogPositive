@@ -6,7 +6,7 @@
 
 #include "BlogPositivePostEditorView.h"
 
-#include <CatalogMacros.h>
+#include <Catalog.h>
 #include <TextView.h>
 #include <MenuBar.h>
 #include <Menu.h>
@@ -29,6 +29,7 @@
 #include "../API/BlogPositiveBlog.h"
 #include "../API/BlogPositivePlugin.h"
 
+#undef B_TRANSLATION_CONTEXT
 #define B_TRANSLATION_CONTEXT "Post Editor View"
 
 const uint32 kPostEditorSavePost = 'PESP';
@@ -45,7 +46,7 @@ BlogPositivePostEditorView::BlogPositivePostEditorView(const char* name,
 
 	BMenuBar* menuBar = new BMenuBar("MenuBar");
 
-	fMenuItem = new BMenuItem(B_TRANSLATE("Save", "As in 'save to blog'"), new BMessage(kPostEditorSavePost));
+	fMenuItem = new BMenuItem(B_TRANSLATE("Save"), new BMessage(kPostEditorSavePost));
 
 	menuBar->AddItem(fMenuItem);
 

@@ -15,7 +15,7 @@ class WordpressPlugin : public BlogPositivePlugin
 {
 public:
 	uint32				Version();
-	char*				Name();
+	const char*			Name();
 	int32				Type();
 
 	uint32				MainHandler();

@@ -13,7 +13,7 @@
 #include <List.h>
 #include <MenuBar.h>
 #include <MenuItem.h>
-#include <CatalogMacros.h>
+#include <Catalog.h>
 #include <stdio.h>
 #include <Point.h>
 #include <PopUpMenu.h>
@@ -28,6 +28,7 @@
 #include "../API/BlogPositivePluginLoader.h"
 #include "../BlogPositiveDelegate.h"
 
+#undef B_TRANSLATION_CONTEXT
 #define B_TRANSLATION_CONTEXT "Main View"
 
 const int32 kBlogSelected = 'BPBS';

@@ -12,7 +12,6 @@
 #include <stdio.h>
 
 #include "API/BlogPositivePluginLoader.h"
-#include "BlogPositiveSharedWindow.h"
 #include "BlogPositiveMain/BlogPositiveMainWindow.h"
 
 #define USE_SHARED_WINDOW 0
