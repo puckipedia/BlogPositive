@@ -8,6 +8,7 @@
 #include <List.h>
 
 #include "../BlogPositiveMain/BlogPositiveMainView.h"
+#include "../BlogPositiveSettings.h"
 
 class BlogPositiveCreateBlog : public BWindow {
 public:
