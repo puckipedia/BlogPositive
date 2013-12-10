@@ -18,7 +18,7 @@ SRCS =	API/BlogPositiveBlog.cpp API/BlogPositivePlugin.cpp \
 
 LIBS = be root curl network z textencoding localestub
 RDEFS = haiku.rdef
-LOCALES = en
+LOCALES = en nl
 
 SYSTEM_INCLUDE_PATHS = $(BUILDHOME)/headers/curl
 
