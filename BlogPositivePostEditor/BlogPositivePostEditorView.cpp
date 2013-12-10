@@ -31,13 +31,14 @@
 const uint32 kPostEditorSavePost = 'PESP';
 
 BlogPositivePostEditorView::BlogPositivePostEditorView(const char* name,
-	BlogPositivePost* aPost)
+	BlogPositivePost* post)
 	:
-	BView(aName, 0)
+	BView(name, 0),
+	fPost(post)
 {
 
 	fTextView = new BTextView("TextView");
-	fTextView->SetText(aPost->Page());
+	fTextView->SetText(post->Page());
 
 	BMenuBar* menuBar = new BMenuBar("MenuBar");
 
@@ -47,8 +48,6 @@ BlogPositivePostEditorView::BlogPositivePostEditorView(const char* name,
 
 	SetLayout(new BGroupLayout(B_VERTICAL));
 	AddChild(BGroupLayoutBuilder(B_VERTICAL, 0).Add(menuBar).Add(fTextView));
-
-	fPost = aPost;
 }
 
 
@@ -70,12 +69,12 @@ BlogPositivePostEditorView::Save()
 void
 BlogPositivePostEditorView::MessageReceived(BMessage* message)
 {
-	switch (aMessage->what)
+	switch (message->what)
 	{
 		case kPostEditorSavePost:
 			Save();
 			break;
 		default:
-			BView::MessageReceived(aMessage);
+			BView::MessageReceived(message);
 	}
 }

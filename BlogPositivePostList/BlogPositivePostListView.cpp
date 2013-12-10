@@ -16,7 +16,7 @@
 #include "../BlogPositivePostEditor/BlogPositivePostEditorWindow.h"
 
 #include <GroupLayout.h>
-#include <GroupLayoutBuilder.h>
+#include <LayoutBuilder.h>
 #include <ScrollView.h>
 #include <Menu.h>
 #include <MenuBar.h>
@@ -74,13 +74,13 @@ BlogPositivePostListView::loadList(void* pointer)
 		thing->listView->UnlockLooper();
 	}
 	BList* list = thing->plugin->GetBlogPosts(thing->blog);
-	if (thing->view->LockLooper()) {
+	if (thing->listView->LockLooper()) {
 		for (int i = 0; i < list->CountItems(); i++) {
 			BlogPositivePost* post
 				= static_cast<BlogPositivePost*>(list->ItemAt(i));
-			thing->view->AddItem(new PostItem(post));
+			thing->listView->AddItem(new PostItem(post));
 		}
-		thing->view->UnlockLooper();
+		thing->listView->UnlockLooper();
 	}
 }
 
@@ -90,7 +90,7 @@ BlogPositivePostListView::BlogPositivePostListView(const char* name,
 	:
 	BView(name, 0)
 {
-	fBlog = aBlog;
+	fBlog = blog;
 
 	fListView = new BListView("ListView");
 	fListView->SetInvocationMessage(new BMessage(kPostListViewOpenPost));
@@ -113,10 +113,10 @@ void
 BlogPositivePostListView::Reload()
 {
 	PluginAndWindowThing* thing = new PluginAndWindowThing();
-	thing->fWindow = this;
-	thing->fBlog = fBlog;
-	thing->fView = fListView;
-	thing->fPlugin = fBlog->Plugin();
+	thing->window = this;
+	thing->blog = fBlog;
+	thing->listView = fListView;
+	thing->plugin = fBlog->Plugin();
 
 	thread_id readThread = spawn_thread(BlogPositivePostListView::loadList,
 		"load_posts", B_NORMAL_PRIORITY, thing);
@@ -129,7 +129,7 @@ class NewPostWindow : public BWindow
 {
 public:
 								NewPostWindow(BlogPositivePostListView* view);
-	void						MessageReceived(BMessage* aMessage)
+	void						MessageReceived(BMessage* aMessage);
 private:
 	BlogPositivePostListView*	fView;
 	BTextControl*				fTextView;
@@ -155,7 +155,7 @@ NewPostWindow::MessageReceived(BMessage* aMessage)
 	switch (aMessage->what) {
 		case 'BPFN':
 			aMessage->SetString("postTitle", fTextView->Text());
-			BMessenger(fView).PostMessage(aMessage);
+			BMessenger(fView).SendMessage(aMessage);
 			Close();
 			break;
 		default:

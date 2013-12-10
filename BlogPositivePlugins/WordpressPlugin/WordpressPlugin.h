@@ -25,6 +25,10 @@ public:
 	BlogPositivePost*	CreateNewPost(BlogPositiveBlog* aBlog,
 							const char* aName);
 	void				RemovePost(BlogPositivePost* aPost);
+private:
+	void				GetAuthentication(BString Auth,
+							BString* Username, BString* pass,
+							BString* XmlRPCUrl);
 };
 
 #endif

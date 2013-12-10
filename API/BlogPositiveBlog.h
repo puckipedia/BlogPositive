@@ -35,6 +35,8 @@ public:
 	BlogPositivePlugin*	Plugin();
 
 	BString*			NameString();
+
+	status_t			Archive(BMessage* into, bool deep = true);
 private:
 	BString* fName;
 	BString* fAuthentication;

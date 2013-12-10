@@ -56,7 +56,7 @@ XmlArray::PushContent(BString string)
 
 XmlArray::XmlArray()
 {
-	list = new BObjectList<BaseXmlValue>();
+	fList = new BObjectList<BaseXmlValue>();
 }
 
 
@@ -81,7 +81,6 @@ XmlArray::ItemAt(int32 itemLocation)
 }
 
 
-void
 XmlNameValuePair::XmlNameValuePair(BString name, BaseXmlValue* value)
 	:
 	fName(name),
@@ -90,7 +89,6 @@ XmlNameValuePair::XmlNameValuePair(BString name, BaseXmlValue* value)
 }
 
 
-void
 XmlNameValuePair::XmlNameValuePair(BString name, BString value)
 	:
 	fName(name),
@@ -135,16 +133,16 @@ XmlStruct::AddItem(XmlNameValuePair* pair)
 
 
 int32
-XmlNameValuePair::Items()
+XmlStruct::Items()
 {
 	return fList->CountItems();
 }
 
 
 XmlNameValuePair*
-XmlNameValuePair::ItemAt(int32 itemIndex)
+XmlStruct::ItemAt(int32 itemIndex)
 {
-	return list->ItemAt(itemIndex);
+	return fList->ItemAt(itemIndex);
 }
 
 

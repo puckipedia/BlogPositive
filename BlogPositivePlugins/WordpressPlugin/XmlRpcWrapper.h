@@ -6,7 +6,9 @@
 #ifndef XML_RPC_WRAPPER_H
 #define XML_RPC_WRAPPER_H
 #include <String.h>
-#include <List.h>
+#include <ObjectList.h>
+
+
 class BaseXmlValue
 {
 public:
@@ -17,9 +19,9 @@ class XmlValue : public BaseXmlValue
 {
 public:
 	void							PushContent(BString string);
-									XmlValue(BString string, BString aBoxType);
-									XmlValue(int fAs, BString aBoxType);
-									XmlValue(double fDs, BString aBoxType);
+									XmlValue(BString string, BString aBoxType = "string");
+									XmlValue(int fAs, BString aBoxType = "i4");
+									XmlValue(double fDs, BString aBoxType = "string");
 private:
 	BString							fValue;
 	BString							boxType;
@@ -31,7 +33,7 @@ public:
 	void							PushContent(BString string);
 									XmlArray();
 	void							AddItem(BaseXmlValue* xmlValue);
-	int32							Items()
+	int32							Items();
 	BaseXmlValue*					ItemAt(int32 itemLocation);
 private:
 	BObjectList<BaseXmlValue>*		fList;
@@ -42,7 +44,7 @@ class XmlNameValuePair : public BaseXmlValue
 public:
 									XmlNameValuePair() {}
 									XmlNameValuePair(BString name,
-										BaseXmlValue value);
+										BaseXmlValue* value);
 									XmlNameValuePair(BString name,
 										BString value);
 	void							PushContent(BString string);
@@ -50,7 +52,7 @@ public:
 	BString							Value();
 private:
 	BString 						fName;
-	BaseXmlValue 					fValue;
+	BaseXmlValue*					fValue;
 };
 
 class XmlStruct : public BaseXmlValue
@@ -59,6 +61,7 @@ public:
 	void							PushContent(BString string);
 									XmlStruct();
 	void 							AddItem(XmlNameValuePair* pair);
+	void							AddItem(BString name, BString value);
 	int32							Items();
 	XmlNameValuePair*				ItemAt(int32 i);
 private:
@@ -68,9 +71,9 @@ private:
 class XmlRpcRequest
 {
 public:
-									XmlRpcRequest()
-	void							AddItem(BaseXmlValue* val)
-	BString							GetData()
+									XmlRpcRequest();
+	void							AddItem(BaseXmlValue* val);
+	BString							GetData();
 	const char*						MethodName();
 	void							SetMethodName(const char* name);
 	int32							Items();

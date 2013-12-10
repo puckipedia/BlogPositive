@@ -8,7 +8,7 @@
 
 #include <Rect.h>
 #include <GroupLayout.h>
-#include <GroupLayoutBuilder.h>
+#include <LayoutBuilder.h>
 #include <String.h>
 
 #include "../API/BlogPositiveBlog.h"

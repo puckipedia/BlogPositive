@@ -86,11 +86,11 @@ private:
 WordpressPost::WordpressPost(BString postName, BString postContent,
 	BString postId, BlogPositiveBlog* blog)
 	:
-	fName(postName),
-	fPage(postContent),
-	fId(postId),
-	fBlog(blog)
+	BlogPositivePost(blog)
 {
+	fName.SetTo(postName);
+	fPage.SetTo(postContent);
+	fId.SetTo(postId);
 }
 
 
@@ -115,8 +115,8 @@ WordpressPlugin::GetBlogPosts(BlogPositiveBlog* aBlog)
 
 	r->SetMethodName("metaWeblog.getRecentPosts");
 	r->AddItem(new XmlValue(1));
-	r->AddItem(new XmlValue(&username));
-	r->AddItem(new XmlValue(&password));
+	r->AddItem(new XmlValue(username));
+	r->AddItem(new XmlValue(password));
 	r->AddItem(new XmlValue(30));
 
 	CURL* curl = curl_easy_init();
@@ -132,7 +132,7 @@ WordpressPlugin::GetBlogPosts(BlogPositiveBlog* aBlog)
 	curl_easy_setopt(curl, CURLOPT_USERAGENT, "libcurl-agent/1.0");
 	curl_easy_perform(curl);
 
-	XmlNode* responseNode = new XmlNode(str.String(), NULL);
+	XmlNode* responseNode = new XmlNode(responseString.String(), NULL);
 	XmlNode* postNode = NULL;
 	if (responseNode->FindChild("param", NULL, true) == NULL)
 		return new BList();
@@ -148,19 +148,19 @@ WordpressPlugin::GetBlogPosts(BlogPositiveBlog* aBlog)
 		XmlNode* firstStructNode = postNode->FindChild("struct", NULL, true);
 		for (int i = 0; i < firstStructNode->Children(); i++)
 		{
-			XmlNode node = firstStructNode->ItemAt(i);
+			XmlNode *node = firstStructNode->ItemAt(i);
 			BString name = node->FindChild("name")->Value();
 			if (name == "title")
 			{
-				aPostName = a->FindChild("string", NULL, true)->Value();
+				aPostName = node->FindChild("string", NULL, true)->Value();
 			}
 			if (name == "description")
 			{
-				aPostContent = a->FindChild("string", NULL, true)->Value();
+				aPostContent = node->FindChild("string", NULL, true)->Value();
 			}
 			if (name == "postid")
 			{
-				aPostId = a->FindChild("string", NULL, true)->Value();
+				aPostId = node->FindChild("string", NULL, true)->Value();
 			}
 		}
 		WordpressPost* aPost = new WordpressPost(aPostName, aPostContent,
@@ -185,7 +185,7 @@ WordpressPlugin::RemovePost(BlogPositivePost* aPost)
 	GetAuthentication(Auth, &username, &password, &xmlrpcurl);
 
 	XmlRpcRequest* request = new XmlRpcRequest();
-	request->fMethodName = new BString("wp.deletePost");
+	request->SetMethodName("wp.deletePost");
 	request->AddItem(new XmlValue(1));
 	request->AddItem(new XmlValue(username));
 	request->AddItem(new XmlValue(password));
@@ -216,16 +216,14 @@ WordpressPost* wpPost = (WordpressPost* )aPost;
 	GetAuthentication(Auth, &username, &password, &xmlrpcurl);
 
 	XmlRpcRequest* request = new XmlRpcRequest();
-	request->fMethodName = new BString("wp.editPost");
+	request->SetMethodName("wp.editPost");
 	request->AddItem(new XmlValue(1));
-	request->AddItem(new XmlValue(&username));
-	request->AddItem(new XmlValue(&password));
+	request->AddItem(new XmlValue(username));
+	request->AddItem(new XmlValue(password));
 	request->AddItem(new XmlValue(wpPost->PostId(), "int"));
 
 	XmlStruct* struc = new XmlStruct();
-	XmlNameValuePair* p = new XmlNameValuePair();
-	p->fName = new BString("post_content");
-	p->fValue = new XmlValue(new BString(wpPost->Page()));
+	XmlNameValuePair* p = new XmlNameValuePair("post_content", wpPost->Page());
 	struc->AddItem(p);
 	request->AddItem(struc);
 
@@ -253,10 +251,10 @@ WordpressPlugin::CreateNewPost(BlogPositiveBlog* aBlog, const char* aName)
 	GetAuthentication(Auth, &username, &password, &xmlrpcurl);
 
 	XmlRpcRequest* request = new XmlRpcRequest();
-	request->fMethodName = new BString("wp.newPost");
+	request->SetMethodName("wp.newPost");
 	request->AddItem(new XmlValue(1));
-	request->AddItem(new XmlValue(&username));
-	request->AddItem(new XmlValue(&password));
+	request->AddItem(new XmlValue(username));
+	request->AddItem(new XmlValue(password));
 	XmlStruct* strut = new XmlStruct();
 	strut->AddItem(new XmlNameValuePair("post_status",
 		new XmlValue("publish")));
@@ -270,7 +268,7 @@ WordpressPlugin::CreateNewPost(BlogPositiveBlog* aBlog, const char* aName)
 	BString requestString = request->GetData();
 	curl_easy_setopt(curl, CURLOPT_POSTFIELDS, requestString.String());
 	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteTobString);
-	curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void* )&str);
+	curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void*)&responseString);
 	curl_easy_setopt(curl, CURLOPT_USERAGENT, "libcurl-agent/1.0");
 	curl_easy_perform(curl);
 

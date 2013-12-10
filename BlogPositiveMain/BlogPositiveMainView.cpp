@@ -42,11 +42,11 @@ public:
 		BlogItemList->DoForEach(&BlogPositiveBlogListView::createItem, this);
 	}
 
-	static bool	createItem(void* item, void* p)
+	static bool	createItem(void* itm, void* p)
 	{
 		BlogPositiveBlogListItem* item
-			= new BlogPositiveBlogListItem((BlogPositiveBlog* )item);
-		((BListView* )p)->AddItem(item);
+			= new BlogPositiveBlogListItem((BlogPositiveBlog*)itm);
+		((BListView*)p)->AddItem(item);
 		return false;
 	}
 };
@@ -145,7 +145,7 @@ BlogPositiveMainView::BlogPositiveMainView(const char* name,
 	fNewMenu = new BMenu("Add Blog");
 	fMenuBar->AddItem(fNewMenu);
 
-	BList* pluginList = BlogPositivePluginLoader::fList;
+	BList* pluginList = BlogPositivePluginLoader::List();
 	BlogPositiveSettings* settings = new BlogPositiveSettings("bloglist");
 
 	BList* lis = BlogPositiveBlog::DeserializeList(settings, "blogs");
@@ -170,5 +170,5 @@ BlogPositiveMainView::BlogPositiveMainView(const char* name,
 
 	SetLayout(new BGroupLayout(B_VERTICAL));
 	AddChild(fMenuBar);
-	AddChild(new BScrollView("scroll_view", fListView, 0, false, true)));
+	AddChild(new BScrollView("scroll_view", fListView, 0, false, true));
 }

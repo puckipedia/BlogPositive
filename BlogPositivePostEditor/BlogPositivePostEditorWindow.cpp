@@ -22,7 +22,7 @@ BlogPositivePostEditorWindow::BlogPositivePostEditorWindow(
 	fView = new BlogPositivePostEditorView("EditorView", aPost);
 
 	BString titleString("Post: ");
-	titleString << aPost->Title();
+	titleString << aPost->Name();
 	SetTitle(titleString.String());
 
 	SetLayout(new BGroupLayout(B_VERTICAL));

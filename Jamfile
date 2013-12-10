@@ -33,11 +33,12 @@ SRCS =  API/BlogPositivePluginLoader.cpp #API/BlogPositivePluginWindow.cpp
 	BlogPositivePostList/BlogPositivePostListView.cpp
 	BlogPositivePostList/BlogPositivePostListWindow.cpp
 	BlogPositivePostEditor/BlogPositivePostEditorView.cpp
-	BlogPositiveSharedWindow.cpp
+#	BlogPositiveSharedWindow.cpp
 	BlogPositivePostEditor/BlogPositivePostEditorWindow.cpp
 #	BlogPositivePlugins/CreateWindowPlugin/CreateWindowPlugin.cpp 
 	BlogPositiveSettings.cpp Example/ExamplePlugin.cpp main.cpp
 	BlogPositivePlugins/WordpressPlugin/WordpressPlugin.cpp
+	BlogPositivePlugins/WordpressPlugin/XmlRpcWrapper.cpp
 	BlogPositivePlugins/WordpressPlugin/xmlnode.cpp ;
 
 # Specify the resource files to use

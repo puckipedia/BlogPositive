@@ -6,6 +6,8 @@
 
 #include "BlogPositiveBlogListItem.h"
 
+#include "../API/BlogPositiveBlog.h"
+
 BlogPositiveBlogListItem::BlogPositiveBlogListItem(BlogPositiveBlog* blog)
 	:
 	BStringItem(blog->Name())

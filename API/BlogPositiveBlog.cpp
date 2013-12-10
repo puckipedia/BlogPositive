@@ -1,7 +1,7 @@
 /*
-*  Copyright 2013 Puck Meerburg, puck@puckipedia.nl
-*  All rights reserved. Distributed under the terms of the MIT License.
-* /
+ * Copyright 2013 Puck Meerburg, puck@puckipedia.nl
+ * All rights reserved. Distributed under the terms of the MIT License.
+ */
 
 
 #include "BlogPositiveBlog.h"
@@ -105,28 +105,28 @@ BlogPositiveBlog::Archive(BMessage* into, bool deep = true)
 void
 BlogPositiveBlog::Unserialize(BMessage* message)
 {
-fName->SetTo(message->GetString("name", ""));
-fAuthentication->SetTo(message->GetString("auth", ""));
-fBlogHandler = message->GetInt32("handler", 0);
+	fName->SetTo(message->GetString("name", ""));
+	fAuthentication->SetTo(message->GetString("auth", ""));
+	fBlogHandler = message->GetInt32("handler", 0);
 }
 
 
 void
 BlogPositiveBlog::SetPlugin(BlogPositivePlugin* plugin)
 {
-fPlugin = plugin;
+	fPlugin = plugin;
 }
 
 
 BlogPositivePlugin*
 BlogPositiveBlog::Plugin()
 {
-return fPlugin;
+	return fPlugin;
 }
 
 
 BString*
 BlogPositiveBlog::NameString()
 {
-return fName;
+	return fName;
 }

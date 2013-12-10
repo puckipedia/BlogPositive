@@ -45,7 +45,7 @@ BlogPositiveSettings::SaveOther(BMessage* message, const char* settingsName)
 	settingsPath.Append(kSettingsFolder);
 	settingsPath.Append(settingsName);
 
-	BFile file(settingsPath->Path(),
+	BFile file(settingsPath.Path(),
 		B_CREATE_FILE | B_ERASE_FILE | B_WRITE_ONLY);
 	if (file.InitCheck() == B_OK) {
 		message->Flatten(&file);

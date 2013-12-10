@@ -36,16 +36,16 @@ ExamplePlugin::GetBlogPosts(BlogPositiveBlog* blog) {
 	BEntry entry;
 
 	while (Dir.GetNextEntry(&entry) == B_OK) {
-		const char name[B_FILE_NAME_LENGTH];
+		char name[B_FILE_NAME_LENGTH];
 		entry.GetName(name);
 		BFile file(&entry, B_READ_ONLY);
 		off_t size;
 		file.GetSize(&size);
-		const char* pointer = new const char[size];
-		file.Read(static_cast<void*>(pointer), size);
+		char* pointer = new char[size];
+		file.Read(reinterpret_cast<void*>(pointer), size);
 		BlogPositivePost* post = new BlogPositivePost(blog);
 		post->SetName(name);
-		post->SetPage(pointer);
+		post->SetPage(reinterpret_cast<const char*>(pointer));
 		list->AddItem(post);
 	}
 	return list;
@@ -82,5 +82,6 @@ ExamplePlugin::SavePost(BlogPositivePost* post) {
 	BPath path(post->Blog()->Authentication());
 	path.Append(post->Name());
 	BFile file(path.Path(), B_WRITE_ONLY | B_ERASE_FILE);
-	file.Write(static_cast<void*>(post->Page()), post->PageSize()+1);
+	char* page = const_cast<char*>(post->Page());
+	file.Write(reinterpret_cast<void*>(page), post->PageSize()+1);
 }

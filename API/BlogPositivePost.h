@@ -7,8 +7,8 @@
 
 
 #include <SupportDefs.h>
+#include <String.h>
 
-class BString;
 class BlogPositiveBlog;
 class BlogPositivePost {
 public:
