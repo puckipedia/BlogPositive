@@ -62,7 +62,7 @@ BlogPositiveCreateBlog::MessageReceived(BMessage* message)
 	case 'CBNB':
 	{
 		BlogPositiveSettings* settings = new BlogPositiveSettings("bloglist");
-		BList* lis = BlogPositiveBlog::DeserializeList(settings, "blogs");
+		BlogList* lis = BlogPositiveBlog::DeserializeList(settings, "blogs");
 		BlogPositiveBlog* blog = new BlogPositiveBlog();
 		blog->SetName(fNameControl->Text());
 		blog->SetAuthentication(fAuthControl->Text());
@@ -73,7 +73,6 @@ BlogPositiveCreateBlog::MessageReceived(BMessage* message)
 			fMainView->Reload(lis);
 			fMainView->UnlockLooper();
 		}
-		BlogPositiveBlog::SerializeList(lis, "blogs")->PrintToStream();
 		BlogPositiveSettings::SaveOther(
 			BlogPositiveBlog::SerializeList(lis, "blogs"), "bloglist");
 		Hide();
@@ -120,10 +119,10 @@ BlogPositivePlugin::Supports(int32 Code)
 }
 
 
-BList*
+PostList*
 BlogPositivePlugin::GetBlogPosts(BlogPositiveBlog* blog)
 {
-	return new BList();
+	return new PostList();
 }
 
 

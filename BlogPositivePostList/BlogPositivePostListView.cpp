@@ -73,11 +73,10 @@ BlogPositivePostListView::loadList(void* pointer)
 		thing->listView->MakeEmpty();
 		thing->listView->UnlockLooper();
 	}
-	BList* list = thing->plugin->GetBlogPosts(thing->blog);
+	PostList* list = thing->plugin->GetBlogPosts(thing->blog);
 	if (thing->listView->LockLooper()) {
 		for (int i = 0; i < list->CountItems(); i++) {
-			BlogPositivePost* post
-				= static_cast<BlogPositivePost*>(list->ItemAt(i));
+			BlogPositivePost* post = list->ItemAt(i);
 			thing->listView->AddItem(new PostItem(post));
 		}
 		thing->listView->UnlockLooper();

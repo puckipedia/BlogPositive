@@ -6,12 +6,17 @@
 #define BP_PLUGIN_H
 
 
+#include <ObjectList.h>
+
 #include "BlogPositiveBlog.h"
 #include "BlogPositivePost.h"
 #include "BlogPositivePluginWindow.h"
 #include "../BlogPositiveSettings.h"
 
 #define kBlogPositiveBlogApi 1
+
+class BlogPositivePlugin;
+typedef BObjectList<BlogPositivePlugin> PluginList;
 
 class BlogPositiveMainView;
 class BlogPositivePlugin {
@@ -22,7 +27,7 @@ public:
 	virtual	int32				Type();
 
 	virtual	bool				Supports(int32 Code);
-	virtual	BList*				GetBlogPosts(BlogPositiveBlog* blog);
+	virtual	PostList*			GetBlogPosts(BlogPositiveBlog* blog);
 	virtual	void				SavePost(BlogPositivePost* post);
 	virtual	BlogPositivePost*	CreateNewPost(BlogPositiveBlog* blog,
 									const char* name);

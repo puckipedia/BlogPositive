@@ -7,6 +7,7 @@
 
 
 #include <View.h>
+#include "../API/BlogPositiveBlog.h"
 
 class BListView;
 class BMessage;
@@ -24,7 +25,7 @@ public:
 									BlogPositiveDelegate* del);
 	void						MessageReceived(BMessage* message);
 	void						AttachedToWindow();
-	void						Reload(BList* list);
+	void						Reload(BlogList* list);
 	void						RemoveBlog();
 private:
 	BMenuBar*					fMenuBar;

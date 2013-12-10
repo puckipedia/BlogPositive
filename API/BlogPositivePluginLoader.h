@@ -5,19 +5,19 @@
 #ifndef BP_PLUGIN_LOADER_H
 #define BP_PLUGIN_LOADER_H
 
+#include "BlogPositivePlugin.h"
 
 class BWindow;
-class BList;
 class BlogPositiveBlog;
 class BlogPositivePost;
 class BlogPositivePluginBlogPostWindow;
 class BlogPositivePluginLoader {
 public:
-	static void 	Initialize();
-	static void 	FindPlugin(BlogPositiveBlog* blog);
-	static BList*	List();
+	static void 		Initialize();
+	static void 		FindPlugin(BlogPositiveBlog* blog);
+	static PluginList*	List();
 private:
-	static BList*	fList;
+	static PluginList*	fList;
 };
 
 #endif

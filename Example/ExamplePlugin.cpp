@@ -29,9 +29,9 @@ ExamplePlugin::MainHandler()
 }
 
 
-BList*
+PostList*
 ExamplePlugin::GetBlogPosts(BlogPositiveBlog* blog) {
-	BList* list = new BList();
+	PostList* list = new PostList();
 	BDirectory Dir(blog->Authentication());
 	BEntry entry;
 

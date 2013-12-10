@@ -6,8 +6,12 @@
 #define BP_POST_H
 
 
-#include <SupportDefs.h>
+#include <ObjectList.h>
 #include <String.h>
+#include <SupportDefs.h>
+
+class BlogPositivePost;
+typedef BObjectList<BlogPositivePost> PostList;
 
 class BlogPositiveBlog;
 class BlogPositivePost {

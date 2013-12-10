@@ -7,41 +7,48 @@
 
 
 #include <Message.h>
+#include <ObjectList.h>
 #include <List.h>
+#include <String.h>
+#include <Archivable.h>
+
+class BlogPositiveBlog;
+typedef BObjectList<BlogPositiveBlog> BlogList;
 
 class BlogPositivePlugin;
-class BString;
-class BlogPositiveBlog {
+class BlogPositiveBlog : public BArchivable {
 public:
-	static BList*		DeserializeList(BMessage* message,
-							const char* blogName);
-	static BMessage*	SerializeList(BList* blist, const char* blogName);
 
-						BlogPositiveBlog();
+	static BlogList*		DeserializeList(BMessage* message,
+								const char* blogName);
+	static BMessage*		SerializeList(BlogList* blist,
+								const char* blogName);
 
-	void				SetName(const char* name);
-	const char*			Name();
+							BlogPositiveBlog();
+							BlogPositiveBlog(BMessage *from);
 
-	void				SetAuthentication(const char* authentication);
-	const char*			Authentication();
+	void					SetName(const char* name);
+	const char*				Name();
 
-	void				SetBlogHandler(int32 blogHandler);
-	int32				BlogHandler();
+	void					SetAuthentication(const char* authentication);
+	const char*				Authentication();
 
-	BMessage*			Serialize();
-	void				Unserialize(BMessage* message);
+	void					SetBlogHandler(int32 blogHandler);
+	int32					BlogHandler();
 
-	void				SetPlugin(BlogPositivePlugin* plugin);
-	BlogPositivePlugin*	Plugin();
+	void					Unserialize(BMessage* message);
 
-	BString*			NameString();
+	void					SetPlugin(BlogPositivePlugin* plugin);
+	BlogPositivePlugin*		Plugin();
 
-	status_t			Archive(BMessage* into, bool deep = true);
+	BString					NameString();
+
+	status_t				Archive(BMessage* into, bool deep = true);
 private:
-	BString* fName;
-	BString* fAuthentication;
-	int32 fBlogHandler;
-	BlogPositivePlugin* fPlugin;
+	BString					fName;
+	BString					fAuthentication;
+	int32					fBlogHandler;
+	BlogPositivePlugin*		fPlugin;
 };
 
 #endif

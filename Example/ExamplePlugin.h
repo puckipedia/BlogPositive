@@ -7,6 +7,7 @@
 
 
 #include "../API/BlogPositivePlugin.h"
+#include "../API/BlogPositivePost.h"
 
 class BList;
 class BlogPositiveBlog;
@@ -16,7 +17,7 @@ public:
 	uint32				Version() {return 0;}
 	uint32				MainHandler();
 	bool				Supports(int32 Code);
-	BList*				GetBlogPosts(BlogPositiveBlog* blog);
+	PostList*			GetBlogPosts(BlogPositiveBlog* blog);
 	void				SavePost(BlogPositivePost* post);
 	BlogPositivePost*	CreateNewPost(BlogPositiveBlog* blog, const char* name);
 	void				RemovePost(BlogPositivePost* post);

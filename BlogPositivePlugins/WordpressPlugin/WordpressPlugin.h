@@ -7,6 +7,7 @@
 #define BP_WP_PLUGIN_H
 
 #include "../../API/BlogPositivePlugin.h"
+#include "../../API/BlogPositivePost.h"
 
 class BlogPositiveBlog;
 class BlogPositivePost;
@@ -20,7 +21,7 @@ public:
 	uint32				MainHandler();
 	bool				Supports(int32 Code);
 
-	BList*				GetBlogPosts(BlogPositiveBlog* aBlog);
+	PostList*			GetBlogPosts(BlogPositiveBlog* aBlog);
 	void				SavePost(BlogPositivePost* aPost);
 	BlogPositivePost*	CreateNewPost(BlogPositiveBlog* aBlog,
 							const char* aName);

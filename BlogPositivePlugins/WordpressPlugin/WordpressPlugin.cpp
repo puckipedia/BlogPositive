@@ -6,6 +6,7 @@
 
 #include "WordpressPlugin.h"
 
+#include <Alert.h>
 #include "../../API/BlogPositiveBlog.h"
 #include "../../API/BlogPositivePost.h"
 #include <curl/curl.h>
@@ -101,7 +102,7 @@ WordpressPost::PostId()
 }
 
 
-BList*
+PostList*
 WordpressPlugin::GetBlogPosts(BlogPositiveBlog* aBlog)
 {
 	BString username;
@@ -134,11 +135,38 @@ WordpressPlugin::GetBlogPosts(BlogPositiveBlog* aBlog)
 
 	XmlNode* responseNode = new XmlNode(responseString.String(), NULL);
 	XmlNode* postNode = NULL;
-	if (responseNode->FindChild("param", NULL, true) == NULL)
-		return new BList();
+	if (responseNode->FindChild("param", NULL, true) == NULL) {
+		const char* errorMessageTitle = "";
+		const char* errorMessageContent = "";
+		long responseCode = 0;
+		curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &responseCode);
+		switch (responseCode) {
+			case 404:
+				errorMessageTitle = "404 - Blog not found";
+				errorMessageContent = "Time goes on and on:\n"
+					"The blog you seek is not here\n"
+					"Maybe a typo?";
+				break;
+			case 500:
+				errorMessageTitle = "500 - An error occured";
+				errorMessageContent = "Sometimes things go wrong:\n"
+					"Maybe the server is down,\n"
+					"Maybe it needs help.";
+				break;
+			default:
+				errorMessageTitle = "??? - Unknown error";
+				errorMessageContent = "Errors do occur\n"
+					"But this is very special\n"
+					"Please do try again!";
+		}
+		BAlert* alertBox = new BAlert(errorMessageTitle, errorMessageContent,
+			":(");
+		alertBox->Go();
+		return new PostList();
+	}
 	XmlNode* postListNode = responseNode->FindChild("param", NULL, true)
 		->FindChild("array", NULL, true)->FindChild("data", NULL, true);
-	BList* postList = new BList();
+	PostList* postList = new PostList();
 
 	while ((postNode = postListNode->FindChild("value", postNode)) != NULL)
 	{

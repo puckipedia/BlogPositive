@@ -37,17 +37,10 @@ public:
 				BListView("BlogPositiveBlogListView", B_SINGLE_SELECTION_LIST)
 	{
 	}
-	void		Reload(BList* BlogItemList)
+	void		Reload(BlogList* BlogItemList)
 	{
-		BlogItemList->DoForEach(&BlogPositiveBlogListView::createItem, this);
-	}
-
-	static bool	createItem(void* itm, void* p)
-	{
-		BlogPositiveBlogListItem* item
-			= new BlogPositiveBlogListItem((BlogPositiveBlog*)itm);
-		((BListView*)p)->AddItem(item);
-		return false;
+		for(int i = 0; i < BlogItemList->CountItems(); i++)
+			AddItem(new BlogPositiveBlogListItem(BlogItemList->ItemAt(i)));
 	}
 };
 
@@ -73,9 +66,8 @@ BlogPositiveMainView::MessageReceived(BMessage* message)
 		case kCreateNewBlog:
 		{
 			int32 index = message->GetInt32("ding", 0);
-			BList* pluginList = BlogPositivePluginLoader::List();
-			BlogPositivePlugin* plugin
-				= (BlogPositivePlugin* )pluginList->ItemAt(index);
+			PluginList* pluginList = BlogPositivePluginLoader::List();
+			BlogPositivePlugin* plugin = pluginList->ItemAt(index);
 			plugin->OpenNewBlogWindow(this);
 			break;
 		}
@@ -88,30 +80,31 @@ BlogPositiveMainView::MessageReceived(BMessage* message)
 void
 BlogPositiveMainView::RemoveBlog()
 {
-	if (fListView->CurrentSelection() == -1)
+	int32 sel = fListView->CurrentSelection();
+	if (sel == -1)
 		return;
 	BlogPositiveSettings* settings = new BlogPositiveSettings("bloglist");
-	BList* lis = BlogPositiveBlog::DeserializeList(settings, "blogs");
-	BlogPositiveBlog* blog = ((BlogPositiveBlogListItem* )fListView->ItemAt(
-		fListView->CurrentSelection()))->Blog();
+	BlogList* lis = BlogPositiveBlog::DeserializeList(settings, "blogs");
+	BlogPositiveBlogListItem* listItem
+		= static_cast<BlogPositiveBlogListItem*>(fListView->ItemAt(sel));
+	BlogPositiveBlog* blog = listItem->Blog();
 	for (int i = 0; i < lis->CountItems(); i++)
 	{
-		if (strcmp(blog->Name(),
-			((BlogPositiveBlog*)lis->ItemAt(i))->Name()) == 0)
+		if (strcmp(blog->Name(), lis->ItemAt(i)->Name()) == 0)
 		{
-			lis->RemoveItem(i);
+			lis->RemoveItemAt(i);
 			break;
 		}
 	}
-	BlogPositiveSettings::SaveOther(BlogPositiveBlog::SerializeList(lis, "blogs")
-		, "bloglist");
+	BlogPositiveSettings::SaveOther(BlogPositiveBlog::SerializeList(lis,
+		"blogs"), "bloglist");
 
 	Reload(lis);
 }
 
 
 void
-BlogPositiveMainView::Reload(BList* lis)
+BlogPositiveMainView::Reload(BlogList* lis)
 {
 	fListView->MakeEmpty();
 	fListView->Reload(lis);
@@ -145,10 +138,10 @@ BlogPositiveMainView::BlogPositiveMainView(const char* name,
 	fNewMenu = new BMenu("Add Blog");
 	fMenuBar->AddItem(fNewMenu);
 
-	BList* pluginList = BlogPositivePluginLoader::List();
+	PluginList* pluginList = BlogPositivePluginLoader::List();
 	BlogPositiveSettings* settings = new BlogPositiveSettings("bloglist");
 
-	BList* lis = BlogPositiveBlog::DeserializeList(settings, "blogs");
+	BlogList* lis = BlogPositiveBlog::DeserializeList(settings, "blogs");
 	fListView->Reload(lis);
 
 	for (int i = 0; i < pluginList->CountItems(); i++)

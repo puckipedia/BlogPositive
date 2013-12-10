@@ -103,7 +103,7 @@ SYMBOLS =  TRUE ;
 DEBUGGER =  TRUE ;
 
 # Specify additional compiler flags for all files
-COMPILER_FLAGS = -std=c++0x ;
+COMPILER_FLAGS = -Wold-style-cast ;
 
 # Specify additional linker flags
 LINKER_FLAGS = ;

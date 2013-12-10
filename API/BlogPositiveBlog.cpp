@@ -7,6 +7,7 @@
 #include "BlogPositiveBlog.h"
 
 #include <List.h>
+#include <ObjectList.h>
 #include <String.h>
 
 #include "BlogPositivePlugin.h"
@@ -15,21 +16,20 @@ const uint32 kBlogMessage = 'BPBL';
 
 BlogPositiveBlog::BlogPositiveBlog()
 {
-	fName = new BString();
-	fAuthentication = new BString();
 }
 
 
-BList*
+
+BlogList*
 BlogPositiveBlog::DeserializeList(BMessage* message, const char* blogName)
 {
 	BMessage msg;
-	BList* Listy = new BList();
+	BlogList* Listy =
+		new BlogList();
 	int i = 0;
 	while (message->FindMessage(blogName, i++, &msg) == B_OK)
 	{
-		BlogPositiveBlog* blog = new BlogPositiveBlog();
-		blog->Unserialize(&msg);
+		BlogPositiveBlog* blog = new BlogPositiveBlog(&msg);
 		Listy->AddItem(blog);
 	}
 	return Listy;
@@ -37,14 +37,15 @@ BlogPositiveBlog::DeserializeList(BMessage* message, const char* blogName)
 
 
 BMessage*
-BlogPositiveBlog::SerializeList(BList* blist, const char* blogName)
+BlogPositiveBlog::SerializeList(BlogList* blist,
+	const char* blogName)
 {
 	BMessage* bm = new BMessage();
 	for (int i = 0; i < blist->CountItems(); i++)
 	{
-		bm->AddMessage(blogName,
-			((BlogPositiveBlog* )blist->ItemAt(i))->Serialize());
-
+		BMessage resultMessage;
+		blist->ItemAt(i)->Archive(&resultMessage);
+		bm->AddMessage(blogName, &resultMessage);
 	}
 	return bm;
 }
@@ -53,28 +54,28 @@ BlogPositiveBlog::SerializeList(BList* blist, const char* blogName)
 void
 BlogPositiveBlog::SetName(const char* name)
 {
-	fName->SetTo(name);
+	fName = name;
 }
 
 
 const char*
 BlogPositiveBlog::Name()
 {
-	return fName->String();
+	return fName.String();
 }
 
 
 void
 BlogPositiveBlog::SetAuthentication(const char* auth)
 {
-	fAuthentication->SetTo(auth);
+	fAuthentication = auth;
 }
 
 
 const char*
 BlogPositiveBlog::Authentication()
 {
-	return fAuthentication->String();
+	return fAuthentication.String();
 }
 
 
@@ -95,18 +96,16 @@ BlogPositiveBlog::BlogHandler()
 status_t
 BlogPositiveBlog::Archive(BMessage* into, bool deep = true)
 {
-	into->AddString("name", fName->String());
-	into->AddString("auth", fAuthentication->String());
+	into->AddString("name", fName);
+	into->AddString("auth", fAuthentication);
 	into->AddInt32("handler", fBlogHandler);
 	return B_OK;
 }
 
-
-void
-BlogPositiveBlog::Unserialize(BMessage* message)
+BlogPositiveBlog::BlogPositiveBlog(BMessage* message)
 {
-	fName->SetTo(message->GetString("name", ""));
-	fAuthentication->SetTo(message->GetString("auth", ""));
+	fName = message->GetString("name", "");
+	fAuthentication = message->GetString("auth", "");
 	fBlogHandler = message->GetInt32("handler", 0);
 }
 
@@ -125,7 +124,7 @@ BlogPositiveBlog::Plugin()
 }
 
 
-BString*
+BString
 BlogPositiveBlog::NameString()
 {
 	return fName;
