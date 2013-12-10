@@ -15,13 +15,15 @@
 #include "../BlogPositiveDelegate.h"
 #include "../BlogPositivePostList/BlogPositivePostListWindow.h"
 
+#define B_TRANSLATION_CONTEXT "Main Window"
+
 class BlogPositiveMainDelegate : public BlogPositiveDelegate
 {
 	public:
 		void	OpenPostList(BlogPositiveBlog* aBlog)
 	{
 		BlogPositivePostListWindow* aWindow
-		= new BlogPositivePostListWindow(aBlog, BRect(100, 100, 400, 600));
+			= new BlogPositivePostListWindow(aBlog, BRect(100, 100, 400, 600));
 		aWindow->Show();
 	}
 };
@@ -33,10 +35,8 @@ BlogPositiveMainWindow::BlogPositiveMainWindow(BRect frame)
 	BlogPositiveMainView* view
 		= new BlogPositiveMainView("MainView", new BlogPositiveMainDelegate());
 	AddHandler(view);
-	SetLayout(new BGroupLayout(B_VERTICAL));
-	AddChild(
-		BGroupLayoutBuilder(B_VERTICAL, 0)
-		.Add(view));
+	SetLayout(new BGroupLayout(B_VERTICAL), 0);
+	AddChild(view);
 }
 
 

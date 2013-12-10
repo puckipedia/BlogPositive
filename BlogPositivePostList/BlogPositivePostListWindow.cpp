@@ -6,6 +6,7 @@
 
 #include "BlogPositivePostListWindow.h"
 
+#include <CatalogMacros.h>
 #include <Rect.h>
 #include <GroupLayout.h>
 #include <LayoutBuilder.h>
@@ -14,11 +15,17 @@
 #include "../API/BlogPositiveBlog.h"
 #include "BlogPositivePostListView.h"
 
+#define B_TRANSLATION_CONTEXT "Post List Window"
+
 BlogPositivePostListWindow::BlogPositivePostListWindow(
 	BlogPositiveBlog* blog, BRect rect)
 	:
-	BWindow(rect, "Blog", B_TITLED_WINDOW, B_AUTO_UPDATE_SIZE_LIMITS)
+	BWindow(rect, "", B_TITLED_WINDOW, B_AUTO_UPDATE_SIZE_LIMITS)
 {
+	BString title;
+	title.SetToFormat(B_TRANSLATE("Blog: %s", "Title of blog window, %s is the blog name"), blog->Name());
+	SetTitle(title.String());
+
 	fListView = new BlogPositivePostListView("ListView", blog);
 
 	SetLayout(new BGroupLayout(B_VERTICAL));

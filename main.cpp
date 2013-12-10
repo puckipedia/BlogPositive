@@ -53,8 +53,10 @@ int
 main()
 {
 	curl_global_init(CURL_GLOBAL_NOTHING);
+
 	HelloHaiku app;
 	app.Run();
+
 	curl_global_cleanup();
 	return 0;
 }

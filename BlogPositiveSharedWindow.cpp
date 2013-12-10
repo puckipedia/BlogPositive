@@ -5,6 +5,7 @@
 
 #include "BlogPositiveSharedWindow.h"
 
+#include <CatalogMacros.h>
 #include <Rect.h>
 #include <View.h>
 #include <GroupLayout.h>
@@ -14,6 +15,8 @@
 #include "BlogPositiveMain/BlogPositiveMainView.h"
 #include "BlogPositivePostList/BlogPositivePostListView.h"
 #include "BlogPositiveDelegate.h"
+
+#define B_TRANSLATION_CONTEXT "Shared Window"
 
 class BlogPositiveSharedDelegate : public BlogPositiveDelegate
 {
@@ -61,7 +64,8 @@ BlogPositiveSharedDelegate::Window()
 
 BlogPositiveSharedWindow::BlogPositiveSharedWindow(BRect aRect)
 	:
-	BWindow(aRect, "BlogPositive", B_TITLED_WINDOW, B_AUTO_UPDATE_SIZE_LIMITS)
+	BWindow(aRect, B_TRANSLATE("BlogPositive", "Window title"),
+		B_TITLED_WINDOW, B_AUTO_UPDATE_SIZE_LIMITS)
 {
 	BlogPositiveSharedDelegate* delegate = new BlogPositiveSharedDelegate();
 	delegate->fWindow = this;

@@ -103,7 +103,7 @@ SYMBOLS =  TRUE ;
 DEBUGGER =  TRUE ;
 
 # Specify additional compiler flags for all files
-COMPILER_FLAGS = -Wold-style-cast ;
+COMPILER_FLAGS = -Wold-style-cast -Werror ;
 
 # Specify additional linker flags
 LINKER_FLAGS = ;

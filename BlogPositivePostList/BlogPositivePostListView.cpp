@@ -6,6 +6,7 @@
 
 #include "BlogPositivePostListView.h"
 
+#include <CatalogMacros.h>
 #include <OS.h>
 #include <StringItem.h>
 #include <ListView.h>
@@ -27,6 +28,8 @@
 #include <Message.h>
 #include <TextControl.h>
 #include <stdio.h>
+
+#define B_TRANSLATION_CONTEXT "Post List View"
 
 const uint32 kPostListViewOpenPost = 'PLOP';
 const uint32 kPostListViewRemovePost = 'PLRP';
@@ -95,16 +98,16 @@ BlogPositivePostListView::BlogPositivePostListView(const char* name,
 	fListView->SetInvocationMessage(new BMessage(kPostListViewOpenPost));
 
 	BMenuBar* menu = new BMenuBar("MenuView");
-	fAddPost = new BMenuItem("New Post", new BMessage(kPostListViewNewPost));
-	fRemovePost = new BMenuItem("Remove Post",
+	fAddPost = new BMenuItem(B_TRANSLATE("New Post"), new BMessage(kPostListViewNewPost));
+	fRemovePost = new BMenuItem(B_TRANSLATE("Remove Post"),
 		new BMessage(kPostListViewRemovePost));
 	menu->AddItem(fAddPost);
 	menu->AddItem(fRemovePost);
 
 	Reload();
 
-	SetLayout(new BGroupLayout(B_VERTICAL));
-	AddChild(BLayoutBuilder::Group<>(B_VERTICAL, 0).Add(menu).Add(fListView));
+	SetLayout(new BGroupLayout(B_VERTICAL, 0));
+	AddChild(menu).Add(fListView));
 }
 
 

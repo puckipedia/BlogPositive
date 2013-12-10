@@ -13,6 +13,7 @@
 #include <List.h>
 #include <MenuBar.h>
 #include <MenuItem.h>
+#include <CatalogMacros.h>
 #include <stdio.h>
 #include <Point.h>
 #include <PopUpMenu.h>
@@ -26,6 +27,8 @@
 #include "../API/BlogPositivePlugin.h"
 #include "../API/BlogPositivePluginLoader.h"
 #include "../BlogPositiveDelegate.h"
+
+#define B_TRANSLATION_CONTEXT "Main View"
 
 const int32 kBlogSelected = 'BPBS';
 const int32 kCreateNewBlog = 'BPCB';
@@ -135,7 +138,7 @@ BlogPositiveMainView::BlogPositiveMainView(const char* name,
 
 	fMenuBar = new BMenuBar("MenuBar");
 
-	fNewMenu = new BMenu("Add Blog");
+	fNewMenu = new BMenu(B_TRANSLATE("Add Blog"));
 	fMenuBar->AddItem(fNewMenu);
 
 	PluginList* pluginList = BlogPositivePluginLoader::List();
@@ -158,7 +161,7 @@ BlogPositiveMainView::BlogPositiveMainView(const char* name,
 	}
 
 	BMessage* aMenuItemMessage = new BMessage(kRemoveCurrentBlog);
-	fRemoveMenuItem = new BMenuItem("Remove blog", aMenuItemMessage);
+	fRemoveMenuItem = new BMenuItem(B_TRANSLATE("Remove blog"), aMenuItemMessage);
 	fMenuBar->AddItem(fRemoveMenuItem);
 
 	SetLayout(new BGroupLayout(B_VERTICAL, 0));

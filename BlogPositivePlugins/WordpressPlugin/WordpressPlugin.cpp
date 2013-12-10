@@ -11,9 +11,12 @@
 #include "../../API/BlogPositivePost.h"
 #include <curl/curl.h>
 #include <stdio.h>
+#include <CatalogMacros.h>
 #include <String.h>
 #include "xmlnode.h"
 #include "XmlRpcWrapper.h"
+
+#define B_TRANSLATION_CONTEXT "Wordpress Plugin"
 
 void
 WordpressPlugin::GetAuthentication(BString Auth, BString* Username,
@@ -41,7 +44,7 @@ WordpressPlugin::Version()
 char*
 WordpressPlugin::Name()
 {
-	return "Wordpress.com or self-hosted";
+	return B_TRANSLATE("Wordpress.com or self-hosted", "Name of the plugin");
 }
 
 
@@ -133,8 +136,6 @@ WordpressPlugin::GetBlogPosts(BlogPositiveBlog* aBlog)
 	curl_easy_setopt(curl, CURLOPT_USERAGENT, "libcurl-agent/1.0");
 	curl_easy_perform(curl);
 	
-	printf("Request: %s\nResponse: %s\n", dataString.String(), responseString.String());
-	
 	XmlNode* responseNode = new XmlNode(responseString.String(), NULL);
 	XmlNode* postNode = NULL;
 	if (responseNode->FindChild("param", NULL, true) == NULL) {
@@ -144,22 +145,22 @@ WordpressPlugin::GetBlogPosts(BlogPositiveBlog* aBlog)
 		curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &responseCode);
 		switch (responseCode) {
 			case 404:
-				errorMessageTitle = "404 - Blog not found";
-				errorMessageContent = "Time goes on and on:\n"
+				errorMessageTitle = B_TRANSLATE("404 - Blog not found", "404 error message title");
+				errorMessageContent = B_TRANSLATE("Time goes on and on:\n"
 					"The blog you seek is not here\n"
-					"Maybe a typo?";
+					"Maybe a typo?", "404 error message haiku");
 				break;
 			case 500:
-				errorMessageTitle = "500 - An error occured";
-				errorMessageContent = "Sometimes things go wrong:\n"
+				errorMessageTitle = B_TRANSLATE("500 - An error occured", "500 error message title");
+				errorMessageContent = B_TRANSLATE("Sometimes things go wrong:\n"
 					"Maybe the server is down,\n"
-					"Maybe it needs help.";
+					"Maybe it needs help.", "500 error message haiku");
 				break;
 			default:
-				errorMessageTitle = "??? - Unknown error";
-				errorMessageContent = "Errors do occur\n"
+				errorMessageTitle = B_TRANSLATE("??? - Unknown error", "unknown error message title");
+				errorMessageContent = B_TRANSLATE("Errors do occur\n"
 					"But this is very special\n"
-					"Please do try again!";
+					"Please do try again!", "unknown error message haiku");
 		}
 		BAlert* alertBox = new BAlert(errorMessageTitle, errorMessageContent,
 			":(");
@@ -300,7 +301,6 @@ WordpressPlugin::CreateNewPost(BlogPositiveBlog* aBlog, const char* aName)
 	curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void*)&responseString);
 	curl_easy_setopt(curl, CURLOPT_USERAGENT, "libcurl-agent/1.0");
 	curl_easy_perform(curl);
-	printf("Request: %s\nResponse: %s\n", requestString.String(), responseString.String());
 
 	XmlNode* responseNode = new XmlNode(responseString.String(), NULL);
 	XmlNode* rstring = responseNode->FindChild("string", NULL, true);
