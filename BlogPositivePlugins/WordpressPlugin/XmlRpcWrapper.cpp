@@ -10,11 +10,11 @@
 #include <String.h>
 
 void
-XmlValue::PushContent(BString string)
+XmlValue::PushContent(BString* string)
 {
-	string << "<value><" << boxType << ">";
-	string << fValue;
-	string << "</" << boxType << "></value>";
+	*string << "<value><" << boxType << ">";
+	*string << fValue;
+	*string << "</" << boxType << "></value>";
 }
 
 
@@ -43,14 +43,14 @@ XmlValue::XmlValue(double doubleVal, BString aBoxType = "string")
 
 
 void
-XmlArray::PushContent(BString string)
+XmlArray::PushContent(BString* string)
 {
-	string << "<array><data>";
+	*string << "<array><data>";
 	for (int i = 0; i < Items(); i++)
 	{
 		ItemAt(i)->PushContent(string);
 	}
-	string << "</data></array>";
+	*string << "</data></array>";
 }
 
 
@@ -98,24 +98,24 @@ XmlNameValuePair::XmlNameValuePair(BString name, BString value)
 
 
 void
-XmlNameValuePair::PushContent(BString string)
+XmlNameValuePair::PushContent(BString* string)
 {
-	string << "<value><member>";
-	string << "<name>" << fName << "</name>";
+	*string << "<value><member>";
+	*string << "<name>" << fName << "</name>";
 	fValue->PushContent(string);
-	string << "</member></value>";
+	*string << "</member></value>";
 }
 
 
 void
-XmlStruct::PushContent(BString string)
+XmlStruct::PushContent(BString* string)
 {
-	string << "<struct>";
+	*string << "<struct>";
 	for (int32 i = 0; i < Items(); i++)
 	{
 		ItemAt(i)->PushContent(string);
 	}
-	string << "</struct>";
+	*string << "</struct>";
 }
 
 
@@ -169,11 +169,12 @@ XmlRpcRequest::GetData()
 	resultString << "<params>";
 	for (int i = 0; i < Items(); i++) {
 		resultString << "<param>";
-		ItemAt(i)->PushContent(resultString);
+		ItemAt(i)->PushContent(&resultString);
 		resultString << "</param>";
 	}
 	resultString << "</params>";
-	resultString << "</methodCall";
+	resultString << "</methodCall>";
+	return resultString;
 }
 
 

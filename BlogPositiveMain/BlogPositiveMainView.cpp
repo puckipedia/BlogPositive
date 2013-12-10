@@ -161,7 +161,7 @@ BlogPositiveMainView::BlogPositiveMainView(const char* name,
 	fRemoveMenuItem = new BMenuItem("Remove blog", aMenuItemMessage);
 	fMenuBar->AddItem(fRemoveMenuItem);
 
-	SetLayout(new BGroupLayout(B_VERTICAL));
+	SetLayout(new BGroupLayout(B_VERTICAL, 0));
 	AddChild(fMenuBar);
 	AddChild(new BScrollView("scroll_view", fListView, 0, false, true));
 }

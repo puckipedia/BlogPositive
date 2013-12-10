@@ -12,13 +12,13 @@
 class BaseXmlValue
 {
 public:
-	virtual void					PushContent(BString string) {}
+	virtual void					PushContent(BString* string) {}
 };
 
 class XmlValue : public BaseXmlValue
 {
 public:
-	void							PushContent(BString string);
+	void							PushContent(BString* string);
 									XmlValue(BString string, BString aBoxType = "string");
 									XmlValue(int fAs, BString aBoxType = "i4");
 									XmlValue(double fDs, BString aBoxType = "string");
@@ -30,7 +30,7 @@ private:
 class XmlArray : public BaseXmlValue
 {
 public:
-	void							PushContent(BString string);
+	void							PushContent(BString* string);
 									XmlArray();
 	void							AddItem(BaseXmlValue* xmlValue);
 	int32							Items();
@@ -47,7 +47,7 @@ public:
 										BaseXmlValue* value);
 									XmlNameValuePair(BString name,
 										BString value);
-	void							PushContent(BString string);
+	void							PushContent(BString* string);
 	BString							Name();
 	BString							Value();
 private:
@@ -58,7 +58,7 @@ private:
 class XmlStruct : public BaseXmlValue
 {
 public:
-	void							PushContent(BString string);
+	void							PushContent(BString* string);
 									XmlStruct();
 	void 							AddItem(XmlNameValuePair* pair);
 	void							AddItem(BString name, BString value);

@@ -132,7 +132,9 @@ WordpressPlugin::GetBlogPosts(BlogPositiveBlog* aBlog)
 	curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void*)&responseString);
 	curl_easy_setopt(curl, CURLOPT_USERAGENT, "libcurl-agent/1.0");
 	curl_easy_perform(curl);
-
+	
+	printf("Request: %s\nResponse: %s\n", dataString.String(), responseString.String());
+	
 	XmlNode* responseNode = new XmlNode(responseString.String(), NULL);
 	XmlNode* postNode = NULL;
 	if (responseNode->FindChild("param", NULL, true) == NULL) {
@@ -226,7 +228,6 @@ WordpressPlugin::RemovePost(BlogPositivePost* aPost)
 	curl_easy_setopt(curl, CURLOPT_POSTFIELDS, dataString.String());
 	curl_easy_setopt(curl, CURLOPT_USERAGENT, "libcurl-agent/1.0");
 	curl_easy_perform(curl);
-
 }
 
 
@@ -299,6 +300,7 @@ WordpressPlugin::CreateNewPost(BlogPositiveBlog* aBlog, const char* aName)
 	curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void*)&responseString);
 	curl_easy_setopt(curl, CURLOPT_USERAGENT, "libcurl-agent/1.0");
 	curl_easy_perform(curl);
+	printf("Request: %s\nResponse: %s\n", requestString.String(), responseString.String());
 
 	XmlNode* responseNode = new XmlNode(responseString.String(), NULL);
 	XmlNode* rstring = responseNode->FindChild("string", NULL, true);
