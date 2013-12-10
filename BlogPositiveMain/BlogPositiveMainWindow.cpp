@@ -32,7 +32,8 @@ class BlogPositiveMainDelegate : public BlogPositiveDelegate
 
 BlogPositiveMainWindow::BlogPositiveMainWindow(BRect frame)
 	:
-	BWindow(frame, B_TRANSLATE("BlogPositive"), B_TITLED_WINDOW, B_AUTO_UPDATE_SIZE_LIMITS)
+	BWindow(frame, B_TRANSLATE("BlogPositive"),
+		B_TITLED_WINDOW, B_AUTO_UPDATE_SIZE_LIMITS)
 {
 	BlogPositiveMainView* view
 		= new BlogPositiveMainView("MainView", new BlogPositiveMainDelegate());

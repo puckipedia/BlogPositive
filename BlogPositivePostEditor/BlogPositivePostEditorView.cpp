@@ -46,7 +46,8 @@ BlogPositivePostEditorView::BlogPositivePostEditorView(const char* name,
 
 	BMenuBar* menuBar = new BMenuBar("MenuBar");
 
-	fMenuItem = new BMenuItem(B_TRANSLATE("Save"), new BMessage(kPostEditorSavePost));
+	fMenuItem = new BMenuItem(B_TRANSLATE("Save"),
+		new BMessage(kPostEditorSavePost));
 
 	menuBar->AddItem(fMenuItem);
 

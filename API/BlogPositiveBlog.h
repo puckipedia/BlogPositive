@@ -25,7 +25,7 @@ public:
 								const char* blogName);
 
 							BlogPositiveBlog();
-							BlogPositiveBlog(BMessage *from);
+							BlogPositiveBlog(BMessage* from);
 
 	void					SetName(const char* name);
 	const char*				Name();

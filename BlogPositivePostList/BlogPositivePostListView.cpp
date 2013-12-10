@@ -99,7 +99,8 @@ BlogPositivePostListView::BlogPositivePostListView(const char* name,
 	fListView->SetInvocationMessage(new BMessage(kPostListViewOpenPost));
 
 	BMenuBar* menu = new BMenuBar("MenuView");
-	fAddPost = new BMenuItem(B_TRANSLATE("New Post"), new BMessage(kPostListViewNewPost));
+	fAddPost = new BMenuItem(B_TRANSLATE("New Post"),
+		new BMessage(kPostListViewNewPost));
 	fRemovePost = new BMenuItem(B_TRANSLATE("Remove Post"),
 		new BMessage(kPostListViewRemovePost));
 	menu->AddItem(fAddPost);

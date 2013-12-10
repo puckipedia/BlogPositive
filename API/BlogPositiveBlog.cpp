@@ -19,13 +19,11 @@ BlogPositiveBlog::BlogPositiveBlog()
 }
 
 
-
 BlogList*
 BlogPositiveBlog::DeserializeList(BMessage* message, const char* blogName)
 {
 	BMessage msg;
-	BlogList* Listy =
-		new BlogList();
+	BlogList* Listy = new BlogList();
 	int i = 0;
 	while (message->FindMessage(blogName, i++, &msg) == B_OK)
 	{
@@ -101,6 +99,7 @@ BlogPositiveBlog::Archive(BMessage* into, bool deep = true)
 	into->AddInt32("handler", fBlogHandler);
 	return B_OK;
 }
+
 
 BlogPositiveBlog::BlogPositiveBlog(BMessage* message)
 {

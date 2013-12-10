@@ -43,7 +43,7 @@ public:
 	}
 	void		Reload(BlogList* BlogItemList)
 	{
-		for(int i = 0; i < BlogItemList->CountItems(); i++)
+		for (int i = 0; i < BlogItemList->CountItems(); i++)
 			AddItem(new BlogPositiveBlogListItem(BlogItemList->ItemAt(i)));
 	}
 };

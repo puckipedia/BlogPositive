@@ -180,7 +180,7 @@ WordpressPlugin::GetBlogPosts(BlogPositiveBlog* aBlog)
 		XmlNode* firstStructNode = postNode->FindChild("struct", NULL, true);
 		for (int i = 0; i < firstStructNode->Children(); i++)
 		{
-			XmlNode *node = firstStructNode->ItemAt(i);
+			XmlNode* node = firstStructNode->ItemAt(i);
 			BString name = node->FindChild("name")->Value();
 			if (name == "title")
 			{
