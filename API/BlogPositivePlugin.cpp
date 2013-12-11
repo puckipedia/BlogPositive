@@ -6,15 +6,23 @@
 
 #include "BlogPositivePlugin.h"
 
-#include <TextControl.h>
-#include <Message.h>
+#include <Button.h>
+#include <Catalog.h>
 #include <GroupLayout.h>
 #include <LayoutBuilder.h>
-#include <Window.h>
 #include <List.h>
+#include <Message.h>
+#include <TextControl.h>
+#include <Window.h>
 
 #include "../BlogPositiveMain/BlogPositiveMainView.h"
 #include "../BlogPositiveSettings.h"
+
+const uint32 kCreateBlog = 'BPCB';
+const uint32 kCancelBlog = 'BPKB';
+
+#undef B_TRANSLATION_CONTEXT
+#define B_TRANSLATION_CONTEXT "BlogPositive Plugin"
 
 
 class BlogPositiveCreateBlog : public BWindow {
@@ -34,8 +42,8 @@ private:
 BlogPositiveCreateBlog::BlogPositiveCreateBlog(BlogPositiveMainView* aView,
 	BlogPositivePlugin* pl)
 	:
-	BWindow(BRect(100, 100, 400, 190), "Create Blog",
-		B_MODAL_WINDOW_LOOK, B_NORMAL_WINDOW_FEEL, 0)
+	BWindow(BRect(100, 100, 400, 190), B_TRANSLATE("Create Blog"),
+		B_DOCUMENT_WINDOW, 0)
 {
 	fNameControl = new BTextControl("NameControl", "Name: ",
 		"", new BMessage('CBFA'));
@@ -43,16 +51,35 @@ BlogPositiveCreateBlog::BlogPositiveCreateBlog(BlogPositiveMainView* aView,
 		"", new BMessage('CBNB'));
 
 	SetLayout(new BGroupLayout(B_VERTICAL));
-	BView* view = new BView("view", B_SUPPORTS_LAYOUT);
-	view->SetLayout(new BGroupLayout(B_VERTICAL));
-	view->AddChild(fNameControl);
-	view->AddChild(fAuthControl);
-	AddChild(view);
-	view->SetLowColor(ui_color(B_PANEL_BACKGROUND_COLOR));
+	BView* mainView = new BView("mainView", B_SUPPORTS_LAYOUT);
+	mainView->SetLayout(new BGroupLayout(B_VERTICAL, 0));
+	mainView->AddChild(fNameControl);
+	mainView->AddChild(fAuthControl);
+
+	BView* buttonView = new BView("buttonView", B_SUPPORTS_LAYOUT);
+	buttonView->SetLayout(new BGroupLayout(B_HORIZONTAL));
+	
+	BButton* createButton = new BButton("ceateButton",
+		B_TRANSLATE("Create"), new BMessage(kCreateBlog));
+	BButton* cancelButton = new BButton("ceateButton",
+		B_TRANSLATE("Cancel"), new BMessage(kCancelBlog));
+	buttonView->AddChild(cancelButton);
+	buttonView->AddChild(createButton);
+	mainView->AddChild(buttonView);
+
+	AddChild(mainView);
+
 	fMainView = aView;
 
 	fNameControl->MakeFocus();
 	fBlogHandler = pl->MainHandler();
+
+	mainView->SetViewColor(ui_color(B_PANEL_BACKGROUND_COLOR));
+	buttonView->SetViewColor(ui_color(B_PANEL_BACKGROUND_COLOR));
+	fNameControl->SetViewColor(ui_color(B_PANEL_BACKGROUND_COLOR));
+	fAuthControl->SetViewColor(ui_color(B_PANEL_BACKGROUND_COLOR));
+	createButton->SetViewColor(ui_color(B_PANEL_BACKGROUND_COLOR));
+	cancelButton->SetViewColor(ui_color(B_PANEL_BACKGROUND_COLOR));
 }
 
 
@@ -71,6 +98,8 @@ BlogPositiveCreateBlog::MessageReceived(BMessage* message)
 			fAuthControl->MakeFocus();
 			break;
 		case 'CBNB':
+			// Fallthrough on purpose
+		case kCreateBlog:
 		{
 			BlogPositiveSettings* settings = new BlogPositiveSettings("bloglist");
 			BlogList* lis = BlogPositiveBlog::DeserializeList(settings, "blogs");
@@ -89,6 +118,9 @@ BlogPositiveCreateBlog::MessageReceived(BMessage* message)
 			Hide();
 			break;
 		}
+		case kCancelBlog:
+			Quit();
+			break;
 		default:
 			BWindow::MessageReceived(message);
 			break;
