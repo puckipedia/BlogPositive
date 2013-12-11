@@ -43,7 +43,7 @@ BlogPositivePostEditorView::BlogPositivePostEditorView(const char* name,
 	SetLayout(new BGroupLayout(B_VERTICAL, 0));
 
 	AddChild(menuBar);
-	AddChild(fTextView);
+	AddChild(new BScrollView("scroll_view", fTextView, 0, false, true));
 }
 
 
