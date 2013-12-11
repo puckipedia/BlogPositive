@@ -155,7 +155,7 @@ BlogPositiveMainView::BlogPositiveMainView(const char* name,
 	fListView->Reload(lis);
 
 	for (int i = 0; i < pluginList->CountItems(); i++) {
-		BlogPositivePlugin* pl = (BlogPositivePlugin* )pluginList->ItemAt(i);
+		BlogPositivePlugin* pl = pluginList->ItemAt(i);
 		if (pl->Type() == kBlogPositiveBlogApi) {
 			BMessage* msg = new BMessage(kCreateNewBlog);
 			msg->SetInt32("ding", i);

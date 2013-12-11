@@ -211,7 +211,7 @@ void
 WordpressPlugin::RemovePost(BlogPositivePost* aPost)
 {
 	BlogPositiveBlog* aBlog = aPost->Blog();
-	WordpressPost* wpPost = (WordpressPost* )aPost;
+	WordpressPost* wpPost = static_cast<WordpressPost*>(aPost);
 
 	BString username;
 	BString password;
