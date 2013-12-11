@@ -14,8 +14,10 @@ class BlogPositiveSettings : public BMessage {
 public:
 				BlogPositiveSettings(const char* settingsName);
 				~BlogPositiveSettings();
+
 	void		Save();
 	static void	SaveOther(BMessage* message, const char* settingsName);
+
 private:
 	BPath*		fSettingsPath;
 };

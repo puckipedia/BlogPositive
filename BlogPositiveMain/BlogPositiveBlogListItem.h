@@ -17,6 +17,7 @@ public:
 	{
 		return fBlog;
 	}
+
 private:
 	BlogPositiveBlog*	fBlog;
 };

@@ -18,8 +18,10 @@ class BlogPositivePostListView : public BView
 public:
 						BlogPositivePostListView(const char* name,
 							BlogPositiveBlog* blog);
+
 			void		AttachedToWindow();
 			void		MessageReceived(BMessage* aMessage);
+
 	void				Reload();
 private:
 	static	int32		_loadList(void* t);

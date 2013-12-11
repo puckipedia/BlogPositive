@@ -15,10 +15,13 @@ class BlogPositivePost {
 public:
 						BlogPositivePost() {}
 						BlogPositivePost(BlogPositiveBlog* blog);
+
 	BlogPositiveBlog*	Blog();
 	void				SetBlog(BlogPositiveBlog* blog);
+
 	const char*			Name();
 	void				SetName(const char* name);
+
 	const char*			Page();
 	void				SetPage(const char* page);
 	uint32				PageSize();

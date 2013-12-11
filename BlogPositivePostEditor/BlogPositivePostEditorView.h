@@ -18,8 +18,10 @@ class BlogPositivePostEditorView : public BView
 public:
 						BlogPositivePostEditorView(const char* name,
 							BlogPositivePost* post);
+
 	void 				AttachedToWindow();
 	void 				MessageReceived(BMessage* aMessage);
+
 	void 				Save();
 private:
 	BMenuItem*			fMenuItem;

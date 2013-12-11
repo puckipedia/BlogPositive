@@ -21,9 +21,12 @@ class BlogPositivePluginPostListWindow : public BWindow {
 public:
 						BlogPositivePluginPostListWindow(BRect rect,
 							const char* Name);
+
+	void				MessageReceived(BMessage* msg);
+
 	void				SetBlog(BlogPositiveBlog* blog);
 	BlogPositiveBlog*	Blog();
-	void				MessageReceived(BMessage* msg);
+
 private:
 	BlogPositiveBlog*	fBlog;
 };

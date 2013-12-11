@@ -15,8 +15,10 @@ class BlogPositiveBlog;
 class ExamplePlugin : public BlogPositivePlugin {
 public:
 	uint32				Version() {return 0;}
+
 	uint32				MainHandler();
 	bool				Supports(int32 Code);
+
 	PostList*			GetBlogPosts(BlogPositiveBlog* blog);
 	void				SavePost(BlogPositivePost* post);
 	BlogPositivePost*	CreateNewPost(BlogPositiveBlog* blog, const char* name);

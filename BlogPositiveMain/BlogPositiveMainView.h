@@ -20,8 +20,10 @@ class BlogPositiveMainView : public BView {
 public:
 								BlogPositiveMainView(const char* name,
 									BlogPositiveDelegate* del);
+
 	void						MessageReceived(BMessage* message);
 	void						AttachedToWindow();
+
 	void						Reload(BlogList* list);
 	void						RemoveBlog();
 private:
