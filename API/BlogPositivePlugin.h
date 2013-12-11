@@ -21,9 +21,10 @@ public:
 	virtual	uint32				Version();
 	virtual	uint32				MainHandler();
 	virtual	const char*			Name();
-	virtual	int32				Type();
 
+	virtual	int32				Type();
 	virtual	bool				Supports(int32 Code);
+
 	virtual	PostList*			GetBlogPosts(BlogPositiveBlog* blog);
 	virtual	void				SavePost(BlogPositivePost* post);
 	virtual	BlogPositivePost*	CreateNewPost(BlogPositiveBlog* blog,

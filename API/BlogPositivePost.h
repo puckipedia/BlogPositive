@@ -25,6 +25,7 @@ public:
 	const char*			Page();
 	void				SetPage(const char* page);
 	uint32				PageSize();
+
 protected:
 	BString				fName;
 	BString				fPage;
