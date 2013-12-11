@@ -9,6 +9,7 @@
 #include "BlogPositivePlugin.h"
 
 class BlogPositiveBlog;
+
 class BlogPositivePluginLoader {
 public:
 	static void 		Initialize();

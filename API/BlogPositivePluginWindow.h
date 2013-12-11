@@ -16,6 +16,7 @@ class BlogPositiveBlog;
 class BlogPositivePost;
 class BMessage;
 class BRect;
+
 class BlogPositivePluginPostListWindow : public BWindow {
 public:
 						BlogPositivePluginPostListWindow(BRect rect,

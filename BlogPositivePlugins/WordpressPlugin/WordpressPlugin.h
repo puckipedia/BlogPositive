@@ -10,6 +10,7 @@
 #include "../../API/BlogPositivePost.h"
 
 class BlogPositiveBlog;
+
 class WordpressPlugin : public BlogPositivePlugin
 {
 public:

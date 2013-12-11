@@ -11,6 +11,7 @@
 class BlogPositiveBlog;
 class BlogPositivePostListView;
 class BRect;
+
 class BlogPositivePostListWindow : public BWindow
 {
 public:

@@ -9,6 +9,7 @@
 #include <Window.h>
 
 class BMessage;
+
 class BlogPositiveMainWindow : public BWindow
 {
 public:

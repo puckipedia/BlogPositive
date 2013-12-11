@@ -15,6 +15,7 @@
 class BlogPositiveMainView;
 class BlogPositiveBlog;
 class BlogPositivePluginWindow;
+
 class BlogPositivePlugin {
 public:
 	virtual	uint32				Version();

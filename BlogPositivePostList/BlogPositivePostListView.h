@@ -12,6 +12,7 @@ class BListView;
 class BlogPositiveBlog;
 class BMenuItem;
 class BMessage;
+
 class BlogPositivePostListView : public BView
 {
 public:

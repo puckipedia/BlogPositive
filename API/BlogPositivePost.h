@@ -10,6 +10,7 @@
 #include <String.h>
 
 class BlogPositiveBlog;
+
 class BlogPositivePost {
 public:
 						BlogPositivePost() {}

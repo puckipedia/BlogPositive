@@ -15,6 +15,7 @@ class BMenuBar;
 class BMenuItem;
 class BMenu;
 class BMessage;
+
 class BlogPositiveMainView : public BView {
 public:
 								BlogPositiveMainView(const char* name,

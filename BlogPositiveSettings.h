@@ -9,6 +9,7 @@
 #include <Message.h>
 
 class BPath;
+
 class BlogPositiveSettings : public BMessage {
 public:
 				BlogPositiveSettings(const char* settingsName);

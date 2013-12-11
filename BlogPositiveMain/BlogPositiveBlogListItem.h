@@ -9,6 +9,7 @@
 #include <ListItem.h>
 
 class BlogPositiveBlog;
+
 class BlogPositiveBlogListItem : public BStringItem {
 public:
 						BlogPositiveBlogListItem(BlogPositiveBlog* blog);

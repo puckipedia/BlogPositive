@@ -13,9 +13,10 @@
 #include <String.h>
 
 class BlogPositiveBlog;
+class BlogPositivePlugin;
+
 typedef BObjectList<BlogPositiveBlog> BlogList;
 
-class BlogPositivePlugin;
 class BlogPositiveBlog : public BArchivable {
 public:
 
