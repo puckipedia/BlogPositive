@@ -47,8 +47,8 @@ BlogPositiveCreateBlog::BlogPositiveCreateBlog(BlogPositiveMainView* aView,
 	view->SetLayout(new BGroupLayout(B_VERTICAL));
 	view->AddChild(fNameControl);
 	view->AddChild(fAuthControl);
-	view->SetLowColor(B_PANEL_BACKGROUND_COLOR);
 	AddChild(view);
+	view->SetLowColor(ui_color(B_PANEL_BACKGROUND_COLOR));
 	fMainView = aView;
 
 	fNameControl->MakeFocus();
