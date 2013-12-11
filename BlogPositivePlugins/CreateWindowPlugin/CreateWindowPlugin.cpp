@@ -6,16 +6,16 @@
 #include "CreateWindowPlugin.h"
 
 #include <GroupLayout.h>
-#include <GroupLayoutBuilder.h>
-#include <OS.h>
-#include <ScrollView.h>
+#include <ListView.h>
 #include <Menu.h>
 #include <MenuBar.h>
 #include <MenuItem.h>
-#include <ListView.h>
+#include <OS.h>
+#include <ScrollView.h>
 #include <TextView.h>
 
 #include "../../API/BlogPositivePluginWindow.h"
+#include "../../API/BlogPositivePost.h"
 
 class PostItem : public BStringItem {
 public:
@@ -72,8 +72,8 @@ CreateWindowPlugin::HookBlogList(BlogPositivePluginPostListWindow** aWindow,
 	BListView* aView = new BListView("ListView");
 	BMessage* msg = new BMessage(kPostWindowGetSelection);
 	aView->SetInvocationMessage(msg);
-	win->SetLayout(new BGroupLayout(B_VERTICAL));
-	win->AddChild(BGroupLayoutBuilder(B_VERTICAL, 10).Add(aView));
+	win->SetLayout(new BGroupLayout(B_VERTICAL, 10));
+	win->AddChild(aView);
 	PluginAndWindowThing* thing = new PluginAndWindowThing();
 	thing->fWindow = *aWindow;
 	thing->fBlog = aBlog;

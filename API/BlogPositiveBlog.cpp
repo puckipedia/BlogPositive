@@ -12,8 +12,6 @@
 
 #include "BlogPositivePlugin.h"
 
-const uint32 kBlogMessage = 'BPBL';
-
 BlogPositiveBlog::BlogPositiveBlog()
 {
 }

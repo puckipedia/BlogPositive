@@ -3,36 +3,26 @@
  * All rights reserved. Distributed under the terms of the MIT License.
  */
 
+#include <curl/curl.h>
 
 #include <Application.h>
 #include <Button.h>
 #include <Message.h>
 #include <Window.h>
 
-#include <stdio.h>
-
 #include "API/BlogPositivePluginLoader.h"
 #include "BlogPositiveMain/BlogPositiveMainWindow.h"
 
-#define USE_SHARED_WINDOW 0
 
-#if USE_SHARED_WINDOW
-#define CLASS BlogPositiveSharedWindow
-#else
-#define CLASS BlogPositiveMainWindow
-#endif
-
-#include <curl/curl.h>
-
-class HelloHaiku : public BApplication
+class BlogPositiveApp : public BApplication
 {
 public:
-			HelloHaiku();
+			BlogPositiveApp();
 	void	ReadyToRun();
 };
 
 
-HelloHaiku::HelloHaiku()
+BlogPositiveApp::BlogPositiveApp()
 	:
 	BApplication("application/x-vnd.BlogPositive")
 {
@@ -41,9 +31,9 @@ HelloHaiku::HelloHaiku()
 
 
 void
-HelloHaiku::ReadyToRun()
+BlogPositiveApp::ReadyToRun()
 {
-	BWindow* window = new CLASS (BRect(100, 100, 600, 200));
+	BWindow* window = new BlogPositiveMainWindow(BRect(100, 100, 600, 200));
 	window->Show();
 }
 

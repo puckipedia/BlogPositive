@@ -7,27 +7,16 @@
 #include "BlogPositivePostEditorView.h"
 
 #include <Catalog.h>
-#include <TextView.h>
-#include <MenuBar.h>
+#include <GroupLayout.h>
 #include <Menu.h>
+#include <MenuBar.h>
 #include <MenuItem.h>
 #include <Message.h>
-#include <GroupLayout.h>
-#include <GroupLayoutBuilder.h>
-
-#include "BlogPositivePostEditorView.h"
-
 #include <TextView.h>
-#include <MenuBar.h>
-#include <Menu.h>
-#include <MenuItem.h>
-#include <Message.h>
-#include <GroupLayout.h>
-#include <GroupLayoutBuilder.h>
 
-#include "../API/BlogPositivePost.h"
 #include "../API/BlogPositiveBlog.h"
 #include "../API/BlogPositivePlugin.h"
+#include "../API/BlogPositivePost.h"
 
 #undef B_TRANSLATION_CONTEXT
 #define B_TRANSLATION_CONTEXT "Post Editor View"
@@ -52,6 +41,7 @@ BlogPositivePostEditorView::BlogPositivePostEditorView(const char* name,
 	menuBar->AddItem(fMenuItem);
 
 	SetLayout(new BGroupLayout(B_VERTICAL, 0));
+
 	AddChild(menuBar);
 	AddChild(fTextView);
 }

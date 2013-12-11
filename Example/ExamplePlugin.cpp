@@ -5,19 +5,18 @@
 
 #include "ExamplePlugin.h"
 
-#include <Path.h>
-#include <Entry.h>
 #include <Directory.h>
-#include <List.h>
-#include <malloc.h>
+#include <Entry.h>
 #include <File.h>
-#include <stdio.h>
+#include <List.h>
+#include <Path.h>
 
 #include "../API/BlogPositiveBlog.h"
 #include "../API/BlogPositivePost.h"
 
 bool
-ExamplePlugin::Supports(int32 Code) {
+ExamplePlugin::Supports(int32 Code)
+{
 	return Code == 'BACN';
 }
 

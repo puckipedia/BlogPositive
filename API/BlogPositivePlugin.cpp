@@ -1,3 +1,9 @@
+/*
+ * Copyright 2013 Puck Meerburg, puck@puckipedia.nl
+ * All rights reserved. Distributed under the terms of the MIT License.
+ */
+
+
 #include "BlogPositivePlugin.h"
 
 #include <TextControl.h>
@@ -57,30 +63,30 @@ BlogPositiveCreateBlog::MessageReceived(BMessage* message)
 {
 	switch (message->what)
 	{
-	case 'CBFA':
-		fAuthControl->MakeFocus();
-		break;
-	case 'CBNB':
-	{
-		BlogPositiveSettings* settings = new BlogPositiveSettings("bloglist");
-		BlogList* lis = BlogPositiveBlog::DeserializeList(settings, "blogs");
-		BlogPositiveBlog* blog = new BlogPositiveBlog();
-		blog->SetName(fNameControl->Text());
-		blog->SetAuthentication(fAuthControl->Text());
-		blog->SetBlogHandler(fBlogHandler);
-		lis->AddItem(blog);
-		if (fMainView->LockLooper())
+		case 'CBFA':
+			fAuthControl->MakeFocus();
+			break;
+		case 'CBNB':
 		{
-			fMainView->Reload(lis);
-			fMainView->UnlockLooper();
+			BlogPositiveSettings* settings = new BlogPositiveSettings("bloglist");
+			BlogList* lis = BlogPositiveBlog::DeserializeList(settings, "blogs");
+			BlogPositiveBlog* blog = new BlogPositiveBlog();
+			blog->SetName(fNameControl->Text());
+			blog->SetAuthentication(fAuthControl->Text());
+			blog->SetBlogHandler(fBlogHandler);
+			lis->AddItem(blog);
+			if (fMainView->LockLooper())
+			{
+				fMainView->Reload(lis);
+				fMainView->UnlockLooper();
+			}
+			BlogPositiveSettings::SaveOther(
+				BlogPositiveBlog::SerializeList(lis, "blogs"), "bloglist");
+			Hide();
+			break;
 		}
-		BlogPositiveSettings::SaveOther(
-			BlogPositiveBlog::SerializeList(lis, "blogs"), "bloglist");
-		Hide();
-		break;
-	}
-	default:
-		BWindow::MessageReceived(message);
+		default:
+			BWindow::MessageReceived(message);
 	}
 }
 

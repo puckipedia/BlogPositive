@@ -5,19 +5,20 @@
 
 
 #include "BlogPositiveSettings.h"
-#include <Path.h>
+
 #include <File.h>
 #include <FindDirectory.h>
+#include <Path.h>
 
 const char* kSettingsFolder = "BlogPositive";
 
 BlogPositiveSettings::BlogPositiveSettings(const char* name)
 	: BMessage()
 {
-	settingsPath = new BPath();
-	find_directory(B_USER_SETTINGS_DIRECTORY, settingsPath);
-	settingsPath->Append(kSettingsFolder);
-	settingsPath->Append(name);
+	fSettingsPath = new BPath();
+	find_directory(B_USER_SETTINGS_DIRECTORY, fSettingsPath);
+	fSettingsPath->Append(kSettingsFolder);
+	fSettingsPath->Append(name);
 
 	BFile file(settingsPath->Path(), B_READ_ONLY);
 	if (file.InitCheck() == B_OK) {
@@ -29,7 +30,7 @@ BlogPositiveSettings::BlogPositiveSettings(const char* name)
 void
 BlogPositiveSettings::Save()
 {
-	BFile file(settingsPath->Path(),
+	BFile file(fSettingsPath->Path(),
 		B_CREATE_FILE | B_ERASE_FILE | B_WRITE_ONLY);
 	if (file.InitCheck() == B_OK) {
 		Flatten(&file);
@@ -50,4 +51,9 @@ BlogPositiveSettings::SaveOther(BMessage* message, const char* settingsName)
 	if (file.InitCheck() == B_OK) {
 		message->Flatten(&file);
 	}
+}
+
+~BlogPositiveSettings::BlogPositiveSettings()
+{
+	delete fSettingsPath;
 }

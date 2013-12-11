@@ -7,9 +7,8 @@
 #include "BlogPositivePostListWindow.h"
 
 #include <Catalog.h>
-#include <Rect.h>
 #include <GroupLayout.h>
-#include <LayoutBuilder.h>
+#include <Rect.h>
 #include <String.h>
 
 #include "../API/BlogPositiveBlog.h"
@@ -29,8 +28,6 @@ BlogPositivePostListWindow::BlogPositivePostListWindow(
 
 	fListView = new BlogPositivePostListView("ListView", blog);
 
-	SetLayout(new BGroupLayout(B_VERTICAL));
-	AddChild(
-		BLayoutBuilder::Group<>(B_VERTICAL, 0)
-			.Add(fListView));
+	SetLayout(new BGroupLayout(B_VERTICAL, 0));
+	AddChild(fListView);
 }

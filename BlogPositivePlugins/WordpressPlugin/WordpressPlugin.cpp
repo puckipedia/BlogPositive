@@ -6,13 +6,15 @@
 
 #include "WordpressPlugin.h"
 
+#include <curl/curl.h>
+#include <stdio.h>
+
 #include <Alert.h>
+#include <Catalog.h>
+#include <String.h>
+
 #include "../../API/BlogPositiveBlog.h"
 #include "../../API/BlogPositivePost.h"
-#include <curl/curl.h>
-#include <Catalog.h>
-#include <stdio.h>
-#include <String.h>
 #include "xmlnode.h"
 #include "XmlRpcWrapper.h"
 
@@ -133,7 +135,7 @@ WordpressPlugin::GetBlogPosts(BlogPositiveBlog* aBlog)
 
 	curl_easy_setopt(curl, CURLOPT_POSTFIELDS, dataString.String());
 	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteTobString);
-	curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void*)&responseString);
+	curl_easy_setopt(curl, CURLOPT_WRITEDATA, static_cast<void*>(&responseString));
 	curl_easy_setopt(curl, CURLOPT_USERAGENT, "libcurl-agent/1.0");
 	curl_easy_perform(curl);
 	
@@ -236,8 +238,10 @@ WordpressPlugin::RemovePost(BlogPositivePost* aPost)
 void
 WordpressPlugin::SavePost(BlogPositivePost* aPost)
 {
-BlogPositiveBlog* aBlog = aPost->Blog();
-WordpressPost* wpPost = (WordpressPost* )aPost;
+	BlogPositiveBlog* aBlog = aPost->Blog();
+	WordpressPost* wpPost = dynamic_cast<WordpressPost*>(aPost);
+	if(wpPost == NULL)
+		return;
 
 	BString username;
 	BString password;
@@ -299,7 +303,7 @@ WordpressPlugin::CreateNewPost(BlogPositiveBlog* aBlog, const char* aName)
 	BString requestString = request->GetData();
 	curl_easy_setopt(curl, CURLOPT_POSTFIELDS, requestString.String());
 	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteTobString);
-	curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void*)&responseString);
+	curl_easy_setopt(curl, CURLOPT_WRITEDATA, statit_cast<void*>(&responseString));
 	curl_easy_setopt(curl, CURLOPT_USERAGENT, "libcurl-agent/1.0");
 	curl_easy_perform(curl);
 

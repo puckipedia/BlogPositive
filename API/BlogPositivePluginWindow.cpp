@@ -6,13 +6,13 @@
 
 #include "BlogPositivePluginWindow.h"
 
-#include <Window.h>
 #include <Message.h>
+#include <Window.h>
 
 #include "BlogPositiveBlog.h"
+#include "BlogPositivePlugin.h"
 #include "BlogPositivePluginLoader.h"
 #include "BlogPositivePost.h"
-#include "BlogPositivePlugin.h"
 
 BlogPositivePluginPostListWindow::BlogPositivePluginPostListWindow(BRect rect,
 	const char* Name)

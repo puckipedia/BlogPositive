@@ -7,12 +7,11 @@
 #include "BlogPositivePluginLoader.h"
 
 #include <List.h>
-#include <stdio.h>
 
 #include "BlogPositiveBlog.h"
 #include "BlogPositivePluginWindow.h"
-#include "../Example/ExamplePlugin.h"
 #include "../BlogPositivePlugins/WordpressPlugin/WordpressPlugin.h"
+#include "../Example/ExamplePlugin.h"
 
 PluginList* BlogPositivePluginLoader::fList;
 
@@ -26,24 +25,24 @@ BlogPositivePluginLoader::Initialize()
 
 
 void
-BlogPositivePluginLoader::FindPlugin(BlogPositiveBlog* aBlog)
+BlogPositivePluginLoader::FindPlugin(BlogPositiveBlog* blog)
 {
-	BlogPositivePlugin* aWorkingPlugin = NULL;
+	BlogPositivePlugin* workingPlugin = NULL;
 	for (int i = 0; i < fList->CountItems(); i++)
 	{
-		BlogPositivePlugin* aPlugin = fList->ItemAt(i);
-		if (aPlugin->Type() == kBlogPositiveBlogApi
-			&& aPlugin->Supports(aBlog->BlogHandler()))
+		BlogPositivePlugin* plugin = fList->ItemAt(i);
+		if (plugin->Type() == kBlogPositiveBlogApi
+			&& plugin->Supports(blog->BlogHandler()))
 		{
-			aWorkingPlugin = aPlugin;
+			workingPlugin = plugin;
 			break;
 		}
 	}
 
-	if (aWorkingPlugin == 0)
+	if (workingPlugin == 0)
 		return;
 
-	aBlog->SetPlugin(aWorkingPlugin);
+	blog->SetPlugin(aWorkingPlugin);
 }
 
 

@@ -7,27 +7,25 @@
 #include "BlogPositivePostListView.h"
 
 #include <Catalog.h>
-#include <OS.h>
-#include <StringItem.h>
-#include <ListView.h>
-
-#include "../API/BlogPositiveBlog.h"
-#include "../API/BlogPositivePost.h"
-#include "../API/BlogPositivePlugin.h"
-#include "../BlogPositivePostEditor/BlogPositivePostEditorWindow.h"
-
 #include <GroupLayout.h>
+#include <ListView.h>
 #include <LayoutBuilder.h>
-#include <ScrollView.h>
 #include <Menu.h>
 #include <MenuBar.h>
-#include <Window.h>
-#include <Rect.h>
 #include <MenuItem.h>
-#include <TextView.h>
 #include <Message.h>
+#include <OS.h>
+#include <Rect.h>
+#include <ScrollView.h>
+#include <StringItem.h>
 #include <TextControl.h>
-#include <stdio.h>
+#include <TextView.h>
+#include <Window.h>
+
+#include "../API/BlogPositiveBlog.h"
+#include "../API/BlogPositivePlugin.h"
+#include "../API/BlogPositivePost.h"
+#include "../BlogPositivePostEditor/BlogPositivePostEditorWindow.h"
 
 #undef B_TRANSLATION_CONTEXT
 #define B_TRANSLATION_CONTEXT "Post List View"
@@ -69,11 +67,10 @@ struct PluginAndWindowThing {
 
 
 int32
-BlogPositivePostListView::loadList(void* pointer)
+BlogPositivePostListView::_loadList(void* pointer)
 {
 	PluginAndWindowThing* thing = static_cast<PluginAndWindowThing*>(pointer);
-	if (thing->listView->LockLooper())
-	{
+	if (thing->listView->LockLooper()) {
 		thing->listView->MakeEmpty();
 		thing->listView->UnlockLooper();
 	}
@@ -123,7 +120,7 @@ BlogPositivePostListView::Reload()
 	thing->listView = fListView;
 	thing->plugin = fBlog->Plugin();
 
-	thread_id readThread = spawn_thread(BlogPositivePostListView::loadList,
+	thread_id readThread = spawn_thread(BlogPositivePostListView::_loadList,
 		"load_posts", B_NORMAL_PRIORITY, thing);
 	resume_thread(readThread);
 

@@ -10,9 +10,9 @@
 
 #include "BlogPositiveBlog.h"
 
-BlogPositivePost::BlogPositivePost(BlogPositiveBlog* aBlog)
+BlogPositivePost::BlogPositivePost(BlogPositiveBlog* blog)
 {
-	fBlog = aBlog;
+	SetBlog(blog);
 }
 
 
@@ -24,9 +24,9 @@ BlogPositivePost::Blog()
 
 
 void
-BlogPositivePost::SetBlog(BlogPositiveBlog* aBlog)
+BlogPositivePost::SetBlog(BlogPositiveBlog* blog)
 {
-	fBlog = aBlog;
+	fBlog = blog;
 }
 
 
@@ -38,9 +38,9 @@ BlogPositivePost::Name()
 
 
 void
-BlogPositivePost::SetName(const char* aName)
+BlogPositivePost::SetName(const char* name)
 {
-	fName.SetTo(aName);
+	fName = name;
 }
 
 
@@ -54,7 +54,7 @@ BlogPositivePost::Page()
 void
 BlogPositivePost::SetPage(const char* page)
 {
-	fPage.SetTo(page);
+	fPage = page;
 }
 
 

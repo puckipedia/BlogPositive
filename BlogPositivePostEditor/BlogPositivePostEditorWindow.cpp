@@ -7,9 +7,8 @@
 #include "BlogPositivePostEditorWindow.h"
 
 #include <Catalog.h>
-#include <Rect.h>
 #include <GroupLayout.h>
-#include <GroupLayoutBuilder.h>
+#include <Rect.h>
 #include <String.h>
 
 #include "../API/BlogPositivePost.h"
@@ -34,3 +33,4 @@ BlogPositivePostEditorWindow::BlogPositivePostEditorWindow(
 		BGroupLayoutBuilder(B_VERTICAL, 0)
 		.Add(fView));
 }
+

@@ -6,12 +6,10 @@
 #include "BlogPositiveMainWindow.h"
 #include "BlogPositiveMainView.h"
 
-#include <Rect.h>
 #include <Catalog.h>
 #include <GroupLayout.h>
-#include <GroupLayoutBuilder.h>
 #include <Message.h>
-#include <stdio.h>
+#include <Rect.h>
 
 #include "../BlogPositiveDelegate.h"
 #include "../BlogPositivePostList/BlogPositivePostListWindow.h"
@@ -38,13 +36,7 @@ BlogPositiveMainWindow::BlogPositiveMainWindow(BRect frame)
 	BlogPositiveMainView* view
 		= new BlogPositiveMainView("MainView", new BlogPositiveMainDelegate());
 	AddHandler(view);
+
 	SetLayout(new BGroupLayout(B_VERTICAL, 0));
 	AddChild(view);
-}
-
-
-void
-BlogPositiveMainWindow::MessageReceived(BMessage* message)
-{
-	BWindow::MessageReceived(message);
 }

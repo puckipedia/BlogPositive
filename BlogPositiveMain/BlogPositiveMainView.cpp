@@ -6,27 +6,26 @@
 
 #include "BlogPositiveMainView.h"
 
-#include <TextView.h>
-#include <ListView.h>
+#include <Catalog.h>
 #include <GroupLayoutBuilder.h>
-#include <ScrollView.h>
 #include <List.h>
+#include <ListView.h>
 #include <MenuBar.h>
 #include <MenuItem.h>
-#include <Catalog.h>
-#include <stdio.h>
 #include <Point.h>
 #include <PopUpMenu.h>
-#include <String.h>
 #include <Rect.h>
+#include <ScrollView.h>
+#include <String.h>
+#include <TextView.h>
 
 #include "../API/BlogPositiveBlog.h"
-#include "../BlogPositiveSettings.h"
-#include "../BlogPositivePostList/BlogPositivePostListWindow.h"
-#include "BlogPositiveBlogListItem.h"
 #include "../API/BlogPositivePlugin.h"
 #include "../API/BlogPositivePluginLoader.h"
+#include "BlogPositiveBlogListItem.h"
 #include "../BlogPositiveDelegate.h"
+#include "../BlogPositivePostList/BlogPositivePostListWindow.h"
+#include "../BlogPositiveSettings.h"
 
 #undef B_TRANSLATION_CONTEXT
 #define B_TRANSLATION_CONTEXT "Main View"
@@ -34,6 +33,7 @@
 const int32 kBlogSelected = 'BPBS';
 const int32 kCreateNewBlog = 'BPCB';
 const int32 kRemoveCurrentBlog = 'BPRC';
+
 class BlogPositiveBlogListView : public BListView {
 public:
 				BlogPositiveBlogListView()
