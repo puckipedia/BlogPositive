@@ -40,7 +40,7 @@ BlogPositivePluginLoader::FindPlugin(BlogPositiveBlog* blog)
 	if (workingPlugin == NULL)
 		return;
 
-	blog->SetPlugin(aWorkingPlugin);
+	blog->SetPlugin(workingPlugin);
 }
 
 
