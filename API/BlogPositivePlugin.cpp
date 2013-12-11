@@ -16,6 +16,7 @@
 #include "../BlogPositiveMain/BlogPositiveMainView.h"
 #include "../BlogPositiveSettings.h"
 
+
 class BlogPositiveCreateBlog : public BWindow {
 public:
 							BlogPositiveCreateBlog(BlogPositiveMainView* aView,

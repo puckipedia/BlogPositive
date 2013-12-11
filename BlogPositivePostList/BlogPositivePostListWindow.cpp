@@ -14,8 +14,10 @@
 #include "../API/BlogPositiveBlog.h"
 #include "BlogPositivePostListView.h"
 
+
 #undef B_TRANSLATION_CONTEXT
 #define B_TRANSLATION_CONTEXT "Post List Window"
+
 
 BlogPositivePostListWindow::BlogPositivePostListWindow(
 	BlogPositiveBlog* blog, BRect rect)

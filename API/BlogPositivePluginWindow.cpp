@@ -14,6 +14,7 @@
 #include "BlogPositivePluginLoader.h"
 #include "BlogPositivePost.h"
 
+
 BlogPositivePluginPostListWindow::BlogPositivePluginPostListWindow(BRect rect,
 	const char* Name)
 	:

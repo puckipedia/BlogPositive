@@ -14,8 +14,10 @@
 #include "../API/BlogPositivePost.h"
 #include "BlogPositivePostEditorView.h"
 
+
 #undef B_TRANSLATION_CONTEXT
 #define B_TRANSLATION_CONTEXT "Post Editor Window"
+
 
 BlogPositivePostEditorWindow::BlogPositivePostEditorWindow(
 	BlogPositivePost* aPost, BRect aRect)

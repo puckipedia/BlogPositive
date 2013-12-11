@@ -19,10 +19,13 @@
 #include "../API/BlogPositivePlugin.h"
 #include "../API/BlogPositivePost.h"
 
+
+const uint32 kPostEditorSavePost = 'PESP';
+
+
 #undef B_TRANSLATION_CONTEXT
 #define B_TRANSLATION_CONTEXT "Post Editor View"
 
-const uint32 kPostEditorSavePost = 'PESP';
 
 BlogPositivePostEditorView::BlogPositivePostEditorView(const char* name,
 	BlogPositivePost* post)

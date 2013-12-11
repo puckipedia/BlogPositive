@@ -18,8 +18,10 @@
 #include "xmlnode.h"
 #include "XmlRpcWrapper.h"
 
+
 #undef B_TRANSLATION_CONTEXT
 #define B_TRANSLATION_CONTEXT "Wordpress Plugin"
+
 
 void
 WordpressPlugin::GetAuthentication(BString Auth, BString* Username,

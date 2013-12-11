@@ -14,6 +14,7 @@
 #include "../API/BlogPositiveBlog.h"
 #include "../API/BlogPositivePost.h"
 
+
 bool
 ExamplePlugin::Supports(int32 Code)
 {

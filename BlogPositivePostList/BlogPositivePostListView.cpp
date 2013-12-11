@@ -27,12 +27,15 @@
 #include "../API/BlogPositivePost.h"
 #include "../BlogPositivePostEditor/BlogPositivePostEditorWindow.h"
 
-#undef B_TRANSLATION_CONTEXT
-#define B_TRANSLATION_CONTEXT "Post List View"
 
 const uint32 kPostListViewOpenPost = 'PLOP';
 const uint32 kPostListViewRemovePost = 'PLRP';
 const uint32 kPostListViewNewPost = 'PLNP';
+
+
+#undef B_TRANSLATION_CONTEXT
+#define B_TRANSLATION_CONTEXT "Post List View"
+
 
 class PostItem : public BStringItem {
 public:

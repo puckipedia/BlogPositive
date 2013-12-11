@@ -10,7 +10,9 @@
 #include <FindDirectory.h>
 #include <Path.h>
 
+
 const char* kSettingsFolder = "BlogPositive";
+
 
 BlogPositiveSettings::BlogPositiveSettings(const char* name)
 	: BMessage()

@@ -13,7 +13,9 @@
 #include "../BlogPositivePlugins/WordpressPlugin/WordpressPlugin.h"
 #include "../Example/ExamplePlugin.h"
 
+
 PluginList* BlogPositivePluginLoader::fList;
+
 
 void
 BlogPositivePluginLoader::Initialize()

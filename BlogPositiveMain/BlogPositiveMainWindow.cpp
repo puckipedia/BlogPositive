@@ -14,8 +14,10 @@
 #include "../BlogPositiveDelegate.h"
 #include "../BlogPositivePostList/BlogPositivePostListWindow.h"
 
+
 #undef B_TRANSLATION_CONTEXT
 #define B_TRANSLATION_CONTEXT "Main Window"
+
 
 class BlogPositiveMainDelegate : public BlogPositiveDelegate
 {

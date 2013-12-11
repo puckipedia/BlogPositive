@@ -12,6 +12,7 @@
 
 #include "BlogPositivePlugin.h"
 
+
 BlogPositiveBlog::BlogPositiveBlog()
 {
 }

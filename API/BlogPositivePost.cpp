@@ -10,6 +10,7 @@
 
 #include "BlogPositiveBlog.h"
 
+
 BlogPositivePost::BlogPositivePost(BlogPositiveBlog* blog)
 {
 	SetBlog(blog);

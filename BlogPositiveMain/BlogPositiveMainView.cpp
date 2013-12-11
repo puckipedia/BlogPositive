@@ -27,12 +27,15 @@
 #include "../BlogPositivePostList/BlogPositivePostListWindow.h"
 #include "../BlogPositiveSettings.h"
 
-#undef B_TRANSLATION_CONTEXT
-#define B_TRANSLATION_CONTEXT "Main View"
 
 const int32 kBlogSelected = 'BPBS';
 const int32 kCreateNewBlog = 'BPCB';
 const int32 kRemoveCurrentBlog = 'BPRC';
+
+
+#undef B_TRANSLATION_CONTEXT
+#define B_TRANSLATION_CONTEXT "Main View"
+
 
 class BlogPositiveBlogListView : public BListView {
 public:

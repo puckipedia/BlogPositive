@@ -9,6 +9,7 @@
 #include <List.h>
 #include <String.h>
 
+
 void
 XmlValue::PushContent(BString* string)
 {
