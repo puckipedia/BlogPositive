@@ -43,7 +43,7 @@ BlogPositiveCreateBlog::BlogPositiveCreateBlog(BlogPositiveMainView* aView,
 	BlogPositivePlugin* pl)
 	:
 	BWindow(BRect(100, 100, 400, 190), B_TRANSLATE("Create Blog"),
-		B_DOCUMENT_WINDOW, 0)
+		B_MODAL_WINDOW, B_NOT_RESIZABLE)
 {
 	fNameControl = new BTextControl("NameControl", "Name: ",
 		"", new BMessage('CBFA'));
@@ -52,7 +52,7 @@ BlogPositiveCreateBlog::BlogPositiveCreateBlog(BlogPositiveMainView* aView,
 
 	SetLayout(new BGroupLayout(B_VERTICAL));
 	BView* mainView = new BView("mainView", B_SUPPORTS_LAYOUT);
-	mainView->SetLayout(new BGroupLayout(B_VERTICAL, 0));
+	mainView->SetLayout(new BGroupLayout(B_VERTICAL, 10));
 	mainView->AddChild(fNameControl);
 	mainView->AddChild(fAuthControl);
 
