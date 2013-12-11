@@ -12,6 +12,9 @@
 #include <ObjectList.h>
 #include <String.h>
 
+class BlogPositiveBlog;
+typedef BObjectList<BlogPositiveBlog> BlogList;
+
 class BlogPositivePlugin;
 class BlogPositiveBlog : public BArchivable {
 public:
@@ -47,7 +50,5 @@ private:
 	int32					fBlogHandler;
 	BlogPositivePlugin*		fPlugin;
 };
-
-typedef BObjectList<BlogPositiveBlog> BlogList;
 
 #endif
