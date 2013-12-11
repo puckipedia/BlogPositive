@@ -43,9 +43,11 @@ BlogPositiveCreateBlog::BlogPositiveCreateBlog(BlogPositiveMainView* aView,
 		"", new BMessage('CBNB'));
 
 	SetLayout(new BGroupLayout(B_VERTICAL));
-	AddChild(fNameControl);
-	AddChild(fAuthControl);
-
+	BView* view = new BView("view", B_SUPPORTS_LAYOUT);
+	view->SetLayout(new BGroupLayout(B_VERTICAL));
+	view->AddChild(fNameControl);
+	view->AddChild(fAuthControl);
+	AddChild(view);
 	fMainView = aView;
 
 	fNameControl->MakeFocus();
