@@ -65,13 +65,14 @@ BlogPositiveMainView::MessageReceived(BMessage* message)
 			break;
 		case kBlogSelected:
 		{
-			if (fListView->CurrentSelection() == -1)
+			int32 current = fListView->CurrentSelection();
+			if (current == -1)
 				break;
-			BlogPositiveBlog* aBlog
-				= ((BlogPositiveBlogListItem*)fListView->ItemAt(
-						fListView->CurrentSelection()))->Blog();
-			BlogPositivePluginLoader::FindPlugin(aBlog);
-			fDelegate->OpenPostList(aBlog);
+			BlogPositiveBlogListItem* blit =
+				static_cast<BlogPositiveBlogListItem*>(fListView->ItemAt(current));
+			BlogPositiveBlog* blog = blit->Blog();
+			BlogPositivePluginLoader::FindPlugin(blog);
+			fDelegate->OpenPostList(blog);
 			break;
 		}
 		case kCreateNewBlog:
