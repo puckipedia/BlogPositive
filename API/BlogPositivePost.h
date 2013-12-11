@@ -7,9 +7,9 @@
 
 
 #include <ObjectList.h>
+#include <String.h>
 
 class BlogPositiveBlog;
-class BString;
 class BlogPositivePost {
 public:
 						BlogPositivePost() {}
