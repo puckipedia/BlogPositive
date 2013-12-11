@@ -43,7 +43,7 @@ main()
 {
 	curl_global_init(CURL_GLOBAL_NOTHING);
 
-	HelloHaiku app;
+	BlogPositiveApp app;
 	app.Run();
 
 	curl_global_cleanup();

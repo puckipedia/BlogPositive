@@ -19,9 +19,9 @@ public:
 							BlogPositiveBlog* blog);
 			void		AttachedToWindow();
 			void		MessageReceived(BMessage* aMessage);
-	static	int32		loadList(void* t);
 	void				Reload();
 private:
+	static	int32		_loadList(void* t);
 	BlogPositiveBlog*	fBlog;
 	BMenuItem*			fAddPost;
 	BMenuItem*			fRemovePost;

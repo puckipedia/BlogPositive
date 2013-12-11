@@ -20,7 +20,7 @@ BlogPositiveSettings::BlogPositiveSettings(const char* name)
 	fSettingsPath->Append(kSettingsFolder);
 	fSettingsPath->Append(name);
 
-	BFile file(settingsPath->Path(), B_READ_ONLY);
+	BFile file(fSettingsPath->Path(), B_READ_ONLY);
 	if (file.InitCheck() == B_OK) {
 		Unflatten(&file);
 	}
@@ -53,7 +53,7 @@ BlogPositiveSettings::SaveOther(BMessage* message, const char* settingsName)
 	}
 }
 
-~BlogPositiveSettings::BlogPositiveSettings()
+BlogPositiveSettings::~BlogPositiveSettings()
 {
 	delete fSettingsPath;
 }

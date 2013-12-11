@@ -12,6 +12,7 @@
 #include <MenuBar.h>
 #include <MenuItem.h>
 #include <Message.h>
+#include <ScrollView.h>
 #include <TextView.h>
 
 #include "../API/BlogPositiveBlog.h"

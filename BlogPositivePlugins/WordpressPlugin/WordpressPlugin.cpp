@@ -75,7 +75,7 @@ WordpressPlugin::Supports(int32 Code)
 size_t WriteTobString(void* bloc, size_t size, size_t nmemb, void* userp)
 {
 	char* charBloc = static_cast<char*>(bloc);
-	const char* cBlock = const_cast<const car*>(charBloc);
+	const char* cBlock = const_cast<const char*>(charBloc);
 	*(static_cast<BString*>(userp)) << cBlock;
 	return nmemb;
 }
@@ -241,9 +241,7 @@ void
 WordpressPlugin::SavePost(BlogPositivePost* aPost)
 {
 	BlogPositiveBlog* aBlog = aPost->Blog();
-	WordpressPost* wpPost = dynamic_cast<WordpressPost*>(aPost);
-	if(wpPost == NULL)
-		return;
+	WordpressPost* wpPost = static_cast<WordpressPost*>(aPost);
 
 	BString username;
 	BString password;
@@ -305,7 +303,7 @@ WordpressPlugin::CreateNewPost(BlogPositiveBlog* aBlog, const char* aName)
 	BString requestString = request->GetData();
 	curl_easy_setopt(curl, CURLOPT_POSTFIELDS, requestString.String());
 	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteTobString);
-	curl_easy_setopt(curl, CURLOPT_WRITEDATA, statit_cast<void*>(&responseString));
+	curl_easy_setopt(curl, CURLOPT_WRITEDATA, static_cast<void*>(&responseString));
 	curl_easy_setopt(curl, CURLOPT_USERAGENT, "libcurl-agent/1.0");
 	curl_easy_perform(curl);
 
@@ -318,3 +316,4 @@ WordpressPlugin::CreateNewPost(BlogPositiveBlog* aBlog, const char* aName)
 	}
 	return NULL;
 }
+

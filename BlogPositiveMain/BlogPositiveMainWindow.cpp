@@ -24,6 +24,7 @@ class BlogPositiveMainDelegate : public BlogPositiveDelegate
 };
 
 
+void
 BlogPositiveMainDelegate::OpenPostList(BlogPositiveBlog* blog)
 {
 	BlogPositivePostListWindow* window

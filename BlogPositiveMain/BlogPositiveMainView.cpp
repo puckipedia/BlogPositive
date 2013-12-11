@@ -51,8 +51,8 @@ BlogPositiveBlogListView::BlogPositiveBlogListView()
 void
 BlogPositiveBlogListView::Reload(BlogList* blogItemList)
 {
-	for (int i = 0; i < BlogItemList->CountItems(); i++)
-		AddItem(new BlogPositiveBlogListItem(BlogItemList->ItemAt(i)));
+	for (int i = 0; i < blogItemList->CountItems(); i++)
+		AddItem(new BlogPositiveBlogListItem(blogItemList->ItemAt(i)));
 }
 
 

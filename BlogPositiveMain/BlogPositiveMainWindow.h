@@ -13,7 +13,6 @@ class BlogPositiveMainWindow : public BWindow
 {
 public:
 			BlogPositiveMainWindow(BRect frame);
-	void	MessageReceived(BMessage* msg);
 };
 
 #endif
