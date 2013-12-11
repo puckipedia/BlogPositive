@@ -9,8 +9,8 @@
 #include <Window.h>
 
 class BlogPositiveBlog;
-class BRect;
 class BlogPositivePostListView;
+class BRect;
 class BlogPositivePostListWindow : public BWindow
 {
 public:

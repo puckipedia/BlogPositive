@@ -1,7 +1,7 @@
 /*
-* Copyright 2013 Puck Meerburg, puck@puckipedia.nl
-* All rights reserved. Distributed under the terms of the MIT License.
-*/
+ * Copyright 2013 Puck Meerburg, puck@puckipedia.nl
+ * All rights reserved. Distributed under the terms of the MIT License.
+ */
 #ifndef BP_PLUGIN_WINDOW_H
 #define BP_PLUGIN_WINDOW_H
 
@@ -12,10 +12,10 @@ const uint32 kPostWindowGetSelection = 'PWgs';
 const uint32 kPostWindowSavePost = 'PWsp';
 const uint32 kPostWindowNewPost = 'PWnp';
 
-class BMessage;
-class BRect;
 class BlogPositiveBlog;
 class BlogPositivePost;
+class BMessage;
+class BRect;
 class BlogPositivePluginPostListWindow : public BWindow {
 public:
 						BlogPositivePluginPostListWindow(BRect rect,

@@ -9,17 +9,16 @@
 #include <View.h>
 #include "../API/BlogPositiveBlog.h"
 
-class BListView;
-class BMessage;
-class BMenuBar;
-class BMenu;
-class BlogPositiveBlogListView;
 class BlogPositiveBlog;
-class BPoint;
-class BMenuItem;
+class BlogPositiveBlogListView;
 class BlogPositiveDelegate;
-class BlogPositiveMainView : public BView
-{
+class BListView;
+class BMenuBar;
+class BMenuItem;
+class BMenu;
+class BMessage;
+class BPoint;
+class BlogPositiveMainView : public BView {
 public:
 								BlogPositiveMainView(const char* name,
 									BlogPositiveDelegate* del);

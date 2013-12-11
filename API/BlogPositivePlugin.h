@@ -8,17 +8,13 @@
 
 #include <ObjectList.h>
 
-#include "BlogPositiveBlog.h"
 #include "BlogPositivePost.h"
-#include "BlogPositivePluginWindow.h"
-#include "../BlogPositiveSettings.h"
 
 #define kBlogPositiveBlogApi 1
 
-class BlogPositivePlugin;
-typedef BObjectList<BlogPositivePlugin> PluginList;
-
 class BlogPositiveMainView;
+class BlogPositiveBlog;
+class BlogPositivePluginWindow;
 class BlogPositivePlugin {
 public:
 	virtual	uint32				Version();
@@ -34,5 +30,7 @@ public:
 	virtual	void				RemovePost(BlogPositivePost* post);
 	virtual	void				OpenNewBlogWindow(BlogPositiveMainView* main);
 };
+
+typedef BObjectList<BlogPositivePlugin> PluginList;
 
 #endif

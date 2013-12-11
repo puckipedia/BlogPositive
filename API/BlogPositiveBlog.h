@@ -6,14 +6,11 @@
 #define BP_BLOG_H
 
 
+#include <Archivable.h>
+#include <List.h>
 #include <Message.h>
 #include <ObjectList.h>
-#include <List.h>
 #include <String.h>
-#include <Archivable.h>
-
-class BlogPositiveBlog;
-typedef BObjectList<BlogPositiveBlog> BlogList;
 
 class BlogPositivePlugin;
 class BlogPositiveBlog : public BArchivable {
@@ -50,5 +47,7 @@ private:
 	int32					fBlogHandler;
 	BlogPositivePlugin*		fPlugin;
 };
+
+typedef BObjectList<BlogPositiveBlog> BlogList;
 
 #endif

@@ -11,7 +11,6 @@
 
 class BList;
 class BlogPositiveBlog;
-class BlogPositivePost;
 class ExamplePlugin : public BlogPositivePlugin {
 public:
 	uint32				Version() {return 0;}

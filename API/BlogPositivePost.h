@@ -7,13 +7,9 @@
 
 
 #include <ObjectList.h>
-#include <String.h>
-#include <SupportDefs.h>
-
-class BlogPositivePost;
-typedef BObjectList<BlogPositivePost> PostList;
 
 class BlogPositiveBlog;
+class BString;
 class BlogPositivePost {
 public:
 						BlogPositivePost() {}
@@ -30,5 +26,7 @@ protected:
 	BString				fPage;
 	BlogPositiveBlog*	fBlog;
 };
+
+typedef BObjectList<BlogPositivePost> PostList;
 
 #endif

@@ -8,10 +8,10 @@
 
 #include <View.h>
 
-class BMessage;
+class BListView;
 class BlogPositiveBlog;
 class BMenuItem;
-class BListView;
+class BMessage;
 class BlogPositivePostListView : public BView
 {
 public:

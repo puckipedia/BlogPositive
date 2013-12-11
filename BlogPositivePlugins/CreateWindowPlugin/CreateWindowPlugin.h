@@ -8,11 +8,10 @@
 
 #include "../../API/BlogPositivePlugin.h"
 
-
-class BlogPositivePluginPostListWindow;
 class BlogPositivePluginBlogPostWindow;
+class BlogPositivePluginPostListWindow;
 class BlogPositivePost;
-class BlogPostiveBlog;
+class BlogPositiveBlog;
 class BWindow;
 class CreateWindowPlugin : public BlogPositivePlugin {
 public:
