@@ -170,7 +170,8 @@ void
 BlogPositivePostListView::MessageReceived(BMessage* aMessage)
 {
 	switch (aMessage->what) {
-		case 'BPFN': {
+		case 'BPFN':
+		{
 			BlogPositivePost* p = fBlog->Plugin()->CreateNewPost(fBlog,
 				aMessage->GetString("postTitle", ""));
 			if (p != NULL)
@@ -211,6 +212,7 @@ BlogPositivePostListView::MessageReceived(BMessage* aMessage)
 		}
 		default:
 			BView::MessageReceived(aMessage);
+			break;
 	}
 }
 

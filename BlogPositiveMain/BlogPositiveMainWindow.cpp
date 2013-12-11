@@ -20,13 +20,17 @@
 class BlogPositiveMainDelegate : public BlogPositiveDelegate
 {
 	public:
-		void	OpenPostList(BlogPositiveBlog* aBlog)
-	{
-		BlogPositivePostListWindow* aWindow
-			= new BlogPositivePostListWindow(aBlog, BRect(100, 100, 400, 600));
-		aWindow->Show();
-	}
+		void	OpenPostList(BlogPositiveBlog* blog);
 };
+
+
+BlogPositiveMainDelegate::OpenPostList(BlogPositiveBlog* blog)
+{
+	BlogPositivePostListWindow* window
+		= new BlogPositivePostListWindow(blog, BRect(100, 100, 400, 600));
+	window->Show();
+}
+
 
 BlogPositiveMainWindow::BlogPositiveMainWindow(BRect frame)
 	:

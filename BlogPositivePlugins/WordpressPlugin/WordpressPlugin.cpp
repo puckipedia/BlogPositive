@@ -74,7 +74,9 @@ WordpressPlugin::Supports(int32 Code)
 
 size_t WriteTobString(void* bloc, size_t size, size_t nmemb, void* userp)
 {
-	*((BString* )userp) << (const char* )bloc;
+	char* charBloc = static_cast<char*>(bloc);
+	const char* cBlock = const_cast<const car*>(charBloc);
+	*(static_cast<BString*>(userp)) << cBlock;
 	return nmemb;
 }
 

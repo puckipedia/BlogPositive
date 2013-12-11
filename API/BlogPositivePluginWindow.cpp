@@ -39,13 +39,13 @@ BlogPositivePluginPostListWindow::Blog()
 void
 BlogPositivePluginPostListWindow::MessageReceived(BMessage* message)
 {
-	switch (message->what)
-	{
+	switch (message->what) {
 		case kPostWindowGetSelection:
 			BlogPositivePluginLoader::OpenPostWindowQueryingPlugins(this);
 			break;
 		default:
 			BWindow::MessageReceived(message);
+			break;
 	}
 }
 
@@ -76,13 +76,13 @@ BlogPositivePluginBlogPostWindow::Post()
 void
 BlogPositivePluginBlogPostWindow::MessageReceived(BMessage* message)
 {
-	switch (message->what)
-	{
+	switch (message->what) {
 		case kPostWindowSavePost:
 			Post()->SetPage(BlogPositivePluginLoader::GetPageContent(this));
 			Post()->Blog()->Plugin()->SavePost(fPost);
 			break;
 		default:
 			BWindow::MessageReceived(message);
+			break;
 	}
 }

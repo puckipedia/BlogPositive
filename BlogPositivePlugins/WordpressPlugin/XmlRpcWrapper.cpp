@@ -46,8 +46,7 @@ void
 XmlArray::PushContent(BString* string)
 {
 	*string << "<array><data>";
-	for (int i = 0; i < Items(); i++)
-	{
+	for (int i = 0; i < Items(); i++) {
 		ItemAt(i)->PushContent(string);
 	}
 	*string << "</data></array>";
@@ -111,8 +110,7 @@ void
 XmlStruct::PushContent(BString* string)
 {
 	*string << "<struct>";
-	for (int32 i = 0; i < Items(); i++)
-	{
+	for (int32 i = 0; i < Items(); i++) {
 		ItemAt(i)->PushContent(string);
 	}
 	*string << "</struct>";

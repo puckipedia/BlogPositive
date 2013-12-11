@@ -65,8 +65,7 @@ BlogPositivePostEditorView::Save()
 void
 BlogPositivePostEditorView::MessageReceived(BMessage* message)
 {
-	switch (message->what)
-	{
+	switch (message->what) {
 		case kPostEditorSavePost:
 			Save();
 			break;

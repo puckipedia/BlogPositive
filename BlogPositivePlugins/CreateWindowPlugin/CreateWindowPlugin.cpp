@@ -86,15 +86,15 @@ CreateWindowPlugin::HookBlogList(BlogPositivePluginPostListWindow** aWindow,
 
 
 BlogPositivePost*
-CreateWindowPlugin::TryGetPost(BWindow* aWindow)
+CreateWindowPlugin::TryGetPost(BWindow* window)
 {
-	BListView* aView = (BListView*)aWindow->FindView("ListView");
+	BListView* listView = dynamic_cast<BListView*>(window->FindView("ListView"));
 	if (aView != NULL) {
-		int32 ChosenOne = aView->CurrentSelection();
-		if (ChosenOne == -1) {
+		int32 chosenOne = listView->CurrentSelection();
+		if (chosenOne == -1) {
 			return NULL;
 		}
-		PostItem* item = (PostItem*)aView->ItemAt(ChosenOne);
+		PostItem* item = static_cast<PostItem*>(listView->ItemAt(chosenOne));
 		return item->Post();
 	}
 	return NULL;
@@ -105,10 +105,10 @@ int32
 CreateWindowPlugin::loadList(void* t)
 {
 	PluginAndWindowThing* thing = (PluginAndWindowThing*)t;
-	BList* list = thing->fPlugin->GetBlogPosts(thing->fBlog);
+	PostList* list = thing->fPlugin->GetBlogPosts(thing->fBlog);
 	if (thing->fView->LockLooper()) {
 		for (int i = 0; i < list->CountItems(); i++) {
-			BlogPositivePost* post = (BlogPositivePost*)list->ItemAt(i);
+			BlogPositivePost* post = list->ItemAt(i);
 			thing->fView->AddItem(new PostItem(post));
 		}
 		thing->fView->UnlockLooper();

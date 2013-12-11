@@ -28,18 +28,16 @@ void
 BlogPositivePluginLoader::FindPlugin(BlogPositiveBlog* blog)
 {
 	BlogPositivePlugin* workingPlugin = NULL;
-	for (int i = 0; i < fList->CountItems(); i++)
-	{
+	for (int i = 0; i < fList->CountItems(); i++) {
 		BlogPositivePlugin* plugin = fList->ItemAt(i);
 		if (plugin->Type() == kBlogPositiveBlogApi
-			&& plugin->Supports(blog->BlogHandler()))
-		{
+			&& plugin->Supports(blog->BlogHandler())) {
 			workingPlugin = plugin;
 			break;
 		}
 	}
 
-	if (workingPlugin == 0)
+	if (workingPlugin == NULL)
 		return;
 
 	blog->SetPlugin(aWorkingPlugin);

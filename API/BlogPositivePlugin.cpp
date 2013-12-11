@@ -40,6 +40,7 @@ BlogPositiveCreateBlog::BlogPositiveCreateBlog(BlogPositiveMainView* aView,
 		"", new BMessage('CBFA'));
 	fAuthControl = new BTextControl("AuthControl", "Auth: ",
 		"", new BMessage('CBNB'));
+
 	SetLayout(new BGroupLayout(B_VERTICAL));
 	AddChild(fNameControl);
 	AddChild(fAuthControl);
@@ -61,8 +62,7 @@ BlogPositiveCreateBlog::SetBlogHandler(int32 blogHandler)
 void
 BlogPositiveCreateBlog::MessageReceived(BMessage* message)
 {
-	switch (message->what)
-	{
+	switch (message->what) {
 		case 'CBFA':
 			fAuthControl->MakeFocus();
 			break;
@@ -87,6 +87,7 @@ BlogPositiveCreateBlog::MessageReceived(BMessage* message)
 		}
 		default:
 			BWindow::MessageReceived(message);
+			break;
 	}
 }
 
@@ -155,7 +156,7 @@ BlogPositivePlugin::SavePost(BlogPositivePost* post)
 
 
 void
-BlogPositivePlugin::OpenNewBlogWindow(BlogPositiveMainView* aView)
+BlogPositivePlugin::OpenNewBlogWindow(BlogPositiveMainView* mainView)
 {
-	(new BlogPositiveCreateBlog(aView, this))->Show();
+	(new BlogPositiveCreateBlog(mainView, this))->Show();
 }

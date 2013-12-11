@@ -36,23 +36,30 @@ const int32 kRemoveCurrentBlog = 'BPRC';
 
 class BlogPositiveBlogListView : public BListView {
 public:
-				BlogPositiveBlogListView()
-				:
-				BListView("BlogPositiveBlogListView", B_SINGLE_SELECTION_LIST)
-	{
-	}
-	void		Reload(BlogList* BlogItemList)
-	{
-		for (int i = 0; i < BlogItemList->CountItems(); i++)
-			AddItem(new BlogPositiveBlogListItem(BlogItemList->ItemAt(i)));
-	}
+				BlogPositiveBlogListView();
+	void		Reload(BlogList* BlogItemList);
 };
+
+
+BlogPositiveBlogListView::BlogPositiveBlogListView()
+	:
+	BListView("BlogPositiveBlogListView", B_SINGLE_SELECTION_LIST)
+{
+}
+
+
+void
+BlogPositiveBlogListView::Reload(BlogList* blogItemList)
+{
+	for (int i = 0; i < BlogItemList->CountItems(); i++)
+		AddItem(new BlogPositiveBlogListItem(BlogItemList->ItemAt(i)));
+}
+
 
 void
 BlogPositiveMainView::MessageReceived(BMessage* message)
 {
-	switch (message->what)
-	{
+	switch (message->what) {
 		case kRemoveCurrentBlog:
 			RemoveBlog();
 			break;
@@ -77,6 +84,7 @@ BlogPositiveMainView::MessageReceived(BMessage* message)
 		}
 		default:
 			BView::MessageReceived(message);
+			break;
 	}
 }
 
@@ -92,10 +100,8 @@ BlogPositiveMainView::RemoveBlog()
 	BlogPositiveBlogListItem* listItem
 		= static_cast<BlogPositiveBlogListItem*>(fListView->ItemAt(sel));
 	BlogPositiveBlog* blog = listItem->Blog();
-	for (int i = 0; i < lis->CountItems(); i++)
-	{
-		if (strcmp(blog->Name(), lis->ItemAt(i)->Name()) == 0)
-		{
+	for (int i = 0; i < lis->CountItems(); i++) {
+		if (strcmp(blog->Name(), lis->ItemAt(i)->Name()) == 0) {
 			lis->RemoveItemAt(i);
 			break;
 		}
@@ -119,8 +125,7 @@ void
 BlogPositiveMainView::AttachedToWindow()
 {
 	fListView->SetTarget(this);
-	for (int i = 0; i < fNewMenu->CountItems(); i++)
-	{
+	for (int i = 0; i < fNewMenu->CountItems(); i++) {
 		fNewMenu->ItemAt(i)->SetTarget(this);
 	}
 	fRemoveMenuItem->SetTarget(this);
@@ -148,11 +153,9 @@ BlogPositiveMainView::BlogPositiveMainView(const char* name,
 	BlogList* lis = BlogPositiveBlog::DeserializeList(settings, "blogs");
 	fListView->Reload(lis);
 
-	for (int i = 0; i < pluginList->CountItems(); i++)
-	{
+	for (int i = 0; i < pluginList->CountItems(); i++) {
 		BlogPositivePlugin* pl = (BlogPositivePlugin* )pluginList->ItemAt(i);
-		if (pl->Type() == kBlogPositiveBlogApi)
-		{
+		if (pl->Type() == kBlogPositiveBlogApi) {
 			BMessage* msg = new BMessage(kCreateNewBlog);
 			msg->SetInt32("ding", i);
 			msg->SetString("sendToView", Name());

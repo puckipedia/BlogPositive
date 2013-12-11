@@ -23,8 +23,7 @@ BlogPositiveBlog::DeserializeList(BMessage* message, const char* blogName)
 	BMessage msg;
 	BlogList* Listy = new BlogList();
 	int i = 0;
-	while (message->FindMessage(blogName, i++, &msg) == B_OK)
-	{
+	while (message->FindMessage(blogName, i++, &msg) == B_OK) {
 		BlogPositiveBlog* blog = new BlogPositiveBlog(&msg);
 		Listy->AddItem(blog);
 	}
@@ -37,8 +36,7 @@ BlogPositiveBlog::SerializeList(BlogList* blist,
 	const char* blogName)
 {
 	BMessage* bm = new BMessage();
-	for (int i = 0; i < blist->CountItems(); i++)
-	{
+	for (int i = 0; i < blist->CountItems(); i++) {
 		BMessage resultMessage;
 		blist->ItemAt(i)->Archive(&resultMessage);
 		bm->AddMessage(blogName, &resultMessage);

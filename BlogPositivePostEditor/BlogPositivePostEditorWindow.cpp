@@ -29,8 +29,6 @@ BlogPositivePostEditorWindow::BlogPositivePostEditorWindow(
 	SetTitle(titleString.String());
 
 	SetLayout(new BGroupLayout(B_VERTICAL));
-	AddChild(
-		BGroupLayoutBuilder(B_VERTICAL, 0)
-		.Add(fView));
+	AddChild(fView);
 }
 
