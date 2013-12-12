@@ -110,7 +110,7 @@ BlogPositivePostListView::BlogPositivePostListView(const char* name,
 
 	SetLayout(new BGroupLayout(B_VERTICAL, 0));
 	AddChild(menu);
-	AddChild(fListView);
+	AddChild(new BScrollView("scrollview", fListView, 0, false, true));
 }
 
 
