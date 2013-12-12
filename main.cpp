@@ -12,6 +12,7 @@
 
 #include "API/BlogPositivePluginLoader.h"
 #include "BlogPositiveMain/BlogPositiveMainWindow.h"
+#include "BlogPositiveSharedWindow.h"
 
 
 class BlogPositiveApp : public BApplication
@@ -33,7 +34,8 @@ BlogPositiveApp::BlogPositiveApp()
 void
 BlogPositiveApp::ReadyToRun()
 {
-	BWindow* window = new BlogPositiveMainWindow(BRect(100, 100, 600, 200));
+	BWindow* window = new BlogPositiveSharedWindow(BRect(100, 100, 
+600, 200));
 	window->Show();
 }
 
