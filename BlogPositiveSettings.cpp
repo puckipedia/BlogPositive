@@ -6,9 +6,13 @@
 
 #include "BlogPositiveSettings.h"
 
+#include <stdio.h>
+
+#include <Directory.h>
 #include <File.h>
 #include <FindDirectory.h>
 #include <Path.h>
+#include <String.h>
 
 
 const char* kSettingsFolder = "BlogPositive";
@@ -20,6 +24,12 @@ BlogPositiveSettings::BlogPositiveSettings(const char* name)
 	fSettingsPath = new BPath();
 	find_directory(B_USER_SETTINGS_DIRECTORY, fSettingsPath);
 	fSettingsPath->Append(kSettingsFolder);
+
+	BString dirs(fSettingsPath->Path());
+	dirs << "/";
+
+	create_directory(dirs.String(), 0755);
+	
 	fSettingsPath->Append(name);
 
 	BFile file(fSettingsPath->Path(), B_READ_ONLY);
