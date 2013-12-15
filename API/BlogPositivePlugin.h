@@ -12,6 +12,9 @@
 
 #define kBlogPositiveBlogApi 1
 
+const uint32 kCreateBlog = 'BPCB';
+const uint32 kCancelBlog = 'BPKB';
+
 class BlogPositiveMainView;
 class BlogPositiveBlog;
 class BlogPositivePluginWindow;

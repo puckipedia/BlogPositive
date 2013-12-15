@@ -26,6 +26,7 @@ public:
 	BlogPositivePost*	CreateNewPost(BlogPositiveBlog* aBlog,
 							const char* aName);
 	void				RemovePost(BlogPositivePost* aPost);
+	void				OpenNewBlogWindow(BlogPositiveMainView* main);
 private:
 	void				GetAuthentication(BString Auth,
 							BString* Username, BString* pass,

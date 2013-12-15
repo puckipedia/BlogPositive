@@ -11,16 +11,145 @@
 
 #include <Alert.h>
 #include <Catalog.h>
+#include <GroupLayout.h>
+#include <LayoutBuilder.h>
 #include <String.h>
+#include <TextControl.h>
+#include <Window.h>
 
 #include "../../API/BlogPositiveBlog.h"
 #include "../../API/BlogPositivePost.h"
+#include "../../BlogPositiveMain/BlogPositiveMainView.h"
+#include "../../BlogPositiveSettings.h"
 #include "xmlnode.h"
 #include "XmlRpcWrapper.h"
 
 
 #undef B_TRANSLATION_CONTEXT
 #define B_TRANSLATION_CONTEXT "Wordpress Plugin"
+
+
+class WPCreateBlog : public BWindow {
+public:
+							WPCreateBlog(BlogPositiveMainView* aView,
+								BlogPositivePlugin* pl);
+	void					SetBlogHandler(int32 blogHandler);
+	void					MessageReceived(BMessage* message);
+	int32					BlogHandler();
+private:
+	int32 					fBlogHandler;
+	BTextControl*			fNameControl;
+	BTextControl*			fUserControl;
+	BTextControl*			fPassControl;
+	BTextControl*			fUrlControl;
+	BlogPositiveMainView*	fMainView;
+};
+
+WPCreateBlog::WPCreateBlog(BlogPositiveMainView* aView,
+	BlogPositivePlugin* pl)
+	:
+	BWindow(BRect(100, 100, 400, 230), B_TRANSLATE("Create Blog"),
+		B_TITLED_WINDOW, B_AUTO_UPDATE_SIZE_LIMITS)
+{
+	fMainView = aView;
+	
+	fNameControl = new BTextControl("NameControl", "Name: ",
+		"", new BMessage('CBFA'));
+	fNameControl->SetAlignment(B_ALIGN_RIGHT, B_ALIGN_LEFT);
+	fUserControl = new BTextControl("UserControl", "Username: ",
+		"", new BMessage('CBUC'));
+	fUserControl->SetAlignment(B_ALIGN_RIGHT, B_ALIGN_LEFT);
+	fPassControl = new BTextControl("UserControl", "Password: ",
+		"", new BMessage('CBPC'));
+	fPassControl->SetAlignment(B_ALIGN_RIGHT, B_ALIGN_LEFT);
+	fUrlControl = new BTextControl("UserControl", "Url: ",
+		"", new BMessage('CBRC'));
+	fUrlControl->SetAlignment(B_ALIGN_RIGHT, B_ALIGN_LEFT);
+
+	SetLayout(new BGroupLayout(B_VERTICAL));
+	BButton* createButton = new BButton("ceateButton",
+		B_TRANSLATE("Create"), new BMessage(kCreateBlog));
+	BButton* cancelButton = new BButton("ceateButton",
+		B_TRANSLATE("Cancel"), new BMessage(kCancelBlog));
+
+	fNameControl->MakeFocus();
+	fBlogHandler = pl->MainHandler();
+	
+	BLayoutBuilder::Group<>(this, B_VERTICAL)
+		.AddGrid(2, 4)
+			.Add(fNameControl->CreateLabelLayoutItem(), 0, 0)
+			.Add(fNameControl->CreateTextViewLayoutItem(), 1, 0)
+			.Add(fUserControl->CreateLabelLayoutItem(), 0, 1)
+			.Add(fUserControl->CreateTextViewLayoutItem(), 1, 1)
+			.Add(fPassControl->CreateLabelLayoutItem(), 0, 2)
+			.Add(fPassControl->CreateTextViewLayoutItem(), 1, 2)
+			.Add(fUrlControl->CreateLabelLayoutItem(), 0, 3)
+			.Add(fUrlControl->CreateTextViewLayoutItem(), 1, 3)
+			.End()
+		.AddGroup(B_HORIZONTAL)
+			.Add(cancelButton)
+			.Add(createButton)
+		.End();
+	
+}
+
+
+void
+WPCreateBlog::SetBlogHandler(int32 blogHandler)
+{
+	fBlogHandler = blogHandler;
+}
+
+
+void
+WPCreateBlog::MessageReceived(BMessage* message)
+{
+	switch (message->what) {
+		case 'CBFA':
+			fUserControl->MakeFocus();
+			break;
+		case 'CBUC':
+			fPassControl->MakeFocus();
+			break;
+		case 'CBPC':
+			fUrlControl->MakeFocus();
+			break;
+		case 'CBRC':
+			// Fallthrough on purpose
+		case kCreateBlog:
+		{
+			BString auth;
+			auth << fUserControl->Text() << "|||";
+			auth << fPassControl->Text() << "|||";
+			auth << fUrlControl->Text();
+			if(strstr(fUrlControl->Text(), "xmlrpc.php") == NULL) {
+				auth << "/xmlrpc.php";
+			}
+			BlogPositiveSettings* settings = new BlogPositiveSettings("bloglist");
+			BlogList* lis = BlogPositiveBlog::DeserializeList(settings, "blogs");
+			BlogPositiveBlog* blog = new BlogPositiveBlog();
+			blog->SetName(fNameControl->Text());
+			blog->SetAuthentication(auth.String());
+			blog->SetBlogHandler(fBlogHandler);
+			lis->AddItem(blog);
+			if (fMainView->LockLooper())
+			{
+				fMainView->Reload(lis);
+				fMainView->UnlockLooper();
+			}
+			BlogPositiveSettings::SaveOther(
+				BlogPositiveBlog::SerializeList(lis, "blogs"), "bloglist");
+			Quit();
+			break;
+		}
+		case kCancelBlog:
+			Quit();
+			break;
+		default:
+			BWindow::MessageReceived(message);
+			break;
+	}
+}
 
 
 void
@@ -112,6 +241,49 @@ WordpressPost::PostId()
 }
 
 
+void ShowError(XmlNode* response, long responseCode)
+{
+	const char* errorMessageTitle = "";
+	const char* errorMessageContent = "";
+	XmlNode* node;
+	switch (responseCode) {
+		case 404:
+			errorMessageTitle = B_TRANSLATE("404 - Blog not found");
+			errorMessageContent = B_TRANSLATE("Time goes on and on:\n"
+				"The blog you seek is not here\n"
+				"Maybe a typo?");
+			break;
+		case 500:
+			errorMessageTitle = B_TRANSLATE("500 - An error occured");
+			errorMessageContent = B_TRANSLATE("Sometimes things go wrong:\n"
+				"Maybe the server is down,\n"
+				"Maybe it needs help.");
+			break;
+		default:
+			node = response->FindChild("string", NULL, true);
+			if(node != NULL) {
+				errorMessageTitle = B_TRANSLATE("Wordpress error");
+				BString* errorString = new BString();
+				const char* error = B_TRANSLATE_COMMENT("This: Not a haiku\n"
+					"But WordPress had an error:\n"
+					"%s", "%s will be the wordpress returned error");
+				errorString->SetToFormat(error, node->Value().String());
+				errorMessageContent = errorString->String();
+				
+			} else {
+				errorMessageTitle = B_TRANSLATE("??? - Unknown error");
+				errorMessageContent = B_TRANSLATE("Errors do occur\n"
+					"But this is very special\n"
+					"Please do try again!");
+			}
+	}
+				printf("--%s--\n%s\n", errorMessageTitle, errorMessageContent);
+	BAlert* alertBox = new BAlert(errorMessageTitle, errorMessageContent,
+		":(", NULL, NULL, B_WIDTH_AS_USUAL, B_OFFSET_SPACING, B_STOP_ALERT);
+	alertBox->Go();
+}
+
+
 PostList*
 WordpressPlugin::GetBlogPosts(BlogPositiveBlog* aBlog)
 {
@@ -146,32 +318,9 @@ WordpressPlugin::GetBlogPosts(BlogPositiveBlog* aBlog)
 	XmlNode* responseNode = new XmlNode(responseString.String(), NULL);
 	XmlNode* postNode = NULL;
 	if (responseNode->FindChild("param", NULL, true) == NULL) {
-		const char* errorMessageTitle = "";
-		const char* errorMessageContent = "";
 		long responseCode = 0;
 		curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &responseCode);
-		switch (responseCode) {
-			case 404:
-				errorMessageTitle = B_TRANSLATE("404 - Blog not found");
-				errorMessageContent = B_TRANSLATE("Time goes on and on:\n"
-					"The blog you seek is not here\n"
-					"Maybe a typo?");
-				break;
-			case 500:
-				errorMessageTitle = B_TRANSLATE("500 - An error occured");
-				errorMessageContent = B_TRANSLATE("Sometimes things go wrong:\n"
-					"Maybe the server is down,\n"
-					"Maybe it needs help.");
-				break;
-			default:
-				errorMessageTitle = B_TRANSLATE("??? - Unknown error");
-				errorMessageContent = B_TRANSLATE("Errors do occur\n"
-					"But this is very special\n"
-					"Please do try again!");
-		}
-		BAlert* alertBox = new BAlert(errorMessageTitle, errorMessageContent,
-			":(");
-		alertBox->Go();
+		ShowError(responseNode, responseCode);
 		return new PostList();
 	}
 	XmlNode* postListNode = responseNode->FindChild("param", NULL, true)
@@ -311,6 +460,11 @@ WordpressPlugin::CreateNewPost(BlogPositiveBlog* aBlog, const char* aName)
 
 	XmlNode* responseNode = new XmlNode(responseString.String(), NULL);
 	XmlNode* rstring = responseNode->FindChild("string", NULL, true);
+	if(rstring == NULL) {
+		long responseCode = 0;
+		curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &responseCode);
+		ShowError(responseNode, responseCode);
+	}
 	if (rstring != NULL) {
 		WordpressPost* post = new WordpressPost(aName, "",
 			rstring->Value(), aBlog);
@@ -319,3 +473,9 @@ WordpressPlugin::CreateNewPost(BlogPositiveBlog* aBlog, const char* aName)
 	return NULL;
 }
 
+
+void
+WordpressPlugin::OpenNewBlogWindow(BlogPositiveMainView* mainView)
+{
+	(new WPCreateBlog(mainView, this))->Show();
+}

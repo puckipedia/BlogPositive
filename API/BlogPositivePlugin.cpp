@@ -18,9 +18,6 @@
 #include "../BlogPositiveMain/BlogPositiveMainView.h"
 #include "../BlogPositiveSettings.h"
 
-const uint32 kCreateBlog = 'BPCB';
-const uint32 kCancelBlog = 'BPKB';
-
 #undef B_TRANSLATION_CONTEXT
 #define B_TRANSLATION_CONTEXT "BlogPositive Plugin"
 
