@@ -89,7 +89,7 @@ BlogPositiveBlog::BlogHandler()
 
 
 status_t
-BlogPositiveBlog::Archive(BMessage* into, bool deep = true)
+BlogPositiveBlog::Archive(BMessage* into, bool deep)
 {
 	into->AddString("name", fName);
 	into->AddString("auth", fAuthentication);

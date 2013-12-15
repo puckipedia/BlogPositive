@@ -10,6 +10,9 @@
 #include "../../API/BlogPositivePost.h"
 
 class BlogPositiveBlog;
+class BString;
+class XmlNode;
+class XmlRpcRequest;
 
 class WordpressPlugin : public BlogPositivePlugin
 {
@@ -28,6 +31,8 @@ public:
 	void				RemovePost(BlogPositivePost* aPost);
 	void				OpenNewBlogWindow(BlogPositiveMainView* main);
 private:
+	XmlNode*			Request(XmlRpcRequest* r, BString* responseString,
+							BString auth);
 	void				GetAuthentication(BString Auth,
 							BString* Username, BString* pass,
 							BString* XmlRPCUrl);

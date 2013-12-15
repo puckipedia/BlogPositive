@@ -284,44 +284,60 @@ void ShowError(XmlNode* response, long responseCode)
 }
 
 
-PostList*
-WordpressPlugin::GetBlogPosts(BlogPositiveBlog* aBlog)
+XmlNode*
+WordpressPlugin::Request(XmlRpcRequest* r, BString* responseString,
+	BString Auth)
 {
 	BString username;
 	BString password;
 	BString xmlrpcurl;
-	BString Auth(aBlog->Authentication());
-
 	GetAuthentication(Auth, &username, &password, &xmlrpcurl);
-
-	XmlRpcRequest* r = new XmlRpcRequest();
-
-	r->SetMethodName("metaWeblog.getRecentPosts");
-	r->AddItem(new XmlValue(1));
-	r->AddItem(new XmlValue(username));
-	r->AddItem(new XmlValue(password));
-	r->AddItem(new XmlValue(30));
-
-	CURL* curl = curl_easy_init();
-
-	BString responseString;
 	BString dataString(r->GetData());
-
+	CURL* curl = curl_easy_init();
+		
 	curl_easy_setopt(curl, CURLOPT_URL, xmlrpcurl.String());
 
 	curl_easy_setopt(curl, CURLOPT_POSTFIELDS, dataString.String());
 	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteTobString);
-	curl_easy_setopt(curl, CURLOPT_WRITEDATA, static_cast<void*>(&responseString));
+	curl_easy_setopt(curl, CURLOPT_WRITEDATA, static_cast<void*>(responseString));
 	curl_easy_setopt(curl, CURLOPT_USERAGENT, "libcurl-agent/1.0");
 	curl_easy_perform(curl);
 	
-	XmlNode* responseNode = new XmlNode(responseString.String(), NULL);
-	XmlNode* postNode = NULL;
-	if (responseNode->FindChild("param", NULL, true) == NULL) {
+	XmlNode* responseNode = new XmlNode(responseString->String(), NULL);
+	if(responseNode->FindChild("fault", NULL, true) != NULL)
+	{
 		long responseCode = 0;
 		curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &responseCode);
 		ShowError(responseNode, responseCode);
-		return new PostList();
+	}
+	return responseNode;
+}
+
+
+PostList*
+WordpressPlugin::GetBlogPosts(BlogPositiveBlog* aBlog)
+{
+	XmlRpcRequest r;
+
+	BString username;
+	BString password;
+	BString xmlrpcurl;
+	GetAuthentication(aBlog->Authentication(), &username, &password,
+		&xmlrpcurl);
+
+	r.SetMethodName("metaWeblog.getRecentPosts");
+	r.AddItem(new XmlValue(1));
+	r.AddItem(new XmlValue(username));
+	r.AddItem(new XmlValue(password));
+	r.AddItem(new XmlValue(30));
+
+	BString responseString;
+	XmlNode* responseNode
+		= Request(&r, &responseString, aBlog->Authentication());
+
+	XmlNode* postNode = NULL;
+	if (responseNode->FindChild("param", NULL, true) == NULL) {
+			return new PostList();
 	}
 	XmlNode* postListNode = responseNode->FindChild("param", NULL, true)
 		->FindChild("array", NULL, true)->FindChild("data", NULL, true);

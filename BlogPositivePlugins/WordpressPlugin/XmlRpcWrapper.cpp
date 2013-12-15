@@ -19,7 +19,7 @@ XmlValue::PushContent(BString* string)
 }
 
 
-XmlValue::XmlValue(BString string, BString aBoxType = "string")
+XmlValue::XmlValue(BString string, BString aBoxType)
 	:
 	fValue(string),
 	boxType(aBoxType)
@@ -27,7 +27,7 @@ XmlValue::XmlValue(BString string, BString aBoxType = "string")
 }
 
 
-XmlValue::XmlValue(int integer, BString aBoxType = "i4")
+XmlValue::XmlValue(int integer, BString aBoxType)
 	:
 	boxType(aBoxType)
 {
@@ -35,7 +35,7 @@ XmlValue::XmlValue(int integer, BString aBoxType = "i4")
 }
 
 
-XmlValue::XmlValue(double doubleVal, BString aBoxType = "string")
+XmlValue::XmlValue(double doubleVal, BString aBoxType)
 	:
 	boxType(aBoxType)
 {
