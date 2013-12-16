@@ -6,8 +6,8 @@
 #define BP_EXAMPLE_PLUGIN_H
 
 
-#include "../API/BlogPositivePlugin.h"
-#include "../API/BlogPositivePost.h"
+#include "BlogPositivePlugin.h"
+#include "BlogPositivePost.h"
 
 class BList;
 class BlogPositiveBlog;

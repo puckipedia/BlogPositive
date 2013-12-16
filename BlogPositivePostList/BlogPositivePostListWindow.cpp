@@ -11,7 +11,7 @@
 #include <Rect.h>
 #include <String.h>
 
-#include "../API/BlogPositiveBlog.h"
+#include "BlogPositiveBlog.h"
 #include "BlogPositivePostListView.h"
 
 

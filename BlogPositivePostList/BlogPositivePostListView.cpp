@@ -22,10 +22,10 @@
 #include <TextView.h>
 #include <Window.h>
 
-#include "../API/BlogPositiveBlog.h"
-#include "../API/BlogPositivePlugin.h"
-#include "../API/BlogPositivePost.h"
-#include "../BlogPositivePostEditor/BlogPositivePostEditorWindow.h"
+#include "BlogPositiveBlog.h"
+#include "BlogPositivePlugin.h"
+#include "BlogPositivePost.h"
+#include "BlogPositivePostEditorWindow.h"
 
 
 const uint32 kPostListViewOpenPost = 'PLOP';

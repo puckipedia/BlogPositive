@@ -7,7 +7,7 @@
 
 
 #include <View.h>
-#include "../API/BlogPositiveBlog.h"
+#include "BlogPositiveBlog.h"
 
 class BlogPositiveBlogListView;
 class BlogPositiveDelegate;

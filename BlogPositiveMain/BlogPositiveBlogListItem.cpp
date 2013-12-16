@@ -6,7 +6,7 @@
 
 #include "BlogPositiveBlogListItem.h"
 
-#include "../API/BlogPositiveBlog.h"
+#include "BlogPositiveBlog.h"
 
 
 BlogPositiveBlogListItem::BlogPositiveBlogListItem(BlogPositiveBlog* blog)

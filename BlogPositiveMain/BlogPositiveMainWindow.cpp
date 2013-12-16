@@ -11,8 +11,8 @@
 #include <Message.h>
 #include <Rect.h>
 
-#include "../BlogPositiveDelegate.h"
-#include "../BlogPositivePostList/BlogPositivePostListWindow.h"
+#include "BlogPositiveDelegate.h"
+#include "BlogPositivePostListWindow.h"
 
 
 #undef B_TRANSLATION_CONTEXT

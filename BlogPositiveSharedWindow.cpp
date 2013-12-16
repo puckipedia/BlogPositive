@@ -4,7 +4,7 @@
  */
 
 #include "BlogPositiveSharedWindow.h"
-#include "BlogPositiveMain/BlogPositiveMainView.h"
+#include "BlogPositiveMainView.h"
 
 #include <Catalog.h>
 #include <GroupLayout.h>
@@ -13,7 +13,7 @@
 #include <SplitView.h>
 
 #include "BlogPositiveDelegate.h"
-#include "BlogPositivePostList/BlogPositivePostListView.h"
+#include "BlogPositivePostListView.h"
 
 
 #undef B_TRANSLATION_CONTEXT

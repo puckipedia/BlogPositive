@@ -10,8 +10,8 @@
 #include <Message.h>
 #include <Window.h>
 
-#include "API/BlogPositivePluginLoader.h"
-#include "BlogPositiveMain/BlogPositiveMainWindow.h"
+#include "BlogPositivePluginLoader.h"
+#include "BlogPositiveMainWindow.h"
 #include "BlogPositiveSharedWindow.h"
 
 

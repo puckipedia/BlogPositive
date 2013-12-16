@@ -17,10 +17,10 @@
 #include <TextControl.h>
 #include <Window.h>
 
-#include "../../API/BlogPositiveBlog.h"
-#include "../../API/BlogPositivePost.h"
-#include "../../BlogPositiveMain/BlogPositiveMainView.h"
-#include "../../BlogPositiveSettings.h"
+#include "BlogPositiveBlog.h"
+#include "BlogPositivePost.h"
+#include "BlogPositiveMainView.h"
+#include "BlogPositiveSettings.h"
 #include "xmlnode.h"
 #include "XmlRpcWrapper.h"
 

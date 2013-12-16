@@ -15,9 +15,9 @@
 #include <ScrollView.h>
 #include <TextView.h>
 
-#include "../API/BlogPositiveBlog.h"
-#include "../API/BlogPositivePlugin.h"
-#include "../API/BlogPositivePost.h"
+#include "BlogPositiveBlog.h"
+#include "BlogPositivePlugin.h"
+#include "BlogPositivePost.h"
 
 
 const uint32 kPostEditorSavePost = 'PESP';

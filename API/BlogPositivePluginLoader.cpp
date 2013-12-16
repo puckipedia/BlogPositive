@@ -10,8 +10,8 @@
 
 #include "BlogPositiveBlog.h"
 #include "BlogPositivePluginWindow.h"
-#include "../BlogPositivePlugins/WordpressPlugin/WordpressPlugin.h"
-#include "../Example/ExamplePlugin.h"
+#include "WordpressPlugin.h"
+#include "ExamplePlugin.h"
 
 
 PluginList* BlogPositivePluginLoader::fList;

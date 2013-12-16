@@ -19,13 +19,13 @@
 #include <String.h>
 #include <TextView.h>
 
-#include "../API/BlogPositiveBlog.h"
-#include "../API/BlogPositivePlugin.h"
-#include "../API/BlogPositivePluginLoader.h"
+#include "BlogPositiveBlog.h"
+#include "BlogPositivePlugin.h"
+#include "BlogPositivePluginLoader.h"
 #include "BlogPositiveBlogListItem.h"
-#include "../BlogPositiveDelegate.h"
-#include "../BlogPositivePostList/BlogPositivePostListWindow.h"
-#include "../BlogPositiveSettings.h"
+#include "BlogPositiveDelegate.h"
+#include "BlogPositivePostListWindow.h"
+#include "BlogPositiveSettings.h"
 
 
 const int32 kBlogSelected = 'BPBS';

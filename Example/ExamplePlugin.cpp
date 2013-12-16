@@ -11,8 +11,8 @@
 #include <List.h>
 #include <Path.h>
 
-#include "../API/BlogPositiveBlog.h"
-#include "../API/BlogPositivePost.h"
+#include "BlogPositiveBlog.h"
+#include "BlogPositivePost.h"
 
 
 bool

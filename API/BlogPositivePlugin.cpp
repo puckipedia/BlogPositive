@@ -15,8 +15,8 @@
 #include <TextControl.h>
 #include <Window.h>
 
-#include "../BlogPositiveMain/BlogPositiveMainView.h"
-#include "../BlogPositiveSettings.h"
+#include "BlogPositiveMainView.h"
+#include "BlogPositiveSettings.h"
 
 #undef B_TRANSLATION_CONTEXT
 #define B_TRANSLATION_CONTEXT "BlogPositive Plugin"
