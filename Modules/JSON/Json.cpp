@@ -6,31 +6,40 @@
 #include <cctype>
 #include "Json.h"
 
-void
-JsonValue::AddSelf(BString* str)
+
+JsonValue::JsonValue()
 {
 	
 }
 
-void
-JsonString::AddString(const char* c)
+template<class T>
+T*
+ParseNew(JsonParser* parser)
 {
-	fString << c;
+	T* t = new T();
+	t->Parse(parser);
+	return t;
+}
+
+void
+JsonValue::Serialize(BString* str)
+{
+	
 }
 
 
 void
-JsonString::AddChar(char c)
+JsonValue::Parse(JsonParser* parser)
 {
-	fString << c;
+	
 }
 
 
 void
-JsonString::AddSelf(BString* str)
+JsonString::Serialize(BString* str)
 {
 	*str << "\"";
-	*str << fString;
+	*str << *this;
 	*str << "\"";
 }
 
@@ -49,6 +58,7 @@ JsonObject::JsonObject()
 
 }
 
+
 void
 JsonObject::AddPair(JsonString* str, JsonValue* val)
 {
@@ -56,15 +66,26 @@ JsonObject::AddPair(JsonString* str, JsonValue* val)
 }
 
 
+JsonValue*
+JsonObject::Get(BString key)
+{
+	for(int i = 0; i < fPairList->CountItems(); i++) {
+		JsonPair* pair = fPairList->ItemAt(i);
+		if(*pair->fName == key)
+			return pair->fValue;
+	}
+	return NULL;
+}
+
 void
-JsonObject::AddSelf(BString* str)
+JsonObject::Serialize(BString* str)
 {
 	*str << "{";
 	for (int i = 0; i < fPairList->CountItems(); i++) {
 		JsonPair* pair = fPairList->ItemAt(i);
-		pair->fName->AddSelf(str);
+		pair->fName->Serialize(str);
 		*str << ": ";
-		pair->fValue->AddSelf(str);
+		pair->fValue->Serialize(str);
 		if(i < fPairList->CountItems()-1) {
 			*str << ", ";
 		}
@@ -73,40 +94,21 @@ JsonObject::AddSelf(BString* str)
 }
 
 
-JsonNumber::JsonNumber(double d)
-	:
-	fDouble(d)
-{
-
-}
-
 void
-JsonNumber::AddSelf(BString* str)
+JsonNumber::Serialize(BString* str)
 {
 	*str << fDouble;
 }
 
 
-JsonArray::JsonArray()
-{
-	fObjectList = new BObjectList<JsonValue>();
-}
-
-
 void
-JsonArray::AddValue(JsonValue* Value)
-{
-	fObjectList->AddItem(Value);
-}
-
-void
-JsonArray::AddSelf(BString* str)
+JsonArray::Serialize(BString* str)
 {
 	*str << "[";
-	for (int i = 0; i < fObjectList->CountItems(); i++) {
-		JsonValue* val = fObjectList->ItemAt(i);
-		val->AddSelf(str);
-		if(i < fObjectList->CountItems()-1) {
+	for (int i = 0; i < CountItems(); i++) {
+		JsonValue* val = ItemAt(i);
+		val->Serialize(str);
+		if(i < CountItems()-1) {
 			*str << ", ";
 		}
 	}
@@ -117,14 +119,14 @@ JsonArray::AddSelf(BString* str)
 
 
 void
-JsonBool::AddSelf(BString* str)
+JsonBool::Serialize(BString* str)
 {
 	*str << fVal ? "true" : "false";
 }
 
 
 void
-JsonNull::AddSelf(BString* str)
+JsonNull::Serialize(BString* str)
 {
 	*str << "null";
 }
@@ -149,35 +151,41 @@ JsonParser::JsonParser(BString string)
 	JsonValue* thing;
 	switch(firstChar) {
 		case '{':
-			thing = TakeObject();
+			thing = ParseNew<JsonObject>(this);
 			break;
 		case '[':
-			thing = TakeArray();
+			thing = ParseNew<JsonArray>(this);
 			break;
 	}
 	BString str;
-	thing->AddSelf(&str);
+	thing->Serialize(&str);
 }
 
 
-JsonNumber*
-JsonParser::TakeNumber() {
+void
+JsonNumber::Parse(JsonParser* parser) {
 	BString numberPart;
-	TakeWhitespace();
-	if(Peek() == '-')
+	parser->TakeWhitespace();
+	if(parser->Peek() == '-') {
 		numberPart << '-';
-	while(isdigit(Peek()))
-		numberPart << TakeOne();
-	if(Peek() == '.')
+		parser->TakeOne();
+	}
+	while(isdigit(parser->Peek()))
+		numberPart << parser->TakeOne();
+	if(parser->Peek() == '.') {
 		numberPart << '.';
-	while(isdigit(Peek()))
-		numberPart << TakeOne();
-	if(Peek() == 'e')
+		parser->TakeOne();
+	}
+	while(isdigit(parser->Peek()))
+		numberPart << parser->TakeOne();
+	if(parser->Peek() == 'e') {
 		numberPart << 'e';
-	while(isdigit(Peek()))
-		numberPart << TakeOne();
+		parser->TakeOne();
+	}
+	while(isdigit(parser->Peek()))
+		numberPart << parser->TakeOne();
 	double i = strtod(numberPart.String(), NULL);
-	return new JsonNumber(i);
+	fDouble = i;
 }
 
 void
@@ -206,16 +214,15 @@ enum States {
 	StringTakeSpecial
 };
 
-JsonString*
-JsonParser::TakeString()
+void
+JsonString::Parse(JsonParser* parser)
 {
-	if(Peek() == '"')
-		TakeOne();
-	JsonString* String = new JsonString();
+	if(parser->Peek() == '"')
+		parser->TakeOne();
 	States state = StringTakeChar;
 	
 	char chr;
-	while(chr = TakeOne()) {
+	while(chr = parser->TakeOne()) {
 		switch (state) {
 			case StringTakeChar:
 				switch (chr) {
@@ -223,38 +230,38 @@ JsonParser::TakeString()
 						state = StringTakeSpecial;
 						break;
 					case '"':
-						return String;
+						return;
 						break;
 					default:
-						String->AddChar(chr);
+						*this << chr;
 						break;
 				}
 				break;
 			case StringTakeSpecial:
 				switch(chr) {
 					case 'b':
-						String->AddChar('\b');
+						*this << '\b';
 						break;
 					case 'f':
-						String->AddChar('\f');
+						*this << '\f';
 						break;
 					case 'n':
-						String->AddChar('\n');
+						*this << '\n';
 						break;
 					case 'r':
-						String->AddChar('\r');
+						*this << '\r';
 						break;
 					case 't':
-						String->AddChar('\t');
+						*this << '\t';
 						break;
 					case 'u':
-						TakeOne();
-						TakeOne();
-						TakeOne();
-						TakeOne();
+						parser->TakeOne();
+						parser->TakeOne();
+						parser->TakeOne();
+						parser->TakeOne();
 						break;
 					default:
-						String->AddChar(chr);
+						*this << chr;
 				}
 				break;
 		}
@@ -267,7 +274,7 @@ JsonParser::TakeValue()
 	TakeWhitespace();
 	switch(Peek()) {
 		case '"':
-			return TakeString();
+			return ParseNew<JsonString>(this);
 			break;
 		case '0':
 		case '1':
@@ -280,13 +287,13 @@ JsonParser::TakeValue()
 		case '8':
 		case '9':
 		case '-':
-			return TakeNumber();
+			return ParseNew<JsonNumber>(this);
 			break;
 		case '[':
-			return TakeArray();
+			return ParseNew<JsonArray>(this);
 			break;
 		case '{':
-			return TakeObject();
+			return ParseNew<JsonObject>(this);
 			break;
 		case 't':
 			TakeOne();
@@ -313,59 +320,45 @@ JsonParser::TakeValue()
 	}
 }
 
-JsonObject*
-JsonParser::TakeObject()
+void
+JsonObject::Parse(JsonParser* parser)
 {
-	TakeUntil('{');
-	TakeOne();
+	parser->TakeUntil('{');
+	parser->TakeOne();
 	char chr;
-	JsonObject* obj = new JsonObject();
 	JsonString* name;
-	while (chr = Peek()) {
+	while (chr = parser->Peek()) {
 		if (chr == '}') {
-			TakeOne();
-			return obj;
+			parser->TakeOne();
+			return;
 		}
-		TakeWhitespace();
-		name = TakeString();
-		TakeUntil(':');
-		TakeOne();
-		obj->AddPair(name, TakeValue());
-		TakeWhitespace();
-		if(Peek() == ',')
-			TakeOne();
-		TakeWhitespace();
+		parser->TakeWhitespace();
+		name = ParseNew<JsonString>(parser);
+		parser->TakeUntil(':');
+		parser->TakeOne();
+		AddPair(name, parser->TakeValue());
+		parser->TakeWhitespace();
+		if(parser->Peek() == ',')
+			parser->TakeOne();
+		parser->TakeWhitespace();
 	}
 }
 
-JsonArray*
-JsonParser::TakeArray()
+void
+JsonArray::Parse(JsonParser* parser)
 {
 	char chr;
-	JsonArray* arr = new JsonArray();
+	parser->TakeOne();
 	
-	TakeOne();
-	
-	while(chr = Peek()) {
+	while(chr = parser->Peek()) {
 		if(chr == ']') {
-			TakeOne();
-			return arr;
+			parser->TakeOne();
+			return;
 		}
-		TakeWhitespace();
-		arr->AddValue(TakeValue());
-		TakeWhitespace();
-		if(Peek() == ',')
-			TakeOne();
+		parser->TakeWhitespace();
+		AddItem(parser->TakeValue());
+		parser->TakeWhitespace();
+		if(parser->Peek() == ',')
+			parser->TakeOne();
 	}
-}
-
-
-void main(int argv, char** argc)
-{
-	BFile file("big.json", B_READ_ONLY);
-	off_t size;
-	file.GetSize(&size);
-	char* c = new char[size];
-	file.Read((void*)c, size);
-	JsonParser* parse = new JsonParser(BString(c));
 }

@@ -4,19 +4,20 @@
 #include <ObjectList.h>
 
 class BString;
+class JsonParser;
 
 class JsonValue {
 public:
-	virtual void AddSelf(BString* str);
+	JsonValue();
+	JsonValue(JsonParser* parser);
+	virtual void Serialize(BString* str);
+	virtual void Parse(JsonParser* parser);
 };
 
-class JsonString : public JsonValue {
+class JsonString : public JsonValue, public BString {
 public:
-	virtual void AddString(const char* c);
-	virtual void AddChar(char c);
-	void AddSelf(BString* str);
-private:
-	BString fString;
+	void Serialize(BString* str);
+	void Parse(JsonParser* parser);
 };
 
 class JsonPair {
@@ -30,38 +31,37 @@ class JsonObject : public JsonValue {
 public:
 	JsonObject();
 	virtual void AddPair(JsonString* str, JsonValue* val);
-	void AddSelf(BString *str);
+	void Serialize(BString *str);
+	void Parse(JsonParser* parser);
+	JsonValue* Get(BString key);
 private:
 	BObjectList<JsonPair>* fPairList;
 };
 
 class JsonNumber : public JsonValue {
 public:
-	JsonNumber(double d);
-	void AddSelf(BString* str);
+	void Serialize(BString* str);
+	void Parse(JsonParser* parser);
 private:
 	double fDouble;
 };
 
-class JsonArray : public JsonValue {
+class JsonArray : public JsonValue, public BObjectList<JsonValue> {
 public:
-	JsonArray();
-	void AddValue(JsonValue* Value);
-	void AddSelf(BString* str);
-private:
-	BObjectList<JsonValue>* fObjectList;
+	void Serialize(BString* str);
+	void Parse(JsonParser* parser);
 };
 
 class JsonBool : public JsonValue {
 public:
 	JsonBool(bool val) {}
-	void AddSelf(BString* str);
+	void Serialize(BString* str);
 private:
 	bool fVal;
 };
 
 class JsonNull : public JsonValue {
-	void AddSelf(BString* str);
+	void Serialize(BString* str);
 };
 
 
@@ -69,20 +69,17 @@ class JsonNull : public JsonValue {
 class JsonParser {
 public:
 	JsonParser(BString str);
-private:
+	JsonValue* Value();
 	void TakeWhitespace();
 	char Peek();
 	char TakeOne();
-	JsonString* TakeString();
-	JsonValue* TakeValue();
-	JsonNumber* TakeNumber();
-	JsonArray* TakeArray();
-	JsonObject* TakeObject();
 	void TakeUntil(char end);
 	void GoBack();
+	JsonValue* TakeValue();
 private:
 	int32 fPointer;
 	BString fString;
+	JsonValue* fValue;
 };
 
 #endif

@@ -14,7 +14,7 @@ SRCS =	API/BlogPositiveBlog.cpp API/BlogPositivePlugin.cpp \
 	BlogPositivePostList/BlogPositivePostListView.cpp \
 	BlogPositivePostList/BlogPositivePostListWindow.cpp \
 	BlogPositiveSettings.cpp Example/ExamplePlugin.cpp \
-	main.cpp
+	Modules/JSON/Json.cpp main.cpp
 
 LIBS = be root curl network z textencoding localestub
 RDEFS = haiku.rdef
