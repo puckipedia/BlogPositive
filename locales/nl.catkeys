@@ -21,4 +21,5 @@ Save	Post Editor View		Opslaan
 Sometimes things go wrong:\nMaybe the server is down,\nMaybe it needs help.	Wordpress Plugin		Soms gaan dingen mis:\nMisschien is de server down,\nMisschien is het ziek.
 This: Not a haiku\nBut WordPress had an error:\n%s	Wordpress Plugin	%s will be the wordpress returned error	Dit is geen haiku\nMaar WordPress had een error:\n%s
 Time goes on and on:\nThe blog you seek is not here\nMaybe a typo?	Wordpress Plugin		Tijd gaat door en door:\nDe blog die je zoekt: Niet hier!\nMisschien een typo?
+Wordpress error	Wordpress Plugin		Wordpress fout
 Wordpress.com or self-hosted	Wordpress Plugin		Wordpress.com or zelf-gehost
