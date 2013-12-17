@@ -43,7 +43,7 @@ BlogPositiveApp::ReadyToRun()
 int
 main()
 {
-	curl_global_init(CURL_GLOBAL_NOTHING);
+	curl_global_init(CURL_GLOBAL_SSL);
 
 	BlogPositiveApp app;
 	app.Run();

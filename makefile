@@ -9,6 +9,7 @@ SRCS =	API/BlogPositiveBlog.cpp API/BlogPositivePlugin.cpp \
 	BlogPositivePlugins/WordpressPlugin/WordpressPlugin.cpp \
 	BlogPositivePlugins/WordpressPlugin/xmlnode.cpp \
 	BlogPositivePlugins/WordpressPlugin/XmlRpcWrapper.cpp \
+	BlogPositivePlugins/BloggerPlugin/BloggerPlugin.cpp \
 	BlogPositivePostEditor/BlogPositivePostEditorView.cpp \
 	BlogPositivePostEditor/BlogPositivePostEditorWindow.cpp \
 	BlogPositivePostList/BlogPositivePostListView.cpp \

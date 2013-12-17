@@ -8,10 +8,11 @@
 
 #include <List.h>
 
+#include "BloggerPlugin.h"
 #include "BlogPositiveBlog.h"
 #include "BlogPositivePluginWindow.h"
-#include "WordpressPlugin.h"
 #include "ExamplePlugin.h"
+#include "WordpressPlugin.h"
 
 
 PluginList* BlogPositivePluginLoader::fList;
@@ -21,6 +22,7 @@ void
 BlogPositivePluginLoader::Initialize()
 {
 	fList = new PluginList();
+	fList->AddItem(new BloggerPlugin());
 	fList->AddItem(new ExamplePlugin());
 	fList->AddItem(new WordpressPlugin());
 }

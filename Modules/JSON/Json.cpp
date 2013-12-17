@@ -157,8 +157,7 @@ JsonParser::JsonParser(BString string)
 			thing = ParseNew<JsonArray>(this);
 			break;
 	}
-	BString str;
-	thing->Serialize(&str);
+	fValue = thing;
 }
 
 
@@ -361,4 +360,10 @@ JsonArray::Parse(JsonParser* parser)
 		if(parser->Peek() == ',')
 			parser->TakeOne();
 	}
+}
+
+JsonValue*
+JsonParser::Value()
+{
+	return fValue;
 }

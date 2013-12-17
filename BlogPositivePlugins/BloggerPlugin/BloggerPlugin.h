@@ -8,7 +8,7 @@
 #include "BlogPositivePlugin.h"
 #include "BlogPositivePost.h"
 
-class WordpressPlugin : public BlogPositivePlugin
+class BloggerPlugin : public BlogPositivePlugin
 {
 public:
 	uint32				Version();
