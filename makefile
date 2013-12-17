@@ -17,7 +17,7 @@ SRCS =	API/BlogPositiveBlog.cpp API/BlogPositivePlugin.cpp \
 	BlogPositiveSettings.cpp Example/ExamplePlugin.cpp \
 	Modules/JSON/Json.cpp main.cpp
 
-LIBS = be root curl network z textencoding localestub
+LIBS = be root curl network z textencoding localestub $(STDCPPLIBS)
 RDEFS = haiku.rdef
 LOCALES = en nl
 SYSTEM_INCLUDE_PATHS = /system/develop/headers/curl
