@@ -35,7 +35,7 @@ private:
 							BString auth);
 	void				GetAuthentication(BString Auth,
 							BString* Username, BString* pass,
-							BString* XmlRPCUrl);
+							BString* XmlRPCUrl, BString* blogId);
 };
 
 #endif
