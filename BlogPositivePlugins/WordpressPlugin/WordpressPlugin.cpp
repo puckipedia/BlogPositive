@@ -139,6 +139,7 @@ WPCreateBlog::WPCreateBlog(BlogPositiveMainView* aView,
 	fUserControl->SetAlignment(B_ALIGN_RIGHT, B_ALIGN_LEFT);
 	fPassControl = new BTextControl("UserControl", "Password: ", "", NULL);
 	fPassControl->SetAlignment(B_ALIGN_RIGHT, B_ALIGN_LEFT);
+	fPassControl->TextView()->HideTyping(true);
 	fUrlControl = new BTextControl("UserControl", "Url: ","", NULL);
 	fUrlControl->SetAlignment(B_ALIGN_RIGHT, B_ALIGN_LEFT);
 	fBlogIdControl = new BTextControl("UserControl", "Blog ID: ", "", NULL);
