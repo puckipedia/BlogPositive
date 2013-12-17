@@ -22,7 +22,8 @@ void
 BlogPositivePluginLoader::Initialize()
 {
 	fList = new PluginList();
-	fList->AddItem(new BloggerPlugin());
+//	fList->AddItem(new BloggerPlugin());
+	// Disabled temporarily (haikuporter release)
 	fList->AddItem(new ExamplePlugin());
 	fList->AddItem(new WordpressPlugin());
 }

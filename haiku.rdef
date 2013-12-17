@@ -4,14 +4,14 @@ resource app_name_catalog_entry "x-vnd.BlogPositive:System name:blogpositive";
 
 resource app_version {
         major = 0,
-        middle = 0,
-        minor = 1,
+        middle = 1,
+        minor = 0,
 
         variety = B_APPV_BETA,
         internal = 0,
 
         short_info = "BlogPositive",
-        long_info = "Blog to most webservices in haiku, using BlogPositive."
+        long_info = "Blog to most webservices in Haiku, using BlogPositive."
 };
 
 
