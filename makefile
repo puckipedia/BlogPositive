@@ -20,9 +20,7 @@ SRCS =	API/BlogPositiveBlog.cpp API/BlogPositivePlugin.cpp \
 LIBS = be root curl network z textencoding localestub
 RDEFS = haiku.rdef
 LOCALES = en nl
-
-SYSTEM_INCLUDE_PATHS = $(BUILDHOME)/headers/curl
-
+SYSTEM_INCLUDE_PATHS = /system/develop/headers/curl
 ## include the makefile-engine
 DEVEL_DIRECTORY := \
 	$(shell findpaths -r "makefile_engine" B_FIND_PATH_DEVELOP_DIRECTORY)
