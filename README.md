@@ -11,6 +11,4 @@ Languages done:
  - English
  - Dutch
 
-Usage
-====
-Seriously?
+![](https://raw.github.com/puckipedia/BlogPositive/master/screenshots/MoveAlongNow.png)
