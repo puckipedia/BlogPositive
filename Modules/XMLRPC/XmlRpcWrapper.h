@@ -49,7 +49,7 @@ public:
 										BString value);
 	void							PushContent(BString* string);
 	BString							Name();
-	BString							Value();
+	BaseXmlValue*					Value();
 private:
 	BString 						fName;
 	BaseXmlValue*					fValue;
@@ -64,6 +64,7 @@ public:
 	void							AddItem(BString name, BString value);
 	int32							Items();
 	XmlNameValuePair*				ItemAt(int32 i);
+	BaseXmlValue*					Get(BString name);
 private:
 	BObjectList<XmlNameValuePair>*	fList;
 };
@@ -82,5 +83,8 @@ private:
 	BString							fMethodName;
 	BObjectList<BaseXmlValue>*		fXmlValues;
 };
+
+class XmlNode;
+XmlArray* ParseResponse(XmlNode* baseNode);
 
 #endif

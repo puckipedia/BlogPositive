@@ -7,15 +7,14 @@ SRCS =	API/BlogPositiveBlog.cpp API/BlogPositivePlugin.cpp \
 	BlogPositiveMain/BlogPositiveBlogListItem.cpp BlogPositiveMain/BlogPositiveMainView.cpp \
 	BlogPositiveMain/BlogPositiveMainWindow.cpp BlogPositiveSharedWindow.cpp \
 	BlogPositivePlugins/WordpressPlugin/WordpressPlugin.cpp \
-	BlogPositivePlugins/WordpressPlugin/xmlnode.cpp \
-	BlogPositivePlugins/WordpressPlugin/XmlRpcWrapper.cpp \
 	BlogPositivePlugins/BloggerPlugin/BloggerPlugin.cpp \
 	BlogPositivePostEditor/BlogPositivePostEditorView.cpp \
 	BlogPositivePostEditor/BlogPositivePostEditorWindow.cpp \
 	BlogPositivePostList/BlogPositivePostListView.cpp \
 	BlogPositivePostList/BlogPositivePostListWindow.cpp \
 	BlogPositiveSettings.cpp Example/ExamplePlugin.cpp \
-	Modules/JSON/Json.cpp main.cpp
+	Modules/JSON/Json.cpp Modules/XML/xmlnode.cpp \
+	Modules/XMLRPC/XmlRpcWrapper.cpp main.cpp
 
 LIBS = be root curl network z textencoding localestub $(STDCPPLIBS)
 RDEFS = haiku.rdef
