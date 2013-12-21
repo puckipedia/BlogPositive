@@ -22,6 +22,7 @@ public:
 									XmlValue(BString string, BString aBoxType = "string");
 									XmlValue(int fAs, BString aBoxType = "i4");
 									XmlValue(double fDs, BString aBoxType = "string");
+	BString							Value();
 private:
 	BString							fValue;
 	BString							boxType;

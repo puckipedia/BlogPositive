@@ -15,7 +15,13 @@ void
 XmlValue::PushContent(BString* string)
 {
 	*string << "<value><" << boxType << ">";
-	*string << fValue;
+	BString value(fValue);
+	value.ReplaceAll("&", "&amp;");
+	value.ReplaceAll("\"", "&quot;");
+	value.ReplaceAll("'", "&apos;");
+	value.ReplaceAll("<", "&lt;");
+	value.ReplaceAll(">", "&gt;");
+	*string << value;
 	*string << "</" << boxType << "></value>";
 }
 
@@ -41,6 +47,13 @@ XmlValue::XmlValue(double doubleVal, BString aBoxType)
 	boxType(aBoxType)
 {
 	fValue << doubleVal;
+}
+
+
+BString
+XmlValue::Value()
+{
+	return fValue;
 }
 
 
@@ -115,10 +128,10 @@ XmlNameValuePair::Value()
 void
 XmlNameValuePair::PushContent(BString* string)
 {
-	*string << "<value><member>";
+	*string << "<member>";
 	*string << "<name>" << fName << "</name>";
 	fValue->PushContent(string);
-	*string << "</member></value>";
+	*string << "</member>";
 }
 
 
@@ -140,6 +153,7 @@ XmlStruct::Get(BString name)
 		if (fList->ItemAt(i)->Name() == name)
 			return fList->ItemAt(i)->Value();
 	}
+	return NULL;
 }
 
 
@@ -153,6 +167,13 @@ void
 XmlStruct::AddItem(XmlNameValuePair* pair)
 {
 	fList->AddItem(pair);
+}
+
+
+void
+XmlStruct::AddItem(BString name, BString value)
+{
+	AddItem(new XmlNameValuePair(name, new XmlValue(value)));
 }
 
 
@@ -245,7 +266,7 @@ ParseValue(XmlNode* baseNode)
 		if (name == "array")
 			return ParseArray(baseNode->ItemAt(0));
 		BString value = baseNode->ItemAt(0)->Value();
-		return new XmlValue(name, value);
+		return new XmlValue(value, name);
 	}
 }
 
@@ -285,10 +306,10 @@ XmlArray*
 ParseResponse(XmlNode* baseNode)
 {
 	XmlArray* responseArray = new XmlArray;
-	XmlNode* paramsNode = baseNode->ItemAt(0)->ItemAt(0);
+	XmlNode* paramsNode = baseNode->FindChild("params", NULL, true);
 
 	for (int i = 0; i < paramsNode->Children(); i++) {
-		responseArray->AddItem(ParseValue(paramsNode->ItemAt(i)));
+		responseArray->AddItem(ParseValue(paramsNode->ItemAt(i)->ItemAt(0)));
 	}
 
 	return responseArray;
