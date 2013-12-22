@@ -132,10 +132,10 @@ public:
 
 	// saves this node and its children to the specified file, producing a valid XML-file
 	bool		SaveToFile(const char* filename) const;
-    BString *SavetoString() const;
+	BString*	SaveToString() const;
 protected:
 	// internal: Save this node and its children, does not output header and footer, use SaveToFile instead!
-    bool SaveString(BString *str, int depth) const;
+	bool		SaveString(BString* str, int depth) const;
 	bool		SaveNode(int ref, int depth) const;
 
 public:

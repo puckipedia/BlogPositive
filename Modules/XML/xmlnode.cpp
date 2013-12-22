@@ -1070,11 +1070,10 @@ XmlNode::SaveToFile(const char* filename) const
 }
 
 BString *
-XmlNode::SavetoString() const
+XmlNode::SaveToString() const
 {
     BString *dummy = new BString("<?xml version=\"1.0\"?>\n");
 	int c = Children();	
-	printf("I have %d children", c);
 	for (int i=0; i<c; i++) {
 	    ItemAt(i)->SaveString(dummy, 0);
 	}
