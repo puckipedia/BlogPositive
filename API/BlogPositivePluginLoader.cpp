@@ -11,7 +11,6 @@
 #include "BloggerPlugin.h"
 #include "BlogPositiveBlog.h"
 #include "BlogPositivePluginWindow.h"
-#include "ExamplePlugin.h"
 #include "LiveJournalPlugin.h"
 #include "WordpressPlugin.h"
 
@@ -23,10 +22,9 @@ void
 BlogPositivePluginLoader::Initialize()
 {
 	fList = new PluginList();
-//	fList->AddItem(new BloggerPlugin());
+	// fList->AddItem(new BloggerPlugin());
+		// Disabled temporarily (haikuporter release)
 	fList->AddItem(new LiveJournalPlugin());
-	// Disabled temporarily (haikuporter release)
-	fList->AddItem(new ExamplePlugin());
 	fList->AddItem(new WordpressPlugin());
 }
 
