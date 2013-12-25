@@ -10,7 +10,6 @@
 
 #include "BloggerPlugin.h"
 #include "BlogPositiveBlog.h"
-#include "BlogPositivePluginWindow.h"
 #include "LiveJournalPlugin.h"
 #include "WordpressPlugin.h"
 

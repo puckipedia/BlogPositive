@@ -20,7 +20,7 @@
 #define B_TRANSLATION_CONTEXT "Shared Window"
 
 
-class BlogPositiveSharedDelegate : public BlogPositiveDelegate
+class BlogPositiveSharedDelegate : public BlogPositiveMainDelegate
 {
 	public:
 				BlogPositiveSharedDelegate(BlogPositiveSharedWindow* window);

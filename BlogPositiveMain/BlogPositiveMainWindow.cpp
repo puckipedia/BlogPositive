@@ -19,7 +19,7 @@
 #define B_TRANSLATION_CONTEXT "Main Window"
 
 
-class BlogPositiveMainDelegate : public BlogPositiveDelegate
+class BlogPositiveWinDelegate : public BlogPositiveMainDelegate
 {
 	public:
 		void	OpenPostList(BlogPositiveBlog* blog);
@@ -27,7 +27,7 @@ class BlogPositiveMainDelegate : public BlogPositiveDelegate
 
 
 void
-BlogPositiveMainDelegate::OpenPostList(BlogPositiveBlog* blog)
+BlogPositiveWinDelegate::OpenPostList(BlogPositiveBlog* blog)
 {
 	BlogPositivePostListWindow* window
 		= new BlogPositivePostListWindow(blog, BRect(100, 100, 400, 600));
@@ -41,7 +41,7 @@ BlogPositiveMainWindow::BlogPositiveMainWindow(BRect frame)
 		B_TITLED_WINDOW, B_AUTO_UPDATE_SIZE_LIMITS)
 {
 	BlogPositiveMainView* view
-		= new BlogPositiveMainView("MainView", new BlogPositiveMainDelegate());
+		= new BlogPositiveMainView("MainView", new BlogPositiveWinDelegate());
 	AddHandler(view);
 
 	SetLayout(new BGroupLayout(B_VERTICAL, 0));

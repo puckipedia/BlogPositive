@@ -10,7 +10,7 @@
 #include "BlogPositiveBlog.h"
 
 class BlogPositiveBlogListView;
-class BlogPositiveDelegate;
+class BlogPositiveMainDelegate;
 class BMenuBar;
 class BMenuItem;
 class BMenu;
@@ -19,7 +19,7 @@ class BMessage;
 class BlogPositiveMainView : public BView {
 public:
 								BlogPositiveMainView(const char* name,
-									BlogPositiveDelegate* del);
+									BlogPositiveMainDelegate* del);
 
 	void						MessageReceived(BMessage* message);
 	void						AttachedToWindow();
@@ -31,7 +31,7 @@ private:
 	BMenu*						fNewMenu;
 	BMenuItem*					fRemoveMenuItem;
 	BlogPositiveBlogListView*	fListView;
-	BlogPositiveDelegate*		fDelegate;
+	BlogPositiveMainDelegate*	fDelegate;
 };
 
 #endif

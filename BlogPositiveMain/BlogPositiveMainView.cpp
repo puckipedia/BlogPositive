@@ -137,7 +137,7 @@ BlogPositiveMainView::AttachedToWindow()
 
 
 BlogPositiveMainView::BlogPositiveMainView(const char* name,
-	BlogPositiveDelegate* del)
+	BlogPositiveMainDelegate* del)
 	:
 	BView(name, 0)
 {
