@@ -19,8 +19,8 @@
 #include <Window.h>
 
 #include "BlogPositiveBlog.h"
+#include "BlogPositiveDelegate.h"
 #include "BlogPositivePost.h"
-#include "BlogPositiveMainView.h"
 #include "BlogPositiveSettings.h"
 #include "xmlnode.h"
 #include "XmlRpcWrapper.h"
@@ -107,31 +107,31 @@ GetAllBlogs(BString userName, BString password, BString xmlrpcurl)
 
 class WPCreateBlog : public BWindow {
 public:
-							WPCreateBlog(BlogPositiveMainView* aView,
+							WPCreateBlog(BlogPositiveBlogListDelegate* dele,
 								BlogPositivePlugin* pl);
 	void					SetBlogHandler(int32 blogHandler);
 	void					MessageReceived(BMessage* message);
 	int32					BlogHandler();
 private:
-	int32 					fBlogHandler;
-	BButton*				fCreateButton;
-	BTextControl*			fNameControl;
-	BTextControl*			fUserControl;
-	BTextControl*			fPassControl;
-	BTextControl*			fUrlControl;
-	BTextControl*			fBlogIdControl;
-	BlogPositiveMainView*	fMainView;
+	int32 						fBlogHandler;
+	BButton*					fCreateButton;
+	BTextControl*				fNameControl;
+	BTextControl*				fUserControl;
+	BTextControl*				fPassControl;
+	BTextControl*				fUrlControl;
+	BTextControl*				fBlogIdControl;
+	BlogPositiveBlogListDelegate*	fDelegate;
 };
 
 const uint32 kChooseBlog = 'CHBL';
 
-WPCreateBlog::WPCreateBlog(BlogPositiveMainView* aView,
+WPCreateBlog::WPCreateBlog(BlogPositiveBlogListDelegate* dele,
 	BlogPositivePlugin* pl)
 	:
 	BWindow(BRect(100, 100, 400, 230), B_TRANSLATE("Create Blog"),
 		B_MODAL_WINDOW, B_AUTO_UPDATE_SIZE_LIMITS)
 {
-	fMainView = aView;
+	fDelegate = dele;
 	
 	fNameControl = new BTextControl("NameControl", "Name: ", "", NULL);
 	fNameControl->SetAlignment(B_ALIGN_RIGHT, B_ALIGN_LEFT);
@@ -244,20 +244,12 @@ WPCreateBlog::MessageReceived(BMessage* message)
 				auth << "/xmlrpc.php";
 			}
 			auth << "|||" << fBlogIdControl->Text();
-			BlogPositiveSettings* settings = new BlogPositiveSettings("bloglist");
-			BlogList* lis = BlogPositiveBlog::DeserializeList(settings, "blogs");
 			BlogPositiveBlog* blog = new BlogPositiveBlog();
 			blog->SetName(fNameControl->Text());
 			blog->SetAuthentication(auth.String());
 			blog->SetBlogHandler(fBlogHandler);
-			lis->AddItem(blog);
-			if (fMainView->LockLooper())
-			{
-				fMainView->Reload(lis);
-				fMainView->UnlockLooper();
-			}
-			BlogPositiveSettings::SaveOther(
-				BlogPositiveBlog::SerializeList(lis, "blogs"), "bloglist");
+			gBlogList->AddItem(blog);
+			fDelegate->ReloadBlogs();
 			Quit();
 			break;
 		}
@@ -607,7 +599,7 @@ WordpressPlugin::CreateNewPost(BlogPositiveBlog* aBlog, const char* aName)
 
 
 void
-WordpressPlugin::OpenNewBlogWindow(BlogPositiveMainView* mainView)
+WordpressPlugin::OpenNewBlogWindow(BlogPositiveBlogListDelegate* dele)
 {
-	(new WPCreateBlog(mainView, this))->Show();
+	(new WPCreateBlog(dele, this))->Show();
 }

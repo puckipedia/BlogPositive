@@ -37,6 +37,23 @@ const int32 kRemoveCurrentBlog = 'BPRC';
 #define B_TRANSLATION_CONTEXT "Main View"
 
 
+class BlogPositiveMainViewDelegate : public BlogPositiveBlogListDelegate {
+public:
+		BlogPositiveMainViewDelegate(BlogPositiveMainView* view)
+		:
+		fView(view)
+		{}
+
+	void	ReloadBlogs() {
+		if (fView->LockLooper()) {
+			fView->Reload(gBlogList);
+			fView->UnlockLooper();
+		}
+	}
+private:
+	BlogPositiveMainView* fView;
+};
+
 class BlogPositiveBlogListView : public BListView {
 public:
 				BlogPositiveBlogListView();
@@ -83,7 +100,7 @@ BlogPositiveMainView::MessageReceived(BMessage* message)
 			int32 index = message->GetInt32("ding", 0);
 			PluginList* pluginList = BlogPositivePluginLoader::List();
 			BlogPositivePlugin* plugin = pluginList->ItemAt(index);
-			plugin->OpenNewBlogWindow(this);
+			plugin->OpenNewBlogWindow(new BlogPositiveMainViewDelegate(this));
 			break;
 		}
 		default:
@@ -99,21 +116,17 @@ BlogPositiveMainView::RemoveBlog()
 	int32 sel = fListView->CurrentSelection();
 	if (sel == -1)
 		return;
-	BlogPositiveSettings* settings = new BlogPositiveSettings("bloglist");
-	BlogList* lis = BlogPositiveBlog::DeserializeList(settings, "blogs");
 	BlogPositiveBlogListItem* listItem
 		= static_cast<BlogPositiveBlogListItem*>(fListView->ItemAt(sel));
 	BlogPositiveBlog* blog = listItem->Blog();
-	for (int i = 0; i < lis->CountItems(); i++) {
-		if (strcmp(blog->Name(), lis->ItemAt(i)->Name()) == 0) {
-			lis->RemoveItemAt(i);
+	for (int i = 0; i < gBlogList->CountItems(); i++) {
+		if (strcmp(blog->Name(), gBlogList->ItemAt(i)->Name()) == 0) {
+			gBlogList->RemoveItemAt(i);
 			break;
 		}
 	}
-	BlogPositiveSettings::SaveOther(BlogPositiveBlog::SerializeList(lis,
-		"blogs"), "bloglist");
 
-	Reload(lis);
+	Reload(gBlogList);
 }
 
 
@@ -152,10 +165,8 @@ BlogPositiveMainView::BlogPositiveMainView(const char* name,
 	fMenuBar->AddItem(fNewMenu);
 
 	PluginList* pluginList = BlogPositivePluginLoader::List();
-	BlogPositiveSettings* settings = new BlogPositiveSettings("bloglist");
 
-	BlogList* lis = BlogPositiveBlog::DeserializeList(settings, "blogs");
-	fListView->Reload(lis);
+	fListView->Reload(gBlogList);
 
 	for (int i = 0; i < pluginList->CountItems(); i++) {
 		BlogPositivePlugin* pl = pluginList->ItemAt(i);

@@ -10,6 +10,7 @@
 #include "BlogPositivePost.h"
 
 class BlogPositiveBlog;
+class BlogPositiveBlogListDelegate;
 class BString;
 class XmlNode;
 class XmlRpcRequest;
@@ -29,7 +30,7 @@ public:
 	BlogPositivePost*	CreateNewPost(BlogPositiveBlog* aBlog,
 							const char* aName);
 	void				RemovePost(BlogPositivePost* aPost);
-	void				OpenNewBlogWindow(BlogPositiveMainView* main);
+	void				OpenNewBlogWindow(BlogPositiveBlogListDelegate* dele);
 private:
 	XmlNode*			Request(XmlRpcRequest* r, BString* responseString,
 							BString auth);

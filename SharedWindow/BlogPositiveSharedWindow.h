@@ -15,6 +15,7 @@ class BlogPositiveSharedWindow : public BWindow
 {
 public:
 				BlogPositiveSharedWindow(BRect frame);
+	bool			QuitRequested();
 	BSplitView*	SplitView();
 private:
 	BSplitView*	fSplitView;

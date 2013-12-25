@@ -5,6 +5,7 @@
 #ifndef BP_DELEGATE_H
 #define BP_DELEGATE_H
 
+class BlogPositiveBlog;
 
 class BlogPositiveMainDelegate
 {
@@ -21,7 +22,7 @@ public:
 class BlogPositivePostListDelegate
 {
 public:
-	virtual	void	ReloadBlogs() {};
+	virtual	void	ReloadPosts() {};
 };
 
 #endif

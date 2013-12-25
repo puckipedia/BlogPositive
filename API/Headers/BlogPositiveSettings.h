@@ -8,6 +8,8 @@
 
 #include <Message.h>
 
+#include "BlogPositiveBlog.h"
+
 class BPath;
 
 class BlogPositiveSettings : public BMessage {
@@ -17,9 +19,19 @@ public:
 
 	void		Save();
 	static void	SaveOther(BMessage* message, const char* settingsName);
-
+	static void	DestructGlobals() {
+				fStatic.Destruct();
+			}
 private:
+	static class _Init {
+	public:
+			_Init();
+		void	Destruct();
+	}		fStatic;
 	BPath*		fSettingsPath;
 };
+
+extern BlogList* gBlogList;
+
 
 #endif BP_SETTINGS_H

@@ -7,18 +7,18 @@
 ## Application Specific Settings ---------------------------------------------
 
 # specify the name of the binary
-NAME= BlogPositive
+NAME= LiveJournal
 
 # specify the type of binary
 #	APP:	Application
 #	SHARED:	Shared library or add-on
 #	STATIC:	Static library archive
 #	DRIVER: Kernel Driver
-TYPE= APP
+TYPE= SHARED
 
 # 	if you plan to use localization features 
 # 	specify the application MIME siganture
-APP_MIME_SIG= application/x-vnd.BlogPositive
+APP_MIME_SIG= 
 
 #	add support for new Pe and Eddie features
 #	to fill in generic makefile
@@ -34,21 +34,11 @@ APP_MIME_SIG= application/x-vnd.BlogPositive
 #	if two source files with the same name (source.c or source.cpp)
 #	are included from different directories.  Also note that spaces
 #	in folder names do not work well with this makefile.
-SRCS= 	API/Source/BlogPositiveBlog.cpp API/Source/BlogPositivePlugin.cpp \
-	API/Source/BlogPositivePost.cpp API/Source/BlogPositiveSettings.cpp \
-	BlogPositiveMain/BlogPositiveBlogListItem.cpp BlogPositiveMain/BlogPositiveMainView.cpp \
-	BlogPositiveMain/BlogPositiveMainWindow.cpp BlogPositivePlugins/BloggerPlugin/BloggerPlugin.cpp \
-	BlogPositivePlugins/LiveJournal/LiveJournalPlugin.cpp BlogPositivePlugins/WordpressPlugin/WordpressPlugin.cpp \
-	BlogPositivePostEditor/BlogPositivePostEditorView.cpp BlogPositivePostEditor/BlogPositivePostEditorWindow.cpp \
-	BlogPositivePostList/BlogPositivePostListView.cpp BlogPositivePostList/BlogPositivePostListWindow.cpp \
-	Example/ExamplePlugin.cpp main.cpp \
-	Modules/JSON/Json.cpp Modules/XML/xmlnode.cpp \
-	Modules/XMLRPC/XmlRpcWrapper.cpp PluginLoader/BlogPositivePluginLoader.cpp \
-	SharedWindow/BlogPositiveSharedWindow.cpp
+SRCS= LiveJournalPlugin.cpp
 
 #	specify the resource definition files to use
 #	full path or a relative path to the resource file can be used.
-RDEFS= haiku.rdef
+RDEFS= 
 	
 #	specify the resource files to use. 
 #	full path or a relative path to the resource file can be used.
@@ -76,7 +66,7 @@ RSRCS=
 #		naming scheme you need to specify the path to the library
 #		and it's name
 #		library: my_lib.a entry: my_lib.a or path/my_lib.a
-LIBS= be curl locale localestub network textencoding z
+LIBS= 
 
 #	specify additional paths to directories following the standard
 #	libXXX.so or libXXX.a naming scheme.  You can specify full paths
@@ -94,7 +84,7 @@ SYSTEM_INCLUDE_PATHS = /system/develop/headers/curl
 #	additional paths to look for local headers
 #	thes use the form: #include "header"
 #	source file directories are automatically included
-LOCAL_INCLUDE_PATHS = API/Headers
+LOCAL_INCLUDE_PATHS = ../../API/Headers ../../Modules/XML ../../Modules/XMLRPC
 
 #	specify the level of optimization that you desire
 #	NONE, SOME, FULL
@@ -106,7 +96,7 @@ OPTIMIZE=
 # 	locales/en.catkeys file. Use it as template for creating other
 # 	languages catkeys. All localization files must be placed
 # 	in "locales" sub-directory.
-LOCALES= en nl
+LOCALES=
 
 #	specify any preprocessor symbols to be defined.  The symbols will not
 #	have their values set automatically; you must supply the value (if any)

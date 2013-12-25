@@ -8,6 +8,7 @@
 
 #include <ObjectList.h>
 
+#include "BlogPositiveDelegate.h"
 #include "BlogPositivePost.h"
 
 #define kBlogPositiveBlogApi 1
@@ -33,7 +34,7 @@ public:
 	virtual	BlogPositivePost*	CreateNewPost(BlogPositiveBlog* blog,
 									const char* name);
 	virtual	void				RemovePost(BlogPositivePost* post);
-	virtual	void				OpenNewBlogWindow(BlogPositiveMainView* main);
+	virtual	void				OpenNewBlogWindow(BlogPositiveBlogListDelegate* main);
 };
 
 typedef BObjectList<BlogPositivePlugin> PluginList;

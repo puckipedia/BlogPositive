@@ -12,8 +12,8 @@
 
 #include "BlogPositivePluginLoader.h"
 #include "BlogPositiveMainWindow.h"
+#include "BlogPositiveSettings.h"
 #include "BlogPositiveSharedWindow.h"
-
 
 class BlogPositiveApp : public BApplication
 {
@@ -49,5 +49,6 @@ main()
 	app.Run();
 
 	curl_global_cleanup();
+	BlogPositiveSettings::DestructGlobals();
 	return 0;
 }

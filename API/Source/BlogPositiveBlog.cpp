@@ -125,3 +125,10 @@ BlogPositiveBlog::NameString()
 {
 	return fName;
 }
+
+
+void PrintList(BlogList* list) {
+	BMessage* msg = BlogPositiveBlog::SerializeList(list, "blogs");
+	msg->PrintToStream();
+	delete msg;	
+}

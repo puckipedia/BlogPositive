@@ -20,8 +20,8 @@
 #include <Window.h>
 
 #include "BlogPositiveBlog.h"
+#include "BlogPositiveDelegate.h"
 #include "BlogPositivePost.h"
-#include "BlogPositiveMainView.h"
 #include "BlogPositiveSettings.h"
 #include "xmlnode.h"
 #include "XmlRpcWrapper.h"
@@ -41,7 +41,7 @@ size_t JournalBString(void* bloc, size_t size, size_t nmemb, void* userp)
 
 class LJCreateBlog : public BWindow {
 public:
-							LJCreateBlog(BlogPositiveMainView* aView,
+							LJCreateBlog(BlogPositiveBlogListDelegate* dele,
 								BlogPositivePlugin* pl);
 	void					SetBlogHandler(int32 blogHandler);
 	void					MessageReceived(BMessage* message);
@@ -49,21 +49,21 @@ public:
 private:
 	int32 					fBlogHandler;
 	BButton*				fCreateButton;
-	BTextControl*			fNameControl;
-	BTextControl*			fUserControl;
-	BTextControl*			fPassControl;
-	BTextControl*			fJournalControl;
-	BlogPositiveMainView*	fMainView;
+	BTextControl*				fNameControl;
+	BTextControl*				fUserControl;
+	BTextControl*				fPassControl;
+	BTextControl*				fJournalControl;
+	BlogPositiveBlogListDelegate*	fDelegate;
 };
 
 
-LJCreateBlog::LJCreateBlog(BlogPositiveMainView* aView,
+LJCreateBlog::LJCreateBlog(BlogPositiveBlogListDelegate* dele,
 	BlogPositivePlugin* pl)
 	:
 	BWindow(BRect(100, 100, 400, 230), B_TRANSLATE("Create Blog"),
 		B_MODAL_WINDOW, B_AUTO_UPDATE_SIZE_LIMITS)
 {
-	fMainView = aView;
+	fDelegate = dele;
 	
 	fNameControl = new BTextControl("NameControl", "Name: ", "", NULL);
 	fNameControl->SetAlignment(B_ALIGN_RIGHT, B_ALIGN_LEFT);
@@ -120,20 +120,12 @@ LJCreateBlog::MessageReceived(BMessage* message)
 			auth << fPassControl->Text() << "|||";
 			auth << fJournalControl->Text();
 
-			BlogPositiveSettings* settings = new BlogPositiveSettings("bloglist");
-			BlogList* lis = BlogPositiveBlog::DeserializeList(settings, "blogs");
 			BlogPositiveBlog* blog = new BlogPositiveBlog();
 			blog->SetName(fNameControl->Text());
 			blog->SetAuthentication(auth.String());
 			blog->SetBlogHandler(fBlogHandler);
-			lis->AddItem(blog);
-			if (fMainView->LockLooper())
-			{
-				fMainView->Reload(lis);
-				fMainView->UnlockLooper();
-			}
-			BlogPositiveSettings::SaveOther(
-				BlogPositiveBlog::SerializeList(lis, "blogs"), "bloglist");
+			gBlogList->AddItem(blog);
+			fDelegate->ReloadBlogs();
 			Quit();
 			break;
 		}
@@ -450,8 +442,8 @@ LiveJournalPlugin::CreateNewPost(BlogPositiveBlog* aBlog, const char* aName)
 
 
 void
-LiveJournalPlugin::OpenNewBlogWindow(BlogPositiveMainView* mainView)
+LiveJournalPlugin::OpenNewBlogWindow(BlogPositiveBlogListDelegate* dele)
 {
-	(new LJCreateBlog(mainView, this))->Show();
+	(new LJCreateBlog(dele, this))->Show();
 }
 

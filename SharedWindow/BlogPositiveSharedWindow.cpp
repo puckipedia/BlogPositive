@@ -6,6 +6,7 @@
 #include "BlogPositiveSharedWindow.h"
 #include "BlogPositiveMainView.h"
 
+#include <Application.h>
 #include <Catalog.h>
 #include <GroupLayout.h>
 #include <Message.h>
@@ -46,6 +47,14 @@ BlogPositiveSharedDelegate::OpenPostList(BlogPositiveBlog* blog)
 		= new BlogPositivePostListView("rightView", blog);
 	fWindow->SplitView()->AddChild(view);
 	fWindow->SplitView()->SetItemCollapsed(1, true);
+}
+
+
+bool
+BlogPositiveSharedWindow::QuitRequested()
+{
+	be_app_messenger.SendMessage(B_QUIT_REQUESTED);
+	return true;
 }
 
 

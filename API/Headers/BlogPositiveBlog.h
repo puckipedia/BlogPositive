@@ -52,4 +52,6 @@ private:
 	BlogPositivePlugin*		fPlugin;
 };
 
+void PrintList(BlogList* list);
+
 #endif

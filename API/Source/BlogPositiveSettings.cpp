@@ -17,6 +17,8 @@
 
 const char* kSettingsFolder = "BlogPositive";
 
+BlogPositiveSettings::_Init BlogPositiveSettings::fStatic;
+BlogList* gBlogList;
 
 BlogPositiveSettings::BlogPositiveSettings(const char* name)
 	: BMessage()
@@ -65,7 +67,23 @@ BlogPositiveSettings::SaveOther(BMessage* message, const char* settingsName)
 	}
 }
 
+
 BlogPositiveSettings::~BlogPositiveSettings()
 {
 	delete fSettingsPath;
+}
+
+
+BlogPositiveSettings::_Init::_Init()
+{
+	BlogPositiveSettings* settings = new BlogPositiveSettings("bloglist");
+	gBlogList = BlogPositiveBlog::DeserializeList(settings, "blogs");
+}
+
+
+void
+BlogPositiveSettings::_Init::Destruct()
+{
+	BlogPositiveSettings::SaveOther(
+		BlogPositiveBlog::SerializeList(gBlogList, "blogs"), "bloglist");
 }

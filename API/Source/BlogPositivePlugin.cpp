@@ -15,7 +15,8 @@
 #include <TextControl.h>
 #include <Window.h>
 
-#include "BlogPositiveMainView.h"
+#include "BlogPositiveBlog.h"
+#include "BlogPositiveDelegate.h"
 #include "BlogPositiveSettings.h"
 
 #undef B_TRANSLATION_CONTEXT
@@ -24,7 +25,7 @@
 
 class BlogPositiveCreateBlog : public BWindow {
 public:
-							BlogPositiveCreateBlog(BlogPositiveMainView* aView,
+							BlogPositiveCreateBlog(BlogPositiveBlogListDelegate* aView,
 								BlogPositivePlugin* pl);
 	void					SetBlogHandler(int32 blogHandler);
 	void					MessageReceived(BMessage* message);
@@ -33,10 +34,10 @@ private:
 	int32 					fBlogHandler;
 	BTextControl*			fNameControl;
 	BTextControl*			fAuthControl;
-	BlogPositiveMainView*	fMainView;
+	BlogPositiveBlogListDelegate*	fDelegate;
 };
 
-BlogPositiveCreateBlog::BlogPositiveCreateBlog(BlogPositiveMainView* aView,
+BlogPositiveCreateBlog::BlogPositiveCreateBlog(BlogPositiveBlogListDelegate* aView,
 	BlogPositivePlugin* pl)
 	:
 	BWindow(BRect(100, 100, 400, 190), B_TRANSLATE("Create Blog"),
@@ -66,7 +67,7 @@ BlogPositiveCreateBlog::BlogPositiveCreateBlog(BlogPositiveMainView* aView,
 
 	AddChild(mainView);
 
-	fMainView = aView;
+	fDelegate = aView;
 
 	fNameControl->MakeFocus();
 	fBlogHandler = pl->MainHandler();
@@ -98,20 +99,12 @@ BlogPositiveCreateBlog::MessageReceived(BMessage* message)
 			// Fallthrough on purpose
 		case kCreateBlog:
 		{
-			BlogPositiveSettings* settings = new BlogPositiveSettings("bloglist");
-			BlogList* lis = BlogPositiveBlog::DeserializeList(settings, "blogs");
 			BlogPositiveBlog* blog = new BlogPositiveBlog();
 			blog->SetName(fNameControl->Text());
 			blog->SetAuthentication(fAuthControl->Text());
 			blog->SetBlogHandler(fBlogHandler);
-			lis->AddItem(blog);
-			if (fMainView->LockLooper())
-			{
-				fMainView->Reload(lis);
-				fMainView->UnlockLooper();
-			}
-			BlogPositiveSettings::SaveOther(
-				BlogPositiveBlog::SerializeList(lis, "blogs"), "bloglist");
+			gBlogList->AddItem(blog);
+			fDelegate->ReloadBlogs();
 			Hide();
 			break;
 		}
@@ -189,7 +182,7 @@ BlogPositivePlugin::SavePost(BlogPositivePost* post)
 
 
 void
-BlogPositivePlugin::OpenNewBlogWindow(BlogPositiveMainView* mainView)
+BlogPositivePlugin::OpenNewBlogWindow(BlogPositiveBlogListDelegate* blogDelegate)
 {
-	(new BlogPositiveCreateBlog(mainView, this))->Show();
+	(new BlogPositiveCreateBlog(blogDelegate, this))->Show();
 }
