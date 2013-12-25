@@ -22,12 +22,19 @@
 #include "BlogPositiveDelegate.h"
 #include "BlogPositivePost.h"
 #include "BlogPositiveSettings.h"
+#include "PluginStub.h"
 #include "xmlnode.h"
 #include "XmlRpcWrapper.h"
 
 
 #undef B_TRANSLATION_CONTEXT
 #define B_TRANSLATION_CONTEXT "Wordpress Plugin"
+
+#if STANDALONE
+MODULES {
+	MODULE(WordpressPlugin);
+}
+#endif
 
 size_t WriteTobString(void* bloc, size_t size, size_t nmemb, void* userp)
 {

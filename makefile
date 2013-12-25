@@ -38,7 +38,6 @@ SRCS= 	API/Source/BlogPositiveBlog.cpp API/Source/BlogPositivePlugin.cpp \
 	API/Source/BlogPositivePost.cpp API/Source/BlogPositiveSettings.cpp \
 	BlogPositiveMain/BlogPositiveBlogListItem.cpp BlogPositiveMain/BlogPositiveMainView.cpp \
 	BlogPositiveMain/BlogPositiveMainWindow.cpp BlogPositivePlugins/BloggerPlugin/BloggerPlugin.cpp \
-	BlogPositivePlugins/LiveJournal/LiveJournalPlugin.cpp BlogPositivePlugins/WordpressPlugin/WordpressPlugin.cpp \
 	BlogPositivePostEditor/BlogPositivePostEditorView.cpp BlogPositivePostEditor/BlogPositivePostEditorWindow.cpp \
 	BlogPositivePostList/BlogPositivePostListView.cpp BlogPositivePostList/BlogPositivePostListWindow.cpp \
 	Example/ExamplePlugin.cpp main.cpp \
@@ -153,3 +152,7 @@ DRIVER_PATH =
 DEVEL_DIRECTORY := \
 	$(shell findpaths -r "makefile_engine" B_FIND_PATH_DEVELOP_DIRECTORY)
 include $(DEVEL_DIRECTORY)/etc/makefile-engine
+
+plugins:
+	$(MAKE) -C BlogPositivePlugins/WordpressPlugin install INSTALL_DIR=../../$(OBJ_DIR)/addons
+	$(MAKE) -C BlogPositivePlugins/LiveJournal install INSTALL_DIR=../../$(OBJ_DIR)/addons

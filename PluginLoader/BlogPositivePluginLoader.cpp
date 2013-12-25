@@ -6,25 +6,58 @@
 
 #include "BlogPositivePluginLoader.h"
 
+#include <kernel/image.h>
+#include <stdio.h>
+
+#include <Directory.h>
+#include <Entry.h>
+#include <FindDirectory.h>
 #include <List.h>
+#include <Path.h>
 
-#include "BloggerPlugin.h"
 #include "BlogPositiveBlog.h"
-#include "LiveJournalPlugin.h"
-#include "WordpressPlugin.h"
-
 
 PluginList* BlogPositivePluginLoader::fList;
 
+void LoadPaths(BPath dirPath, PluginList* list)
+{
+	printf("Loading dir %s:\n", dirPath.Path());
+	BDirectory addonsDir(dirPath.Path());
+	BEntry entry;
+	BPath path;
+	void (*plugin)(PluginList*);
+	while (addonsDir.GetNextEntry(&entry) == B_OK) {
+		entry.GetPath(&path);
+		printf("\tLoading addon %s: ", path.Path());
+		image_id addon = load_add_on(path.Path());
+		if (addon > 0) {
+			if (get_image_symbol(addon,
+				"loadModules",
+				B_SYMBOL_TYPE_TEXT,
+				reinterpret_cast<void**>(&plugin)) == B_OK) {
+				plugin(list);
+				printf("Win :D\n");
+			} else {
+				printf("Fail :( (missing symbol)\n");
+			}
+		} else {
+			printf("Fail :( (not an addon?)\n");
+		}
+	}
+	printf("Done.\n");
+}
 
 void
 BlogPositivePluginLoader::Initialize()
 {
 	fList = new PluginList();
-	// fList->AddItem(new BloggerPlugin());
-		// Disabled temporarily (haikuporter release)
-	fList->AddItem(new LiveJournalPlugin());
-	fList->AddItem(new WordpressPlugin());
+	BPath path;
+	find_directory(B_SYSTEM_ADDONS_DIRECTORY, &path);
+	path.Append("BlogPositive");
+	LoadPaths(path, fList);
+	find_directory(B_USER_ADDONS_DIRECTORY, &path);
+	path.Append("BlogPositive");
+	LoadPaths(path, fList);
 }
 
 
