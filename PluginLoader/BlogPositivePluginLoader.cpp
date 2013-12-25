@@ -6,9 +6,11 @@
 
 #include "BlogPositivePluginLoader.h"
 
+#include <app/Roster.h>
 #include <kernel/image.h>
 #include <stdio.h>
 
+#include <Application.h>
 #include <Directory.h>
 #include <Entry.h>
 #include <FindDirectory.h>
@@ -57,6 +59,13 @@ BlogPositivePluginLoader::Initialize()
 	LoadPaths(path, fList);
 	find_directory(B_USER_ADDONS_DIRECTORY, &path);
 	path.Append("BlogPositive");
+	LoadPaths(path, fList);
+	app_info info;
+	be_app->GetAppInfo(&info);
+	BEntry entry(&info.ref);
+	entry.GetPath(&path);
+	path.GetParent(&path);
+	path.Append("add-ons");
 	LoadPaths(path, fList);
 }
 

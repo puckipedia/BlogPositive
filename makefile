@@ -154,5 +154,5 @@ DEVEL_DIRECTORY := \
 include $(DEVEL_DIRECTORY)/etc/makefile-engine
 
 plugins:
-	$(MAKE) -C BlogPositivePlugins/WordpressPlugin install INSTALL_DIR=../../$(OBJ_DIR)/addons
-	$(MAKE) -C BlogPositivePlugins/LiveJournal install INSTALL_DIR=../../$(OBJ_DIR)/addons
+	$(MAKE) -C BlogPositivePlugins/WordpressPlugin install INSTALL_DIR=../../$(OBJ_DIR)/add-ons
+	$(MAKE) -C BlogPositivePlugins/LiveJournal install INSTALL_DIR=../../$(OBJ_DIR)/add-ons
