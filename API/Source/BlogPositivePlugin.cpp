@@ -41,43 +41,35 @@ BlogPositiveCreateBlog::BlogPositiveCreateBlog(BlogPositiveBlogListDelegate* aVi
 	BlogPositivePlugin* pl)
 	:
 	BWindow(BRect(100, 100, 400, 190), B_TRANSLATE("Create Blog"),
-		B_MODAL_WINDOW, B_NOT_RESIZABLE)
+		B_MODAL_WINDOW, B_NOT_RESIZABLE | B_AUTO_UPDATE_SIZE_LIMITS)
 {
 	fNameControl = new BTextControl("NameControl", "Name: ",
 		"", new BMessage('CBFA'));
+	fNameControl->SetAlignment(B_ALIGN_RIGHT, B_ALIGN_LEFT);
+
 	fAuthControl = new BTextControl("AuthControl", "Auth: ",
 		"", new BMessage('CBNB'));
+	fAuthControl->SetAlignment(B_ALIGN_RIGHT, B_ALIGN_LEFT);
 
-	SetLayout(new BGroupLayout(B_VERTICAL));
-	BView* mainView = new BView("mainView", B_SUPPORTS_LAYOUT);
-	mainView->SetLayout(new BGroupLayout(B_VERTICAL, 10));
-	mainView->AddChild(fNameControl);
-	mainView->AddChild(fAuthControl);
-
-	BView* buttonView = new BView("buttonView", B_SUPPORTS_LAYOUT);
-	buttonView->SetLayout(new BGroupLayout(B_HORIZONTAL));
-	
-	BButton* createButton = new BButton("ceateButton",
+	BButton* createButton = new BButton("createButton",
 		B_TRANSLATE("Create"), new BMessage(kCreateBlog));
-	BButton* cancelButton = new BButton("ceateButton",
+	BButton* cancelButton = new BButton("cancelButton",
 		B_TRANSLATE("Cancel"), new BMessage(kCancelBlog));
-	buttonView->AddChild(cancelButton);
-	buttonView->AddChild(createButton);
-	mainView->AddChild(buttonView);
-
-	AddChild(mainView);
 
 	fDelegate = aView;
 
 	fNameControl->MakeFocus();
 	fBlogHandler = pl->MainHandler();
 
-	mainView->SetViewColor(ui_color(B_PANEL_BACKGROUND_COLOR));
-	buttonView->SetViewColor(ui_color(B_PANEL_BACKGROUND_COLOR));
-	fNameControl->SetViewColor(ui_color(B_PANEL_BACKGROUND_COLOR));
-	fAuthControl->SetViewColor(ui_color(B_PANEL_BACKGROUND_COLOR));
-	createButton->SetViewColor(ui_color(B_PANEL_BACKGROUND_COLOR));
-	cancelButton->SetViewColor(ui_color(B_PANEL_BACKGROUND_COLOR));
+	BLayoutBuilder::Grid<>(this, 2, 3)
+		.Add(fNameControl->CreateLabelLayoutItem(), 0, 0)
+		.Add(fNameControl->CreateTextViewLayoutItem(), 1, 0)
+		.Add(fAuthControl->CreateLabelLayoutItem(), 0, 1)
+		.Add(fAuthControl->CreateTextViewLayoutItem(), 1, 1)
+		.AddGroup(B_HORIZONTAL, 4, 2, 0, 2)
+			.Add(createButton)
+			.Add(cancelButton)
+		.End();
 }
 
 

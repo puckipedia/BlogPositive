@@ -266,7 +266,7 @@ OnSugarPlugin::Get(BString* responseString, BString apiEndpoint, BString Auth)
 	curl_easy_perform(curl);
 	
 	XmlNode* responseNode = new XmlNode(responseString->String(), NULL);
-	
+
 	return responseNode;
 }
 
@@ -288,12 +288,23 @@ OnSugarPlugin::Post(BString* responseString, BString apiEndpoint,
 	
 	curl_easy_setopt(curl, CURLOPT_POSTFIELDS, requestString.String());
 	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, readIntoBString);
-	curl_easy_setopt(curl, CURLOPT_WRITEDATA, static_cast<void*>(responseString));
+	curl_easy_setopt(curl, CURLOPT_WRITEDATA,
+		static_cast<void*>(responseString));
 	curl_easy_setopt(curl, CURLOPT_USERAGENT, "BlogPositive/0.1 (OnSugar/0.1)");
 	curl_easy_perform(curl);
 	
 	XmlNode* responseNode = new XmlNode(responseString->String(), NULL);
-	
+	XmlNode* err = responseNode->FindChild("error", NULL, true);
+	if (err != NULL) {
+		BString message;
+		message.SetToFormat(B_TRANSLATE(
+			"Server: An error.\n"
+			"Oops: \"%s\"\n"
+			"May want to fix that!"), err->Value().String());
+		BAlert* alert = new BAlert(B_TRANSLATE("Oops, an error!"),
+			message.String(), ":(");
+		alert->Go();
+	}
 	return responseNode;
 }
 
@@ -303,7 +314,25 @@ OnSugarPlugin::GetBlogPosts(BlogPositiveBlog* blog)
 {
 	BString response;
 	XmlNode* responseNode = Get(&response, "/posts/xml", blog->Authentication());
+	if (responseNode == NULL) {
+		BAlert* alert = new BAlert(B_TRANSLATE("This isn't OnSugar!"),
+			B_TRANSLATE("BlogPositive has:\n"
+			"a very big disaster.\n"
+			"The URL's wrong!"), ":(");
+		alert->Go();
+		return new PostList();
+	}
+
 	XmlNode* postsNode = responseNode->FindChild("posts", NULL, true);
+	if (postsNode == NULL) {
+		BAlert* alert = new BAlert(B_TRANSLATE("This isn't OnSugar!"),
+			B_TRANSLATE("BlogPositive has:\n"
+			"a very big disaster.\n"
+			"The URL's wrong!"), ":(");
+		alert->Go();
+		return new PostList();
+	}
+
 	XmlNode* postNode = NULL;
 	
 	PostList* list = new PostList();
@@ -360,8 +389,15 @@ OnSugarPlugin::SavePost(BlogPositivePost* bppost)
 	BString response;
 	XmlNode* respNode = Post(&response, "/posts/create",
 		request, post->Blog()->Authentication());
-	BString id = respNode->FindChild("id", NULL, true)->Value();
+	printf("Response: %s\n", response.String());
+	XmlNode* idNode = respNode->FindChild("id", NULL, true);
+	if (idNode == NULL) {
+		delete respNode;
+		return;
+	}
+	BString id = idNode->Value();
 	post->SetPostId(id);
+
 	delete respNode;
 }
 

@@ -9,7 +9,6 @@
 #include <stdio.h>
 
 #include <Catalog.h>
-#include <GroupLayout.h>
 #include <ListView.h>
 #include <LayoutBuilder.h>
 #include <Menu.h>
@@ -150,8 +149,9 @@ NewPostWindow::NewPostWindow(BlogPositivePostListView* view)
 {
 	fTextView = new BTextControl("TextView", "Title: ",
 		"", new BMessage('BPFN'));
-	SetLayout(new BGroupLayout(B_VERTICAL));
-	AddChild(BLayoutBuilder::Group<>(B_VERTICAL, 0).Add(fTextView));
+	BLayoutBuilder::Group<>(this, B_VERTICAL)
+		.SetInsets(0, 0, 0, 0)
+		.Add(fTextView);
 	fView = view;
 }
 

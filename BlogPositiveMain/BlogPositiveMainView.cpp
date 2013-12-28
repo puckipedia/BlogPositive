@@ -7,7 +7,7 @@
 #include "BlogPositiveMainView.h"
 
 #include <Catalog.h>
-#include <GroupLayoutBuilder.h>
+#include <LayoutBuilder.h>
 #include <List.h>
 #include <ListView.h>
 #include <MenuBar.h>
@@ -27,32 +27,12 @@
 #include "BlogPositivePostListWindow.h"
 #include "BlogPositiveSettings.h"
 
-
 const int32 kBlogSelected = 'BPBS';
 const int32 kCreateNewBlog = 'BPCB';
 const int32 kRemoveCurrentBlog = 'BPRC';
 
-
 #undef B_TRANSLATION_CONTEXT
 #define B_TRANSLATION_CONTEXT "Main View"
-
-
-class BlogPositiveMainViewDelegate : public BlogPositiveBlogListDelegate {
-public:
-		BlogPositiveMainViewDelegate(BlogPositiveMainView* view)
-		:
-		fView(view)
-		{}
-
-	void	ReloadBlogs() {
-		if (fView->LockLooper()) {
-			fView->Reload(gBlogList);
-			fView->UnlockLooper();
-		}
-	}
-private:
-	BlogPositiveMainView* fView;
-};
 
 class BlogPositiveBlogListView : public BListView {
 public:
@@ -100,7 +80,7 @@ BlogPositiveMainView::MessageReceived(BMessage* message)
 			int32 index = message->GetInt32("ding", 0);
 			PluginList* pluginList = BlogPositivePluginLoader::List();
 			BlogPositivePlugin* plugin = pluginList->ItemAt(index);
-			plugin->OpenNewBlogWindow(new BlogPositiveMainViewDelegate(this));
+			plugin->OpenNewBlogWindow(this);
 			break;
 		}
 		default:
@@ -149,6 +129,15 @@ BlogPositiveMainView::AttachedToWindow()
 }
 
 
+void
+BlogPositiveMainView::ReloadBlogs() {
+	if (LockLooper()) {
+		Reload(gBlogList);
+		UnlockLooper();
+	}
+}
+
+
 BlogPositiveMainView::BlogPositiveMainView(const char* name,
 	BlogPositiveMainDelegate* del)
 	:
@@ -183,7 +172,7 @@ BlogPositiveMainView::BlogPositiveMainView(const char* name,
 	fRemoveMenuItem = new BMenuItem(B_TRANSLATE("Remove blog"), aMenuItemMessage);
 	fMenuBar->AddItem(fRemoveMenuItem);
 
-	SetLayout(new BGroupLayout(B_VERTICAL, 0));
-	AddChild(fMenuBar);
-	AddChild(new BScrollView("scroll_view", fListView, 0, false, true));
+	BLayoutBuilder::Group<>(this, B_VERTICAL, 0)
+		.Add(fMenuBar)
+		.Add(new BScrollView("scroll_view", fListView, 0, false, true));
 }

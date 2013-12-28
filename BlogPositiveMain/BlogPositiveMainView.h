@@ -7,7 +7,9 @@
 
 
 #include <View.h>
+
 #include "BlogPositiveBlog.h"
+#include "BlogPositiveDelegate.h"
 
 class BlogPositiveBlogListView;
 class BlogPositiveMainDelegate;
@@ -16,7 +18,8 @@ class BMenuItem;
 class BMenu;
 class BMessage;
 
-class BlogPositiveMainView : public BView {
+class BlogPositiveMainView : public BView, public BlogPositiveBlogListDelegate
+	{
 public:
 								BlogPositiveMainView(const char* name,
 									BlogPositiveMainDelegate* del);
@@ -26,6 +29,11 @@ public:
 
 	void						Reload(BlogList* list);
 	void						RemoveBlog();
+
+	// BlogListDelegate
+	void						ReloadBlogs();
+
+
 private:
 	BMenuBar*					fMenuBar;
 	BMenu*						fNewMenu;
