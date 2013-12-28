@@ -6,6 +6,8 @@
 
 #include "BlogPositivePostListView.h"
 
+#include <stdio.h>
+
 #include <Catalog.h>
 #include <GroupLayout.h>
 #include <ListView.h>
@@ -179,10 +181,10 @@ BlogPositivePostListView::MessageReceived(BMessage* aMessage)
 				aMessage->GetString("postTitle", ""));
 			if (p != NULL)
 			{
-				Reload();
 				BlogPositivePostEditorWindow* window
 					= new BlogPositivePostEditorWindow(p,
 						BRect(100, 100, 500, 600));
+				window->Show();
 			}
 			break;
 		}

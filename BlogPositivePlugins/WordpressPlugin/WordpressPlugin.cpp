@@ -11,9 +11,11 @@
 
 #include <Alert.h>
 #include <Catalog.h>
+#include <ControlLook.h>
 #include <GroupLayout.h>
 #include <LayoutBuilder.h>
 #include <PopUpMenu.h>
+#include <Size.h>
 #include <String.h>
 #include <TextControl.h>
 #include <Window.h>
@@ -135,8 +137,8 @@ const uint32 kChooseBlog = 'CHBL';
 WPCreateBlog::WPCreateBlog(BlogPositiveBlogListDelegate* dele,
 	BlogPositivePlugin* pl)
 	:
-	BWindow(BRect(100, 100, 400, 230), B_TRANSLATE("Create Blog"),
-		B_MODAL_WINDOW, B_AUTO_UPDATE_SIZE_LIMITS)
+	BWindow(BRect(100, 100, 400, 230), B_TRANSLATE("Create Wordpress Blog"),
+		B_TITLED_WINDOW, B_AUTO_UPDATE_SIZE_LIMITS)
 {
 	fDelegate = dele;
 	
@@ -159,26 +161,35 @@ WPCreateBlog::WPCreateBlog(BlogPositiveBlogListDelegate* dele,
 		B_TRANSLATE("Cancel"), new BMessage(kCancelBlog));
 	BButton* getBlogsButton = new BButton("chooseButton",
 		B_TRANSLATE("List"), new BMessage(kChooseBlog));
+
+	fCreateButton->SetExplicitMaxSize(BSize(B_SIZE_UNLIMITED, B_SIZE_UNLIMITED));
+	cancelButton->SetExplicitMaxSize(BSize(B_SIZE_UNLIMITED, B_SIZE_UNLIMITED));
+	getBlogsButton->SetExplicitMaxSize(BSize(B_SIZE_UNLIMITED, B_SIZE_UNLIMITED));
+
 	fNameControl->MakeFocus();
 	fBlogHandler = pl->MainHandler();
 	
 	BLayoutBuilder::Group<>(this, B_VERTICAL)
-		.AddGrid(2, 4)
+		.SetInsets(be_control_look->DefaultItemSpacing()*0.5,
+			be_control_look->DefaultItemSpacing()*0.5)
+		.AddGrid(3, 4)
+			.SetInsets(be_control_look->DefaultItemSpacing()*0.5,
+				be_control_look->DefaultItemSpacing()*0.5)
 			.Add(fNameControl->CreateLabelLayoutItem(), 0, 0)
-			.Add(fNameControl->CreateTextViewLayoutItem(), 1, 0)
+			.Add(fNameControl->CreateTextViewLayoutItem(), 1, 0, 2)
 			.Add(fUserControl->CreateLabelLayoutItem(), 0, 1)
-			.Add(fUserControl->CreateTextViewLayoutItem(), 1, 1)
+			.Add(fUserControl->CreateTextViewLayoutItem(), 1, 1, 2)
 			.Add(fPassControl->CreateLabelLayoutItem(), 0, 2)
-			.Add(fPassControl->CreateTextViewLayoutItem(), 1, 2)
+			.Add(fPassControl->CreateTextViewLayoutItem(), 1, 2, 2)
 			.Add(fUrlControl->CreateLabelLayoutItem(), 0, 3)
-			.Add(fUrlControl->CreateTextViewLayoutItem(), 1, 3)
+			.Add(fUrlControl->CreateTextViewLayoutItem(), 1, 3, 2)
 			.Add(fBlogIdControl->CreateLabelLayoutItem(), 0, 4)
-			.AddGroup(B_HORIZONTAL, 0, 1, 4)
-				.Add(fBlogIdControl->CreateTextViewLayoutItem())
-				.Add(getBlogsButton)
-				.End()
+			.Add(fBlogIdControl->CreateTextViewLayoutItem(), 1, 4)
+			.Add(getBlogsButton, 2, 4)
 			.End()
 		.AddGroup(B_HORIZONTAL)
+			.SetInsets(be_control_look->DefaultItemSpacing()*0.25,
+				be_control_look->DefaultItemSpacing()*0.25)
 			.Add(cancelButton)
 			.Add(fCreateButton)
 		.End();

@@ -155,4 +155,5 @@ include $(DEVEL_DIRECTORY)/etc/makefile-engine
 
 plugins:
 	$(MAKE) -C BlogPositivePlugins/WordpressPlugin install INSTALL_DIR=../../$(OBJ_DIR)/add-ons
+	$(MAKE) -C BlogPositivePlugins/OnSugarPlugin install INSTALL_DIR=../../$(OBJ_DIR)/add-ons
 	$(MAKE) -C BlogPositivePlugins/LiveJournal install INSTALL_DIR=../../$(OBJ_DIR)/add-ons

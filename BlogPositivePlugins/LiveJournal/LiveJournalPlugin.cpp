@@ -12,9 +12,11 @@
 
 #include <Alert.h>
 #include <Catalog.h>
+#include <ControlLook.h>
 #include <GroupLayout.h>
 #include <LayoutBuilder.h>
 #include <PopUpMenu.h>
+#include <Size.h>
 #include <String.h>
 #include <TextControl.h>
 #include <Window.h>
@@ -67,8 +69,8 @@ private:
 LJCreateBlog::LJCreateBlog(BlogPositiveBlogListDelegate* dele,
 	BlogPositivePlugin* pl)
 	:
-	BWindow(BRect(100, 100, 400, 230), B_TRANSLATE("Create Blog"),
-		B_MODAL_WINDOW, B_AUTO_UPDATE_SIZE_LIMITS)
+	BWindow(BRect(100, 100, 400, 230), B_TRANSLATE("Create LiveJournal Blog"),
+		B_TITLED_WINDOW, B_AUTO_UPDATE_SIZE_LIMITS)
 {
 	fDelegate = dele;
 	
@@ -87,11 +89,19 @@ LJCreateBlog::LJCreateBlog(BlogPositiveBlogListDelegate* dele,
 		B_TRANSLATE("Create"), new BMessage(kCreateBlog));
 	BButton* cancelButton = new BButton("cancelButton",
 		B_TRANSLATE("Cancel"), new BMessage(kCancelBlog));
+
+	fCreateButton->SetExplicitMaxSize(BSize(B_SIZE_UNLIMITED, B_SIZE_UNLIMITED));
+	cancelButton->SetExplicitMaxSize(BSize(B_SIZE_UNLIMITED, B_SIZE_UNLIMITED));
+
 	fNameControl->MakeFocus();
 	fBlogHandler = pl->MainHandler();
 	
 	BLayoutBuilder::Group<>(this, B_VERTICAL)
+		.SetInsets(be_control_look->DefaultItemSpacing()*0.5,
+			be_control_look->DefaultItemSpacing()*0.5)
 		.AddGrid(2, 3)
+			.SetInsets(be_control_look->DefaultItemSpacing()*0.5,
+				be_control_look->DefaultItemSpacing()*0.5)
 			.Add(fNameControl->CreateLabelLayoutItem(), 0, 0)
 			.Add(fNameControl->CreateTextViewLayoutItem(), 1, 0)
 			.Add(fUserControl->CreateLabelLayoutItem(), 0, 1)
@@ -102,6 +112,8 @@ LJCreateBlog::LJCreateBlog(BlogPositiveBlogListDelegate* dele,
 			.Add(fJournalControl->CreateTextViewLayoutItem(), 1, 3)
 			.End()
 		.AddGroup(B_HORIZONTAL)
+			.SetInsets(be_control_look->DefaultItemSpacing()*0.5,
+				be_control_look->DefaultItemSpacing()*0.5)
 			.Add(cancelButton)
 			.Add(fCreateButton)
 		.End();
