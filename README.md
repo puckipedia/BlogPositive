@@ -1,6 +1,6 @@
 Building
 ====
-To build, run `make && make bindcatalogs`. This will make the app and bind the language catalogs into it. Afterwards just run it!
+To build, run `make && make plugins && make bindcatalogs`. This will make the app and bind the language catalogs into it. Afterwards just run it! (Also, move the add-ons folder into the folder the app is if you move it!)
 
 Translate!
 ====
