@@ -75,7 +75,7 @@ RSRCS=
 #		naming scheme you need to specify the path to the library
 #		and it's name
 #		library: my_lib.a entry: my_lib.a or path/my_lib.a
-LIBS= be curl locale localestub network textencoding z
+LIBS= be curl $(STDCPPLIBS) localestub network textencoding z
 
 #	specify additional paths to directories following the standard
 #	libXXX.so or libXXX.a naming scheme.  You can specify full paths
@@ -153,7 +153,9 @@ DEVEL_DIRECTORY := \
 	$(shell findpaths -r "makefile_engine" B_FIND_PATH_DEVELOP_DIRECTORY)
 include $(DEVEL_DIRECTORY)/etc/makefile-engine
 
+PLUGIN_DIR = $(shell pwd)/$(OBJ_DIR)/add-ons
+
 plugins:
-	$(MAKE) -C BlogPositivePlugins/WordpressPlugin install INSTALL_DIR=../../$(OBJ_DIR)/add-ons
-	$(MAKE) -C BlogPositivePlugins/OnSugarPlugin install INSTALL_DIR=../../$(OBJ_DIR)/add-ons
-	$(MAKE) -C BlogPositivePlugins/LiveJournal install INSTALL_DIR=../../$(OBJ_DIR)/add-ons
+	$(MAKE) -C BlogPositivePlugins/WordpressPlugin install INSTALL_DIR=$(PLUGIN_DIR)
+	$(MAKE) -C BlogPositivePlugins/OnSugarPlugin install INSTALL_DIR=$(PLUGIN_DIR)
+	$(MAKE) -C BlogPositivePlugins/LiveJournal install INSTALL_DIR=$(PLUGIN_DIR)
