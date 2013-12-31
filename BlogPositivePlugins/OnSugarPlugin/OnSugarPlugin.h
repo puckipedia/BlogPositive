@@ -22,12 +22,10 @@ public:
 	uint32				MainHandler();
 	bool				Supports(uint32 Code);
 	
-	void				GetAuthentication(BString auth, BString* Username,
-							BString* Password, BString* BlogUrl);
 	XmlNode*			Get(BString* responseString, BString apiEndpoint,
-							BString auth);
+							BlogPositiveBlog* blog);
 	XmlNode*			Post(BString* responseString, BString apiEndpoint,
-							BString requestString, BString auth);
+							BString requestString, BlogPositiveBlog* blog);
 
 	PostList*			GetBlogPosts(BlogPositiveBlog* blog);
 	void				SavePost(BlogPositivePost* post);

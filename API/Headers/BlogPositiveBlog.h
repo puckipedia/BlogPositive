@@ -31,8 +31,7 @@ public:
 	void					SetName(const char* name);
 	const char*				Name();
 
-	void					SetAuthentication(const char* authentication);
-	const char*				Authentication();
+	BMessage*				Configuration();
 
 	void					SetBlogHandler(int32 blogHandler);
 	int32					BlogHandler();
@@ -46,8 +45,8 @@ public:
 
 	status_t				Archive(BMessage* into, bool deep = true);
 private:
+	BMessage*				fConfiguration;
 	BString					fName;
-	BString					fAuthentication;
 	int32					fBlogHandler;
 	BlogPositiveBlogPlugin*	fPlugin;
 };

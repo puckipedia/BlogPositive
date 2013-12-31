@@ -32,10 +32,7 @@ public:
 	void				OpenNewBlogWindow(BlogPositiveBlogListDelegate* mainView);
 private:
 	XmlNode*			Request(XmlRpcRequest* r, BString* responseString,
-							BString auth);
-	void				GetAuthentication(BString Auth,
-							BString* Username, BString* pass,
-							BString* journal);
+							BlogPositiveBlog* blog);
 };
 
 #endif

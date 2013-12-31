@@ -136,13 +136,12 @@ OSCreateBlog::MessageReceived(BMessage* message)
 	switch (message->what) {
 		case kCreateBlog:
 		{
-			BString auth;
-			auth << fUserControl->Text() << "|||";
-			auth << fPassControl->Text() << "|||";
-			auth << fUrlControl->Text();
 			BlogPositiveBlog* blog = new BlogPositiveBlog();
 			blog->SetName(fNameControl->Text());
-			blog->SetAuthentication(auth.String());
+			BMessage* config = blog->Configuration();
+			config->SetString("username", fUserControl->Text());
+			config->SetString("password", fPassControl->Text());
+			config->SetString("blogUrl", fUrlControl->Text());
 			blog->SetBlogHandler(fBlogHandler);
 			gBlogList->AddItem(blog);
 			fDelegate->ReloadBlogs();
@@ -224,29 +223,12 @@ OnSugarPlugin::Supports(uint32 Code)
 }
 
 
-void
-OnSugarPlugin::GetAuthentication(BString Auth, BString* Username,
-	BString* Password, BString* BlogUrl)
-{
-	int32 SeperatorLocation = Auth.FindFirst("|||");
-	int32 XBLocation = Auth.FindLast("|||");
-	Auth.CopyInto(*Username, 0, SeperatorLocation);
-
-	Auth.CopyInto(*Password, SeperatorLocation + 3,
-		XBLocation - SeperatorLocation - 3);
-
-	Auth.CopyInto(*BlogUrl, XBLocation + 3, Auth.Length() - XBLocation - 3);
-}
-
-
 XmlNode*
-OnSugarPlugin::Get(BString* responseString, BString apiEndpoint, BString Auth)
+OnSugarPlugin::Get(BString* responseString, BString apiEndpoint, 
+	BlogPositiveBlog* blog)
 {
 
-	BString username;
-	BString password;
-	BString blogUrl;
-	GetAuthentication(Auth, &username, &password, &blogUrl);
+	BString blogUrl = blog->Configuration()->GetString("blogUrl", "");
 
 	blogUrl << "/api" << apiEndpoint;
 
@@ -266,13 +248,10 @@ OnSugarPlugin::Get(BString* responseString, BString apiEndpoint, BString Auth)
 
 XmlNode*
 OnSugarPlugin::Post(BString* responseString, BString apiEndpoint,
-	BString requestString, BString Auth)
+	BString requestString, BlogPositiveBlog* blog)
 {
 
-	BString username;
-	BString password;
-	BString blogUrl;
-	GetAuthentication(Auth, &username, &password, &blogUrl);
+	BString blogUrl = blog->Configuration()->GetString("blogUrl", "");
 
 	blogUrl << "/api" << apiEndpoint;
 	
@@ -306,7 +285,7 @@ PostList*
 OnSugarPlugin::GetBlogPosts(BlogPositiveBlog* blog)
 {
 	BString response;
-	XmlNode* responseNode = Get(&response, "/posts/xml", blog->Authentication());
+	XmlNode* responseNode = Get(&response, "/posts/xml", blog);
 	if (responseNode == NULL) {
 		BAlert* alert = new BAlert(B_TRANSLATE("This isn't OnSugar!"),
 			B_TRANSLATE("BlogPositive has:\n"
@@ -346,6 +325,7 @@ void
 OnSugarPlugin::SavePost(BlogPositivePost* bppost)
 {
 	OnSugarPost* post = static_cast<OnSugarPost*>(bppost);
+	BlogPositiveBlog* blog = post->Blog();
 	
 	if (strlen(post->PostId()) > 0) {
 		BAlert* alert = new BAlert(B_TRANSLATE("Not Supported"),
@@ -360,11 +340,8 @@ OnSugarPlugin::SavePost(BlogPositivePost* bppost)
 		}
 	}
 	
-	BString username;
-	BString password;
-	BString blogurl;
-	GetAuthentication(post->Blog()->Authentication(), &username, &password,
-		&blogurl);
+	BString username = blog->Configuration()->GetString("username", "");
+	BString password = blog->Configuration()->GetString("password", "");
 	
 	BString request = "login=";
 	request << username << "&password=" << password << "&type=text";
@@ -381,7 +358,7 @@ OnSugarPlugin::SavePost(BlogPositivePost* bppost)
 	
 	BString response;
 	XmlNode* respNode = Post(&response, "/posts/create",
-		request, post->Blog()->Authentication());
+		request, blog);
 	printf("Response: %s\n", response.String());
 	XmlNode* idNode = respNode->FindChild("id", NULL, true);
 	if (idNode == NULL) {

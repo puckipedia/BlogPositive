@@ -102,12 +102,11 @@ GetAllBlogs(BString userName, BString password, BString xmlrpcurl)
 		}
 		BlogPositiveBlog* blog = new BlogPositiveBlog();
 		blog->SetName(blogName);
-		BString auth;
-		auth << userName << "|||";
-		auth << password << "|||";
-		auth << xmlrpcUrl << "|||";
-		auth << blogId;
-		blog->SetAuthentication(auth);
+		BMessage* message = blog->Configuration();
+		message->AddString("username", userName);
+		message->AddString("password", password);
+		message->AddString("xmlrpcurl", xmlrpcUrl);
+		message->AddString("blogid", blogId);
 		blogList->AddItem(blog);
 	}
 	return blogList;
@@ -222,11 +221,7 @@ WPCreateBlog::MessageReceived(BMessage* message)
 			if(list->CountItems() == 1) {
 				delete menu;
 				BlogPositiveBlog* blog = list->ItemAt(0);
-				BString blogId;
-				BString Auth(blog->Authentication());
-				int32 XBLocation = Auth.FindLast("|||");
-				Auth.CopyInto(blogId, XBLocation + 3, Auth.Length() - XBLocation - 3);
-				fBlogIdControl->SetText(blogId);
+				fBlogIdControl->SetText(blog->Configuration()->GetString("blogid", ""));
 				delete list;
 				break;
 			}
@@ -244,28 +239,29 @@ WPCreateBlog::MessageReceived(BMessage* message)
 				chosen = choseni->Message();
 			if(chosen) {
 				BlogPositiveBlog* blog = list->ItemAt(chosen->GetInt32("num", -1));
-				BString blogId;
-				BString Auth(blog->Authentication());
-				int32 XBLocation = Auth.FindLast("|||");
-				Auth.CopyInto(blogId, XBLocation + 3, Auth.Length() - XBLocation - 3);
-				fBlogIdControl->SetText(blogId);
+				fBlogIdControl->SetText(blog->Configuration()->GetString("blogid", ""));
 			}
 			break;
 		}
 		case kCreateBlog:
 		{
-			BString auth;
-			auth << fUserControl->Text() << "|||";
-			auth << fPassControl->Text() << "|||";
-			auth << fUrlControl->Text();
+			BString xmlrpcurl = fUrlControl->Text();
 			if(strstr(fUrlControl->Text(), "xmlrpc.php") == NULL) {
-				auth << "/xmlrpc.php";
+				xmlrpcurl << "/xmlrpc.php";
 			}
-			auth << "|||" << fBlogIdControl->Text();
+
 			BlogPositiveBlog* blog = new BlogPositiveBlog();
+			
 			blog->SetName(fNameControl->Text());
-			blog->SetAuthentication(auth.String());
+			
+			BMessage* message = blog->Configuration();
+			message->AddString("username", fUserControl->Text());
+			message->AddString("password", fUserControl->Text());
+			message->AddString("blogid", fBlogIdControl->Text());
+			message->AddString("xmlrpcurl", xmlrpcurl);
+
 			blog->SetBlogHandler(fBlogHandler);
+
 			gBlogList->AddItem(blog);
 			fDelegate->ReloadBlogs();
 			Quit();
@@ -278,26 +274,6 @@ WPCreateBlog::MessageReceived(BMessage* message)
 			BWindow::MessageReceived(message);
 			break;
 	}
-}
-
-
-void
-WordpressPlugin::GetAuthentication(BString Auth, BString* Username,
-	BString* Password, BString* XmlRPCUrl, BString* blogId)
-{
-	int32 SeperatorLocation = Auth.FindFirst("|||");
-	int32 PXLocation = Auth.FindFirst("|||", SeperatorLocation + 3);
-	int32 XBLocation = Auth.FindLast("|||");
-	Auth.CopyInto(*Username, 0, SeperatorLocation);
-
-	Auth.CopyInto(*Password, SeperatorLocation + 3,
-		PXLocation - SeperatorLocation - 3);
-
-	Auth.CopyInto(*XmlRPCUrl, PXLocation + 3, XBLocation - PXLocation - 3);
-	if(PXLocation == XBLocation)
-		*blogId = "1";
-	else
-		Auth.CopyInto(*blogId, XBLocation + 3, Auth.Length() - XBLocation - 3);
 }
 
 
@@ -403,13 +379,9 @@ void ShowError(XmlNode* response, long responseCode)
 
 XmlNode*
 WordpressPlugin::Request(XmlRpcRequest* r, BString* responseString,
-	BString Auth)
+	BlogPositiveBlog* blog)
 {
-	BString username;
-	BString password;
-	BString xmlrpcurl;
-	BString blogId;
-	GetAuthentication(Auth, &username, &password, &xmlrpcurl, &blogId);
+	BString xmlrpcurl = blog->Configuration()->GetString("xmlrpcurl", "");
 	BString dataString(r->GetData());
 	CURL* curl = curl_easy_init();
 	curl_easy_setopt(curl, CURLOPT_URL, xmlrpcurl.String());
@@ -436,12 +408,9 @@ WordpressPlugin::GetBlogPosts(BlogPositiveBlog* aBlog)
 {
 	XmlRpcRequest r;
 
-	BString username;
-	BString password;
-	BString xmlrpcurl;
-	BString blogId;
-	GetAuthentication(aBlog->Authentication(), &username, &password,
-		&xmlrpcurl, &blogId);
+	BString username = aBlog->Configuration()->GetString("username", "");
+	BString password = aBlog->Configuration()->GetString("password", "");
+	BString blogId = aBlog->Configuration()->GetString("blogid", "");
 
 	r.SetMethodName("wp.getPosts");
 	r.AddItem(new XmlValue(blogId));
@@ -450,7 +419,7 @@ WordpressPlugin::GetBlogPosts(BlogPositiveBlog* aBlog)
 
 	BString responseString;
 	XmlNode* responseNode
-		= Request(&r, &responseString, aBlog->Authentication());
+		= Request(&r, &responseString, aBlog);
 
 	XmlNode* postNode = NULL;
 	if (responseNode->FindChild("param", NULL, true) == NULL) {
@@ -497,13 +466,10 @@ WordpressPlugin::RemovePost(BlogPositivePost* aPost)
 	BlogPositiveBlog* aBlog = aPost->Blog();
 	WordpressPost* wpPost = static_cast<WordpressPost*>(aPost);
 
-	BString username;
-	BString password;
-	BString xmlrpcurl;
-	BString blogId;
-	BString Auth(aBlog->Authentication());
-
-	GetAuthentication(Auth, &username, &password, &xmlrpcurl, &blogId);
+	BString username = aBlog->Configuration()->GetString("username", "");
+	BString password = aBlog->Configuration()->GetString("password", "");
+	BString blogId = aBlog->Configuration()->GetString("blogid", "");
+	BString xmlrpcurl = aBlog->Configuration()->GetString("xmlrpcurl", "");
 
 	XmlRpcRequest* request = new XmlRpcRequest();
 	request->SetMethodName("wp.deletePost");
@@ -528,13 +494,10 @@ WordpressPlugin::SavePost(BlogPositivePost* aPost)
 	BlogPositiveBlog* aBlog = aPost->Blog();
 	WordpressPost* wpPost = static_cast<WordpressPost*>(aPost);
 
-	BString username;
-	BString password;
-	BString xmlrpcurl;
-	BString blogId;
-	BString Auth(aBlog->Authentication());
-
-	GetAuthentication(Auth, &username, &password, &xmlrpcurl, &blogId);
+	BString username = aBlog->Configuration()->GetString("username", "");
+	BString password = aBlog->Configuration()->GetString("password", "");
+	BString blogId = aBlog->Configuration()->GetString("blogid", "");
+	BString xmlrpcurl = aBlog->Configuration()->GetString("xmlrpcurl", "");
 
 	XmlRpcRequest* request = new XmlRpcRequest();
 	request->SetMethodName("wp.editPost");
@@ -564,12 +527,10 @@ WordpressPlugin::SavePost(BlogPositivePost* aPost)
 BlogPositivePost*
 WordpressPlugin::CreateNewPost(BlogPositiveBlog* aBlog, const char* aName)
 {
-	BString Auth = BString(aBlog->Authentication());
-	BString username;
-	BString password;
-	BString xmlrpcurl;
-	BString blogId;
-	GetAuthentication(Auth, &username, &password, &xmlrpcurl, &blogId);
+	BString username = aBlog->Configuration()->GetString("username", "");
+	BString password = aBlog->Configuration()->GetString("password", "");
+	BString blogId = aBlog->Configuration()->GetString("blogid", "");
+	BString xmlrpcurl = aBlog->Configuration()->GetString("xmlrpcurl", "");
 
 	XmlRpcRequest* request = new XmlRpcRequest();
 	request->SetMethodName("wp.newPost");

@@ -134,15 +134,17 @@ LJCreateBlog::MessageReceived(BMessage* message)
 	switch (message->what) {
 		case kCreateBlog:
 		{
-			BString auth;
-			auth << fUserControl->Text() << "|||";
-			auth << fPassControl->Text() << "|||";
-			auth << fJournalControl->Text();
-
 			BlogPositiveBlog* blog = new BlogPositiveBlog();
+
 			blog->SetName(fNameControl->Text());
-			blog->SetAuthentication(auth.String());
+			
+			BMessage* config = blog->Configuration();
+			config->AddString("username", fUserControl->Text());
+			config->AddString("password", fPassControl->Text());
+			config->AddString("journal", fJournalControl->Text());
+			
 			blog->SetBlogHandler(fBlogHandler);
+
 			gBlogList->AddItem(blog);
 			fDelegate->ReloadBlogs();
 			Quit();
@@ -155,21 +157,6 @@ LJCreateBlog::MessageReceived(BMessage* message)
 			BWindow::MessageReceived(message);
 			break;
 	}
-}
-
-
-void
-LiveJournalPlugin::GetAuthentication(BString Auth, BString* Username,
-	BString* Password, BString* journal)
-{
-	int32 SeperatorLocation = Auth.FindFirst("|||");
-	int32 XBLocation = Auth.FindLast("|||");
-	Auth.CopyInto(*Username, 0, SeperatorLocation);
-
-	Auth.CopyInto(*Password, SeperatorLocation + 3,
-		XBLocation - SeperatorLocation - 3);
-
-	Auth.CopyInto(*journal, XBLocation + 3, Auth.Length() - 3);
 }
 
 
@@ -271,7 +258,7 @@ void LiveJournalShowError(XmlNode* response, long responseCode)
 
 XmlNode*
 LiveJournalPlugin::Request(XmlRpcRequest* r, BString* responseString,
-	BString Auth)
+	BlogPositiveBlog* blog)
 {
 	BString dataString(r->GetData());
 	CURL* curl = curl_easy_init();
@@ -300,11 +287,9 @@ LiveJournalPlugin::GetBlogPosts(BlogPositiveBlog* aBlog)
 {
 	XmlRpcRequest r;
 
-	BString username;
-	BString password;
-	BString journal;
-	GetAuthentication(aBlog->Authentication(), &username, &password,
-		&journal);
+	BString username = aBlog->Configuration()->GetString("username", "");
+	BString password = aBlog->Configuration()->GetString("password", "");
+	BString journal = aBlog->Configuration()->GetString("journal", "");
 
 	r.SetMethodName("LJ.XMLRPC.getevents");
 	XmlStruct requestStruct;
@@ -320,7 +305,7 @@ LiveJournalPlugin::GetBlogPosts(BlogPositiveBlog* aBlog)
 
 	BString responseString;
 	XmlNode* responseNode
-		= Request(&r, &responseString, aBlog->Authentication());
+		= Request(&r, &responseString, aBlog);
 
 	XmlArray* responseArray = ParseResponse(responseNode);
 	BString derp;
@@ -349,11 +334,8 @@ LiveJournalPlugin::SavePost(BlogPositivePost* post)
 	LiveJournalPost* ljPost = static_cast<LiveJournalPost*>(post);
 	XmlRpcRequest r;
 
-	BString username;
-	BString password;
-	BString journal;
-	GetAuthentication(post->Blog()->Authentication(), &username, &password,
-		&journal);
+	BString username = post->Blog()->Configuration()->GetString("username", "");
+	BString password = post->Blog()->Configuration()->GetString("password", "");
 
 	r.SetMethodName("LJ.XMLRPC.editevent");
 	XmlStruct requestStruct;
@@ -370,7 +352,7 @@ LiveJournalPlugin::SavePost(BlogPositivePost* post)
 
 	BString responseString;
 	XmlNode* responseNode
-		= Request(&r, &responseString, post->Blog()->Authentication());
+		= Request(&r, &responseString, post->Blog());
 	XmlArray* responseArray = ParseResponse(responseNode);
 	XmlStruct* str = static_cast<XmlStruct*>(responseArray->ItemAt(0));
 	
@@ -384,11 +366,8 @@ LiveJournalPlugin::RemovePost(BlogPositivePost* post)
 	LiveJournalPost* ljPost = static_cast<LiveJournalPost*>(post);
 	XmlRpcRequest r;
 
-	BString username;
-	BString password;
-	BString journal;
-	GetAuthentication(post->Blog()->Authentication(), &username, &password,
-		&journal);
+	BString username = post->Blog()->Configuration()->GetString("username", "");
+	BString password = post->Blog()->Configuration()->GetString("password", "");
 
 	r.SetMethodName("LJ.XMLRPC.editevent");
 	XmlStruct requestStruct;
@@ -404,7 +383,7 @@ LiveJournalPlugin::RemovePost(BlogPositivePost* post)
 
 	BString responseString;
 	XmlNode* responseNode
-		= Request(&r, &responseString, post->Blog()->Authentication());
+		= Request(&r, &responseString, post->Blog());
 }
 
 
@@ -413,11 +392,9 @@ LiveJournalPlugin::CreateNewPost(BlogPositiveBlog* aBlog, const char* aName)
 {
 	XmlRpcRequest r;
 
-	BString username;
-	BString password;
-	BString journal;
-	GetAuthentication(aBlog->Authentication(), &username, &password,
-		&journal);
+	BString username = aBlog->Configuration()->GetString("username", "");
+	BString password = aBlog->Configuration()->GetString("password", "");
+	BString journal = aBlog->Configuration()->GetString("journal", "");
 
 	r.SetMethodName("LJ.XMLRPC.postevent");
 	XmlStruct requestStruct;
@@ -444,7 +421,7 @@ LiveJournalPlugin::CreateNewPost(BlogPositiveBlog* aBlog, const char* aName)
 
 	BString responseString;
 	XmlNode* responseNode
-		= Request(&r, &responseString, aBlog->Authentication());
+		= Request(&r, &responseString, aBlog);
 	XmlArray* responseArray = ParseResponse(responseNode);
 	XmlStruct* str = static_cast<XmlStruct*>(responseArray->ItemAt(0));
 	LiveJournalPost* ljPost = new LiveJournalPost(aName, "-", "", aBlog);

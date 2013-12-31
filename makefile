@@ -39,8 +39,8 @@ SRCS= 	API/Source/BlogPositiveBlog.cpp API/Source/BlogPositivePost.cpp \
 	BlogPositiveMain/BlogPositiveBlogListItem.cpp BlogPositiveMain/BlogPositiveMainView.cpp \
 	BlogPositiveMain/BlogPositiveMainWindow.cpp BlogPositivePostEditor/BlogPositivePostEditorView.cpp \
 	BlogPositivePostEditor/BlogPositivePostEditorWindow.cpp BlogPositivePostList/BlogPositivePostListView.cpp \
-	BlogPositivePostList/BlogPositivePostListWindow.cpp Example/ExamplePlugin.cpp \
-	main.cpp Modules/JSON/Json.cpp \
+	BlogPositivePostList/BlogPositivePostListWindow.cpp main.cpp \
+	Modules/JSON/Json.cpp \
 	Modules/XML/xmlnode.cpp Modules/XMLRPC/XmlRpcWrapper.cpp \
 	PluginLoader/BlogPositivePluginLoader.cpp SharedWindow/BlogPositiveSharedWindow.cpp
 

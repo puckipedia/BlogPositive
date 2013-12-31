@@ -62,12 +62,10 @@ BlogPositiveCreateBlog::BlogPositiveCreateBlog(BlogPositiveBlogListDelegate* aVi
 	fNameControl->MakeFocus();
 	fBlogHandler = pl->MainHandler();
 
-	BLayoutBuilder::Grid<>(this, 2, 3)
+	BLayoutBuilder::Grid<>(this, 2, 2)
 		.Add(fNameControl->CreateLabelLayoutItem(), 0, 0)
 		.Add(fNameControl->CreateTextViewLayoutItem(), 1, 0)
-		.Add(fAuthControl->CreateLabelLayoutItem(), 0, 1)
-		.Add(fAuthControl->CreateTextViewLayoutItem(), 1, 1)
-		.AddGroup(B_HORIZONTAL, 4, 2, 0, 2)
+		.AddGroup(B_HORIZONTAL, 4, 2, 0, 1)
 			.Add(createButton)
 			.Add(cancelButton)
 		.End();
@@ -94,7 +92,6 @@ BlogPositiveCreateBlog::MessageReceived(BMessage* message)
 		{
 			BlogPositiveBlog* blog = new BlogPositiveBlog();
 			blog->SetName(fNameControl->Text());
-			blog->SetAuthentication(fAuthControl->Text());
 			blog->SetBlogHandler(fBlogHandler);
 			gBlogList->AddItem(blog);
 			fDelegate->ReloadBlogs();
