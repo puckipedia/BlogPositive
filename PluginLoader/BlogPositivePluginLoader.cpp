@@ -18,6 +18,7 @@
 #include <Path.h>
 
 #include "BlogPositiveBlog.h"
+#include "BlogPositiveBlogPlugin.h"
 
 PluginList* BlogPositivePluginLoader::fList;
 
@@ -73,10 +74,11 @@ BlogPositivePluginLoader::Initialize()
 void
 BlogPositivePluginLoader::FindPlugin(BlogPositiveBlog* blog)
 {
-	BlogPositivePlugin* workingPlugin = NULL;
+	BlogPositiveBlogPlugin* workingPlugin = NULL;
 	for (int i = 0; i < fList->CountItems(); i++) {
-		BlogPositivePlugin* plugin = fList->ItemAt(i);
-		if (plugin->Type() == kBlogPositiveBlogApi
+		BlogPositiveBlogPlugin* plugin
+			= dynamic_cast<BlogPositiveBlogPlugin*>(fList->ItemAt(i));
+		if (plugin != NULL
 			&& plugin->Supports(blog->BlogHandler())) {
 			workingPlugin = plugin;
 			break;

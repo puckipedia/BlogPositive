@@ -108,13 +108,6 @@ BloggerPlugin::Name()
 }
 
 
-int32
-BloggerPlugin::Type()
-{
-	return kBlogPositiveBlogApi;
-}
-
-
 uint32
 BloggerPlugin::MainHandler()
 {
@@ -123,7 +116,7 @@ BloggerPlugin::MainHandler()
 
 
 bool
-BloggerPlugin::Supports(int32 Code)
+BloggerPlugin::Supports(uint32 Code)
 {
 	return Code == MainHandler();
 }

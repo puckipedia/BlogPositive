@@ -6,22 +6,21 @@
 #define BP_OS_PLUGIN_H
 
 
-#include "BlogPositivePlugin.h"
+#include "BlogPositiveBlogPlugin.h"
 #include "BlogPositivePost.h"
 
 class BlogPositiveBlog;
 class BString;
 class XmlNode;
 
-class OnSugarPlugin : public BlogPositivePlugin
+class OnSugarPlugin : public BlogPositiveBlogPlugin
 {
 public:
 	uint32				Version();
 	const char*			Name();
-	int32				Type();
 	
 	uint32				MainHandler();
-	bool				Supports(int32 Code);
+	bool				Supports(uint32 Code);
 	
 	void				GetAuthentication(BString auth, BString* Username,
 							BString* Password, BString* BlogUrl);

@@ -6,7 +6,7 @@
 #define BP_WP_PLUGIN_H
 
 
-#include "BlogPositivePlugin.h"
+#include "BlogPositiveBlogPlugin.h"
 #include "BlogPositivePost.h"
 
 class BlogPositiveBlog;
@@ -15,15 +15,14 @@ class BString;
 class XmlNode;
 class XmlRpcRequest;
 
-class WordpressPlugin : public BlogPositivePlugin
+class WordpressPlugin : public BlogPositiveBlogPlugin
 {
 public:
 	uint32				Version();
 	const char*			Name();
-	int32				Type();
 
 	uint32				MainHandler();
-	bool				Supports(int32 Code);
+	bool				Supports(uint32 Code);
 
 	PostList*			GetBlogPosts(BlogPositiveBlog* aBlog);
 	void				SavePost(BlogPositivePost* aPost);

@@ -5,18 +5,17 @@
 #ifndef BP_BLOGGER_PLUGIN_H
 #define BP_BLOGGER_PLUGIN_H
 
-#include "BlogPositivePlugin.h"
+#include "BlogPositiveBlogPlugin.h"
 #include "BlogPositivePost.h"
 
-class BloggerPlugin : public BlogPositivePlugin
+class BloggerPlugin : public BlogPositiveBlogPlugin
 {
 public:
 	uint32				Version();
 	const char*			Name();
-	int32				Type();
 
 	uint32				MainHandler();
-	bool				Supports(int32 Code);
+	bool				Supports(uint32 Code);
 
 	PostList*			GetBlogPosts(BlogPositiveBlog* aBlog);
 

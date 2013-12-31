@@ -51,7 +51,7 @@ size_t JournalBString(void* bloc, size_t size, size_t nmemb, void* userp)
 class LJCreateBlog : public BWindow {
 public:
 							LJCreateBlog(BlogPositiveBlogListDelegate* dele,
-								BlogPositivePlugin* pl);
+								BlogPositiveBlogPlugin* pl);
 	void					SetBlogHandler(int32 blogHandler);
 	void					MessageReceived(BMessage* message);
 	int32					BlogHandler();
@@ -67,7 +67,7 @@ private:
 
 
 LJCreateBlog::LJCreateBlog(BlogPositiveBlogListDelegate* dele,
-	BlogPositivePlugin* pl)
+	BlogPositiveBlogPlugin* pl)
 	:
 	BWindow(BRect(100, 100, 400, 230), B_TRANSLATE("Create LiveJournal Blog"),
 		B_TITLED_WINDOW, B_AUTO_UPDATE_SIZE_LIMITS)
@@ -187,13 +187,6 @@ LiveJournalPlugin::Name()
 }
 
 
-int32
-LiveJournalPlugin::Type()
-{
-	return kBlogPositiveBlogApi;
-}
-
-
 uint32
 LiveJournalPlugin::MainHandler()
 {
@@ -202,9 +195,9 @@ LiveJournalPlugin::MainHandler()
 
 
 bool
-LiveJournalPlugin::Supports(int32 Code)
+LiveJournalPlugin::Supports(uint32 Code)
 {
-	return Code == 'LiJo';
+	return Code == MainHandler();
 }
 
 

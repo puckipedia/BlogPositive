@@ -16,7 +16,7 @@
 #include <TextView.h>
 
 #include "BlogPositiveBlog.h"
-#include "BlogPositivePlugin.h"
+#include "BlogPositiveBlogPlugin.h"
 #include "BlogPositivePost.h"
 
 

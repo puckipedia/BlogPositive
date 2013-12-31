@@ -6,6 +6,8 @@
 
 #include "BlogPositiveMainView.h"
 
+#include <stdio.h>
+
 #include <Catalog.h>
 #include <LayoutBuilder.h>
 #include <List.h>
@@ -20,6 +22,7 @@
 #include <TextView.h>
 
 #include "BlogPositiveBlog.h"
+#include "BlogPositiveBlogPlugin.h"
 #include "BlogPositivePlugin.h"
 #include "BlogPositivePluginLoader.h"
 #include "BlogPositiveBlogListItem.h"
@@ -79,8 +82,10 @@ BlogPositiveMainView::MessageReceived(BMessage* message)
 		{
 			int32 index = message->GetInt32("ding", 0);
 			PluginList* pluginList = BlogPositivePluginLoader::List();
-			BlogPositivePlugin* plugin = pluginList->ItemAt(index);
-			plugin->OpenNewBlogWindow(this);
+			BlogPositiveBlogPlugin* plugin
+				= dynamic_cast<BlogPositiveBlogPlugin*>(pluginList->ItemAt(index));
+			if(plugin)
+				plugin->OpenNewBlogWindow(this);
 			break;
 		}
 		default:
@@ -159,7 +164,7 @@ BlogPositiveMainView::BlogPositiveMainView(const char* name,
 
 	for (int i = 0; i < pluginList->CountItems(); i++) {
 		BlogPositivePlugin* pl = pluginList->ItemAt(i);
-		if (pl->Type() == kBlogPositiveBlogApi) {
+		if (dynamic_cast<BlogPositiveBlogPlugin*>(pl)) {
 			BMessage* msg = new BMessage(kCreateNewBlog);
 			msg->SetInt32("ding", i);
 			msg->SetString("sendToView", Name());

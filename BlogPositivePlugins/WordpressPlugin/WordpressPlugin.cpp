@@ -117,7 +117,7 @@ GetAllBlogs(BString userName, BString password, BString xmlrpcurl)
 class WPCreateBlog : public BWindow {
 public:
 							WPCreateBlog(BlogPositiveBlogListDelegate* dele,
-								BlogPositivePlugin* pl);
+								BlogPositiveBlogPlugin* pl);
 	void					SetBlogHandler(int32 blogHandler);
 	void					MessageReceived(BMessage* message);
 	int32					BlogHandler();
@@ -135,7 +135,7 @@ private:
 const uint32 kChooseBlog = 'CHBL';
 
 WPCreateBlog::WPCreateBlog(BlogPositiveBlogListDelegate* dele,
-	BlogPositivePlugin* pl)
+	BlogPositiveBlogPlugin* pl)
 	:
 	BWindow(BRect(100, 100, 400, 230), B_TRANSLATE("Create Wordpress Blog"),
 		B_TITLED_WINDOW, B_AUTO_UPDATE_SIZE_LIMITS)
@@ -315,13 +315,6 @@ WordpressPlugin::Name()
 }
 
 
-int32
-WordpressPlugin::Type()
-{
-	return kBlogPositiveBlogApi;
-}
-
-
 uint32
 WordpressPlugin::MainHandler()
 {
@@ -330,9 +323,9 @@ WordpressPlugin::MainHandler()
 
 
 bool
-WordpressPlugin::Supports(int32 Code)
+WordpressPlugin::Supports(uint32 Code)
 {
-	return Code == 'WoPr';
+	return Code == MainHandler();
 }
 
 

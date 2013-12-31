@@ -6,12 +6,14 @@
 
 #include "BlogPositiveBlog.h"
 
+#include <stdio.h>
+
 #include <List.h>
 #include <ObjectList.h>
 #include <String.h>
 
-#include "BlogPositivePlugin.h"
-
+#include "BlogPositiveBlogPlugin.h"
+#include "BlogPositivePluginLoader.h"
 
 BlogPositiveBlog::BlogPositiveBlog()
 {
@@ -107,15 +109,17 @@ BlogPositiveBlog::BlogPositiveBlog(BMessage* message)
 
 
 void
-BlogPositiveBlog::SetPlugin(BlogPositivePlugin* plugin)
+BlogPositiveBlog::SetPlugin(BlogPositiveBlogPlugin* plugin)
 {
 	fPlugin = plugin;
 }
 
 
-BlogPositivePlugin*
+BlogPositiveBlogPlugin*
 BlogPositiveBlog::Plugin()
 {
+	if(fPlugin == NULL)
+		BlogPositivePluginLoader::FindPlugin(this);
 	return fPlugin;
 }
 

@@ -5,6 +5,7 @@
 
 
 #include "BlogPositivePlugin.h"
+#include "BlogPositiveBlogPlugin.h"
 
 #include <Button.h>
 #include <Catalog.h>
@@ -26,7 +27,7 @@
 class BlogPositiveCreateBlog : public BWindow {
 public:
 							BlogPositiveCreateBlog(BlogPositiveBlogListDelegate* aView,
-								BlogPositivePlugin* pl);
+								BlogPositiveBlogPlugin* pl);
 	void					SetBlogHandler(int32 blogHandler);
 	void					MessageReceived(BMessage* message);
 	int32					BlogHandler();
@@ -38,7 +39,7 @@ private:
 };
 
 BlogPositiveCreateBlog::BlogPositiveCreateBlog(BlogPositiveBlogListDelegate* aView,
-	BlogPositivePlugin* pl)
+	BlogPositiveBlogPlugin* pl)
 	:
 	BWindow(BRect(100, 100, 400, 190), B_TRANSLATE("Create Blog"),
 		B_MODAL_WINDOW, B_NOT_RESIZABLE | B_AUTO_UPDATE_SIZE_LIMITS)
@@ -117,13 +118,6 @@ BlogPositivePlugin::Version()
 }
 
 
-uint32
-BlogPositivePlugin::MainHandler()
-{
-	return 'BACN';
-}
-
-
 const char*
 BlogPositivePlugin::Name()
 {
@@ -131,50 +125,50 @@ BlogPositivePlugin::Name()
 }
 
 
-int32
-BlogPositivePlugin::Type()
+uint32
+BlogPositiveBlogPlugin::MainHandler()
 {
-	return kBlogPositiveBlogApi;
+	return 'BACN';
 }
 
 
 bool
-BlogPositivePlugin::Supports(int32 Code)
+BlogPositiveBlogPlugin::Supports(uint32 Code)
 {
 	return false;
 }
 
 
 PostList*
-BlogPositivePlugin::GetBlogPosts(BlogPositiveBlog* blog)
+BlogPositiveBlogPlugin::GetBlogPosts(BlogPositiveBlog* blog)
 {
 	return new PostList();
 }
 
 
 BlogPositivePost*
-BlogPositivePlugin::CreateNewPost(BlogPositiveBlog* blog, const char* name)
+BlogPositiveBlogPlugin::CreateNewPost(BlogPositiveBlog* blog, const char* name)
 {
 	return NULL;
 }
 
 
 void
-BlogPositivePlugin::RemovePost(BlogPositivePost* post)
+BlogPositiveBlogPlugin::RemovePost(BlogPositivePost* post)
 {
 
 }
 
 
 void
-BlogPositivePlugin::SavePost(BlogPositivePost* post)
+BlogPositiveBlogPlugin::SavePost(BlogPositivePost* post)
 {
 
 }
 
 
 void
-BlogPositivePlugin::OpenNewBlogWindow(BlogPositiveBlogListDelegate* blogDelegate)
+BlogPositiveBlogPlugin::OpenNewBlogWindow(BlogPositiveBlogListDelegate* blogDelegate)
 {
 	(new BlogPositiveCreateBlog(blogDelegate, this))->Show();
 }

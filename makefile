@@ -34,16 +34,15 @@ APP_MIME_SIG= application/x-vnd.BlogPositive
 #	if two source files with the same name (source.c or source.cpp)
 #	are included from different directories.  Also note that spaces
 #	in folder names do not work well with this makefile.
-SRCS= 	API/Source/BlogPositiveBlog.cpp API/Source/BlogPositivePlugin.cpp \
-	API/Source/BlogPositivePost.cpp API/Source/BlogPositiveSettings.cpp \
+SRCS= 	API/Source/BlogPositiveBlog.cpp API/Source/BlogPositivePost.cpp \
+	API/Source/BlogPositiveSettings.cpp API/Source/BlogPositivePlugin.cpp \
 	BlogPositiveMain/BlogPositiveBlogListItem.cpp BlogPositiveMain/BlogPositiveMainView.cpp \
-	BlogPositiveMain/BlogPositiveMainWindow.cpp BlogPositivePlugins/BloggerPlugin/BloggerPlugin.cpp \
-	BlogPositivePostEditor/BlogPositivePostEditorView.cpp BlogPositivePostEditor/BlogPositivePostEditorWindow.cpp \
-	BlogPositivePostList/BlogPositivePostListView.cpp BlogPositivePostList/BlogPositivePostListWindow.cpp \
-	Example/ExamplePlugin.cpp main.cpp \
-	Modules/JSON/Json.cpp Modules/XML/xmlnode.cpp \
-	Modules/XMLRPC/XmlRpcWrapper.cpp PluginLoader/BlogPositivePluginLoader.cpp \
-	SharedWindow/BlogPositiveSharedWindow.cpp
+	BlogPositiveMain/BlogPositiveMainWindow.cpp BlogPositivePostEditor/BlogPositivePostEditorView.cpp \
+	BlogPositivePostEditor/BlogPositivePostEditorWindow.cpp BlogPositivePostList/BlogPositivePostListView.cpp \
+	BlogPositivePostList/BlogPositivePostListWindow.cpp Example/ExamplePlugin.cpp \
+	main.cpp Modules/JSON/Json.cpp \
+	Modules/XML/xmlnode.cpp Modules/XMLRPC/XmlRpcWrapper.cpp \
+	PluginLoader/BlogPositivePluginLoader.cpp SharedWindow/BlogPositiveSharedWindow.cpp
 
 #	specify the resource definition files to use
 #	full path or a relative path to the resource file can be used.

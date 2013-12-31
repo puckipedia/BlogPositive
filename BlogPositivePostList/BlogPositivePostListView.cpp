@@ -24,7 +24,7 @@
 #include <Window.h>
 
 #include "BlogPositiveBlog.h"
-#include "BlogPositivePlugin.h"
+#include "BlogPositiveBlogPlugin.h"
 #include "BlogPositivePost.h"
 #include "BlogPositivePostEditorWindow.h"
 
@@ -64,7 +64,7 @@ PostItem::Post()
 
 struct PluginAndWindowThing {
 	BlogPositivePostListView*	window;
-	BlogPositivePlugin*			plugin;
+	BlogPositiveBlogPlugin*		plugin;
 	BlogPositiveBlog*			blog;
 	BListView*					listView;
 };

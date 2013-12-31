@@ -13,7 +13,7 @@
 #include <String.h>
 
 class BlogPositiveBlog;
-class BlogPositivePlugin;
+class BlogPositiveBlogPlugin;
 
 typedef BObjectList<BlogPositiveBlog> BlogList;
 
@@ -39,8 +39,8 @@ public:
 
 	void					Unserialize(BMessage* message);
 
-	void					SetPlugin(BlogPositivePlugin* plugin);
-	BlogPositivePlugin*		Plugin();
+	void					SetPlugin(BlogPositiveBlogPlugin* plugin);
+	BlogPositiveBlogPlugin*	Plugin();
 
 	BString					NameString();
 
@@ -49,7 +49,7 @@ private:
 	BString					fName;
 	BString					fAuthentication;
 	int32					fBlogHandler;
-	BlogPositivePlugin*		fPlugin;
+	BlogPositiveBlogPlugin*	fPlugin;
 };
 
 void PrintList(BlogList* list);

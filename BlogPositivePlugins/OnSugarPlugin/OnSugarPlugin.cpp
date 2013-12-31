@@ -47,7 +47,7 @@ size_t readIntoBString(void* bloc, size_t size, size_t nmemb, void* userp)
 class OSCreateBlog : public BWindow {
 public:
 							OSCreateBlog(BlogPositiveBlogListDelegate* dele,
-								BlogPositivePlugin* pl);
+								BlogPositiveBlogPlugin* pl);
 	void					SetBlogHandler(int32 blogHandler);
 	void					MessageReceived(BMessage* message);
 	int32					BlogHandler();
@@ -64,7 +64,7 @@ private:
 const uint32 kChooseBlog = 'CHBL';
 
 OSCreateBlog::OSCreateBlog(BlogPositiveBlogListDelegate* dele,
-	BlogPositivePlugin* pl)
+	BlogPositiveBlogPlugin* pl)
 	:
 	BWindow(BRect(100, 100, 400, 230), B_TRANSLATE("Create OnSugar Blog"),
 		B_TITLED_WINDOW, B_AUTO_UPDATE_SIZE_LIMITS)
@@ -210,13 +210,6 @@ OnSugarPlugin::Name()
 }
 
 
-int32
-OnSugarPlugin::Type()
-{
-	return kBlogPositiveBlogApi;
-}
-
-
 uint32
 OnSugarPlugin::MainHandler()
 {
@@ -225,7 +218,7 @@ OnSugarPlugin::MainHandler()
 
 
 bool
-OnSugarPlugin::Supports(int32 Code)
+OnSugarPlugin::Supports(uint32 Code)
 {
 	return Code == MainHandler();
 }
