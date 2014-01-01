@@ -14,6 +14,7 @@
 BlogPositivePost::BlogPositivePost(BlogPositiveBlog* blog)
 {
 	SetBlog(blog);
+	fMetadata = new Metadata();
 }
 
 
@@ -63,4 +64,11 @@ uint32
 BlogPositivePost::PageSize()
 {
 	return fPage.Length();
+}
+
+
+Metadata*
+BlogPositivePost::Metadata()
+{
+	return fMetadata;
 }

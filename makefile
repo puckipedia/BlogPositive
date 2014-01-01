@@ -36,6 +36,7 @@ APP_MIME_SIG= application/x-vnd.BlogPositive
 #	in folder names do not work well with this makefile.
 SRCS= 	API/Source/BlogPositiveBlog.cpp API/Source/BlogPositivePost.cpp \
 	API/Source/BlogPositiveSettings.cpp API/Source/BlogPositivePlugin.cpp \
+	API/Source/Metadata/Metadata.cpp \
 	BlogPositiveMain/BlogPositiveBlogListItem.cpp BlogPositiveMain/BlogPositiveMainView.cpp \
 	BlogPositiveMain/BlogPositiveMainWindow.cpp BlogPositivePostEditor/BlogPositivePostEditorView.cpp \
 	BlogPositivePostEditor/BlogPositivePostEditorWindow.cpp BlogPositivePostList/BlogPositivePostListView.cpp \

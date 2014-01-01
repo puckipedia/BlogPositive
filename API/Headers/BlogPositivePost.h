@@ -9,6 +9,8 @@
 #include <ObjectList.h>
 #include <String.h>
 
+#include "Metadata/Metadata.h"
+
 class BlogPositiveBlog;
 
 class BlogPositivePost {
@@ -25,11 +27,14 @@ public:
 	const char*			Page();
 	void				SetPage(const char* page);
 	uint32				PageSize();
+	
+	Metadata*			Metadata();	
 
 protected:
+	BlogPositiveBlog*	fBlog;
+	Metadata*			fMetadata;
 	BString				fName;
 	BString				fPage;
-	BlogPositiveBlog*	fBlog;
 };
 
 typedef BObjectList<BlogPositivePost> PostList;

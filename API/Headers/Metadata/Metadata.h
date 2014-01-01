@@ -6,19 +6,40 @@
 #define BP_METADATA_H
 
 
+#include <ObjectList.h>
+#include <String.h>
+#include <View.h>
+
 class MetadataItem {
 public:
-	virtual					MetadataItem(BString name, BString key);
-	virtual	BView*			LabelView();
-	virtual	BView*			ContentView();
+	BString	Name();
+	void	SetName(BString name);
+
+	BString	Value();
+	void	SetValue(BString value);
+	
+	BString	Key();
+	void	SetKey(BString key);
 };
 
+class MetadataPair {
+public:
+	BString key;
+	MetadataItem* item;
+};
 
 class Metadata {
 public:
+					Metadata();
 	MetadataItem*	GetItem(BString name);
-	BString			GetItemType(BString name);
 	void			SetItem(BString name, MetadataItem* item);
+	
+	int32			CountItems();
+	MetadataItem*	ItemAt(int32 index);
+
+private:
+	int32			_Index(BString name);
+	BObjectList<MetadataPair>*	fPairList;
 };
 
 #endif
