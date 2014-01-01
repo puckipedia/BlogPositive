@@ -39,7 +39,8 @@ SRCS= 	API/Source/BlogPositiveBlog.cpp API/Source/BlogPositivePost.cpp \
 	API/Source/Metadata/Metadata.cpp \
 	BlogPositiveMain/BlogPositiveBlogListItem.cpp BlogPositiveMain/BlogPositiveMainView.cpp \
 	BlogPositiveMain/BlogPositiveMainWindow.cpp BlogPositivePostEditor/BlogPositivePostEditorView.cpp \
-	BlogPositivePostEditor/BlogPositivePostEditorWindow.cpp BlogPositivePostList/BlogPositivePostListView.cpp \
+	BlogPositivePostEditor/BlogPositivePostEditorWindow.cpp BlogPositivePostEditor/BlogPositivePostMetadataWindow.cpp \
+	BlogPositivePostList/BlogPositivePostListView.cpp \
 	BlogPositivePostList/BlogPositivePostListWindow.cpp main.cpp \
 	Modules/JSON/Json.cpp \
 	Modules/XML/xmlnode.cpp Modules/XMLRPC/XmlRpcWrapper.cpp \

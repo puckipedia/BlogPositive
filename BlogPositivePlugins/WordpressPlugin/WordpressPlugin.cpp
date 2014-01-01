@@ -68,7 +68,7 @@ GetAllBlogs(BString userName, BString password, BString xmlrpcurl)
 	curl_easy_setopt(curl, CURLOPT_WRITEDATA, static_cast<void*>(&responseString));
 	curl_easy_setopt(curl, CURLOPT_USERAGENT, "libcurl-agent/1.0");
 	curl_easy_perform(curl);
-	printf("%s\n", responseString.String());
+
 	XmlNode* responseNode = new XmlNode(responseString.String(), NULL);
 	XmlNode* blogNode = NULL;
 	BlogList* blogList = new BlogList();
@@ -256,7 +256,7 @@ WPCreateBlog::MessageReceived(BMessage* message)
 			
 			BMessage* message = blog->Configuration();
 			message->AddString("username", fUserControl->Text());
-			message->AddString("password", fUserControl->Text());
+			message->AddString("password", fPassControl->Text());
 			message->AddString("blogid", fBlogIdControl->Text());
 			message->AddString("xmlrpcurl", xmlrpcurl);
 
@@ -434,6 +434,8 @@ WordpressPlugin::GetBlogPosts(BlogPositiveBlog* aBlog)
 		BString aPostName;
 		BString aPostContent;
 		BString aPostId;
+		BString aPostStatus;
+		
 		XmlNode* firstStructNode = postNode->FindChild("struct", NULL, true);
 		for (int i = 0; i < firstStructNode->Children(); i++)
 		{
@@ -451,9 +453,15 @@ WordpressPlugin::GetBlogPosts(BlogPositiveBlog* aBlog)
 			{
 				aPostId = node->FindChild("string", NULL, true)->Value();
 			}
+			if (name == "post_status")
+			{
+				aPostStatus = node->FindChild("string", NULL, true)->Value();
+			}
+			
 		}
 		WordpressPost* aPost = new WordpressPost(aPostName, aPostContent,
 			aPostId, aBlog);
+		aPost->PostMetadata()->SetItem("post_status", new MetadataItem("Post status: ", aPostStatus));
 		postList->AddItem(aPost);
 	}
 	return postList;
@@ -509,6 +517,10 @@ WordpressPlugin::SavePost(BlogPositivePost* aPost)
 	XmlStruct* struc = new XmlStruct();
 	XmlNameValuePair* p = new XmlNameValuePair("post_content", wpPost->Page());
 	struc->AddItem(p);
+	p = new XmlNameValuePair("post_status", wpPost->PostMetadata()->GetItem("post_status")->Value());
+	struc->AddItem(p);
+	p = new XmlNameValuePair("post_title", wpPost->Name());
+	struc->AddItem(p);
 	request->AddItem(struc);
 
 	CURL* curl = curl_easy_init();
@@ -539,7 +551,7 @@ WordpressPlugin::CreateNewPost(BlogPositiveBlog* aBlog, const char* aName)
 	request->AddItem(new XmlValue(password));
 	XmlStruct* strut = new XmlStruct();
 	strut->AddItem(new XmlNameValuePair("post_status",
-		new XmlValue("publish")));
+		new XmlValue("draft")));
 	strut->AddItem(new XmlNameValuePair("post_title", new XmlValue(aName)));
 	request->AddItem(strut);
 
@@ -554,6 +566,7 @@ WordpressPlugin::CreateNewPost(BlogPositiveBlog* aBlog, const char* aName)
 	curl_easy_setopt(curl, CURLOPT_USERAGENT, "libcurl-agent/1.0");
 	curl_easy_perform(curl);
 
+	delete request;
 	XmlNode* responseNode = new XmlNode(responseString.String(), NULL);
 	XmlNode* rstring = responseNode->FindChild("string", NULL, true);
 	if(rstring == NULL) {
@@ -564,8 +577,13 @@ WordpressPlugin::CreateNewPost(BlogPositiveBlog* aBlog, const char* aName)
 	if (rstring != NULL) {
 		WordpressPost* post = new WordpressPost(aName, "",
 			rstring->Value(), aBlog);
+		post->PostMetadata()->SetItem("post_status", new MetadataItem("Post status:", "draft"));
+		delete rstring;
+		delete responseNode;
 		return post;
 	}
+	delete rstring;
+	delete responseNode;
 	return NULL;
 }
 

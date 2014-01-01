@@ -60,11 +60,11 @@ XmlValue::Value()
 void
 XmlArray::PushContent(BString* string)
 {
-	*string << "<array><data>";
+	*string << "<value><array><data>";
 	for (int i = 0; i < Items(); i++) {
 		ItemAt(i)->PushContent(string);
 	}
-	*string << "</data></array>";
+	*string << "</data></array></value>";
 }
 
 
@@ -138,11 +138,11 @@ XmlNameValuePair::PushContent(BString* string)
 void
 XmlStruct::PushContent(BString* string)
 {
-	*string << "<struct>";
+	*string << "<value><struct>";
 	for (int32 i = 0; i < Items(); i++) {
 		ItemAt(i)->PushContent(string);
 	}
-	*string << "</struct>";
+	*string << "</struct></value>";
 }
 
 

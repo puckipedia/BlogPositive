@@ -6,6 +6,8 @@
 
 #include "BlogPositivePostEditorView.h"
 
+#include <stdio.h>
+
 #include <Catalog.h>
 #include <GroupLayout.h>
 #include <Menu.h>
@@ -18,10 +20,10 @@
 #include "BlogPositiveBlog.h"
 #include "BlogPositiveBlogPlugin.h"
 #include "BlogPositivePost.h"
-
+#include "BlogPositivePostMetadataWindow.h"
 
 const uint32 kPostEditorSavePost = 'PESP';
-
+const uint32 kPostEditorMetadata = 'MtDt';
 
 #undef B_TRANSLATION_CONTEXT
 #define B_TRANSLATION_CONTEXT "Post Editor View"
@@ -41,8 +43,11 @@ BlogPositivePostEditorView::BlogPositivePostEditorView(const char* name,
 
 	fMenuItem = new BMenuItem(B_TRANSLATE("Save"),
 		new BMessage(kPostEditorSavePost));
-
 	menuBar->AddItem(fMenuItem);
+
+	fMetadataItem = new BMenuItem(B_TRANSLATE("Metadata"),
+		new BMessage(kPostEditorMetadata));
+	menuBar->AddItem(fMetadataItem);
 
 	SetLayout(new BGroupLayout(B_VERTICAL, 0));
 
@@ -55,6 +60,7 @@ void
 BlogPositivePostEditorView::AttachedToWindow()
 {
 	fMenuItem->SetTarget(this);
+	fMetadataItem->SetTarget(this);
 }
 
 
@@ -73,6 +79,12 @@ BlogPositivePostEditorView::MessageReceived(BMessage* message)
 		case kPostEditorSavePost:
 			Save();
 			break;
+		case kPostEditorMetadata: {
+			BlogPositivePostMetadataWindow* win
+				= new BlogPositivePostMetadataWindow(BRect(100, 100, 300, 500), fPost->PostMetadata());
+			win->Show();
+			break;
+		}
 		default:
 			BView::MessageReceived(message);
 	}

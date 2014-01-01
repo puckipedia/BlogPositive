@@ -25,6 +25,7 @@ public:
 	void 				Save();
 private:
 	BMenuItem*			fMenuItem;
+	BMenuItem*			fMetadataItem;
 	BTextView*			fTextView;
 	BlogPositivePost*	fPost;
 };

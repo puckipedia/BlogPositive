@@ -33,6 +33,7 @@ Metadata::SetItem(BString name, MetadataItem* item)
 		fPairList->ItemAt(index)->item = item;
 		delete it; // trash it, remove it, etc.
 	}
+	item->SetKey(name);
 }
 
 
@@ -57,4 +58,5 @@ Metadata::_Index(BString name)
 		if (fPairList->ItemAt(i)->key == name)
 			return i;
 	}
+	return -1;
 }

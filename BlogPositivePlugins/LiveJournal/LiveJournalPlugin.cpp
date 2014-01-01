@@ -281,6 +281,24 @@ LiveJournalPlugin::Request(XmlRpcRequest* r, BString* responseString,
 	return responseNode;
 }
 
+void
+LJFillProps(BlogPositivePost* post, XmlStruct* props)
+{
+	XmlValue* xmlValue;
+#define PROP(__VALUE__, __NAME__) \
+	do {if(props && (xmlValue = static_cast<XmlValue*>(props->Get(__VALUE__)))) \
+		post->PostMetadata()->SetItem(__VALUE__, new MetadataItem(__NAME__ ": ", xmlValue->Value())); \
+	else \
+		post->PostMetadata()->SetItem(__VALUE__, new MetadataItem(__NAME__ ": ", "")); \
+	} while (0)
+	PROP("current_location", "Current location");
+	PROP("current_mood", "Current mood");
+	PROP("current_music", "Current music");
+	PROP("taglist", "Tags");
+	
+#undef PROP
+}
+
 
 PostList*
 LiveJournalPlugin::GetBlogPosts(BlogPositiveBlog* aBlog)
@@ -300,7 +318,6 @@ LiveJournalPlugin::GetBlogPosts(BlogPositiveBlog* aBlog)
 	requestStruct.AddItem("usejournal", journal);
 	requestStruct.AddItem(new XmlNameValuePair("noprops", new XmlValue("1", "boolean")));
 	requestStruct.AddItem("lineendings", "unix");
-
 	r.AddItem(&requestStruct);
 
 	BString responseString;
@@ -316,11 +333,12 @@ LiveJournalPlugin::GetBlogPosts(BlogPositiveBlog* aBlog)
 	for (int i = 0; i < blogPosts->Items(); i++) {
 		XmlStruct* post = static_cast<XmlStruct*>(blogPosts->ItemAt(i));
 		BString subject = "---No Subject---";
-		if(post->Get("subject") != NULL)
+		if(post->Get("subject"))
 			subject = static_cast<XmlValue*>(post->Get("subject"))->Value();
 		BString text = static_cast<XmlValue*>(post->Get("event"))->Value();
 		BString id = static_cast<XmlValue*>(post->Get("itemid"))->Value();
 		LiveJournalPost* ljPost = new LiveJournalPost(subject, text, id, aBlog);
+		LJFillProps(ljPost, static_cast<XmlStruct*>(post->Get("props")));
 		postList->AddItem(ljPost);
 	}
 	
@@ -347,9 +365,14 @@ LiveJournalPlugin::SavePost(BlogPositivePost* post)
 	if(strcmp(ljPost->Name(), "---No Subject---") != 0)
 		requestStruct.AddItem("subject", ljPost->Name());
 	requestStruct.AddItem("lineendings", "unix");
-
+	BString propContent;
+	XmlStruct* props = new XmlStruct();
+	for (int32 i = 0; i < post->PostMetadata()->CountItems(); i++) {
+		MetadataItem* item = post->PostMetadata()->ItemAt(i);
+		props->AddItem(item->Key(), item->Value());
+	}
+	requestStruct.AddItem(new XmlNameValuePair("props", props));
 	r.AddItem(&requestStruct);
-
 	BString responseString;
 	XmlNode* responseNode
 		= Request(&r, &responseString, post->Blog());
@@ -357,6 +380,7 @@ LiveJournalPlugin::SavePost(BlogPositivePost* post)
 	XmlStruct* str = static_cast<XmlStruct*>(responseArray->ItemAt(0));
 	
 	ljPost->SetPostId(static_cast<XmlValue*>(str->Get("itemid"))->Value());
+	delete props;
 }
 
 
@@ -426,6 +450,7 @@ LiveJournalPlugin::CreateNewPost(BlogPositiveBlog* aBlog, const char* aName)
 	XmlStruct* str = static_cast<XmlStruct*>(responseArray->ItemAt(0));
 	LiveJournalPost* ljPost = new LiveJournalPost(aName, "-", "", aBlog);
 	ljPost->SetPostId(static_cast<XmlValue*>(str->Get("itemid"))->Value());
+	LJFillProps(ljPost, NULL);
 	return ljPost;
 }
 

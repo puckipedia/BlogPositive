@@ -12,14 +12,21 @@
 
 class MetadataItem {
 public:
-	BString	Name();
-	void	SetName(BString name);
+			MetadataItem(BString name, BString value) {fName = name; fValue = value;};
 
-	BString	Value();
-	void	SetValue(BString value);
+	BString	Name() {return fName;};
+	void	SetName(BString name) {fName = name;};
+
+	BString	Value() {return fValue;};
+	void	SetValue(BString value) {fValue = value;};
 	
-	BString	Key();
-	void	SetKey(BString key);
+	BString	Key() {return fKey;};
+	void	SetKey(BString key) {fKey = key;};
+
+private:
+	BString	fName;
+	BString	fValue;
+	BString	fKey;
 };
 
 class MetadataPair {
