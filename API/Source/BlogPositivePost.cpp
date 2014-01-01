@@ -68,7 +68,7 @@ BlogPositivePost::PageSize()
 
 
 Metadata*
-BlogPositivePost::Metadata()
+BlogPositivePost::PostMetadata()
 {
 	return fMetadata;
 }

@@ -12,6 +12,7 @@
 #include "Metadata/Metadata.h"
 
 class BlogPositiveBlog;
+class Metadata;
 
 class BlogPositivePost {
 public:
@@ -28,7 +29,7 @@ public:
 	void				SetPage(const char* page);
 	uint32				PageSize();
 	
-	Metadata*			Metadata();	
+	Metadata*			PostMetadata();	
 
 protected:
 	BlogPositiveBlog*	fBlog;

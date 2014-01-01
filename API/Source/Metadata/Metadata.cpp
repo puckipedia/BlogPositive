@@ -25,7 +25,7 @@ Metadata::SetItem(BString name, MetadataItem* item)
 	int32 index = _Index(name);
 	if (index < 0) {
 		MetadataPair* pair = new MetadataPair;
-		pair->name = name;
+		pair->key = name;
 		pair->item = item;
 		fPairList->AddItem(pair);
 	} else {
@@ -54,7 +54,7 @@ int32
 Metadata::_Index(BString name)
 {
 	for (int32 i = 0; i < fPairList->CountItems(); i++) {
-		if (fPairList->ItemAt(i)->name == name)
+		if (fPairList->ItemAt(i)->key == name)
 			return i;
 	}
 }
