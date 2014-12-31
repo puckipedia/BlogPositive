@@ -42,6 +42,8 @@ class JsonNumber : public JsonValue {
 public:
 	void Serialize(BString* str);
 	void Parse(JsonParser* parser);
+
+	double Value();
 private:
 	double fDouble;
 };

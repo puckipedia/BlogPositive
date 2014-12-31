@@ -187,6 +187,11 @@ JsonNumber::Parse(JsonParser* parser) {
 	fDouble = i;
 }
 
+double
+JsonNumber::Value() {
+	return fDouble;
+}
+
 void
 JsonParser::TakeWhitespace() {
 	while(Peek() != NULL && isspace(Peek()))
