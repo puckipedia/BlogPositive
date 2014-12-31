@@ -18,6 +18,8 @@ class JsonString : public JsonValue, public BString {
 public:
 	void Serialize(BString* str);
 	void Parse(JsonParser* parser);
+
+	static BString Escape(BString str);
 };
 
 class JsonPair {
