@@ -267,6 +267,7 @@ JsonString::Parse(JsonParser* parser)
 					default:
 						*this << chr;
 				}
+				state = StringTakeChar;
 				break;
 		}
 	}
