@@ -35,11 +35,26 @@ JsonValue::Parse(JsonParser* parser)
 }
 
 
+BString
+JsonString::Escape(BString str)
+{
+	BString ret(str);
+	ret.ReplaceAll("\\", "\\\\");
+	ret.ReplaceAll("\"", "\\\"");
+	ret.ReplaceAll("\b", "\\b");
+	ret.ReplaceAll("\f", "\\g");
+	ret.ReplaceAll("\n", "\\n");
+	ret.ReplaceAll("\r", "\\r");
+	ret.ReplaceAll("\t", "\\t");
+	return ret;
+}
+
+
 void
 JsonString::Serialize(BString* str)
 {
 	*str << "\"";
-	*str << *this;
+	*str << Escape(*this);
 	*str << "\"";
 }
 
@@ -187,6 +202,11 @@ JsonNumber::Parse(JsonParser* parser) {
 	fDouble = i;
 }
 
+double
+JsonNumber::Value() {
+	return fDouble;
+}
+
 void
 JsonParser::TakeWhitespace() {
 	while(Peek() != NULL && isspace(Peek()))
@@ -262,6 +282,7 @@ JsonString::Parse(JsonParser* parser)
 					default:
 						*this << chr;
 				}
+				state = StringTakeChar;
 				break;
 		}
 	}

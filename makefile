@@ -160,3 +160,4 @@ plugins:
 	$(MAKE) -C BlogPositivePlugins/WordpressPlugin install INSTALL_DIR=$(PLUGIN_DIR)
 	$(MAKE) -C BlogPositivePlugins/OnSugarPlugin install INSTALL_DIR=$(PLUGIN_DIR)
 	$(MAKE) -C BlogPositivePlugins/LiveJournal install INSTALL_DIR=$(PLUGIN_DIR)
+	$(MAKE) -C BlogPositivePlugins/GhostPlugin install INSTALL_DIR=$(PLUGIN_DIR)
