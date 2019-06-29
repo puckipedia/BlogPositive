@@ -34,4 +34,4 @@ private:
 extern BlogList* gBlogList;
 
 
-#endif BP_SETTINGS_H
+#endif // BP_SETTINGS_H

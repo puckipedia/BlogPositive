@@ -86,6 +86,7 @@ BlogPositivePostListView::_loadList(void* pointer)
 		}
 		thing->listView->UnlockLooper();
 	}
+	return 0;
 }
 
 
